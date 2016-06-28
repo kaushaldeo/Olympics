@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
 		72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */; };
 		72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */; };
 		72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */; };
@@ -41,10 +42,13 @@
 		72DA121E1D1261BC00AA8EE3 /* KDParseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA121D1D1261BC00AA8EE3 /* KDParseOperation.swift */; };
 		72DA12201D128D1D00AA8EE3 /* KDUnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */; };
 		72DC6C901D223F19001E5AF9 /* KDStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */; };
+		72DC6C921D224685001E5AF9 /* KDPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */; };
+		72DC6C941D224697001E5AF9 /* KDMedalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */; };
 		A5024B28232EDAD4E98032CF /* Pods_Olympics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE87072582A5606C63FB444 /* Pods_Olympics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
 		72DA106B1D0BA16B00AA8EE3 /* Olympics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Olympics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics.xcdatamodel; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 		72DA121D1D1261BC00AA8EE3 /* KDParseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDParseOperation.swift; sourceTree = "<group>"; };
 		72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDUnitsViewController.swift; sourceTree = "<group>"; };
 		72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDStoryboardSegue.swift; sourceTree = "<group>"; };
+		72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDPlayersViewController.swift; sourceTree = "<group>"; };
+		72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalsViewController.swift; sourceTree = "<group>"; };
 		7A1D1F68A84A2A69C308D6AC /* Pods-Olympics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olympics.release.xcconfig"; path = "Pods/Target Support Files/Pods-Olympics/Pods-Olympics.release.xcconfig"; sourceTree = "<group>"; };
 		AFE87072582A5606C63FB444 /* Pods_Olympics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Olympics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8B1B2F22D61F37DAF0E991E /* Pods-Olympics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olympics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Olympics/Pods-Olympics.debug.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +182,8 @@
 				72DA10881D0BA25000AA8EE3 /* KDCountriesViewController.swift */,
 				72DA108A1D0BE36F00AA8EE3 /* KDEventsViewController.swift */,
 				72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */,
+				72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */,
+				72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -185,6 +193,7 @@
 			children = (
 				72DA108F1D0BECB500AA8EE3 /* KDScrollerBar.swift */,
 				72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */,
+				728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,10 +340,12 @@
 			files = (
 				72DA120C1D1251DB00AA8EE3 /* Event+CoreDataProperties.swift in Sources */,
 				72DA12111D1251DB00AA8EE3 /* Venue.swift in Sources */,
+				72DC6C941D224697001E5AF9 /* KDMedalsViewController.swift in Sources */,
 				72DA12121D1251DB00AA8EE3 /* Competitor+CoreDataProperties.swift in Sources */,
 				72DA121E1D1261BC00AA8EE3 /* KDParseOperation.swift in Sources */,
 				72DA12141D1251DB00AA8EE3 /* Discipline+CoreDataProperties.swift in Sources */,
 				72DA120B1D1251DB00AA8EE3 /* Country.swift in Sources */,
+				72DC6C921D224685001E5AF9 /* KDPlayersViewController.swift in Sources */,
 				72DA12171D1251DB00AA8EE3 /* Athlete.swift in Sources */,
 				72DA12091D1251DB00AA8EE3 /* Team.swift in Sources */,
 				72DA12161D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift in Sources */,
@@ -350,6 +361,7 @@
 				72DA12071D1251DB00AA8EE3 /* Location.swift in Sources */,
 				72DA108B1D0BE36F00AA8EE3 /* KDEventsViewController.swift in Sources */,
 				72DA120D1D1251DB00AA8EE3 /* Event.swift in Sources */,
+				728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */,
 				72DA12041D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift in Sources */,
 				72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */,
 				72DA12061D1251DB00AA8EE3 /* Location+CoreDataProperties.swift in Sources */,

@@ -1,15 +1,15 @@
 //
-//  KDCountriesViewController.swift
+//  KDMedalsViewController.swift
 //  Olympics
 //
-//  Created by Kaushal Deo on 6/10/16.
+//  Created by Kaushal Deo on 6/27/16.
 //  Copyright © 2016 Scorpion Inc. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class KDCountriesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,8 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        KDAPIManager.sharedInstance.updateCountry()
-       
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 64.0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -56,12 +56,12 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDMedalViewCell
         
         // Configure the cell...
         let country = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Country
-        cell.textLabel?.text = country.name
-        cell.detailTextLabel?.text = country.alias
+        cell.nameLabel.text = country.name
+        cell.aliasLabel.text = country.alias
         return cell
     }
     

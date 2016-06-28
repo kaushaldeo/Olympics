@@ -99,24 +99,31 @@ class KDAPIManager : NSObject {
     //MARK: - Web-Service Methods
     
     func updateCountry() {
-        self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], success: { (task, response) in
-            if let parser = response as? NSXMLParser {
-                let operation = CountryParser(parser: parser)
-                self.operationQueue.addOperation(operation)
-            }
+        self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], progress: { (progress) in
+            print(progress)
+            }, success: { (task, response) in
+                if let parser = response as? NSXMLParser {
+                    let operation = CountryParser(parser: parser)
+                    self.operationQueue.addOperation(operation)
+                }
             }, failure: { (task, error) in
                 print(error)
+                
         })
     }
     
     func updateSchedule() {
-        self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], success: { (task, response) in
-            if let parser = response as? NSXMLParser {
-                let operation = SportParser(parser: parser)
-                self.operationQueue.addOperation(operation)
-            }
+        self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress: { (progress) in
+            print(progress)
+            }, success: { (task, response) in
+                if let parser = response as? NSXMLParser {
+                    let operation = SportParser(parser: parser)
+                    self.operationQueue.addOperation(operation)
+                }
             }, failure: { (task, error) in
                 print(error)
+                
         })
+        
     }
 }

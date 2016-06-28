@@ -26,6 +26,8 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         // Do any additional setup after loading the view.
         
         self.scrollerBar.delegate = self
+        
+         KDAPIManager.sharedInstance.updateSchedule()
     }
     
     override func viewDidAppear(animated: Bool) {

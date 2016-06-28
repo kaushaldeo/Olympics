@@ -116,7 +116,7 @@ class SportParser : KDParseOperation {
     // sent when an end tag is encountered. The various parameters are supplied as above.
     override func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "sports" {
-            self.context.saveContext()
+            //self.context.saveContext()
         }
        
     }
