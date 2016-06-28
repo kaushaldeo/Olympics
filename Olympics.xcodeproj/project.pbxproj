@@ -1,0 +1,532 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */; };
+		72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */; };
+		72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */; };
+		72DA10791D0BA16B00AA8EE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72DA10771D0BA16B00AA8EE3 /* Main.storyboard */; };
+		72DA107B1D0BA16B00AA8EE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72DA107A1D0BA16B00AA8EE3 /* Assets.xcassets */; };
+		72DA107E1D0BA16B00AA8EE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72DA107C1D0BA16B00AA8EE3 /* LaunchScreen.storyboard */; };
+		72DA10891D0BA25000AA8EE3 /* KDCountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10881D0BA25000AA8EE3 /* KDCountriesViewController.swift */; };
+		72DA108B1D0BE36F00AA8EE3 /* KDEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA108A1D0BE36F00AA8EE3 /* KDEventsViewController.swift */; };
+		72DA10901D0BECB500AA8EE3 /* KDScrollerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA108F1D0BECB500AA8EE3 /* KDScrollerBar.swift */; };
+		72DA12041D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F01D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift */; };
+		72DA12051D1251DB00AA8EE3 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F11D1251DB00AA8EE3 /* Sport.swift */; };
+		72DA12061D1251DB00AA8EE3 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F21D1251DB00AA8EE3 /* Location+CoreDataProperties.swift */; };
+		72DA12071D1251DB00AA8EE3 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F31D1251DB00AA8EE3 /* Location.swift */; };
+		72DA12081D1251DB00AA8EE3 /* Team+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F41D1251DB00AA8EE3 /* Team+CoreDataProperties.swift */; };
+		72DA12091D1251DB00AA8EE3 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F51D1251DB00AA8EE3 /* Team.swift */; };
+		72DA120A1D1251DB00AA8EE3 /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F61D1251DB00AA8EE3 /* Country+CoreDataProperties.swift */; };
+		72DA120B1D1251DB00AA8EE3 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F71D1251DB00AA8EE3 /* Country.swift */; };
+		72DA120C1D1251DB00AA8EE3 /* Event+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F81D1251DB00AA8EE3 /* Event+CoreDataProperties.swift */; };
+		72DA120D1D1251DB00AA8EE3 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11F91D1251DB00AA8EE3 /* Event.swift */; };
+		72DA120E1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11FA1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift */; };
+		72DA120F1D1251DB00AA8EE3 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11FB1D1251DB00AA8EE3 /* Unit.swift */; };
+		72DA12101D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11FC1D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift */; };
+		72DA12111D1251DB00AA8EE3 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11FD1D1251DB00AA8EE3 /* Venue.swift */; };
+		72DA12121D1251DB00AA8EE3 /* Competitor+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11FE1D1251DB00AA8EE3 /* Competitor+CoreDataProperties.swift */; };
+		72DA12131D1251DB00AA8EE3 /* Competitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA11FF1D1251DB00AA8EE3 /* Competitor.swift */; };
+		72DA12141D1251DB00AA8EE3 /* Discipline+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA12001D1251DB00AA8EE3 /* Discipline+CoreDataProperties.swift */; };
+		72DA12151D1251DB00AA8EE3 /* Discipline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA12011D1251DB00AA8EE3 /* Discipline.swift */; };
+		72DA12161D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA12021D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift */; };
+		72DA12171D1251DB00AA8EE3 /* Athlete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA12031D1251DB00AA8EE3 /* Athlete.swift */; };
+		72DA121A1D1256C900AA8EE3 /* KDAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA12191D1256C900AA8EE3 /* KDAPIManager.swift */; };
+		72DA121C1D125C8900AA8EE3 /* KDManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA121B1D125C8900AA8EE3 /* KDManagedObjectContext.swift */; };
+		72DA121E1D1261BC00AA8EE3 /* KDParseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA121D1D1261BC00AA8EE3 /* KDParseOperation.swift */; };
+		72DA12201D128D1D00AA8EE3 /* KDUnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */; };
+		72DC6C901D223F19001E5AF9 /* KDStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */; };
+		A5024B28232EDAD4E98032CF /* Pods_Olympics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE87072582A5606C63FB444 /* Pods_Olympics.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		72DA106B1D0BA16B00AA8EE3 /* Olympics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Olympics.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics.xcdatamodel; sourceTree = "<group>"; };
+		72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		72DA10781D0BA16B00AA8EE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		72DA107A1D0BA16B00AA8EE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		72DA107D1D0BA16B00AA8EE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		72DA107F1D0BA16B00AA8EE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72DA10881D0BA25000AA8EE3 /* KDCountriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCountriesViewController.swift; sourceTree = "<group>"; };
+		72DA108A1D0BE36F00AA8EE3 /* KDEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDEventsViewController.swift; sourceTree = "<group>"; };
+		72DA108F1D0BECB500AA8EE3 /* KDScrollerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDScrollerBar.swift; sourceTree = "<group>"; };
+		72DA11F01D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sport+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA11F11D1251DB00AA8EE3 /* Sport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
+		72DA11F21D1251DB00AA8EE3 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA11F31D1251DB00AA8EE3 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		72DA11F41D1251DB00AA8EE3 /* Team+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Team+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA11F51D1251DB00AA8EE3 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		72DA11F61D1251DB00AA8EE3 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA11F71D1251DB00AA8EE3 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		72DA11F81D1251DB00AA8EE3 /* Event+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA11F91D1251DB00AA8EE3 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		72DA11FA1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA11FB1D1251DB00AA8EE3 /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		72DA11FC1D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Venue+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA11FD1D1251DB00AA8EE3 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		72DA11FE1D1251DB00AA8EE3 /* Competitor+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Competitor+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA11FF1D1251DB00AA8EE3 /* Competitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Competitor.swift; sourceTree = "<group>"; };
+		72DA12001D1251DB00AA8EE3 /* Discipline+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Discipline+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA12011D1251DB00AA8EE3 /* Discipline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discipline.swift; sourceTree = "<group>"; };
+		72DA12021D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Athlete+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		72DA12031D1251DB00AA8EE3 /* Athlete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Athlete.swift; sourceTree = "<group>"; };
+		72DA12191D1256C900AA8EE3 /* KDAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDAPIManager.swift; sourceTree = "<group>"; };
+		72DA121B1D125C8900AA8EE3 /* KDManagedObjectContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDManagedObjectContext.swift; sourceTree = "<group>"; };
+		72DA121D1D1261BC00AA8EE3 /* KDParseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDParseOperation.swift; sourceTree = "<group>"; };
+		72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDUnitsViewController.swift; sourceTree = "<group>"; };
+		72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDStoryboardSegue.swift; sourceTree = "<group>"; };
+		7A1D1F68A84A2A69C308D6AC /* Pods-Olympics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olympics.release.xcconfig"; path = "Pods/Target Support Files/Pods-Olympics/Pods-Olympics.release.xcconfig"; sourceTree = "<group>"; };
+		AFE87072582A5606C63FB444 /* Pods_Olympics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Olympics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8B1B2F22D61F37DAF0E991E /* Pods-Olympics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olympics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Olympics/Pods-Olympics.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		72DA10681D0BA16B00AA8EE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5024B28232EDAD4E98032CF /* Pods_Olympics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6FCEB0915A3FE989420A6CCD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E8B1B2F22D61F37DAF0E991E /* Pods-Olympics.debug.xcconfig */,
+				7A1D1F68A84A2A69C308D6AC /* Pods-Olympics.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		72DA10621D0BA16B00AA8EE3 = {
+			isa = PBXGroup;
+			children = (
+				72DA106D1D0BA16B00AA8EE3 /* Olympics */,
+				72DA106C1D0BA16B00AA8EE3 /* Products */,
+				6FCEB0915A3FE989420A6CCD /* Pods */,
+				80D1649C9030901CCE495376 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		72DA106C1D0BA16B00AA8EE3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				72DA106B1D0BA16B00AA8EE3 /* Olympics.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		72DA106D1D0BA16B00AA8EE3 /* Olympics */ = {
+			isa = PBXGroup;
+			children = (
+				72DA12181D1256B300AA8EE3 /* Network */,
+				72DA10851D0BA22F00AA8EE3 /* Models */,
+				72DA10861D0BA22F00AA8EE3 /* ViewControllers */,
+				72DA10871D0BA22F00AA8EE3 /* Views */,
+				72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */,
+				72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */,
+				72DA10771D0BA16B00AA8EE3 /* Main.storyboard */,
+				72DA107A1D0BA16B00AA8EE3 /* Assets.xcassets */,
+				72DA107C1D0BA16B00AA8EE3 /* LaunchScreen.storyboard */,
+				72DA107F1D0BA16B00AA8EE3 /* Info.plist */,
+				72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */,
+			);
+			path = Olympics;
+			sourceTree = "<group>";
+		};
+		72DA10851D0BA22F00AA8EE3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				72DA11F01D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift */,
+				72DA11F11D1251DB00AA8EE3 /* Sport.swift */,
+				72DA11F21D1251DB00AA8EE3 /* Location+CoreDataProperties.swift */,
+				72DA11F31D1251DB00AA8EE3 /* Location.swift */,
+				72DA11F41D1251DB00AA8EE3 /* Team+CoreDataProperties.swift */,
+				72DA11F51D1251DB00AA8EE3 /* Team.swift */,
+				72DA11F61D1251DB00AA8EE3 /* Country+CoreDataProperties.swift */,
+				72DA11F71D1251DB00AA8EE3 /* Country.swift */,
+				72DA11F81D1251DB00AA8EE3 /* Event+CoreDataProperties.swift */,
+				72DA11F91D1251DB00AA8EE3 /* Event.swift */,
+				72DA11FA1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift */,
+				72DA11FB1D1251DB00AA8EE3 /* Unit.swift */,
+				72DA11FC1D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift */,
+				72DA11FD1D1251DB00AA8EE3 /* Venue.swift */,
+				72DA11FE1D1251DB00AA8EE3 /* Competitor+CoreDataProperties.swift */,
+				72DA11FF1D1251DB00AA8EE3 /* Competitor.swift */,
+				72DA12001D1251DB00AA8EE3 /* Discipline+CoreDataProperties.swift */,
+				72DA12011D1251DB00AA8EE3 /* Discipline.swift */,
+				72DA12021D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift */,
+				72DA12031D1251DB00AA8EE3 /* Athlete.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		72DA10861D0BA22F00AA8EE3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				72DA10881D0BA25000AA8EE3 /* KDCountriesViewController.swift */,
+				72DA108A1D0BE36F00AA8EE3 /* KDEventsViewController.swift */,
+				72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		72DA10871D0BA22F00AA8EE3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72DA108F1D0BECB500AA8EE3 /* KDScrollerBar.swift */,
+				72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72DA12181D1256B300AA8EE3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				72DA12191D1256C900AA8EE3 /* KDAPIManager.swift */,
+				72DA121D1D1261BC00AA8EE3 /* KDParseOperation.swift */,
+				72DA121B1D125C8900AA8EE3 /* KDManagedObjectContext.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		80D1649C9030901CCE495376 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFE87072582A5606C63FB444 /* Pods_Olympics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		72DA106A1D0BA16B00AA8EE3 /* Olympics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72DA10821D0BA16B00AA8EE3 /* Build configuration list for PBXNativeTarget "Olympics" */;
+			buildPhases = (
+				33C327724279DC1B33E3A43D /* [CP] Check Pods Manifest.lock */,
+				72DA10671D0BA16B00AA8EE3 /* Sources */,
+				72DA10681D0BA16B00AA8EE3 /* Frameworks */,
+				72DA10691D0BA16B00AA8EE3 /* Resources */,
+				6A8849F9FE09050E235F8D94 /* [CP] Embed Pods Frameworks */,
+				F2D7AA540560E59BC1B66549 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Olympics;
+			productName = Olympics;
+			productReference = 72DA106B1D0BA16B00AA8EE3 /* Olympics.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		72DA10631D0BA16B00AA8EE3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Scorpion Inc";
+				TargetAttributes = {
+					72DA106A1D0BA16B00AA8EE3 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 72DA10661D0BA16B00AA8EE3 /* Build configuration list for PBXProject "Olympics" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 72DA10621D0BA16B00AA8EE3;
+			productRefGroup = 72DA106C1D0BA16B00AA8EE3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				72DA106A1D0BA16B00AA8EE3 /* Olympics */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		72DA10691D0BA16B00AA8EE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72DA107E1D0BA16B00AA8EE3 /* LaunchScreen.storyboard in Resources */,
+				72DA107B1D0BA16B00AA8EE3 /* Assets.xcassets in Resources */,
+				72DA10791D0BA16B00AA8EE3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33C327724279DC1B33E3A43D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6A8849F9FE09050E235F8D94 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Olympics/Pods-Olympics-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2D7AA540560E59BC1B66549 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Olympics/Pods-Olympics-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		72DA10671D0BA16B00AA8EE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72DA120C1D1251DB00AA8EE3 /* Event+CoreDataProperties.swift in Sources */,
+				72DA12111D1251DB00AA8EE3 /* Venue.swift in Sources */,
+				72DA12121D1251DB00AA8EE3 /* Competitor+CoreDataProperties.swift in Sources */,
+				72DA121E1D1261BC00AA8EE3 /* KDParseOperation.swift in Sources */,
+				72DA12141D1251DB00AA8EE3 /* Discipline+CoreDataProperties.swift in Sources */,
+				72DA120B1D1251DB00AA8EE3 /* Country.swift in Sources */,
+				72DA12171D1251DB00AA8EE3 /* Athlete.swift in Sources */,
+				72DA12091D1251DB00AA8EE3 /* Team.swift in Sources */,
+				72DA12161D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift in Sources */,
+				72DA120F1D1251DB00AA8EE3 /* Unit.swift in Sources */,
+				72DA10891D0BA25000AA8EE3 /* KDCountriesViewController.swift in Sources */,
+				72DA120A1D1251DB00AA8EE3 /* Country+CoreDataProperties.swift in Sources */,
+				72DC6C901D223F19001E5AF9 /* KDStoryboardSegue.swift in Sources */,
+				72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */,
+				72DA12131D1251DB00AA8EE3 /* Competitor.swift in Sources */,
+				72DA12101D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift in Sources */,
+				72DA120E1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift in Sources */,
+				72DA121C1D125C8900AA8EE3 /* KDManagedObjectContext.swift in Sources */,
+				72DA12071D1251DB00AA8EE3 /* Location.swift in Sources */,
+				72DA108B1D0BE36F00AA8EE3 /* KDEventsViewController.swift in Sources */,
+				72DA120D1D1251DB00AA8EE3 /* Event.swift in Sources */,
+				72DA12041D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift in Sources */,
+				72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */,
+				72DA12061D1251DB00AA8EE3 /* Location+CoreDataProperties.swift in Sources */,
+				72DA10901D0BECB500AA8EE3 /* KDScrollerBar.swift in Sources */,
+				72DA121A1D1256C900AA8EE3 /* KDAPIManager.swift in Sources */,
+				72DA12201D128D1D00AA8EE3 /* KDUnitsViewController.swift in Sources */,
+				72DA12051D1251DB00AA8EE3 /* Sport.swift in Sources */,
+				72DA12081D1251DB00AA8EE3 /* Team+CoreDataProperties.swift in Sources */,
+				72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */,
+				72DA12151D1251DB00AA8EE3 /* Discipline.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		72DA10771D0BA16B00AA8EE3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72DA10781D0BA16B00AA8EE3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		72DA107C1D0BA16B00AA8EE3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72DA107D1D0BA16B00AA8EE3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		72DA10801D0BA16B00AA8EE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		72DA10811D0BA16B00AA8EE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		72DA10831D0BA16B00AA8EE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8B1B2F22D61F37DAF0E991E /* Pods-Olympics.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Olympics/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kaushal.Olympics;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		72DA10841D0BA16B00AA8EE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A1D1F68A84A2A69C308D6AC /* Pods-Olympics.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Olympics/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kaushal.Olympics;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		72DA10661D0BA16B00AA8EE3 /* Build configuration list for PBXProject "Olympics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72DA10801D0BA16B00AA8EE3 /* Debug */,
+				72DA10811D0BA16B00AA8EE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		72DA10821D0BA16B00AA8EE3 /* Build configuration list for PBXNativeTarget "Olympics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72DA10831D0BA16B00AA8EE3 /* Debug */,
+				72DA10841D0BA16B00AA8EE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */,
+			);
+			currentVersion = 72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */;
+			path = Olympics.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 72DA10631D0BA16B00AA8EE3 /* Project object */;
+}
