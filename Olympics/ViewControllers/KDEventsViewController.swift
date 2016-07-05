@@ -27,7 +27,13 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         
         self.scrollerBar.delegate = self
         
-         KDAPIManager.sharedInstance.updateSchedule()
+        //KDAPIManager.sharedInstance.updateSchedule()
+        let context = NSManagedObjectContext.mainContext()
+        
+        if  let country = Country.country(context) {
+            KDAPIManager.sharedInstance.updateProfile(country)
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -169,13 +175,13 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
     }
     
     func scrollerBar(scrollerBar: KDScrollerBar, titleForItemAtIndexPath indexPath: NSIndexPath) -> String? {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Discipline
+        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
         return unit.name
     }
     
     func scrollerBar(scrollerBar: KDScrollerBar, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Discipline
-            print(unit.name)
+        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
+        print(unit.name)
         
         self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: true)
     }
@@ -192,7 +198,7 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Discipline", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Event", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
@@ -202,6 +208,10 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if  let country = Country.country(context) {
+            fetchRequest.predicate = NSPredicate(format: "country = %@", country)
+        }
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

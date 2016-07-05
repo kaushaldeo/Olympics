@@ -14,53 +14,14 @@ class Country: NSManagedObject {
     
     // Insert code here to add functionality to your managed object subclass
     
-}
-
-
-class CountryParser : KDParseOperation {
-    
-    override func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        
-        if elementName == "organizations" {
-            self.startParsing = true
-        }
-        
-        if self.startParsing && elementName == "organization" {
-            if let entityDescription = NSEntityDescription.entityForName("Country", inManagedObjectContext: self.context) {
-                let country = Country(entity: entityDescription, insertIntoManagedObjectContext: nil)
-                country.identifier = attributeDict["id"]
-                country.name = attributeDict["description"]
-                country.alias = attributeDict["alias"]
-                self.items.append(country)
-            }
-            
-            if self.items.count > 20 {
-                self.processedData(self.items)
-                self.items.removeAll()
+    class func country(context: NSManagedObjectContext) -> Country? {
+        let setting = NSUserDefaults.standardUserDefaults()
+        if let identifier = setting.valueForKey("kCountry") as? String {
+           if let objectID = context.persistentStoreCoordinator?.managedObjectIDForURIRepresentation(NSURL(string: identifier)!) {
+                return context.objectWithID(objectID) as? Country
             }
         }
+        return nil
     }
     
-    override func processedData(objects: [NSManagedObject]) {
-        if let countries = objects as? [Country] {
-            
-            let fetchRequest = NSFetchRequest(entityName: "Country")
-            
-            let entityDescription = NSEntityDescription.entityForName("Country", inManagedObjectContext:self.context)
-            fetchRequest.entity = entityDescription
-            
-            
-            fetchRequest.propertiesToFetch = ["identifier"]
-            fetchRequest.resultType = .DictionaryResultType
-            
-            
-            for country in countries {
-                fetchRequest.predicate = NSPredicate(format: "identifier = %@", country.identifier!)
-                if self.context.countForFetchRequest(fetchRequest, error: nil) == 0 {
-                    self.context.insertObject(country)
-                }
-            }
-            self.context.saveContext()
-        }
-    }
 }

@@ -15,10 +15,6 @@ class KDParseOperation: NSOperation, NSXMLParserDelegate {
     
     let context: NSManagedObjectContext
     
-    var items = [NSManagedObject]()
-    
-    var startParsing = false
-    
     init(parser: NSXMLParser, persistentStoreCoordinator: NSPersistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator) {
         self.parser = parser
         self.context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
@@ -29,17 +25,8 @@ class KDParseOperation: NSOperation, NSXMLParserDelegate {
     override func main() {
         self.parser.delegate = self
         self.parser.parse()
-        
-        if self.items.count > 20 {
-            self.processedData(self.items)
-            self.items.removeAll()
-        }
-        
     }
-    
-    func processedData(objects:[NSManagedObject]) {
-        
-    }
+
     
     //MARK: - NSXMLParser Delegate
     
@@ -53,10 +40,7 @@ class KDParseOperation: NSOperation, NSXMLParserDelegate {
     
     // sent when the parser has completed parsing. If this is encountered, the parse was successful.
     func parserDidEndDocument(parser: NSXMLParser) {
-        if self.items.count > 0 {
-            self.processedData(self.items)
-            self.items.removeAll()
-        }
+        
     }
     /*
      // DTD handling methods for various declarations.
@@ -122,17 +106,11 @@ class KDParseOperation: NSOperation, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
         // ...and this reports a fatal error to the delegate. The parser will stop parsing.
         
-        if self.items.count > 0 {
-            self.processedData(self.items)
-            self.items.removeAll()
-        }
+        
     }
     
     func parser(parser: NSXMLParser, validationErrorOccurred validationError: NSError) {
-        if self.items.count > 0 {
-            self.processedData(self.items)
-            self.items.removeAll()
-        }
+       
     }
     
 }

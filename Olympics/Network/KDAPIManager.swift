@@ -103,7 +103,7 @@ class KDAPIManager : NSObject {
             print(progress)
             }, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
-                    let operation = CountryParser(parser: parser)
+                    let operation = KDCountryParser(parser: parser)
                     self.operationQueue.addOperation(operation)
                 }
             }, failure: { (task, error) in
@@ -117,7 +117,26 @@ class KDAPIManager : NSObject {
             print(progress)
             }, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
-                    let operation = SportParser(parser: parser)
+                    let operation = KDScheduleParser(parser: parser)
+                    self.operationQueue.addOperation(operation)
+                }
+            }, failure: { (task, error) in
+                print(error)
+                
+        })
+        
+    }
+    
+    
+    func updateProfile(country:Country) {
+        guard let identifier = country.identifier else {
+            return
+        }
+        self.sessionManager.GET("organization/2016/\(identifier)/profile.xml", parameters: ["api_key":key], progress: { (progress) in
+            print(progress)
+            }, success: { (task, response) in
+                if let parser = response as? NSXMLParser {
+                    let operation = KDProfileParser(parser: parser)
                     self.operationQueue.addOperation(operation)
                 }
             }, failure: { (task, error) in
