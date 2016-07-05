@@ -18,10 +18,13 @@
     </entity>
     <entity name="Country" representedClassName=".Country">
         <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bronze" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="gold" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String">
             <userInfo/>
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="silver" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="country" inverseEntity="Event" syncable="YES"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athlete" inverseName="country" inverseEntity="Athlete" syncable="YES"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="country" inverseEntity="Team" syncable="YES"/>
@@ -87,7 +90,7 @@
     <elements>
         <element name="Athlete" positionX="-389" positionY="468" width="128" height="150"/>
         <element name="Competitor" positionX="360" positionY="606" width="128" height="118"/>
-        <element name="Country" positionX="-56" positionY="333" width="128" height="135"/>
+        <element name="Country" positionX="-56" positionY="333" width="128" height="180"/>
         <element name="Discipline" positionX="664" positionY="435" width="128" height="150"/>
         <element name="Event" positionX="241" positionY="414" width="128" height="165"/>
         <element name="Location" positionX="657" positionY="270" width="128" height="105"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jrY-rJ-gp5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FZ7-c7-7Fd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -56,7 +56,28 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLi-I2-yZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-295.5" y="-87"/>
+            <point key="canvasLocation" x="-328.5" y="-87"/>
+        </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="oJC-AO-s93">
+            <objects>
+                <viewController storyboardIdentifier="kSplashViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FZ7-c7-7Fd" customClass="KDSplashViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xkc-3T-bF2"/>
+                        <viewControllerLayoutGuide type="bottom" id="AeD-uE-bPJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mnU-Gx-eIM">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="jrY-rJ-gp5" kind="custom" identifier="showCountry" customClass="KDStoryboardSegue" customModule="Olympics" customModuleProvider="target" id="w4y-zP-Zeb"/>
+                        <segue destination="LdC-bc-T7b" kind="custom" identifier="showEvent" customClass="KDStoryboardSegue" customModule="Olympics" customModuleProvider="target" id="kDN-ap-Svd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z85-dc-C1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-328.5" y="-822.75"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="c5N-wH-f0P">
@@ -605,7 +626,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2W-E4-hXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1161" y="-87"/>
+            <point key="canvasLocation" x="-1197" y="-87"/>
         </scene>
         <!--Olympics-->
         <scene sceneID="Sjw-O6-dyP">
@@ -676,4 +697,7 @@
             <point key="canvasLocation" x="1249.5" y="648.75"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="kDN-ap-Svd"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -14,6 +14,10 @@ class Country: NSManagedObject {
     
     // Insert code here to add functionality to your managed object subclass
     
+    func total() -> Int16 {
+        return self.bronze + self.silver + self.gold
+    }
+    
     class func country(context: NSManagedObjectContext) -> Country? {
         let setting = NSUserDefaults.standardUserDefaults()
         if let identifier = setting.valueForKey("kCountry") as? String {

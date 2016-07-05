@@ -97,3 +97,26 @@ extension NSManagedObject {
         return String(self)
     }
 }
+
+
+extension NSUserDefaults {
+    class func loadCountry() -> Bool {
+        let setting = NSUserDefaults.standardUserDefaults()
+        return setting.boolForKey("kLoadCountry")
+    }
+    
+    class func country(loaded:Bool) {
+        let setting = NSUserDefaults.standardUserDefaults()
+        setting.setBool(loaded, forKey: "kLoadCountry")
+    }
+    
+    class func loadSchedule() -> Bool {
+        let setting = NSUserDefaults.standardUserDefaults()
+        return setting.boolForKey("kLoadSchedule")
+    }
+    
+    class func schedule(loaded:Bool) {
+        let setting = NSUserDefaults.standardUserDefaults()
+        setting.setBool(loaded, forKey: "kLoadSchedule")
+    }
+}

@@ -11,6 +11,8 @@
 		72D0F5C31D2B8EF300400F03 /* KDCountryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C21D2B8EF300400F03 /* KDCountryParser.swift */; };
 		72D0F5C51D2B8FED00400F03 /* KDScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C41D2B8FED00400F03 /* KDScheduleParser.swift */; };
 		72D0F5C71D2B90E400400F03 /* KDProfileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */; };
+		72D0F5C91D2C248600400F03 /* KDSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C81D2C248600400F03 /* KDSplashViewController.swift */; };
+		72D0F5CB1D2C2A7100400F03 /* KDMedalParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5CA1D2C2A7100400F03 /* KDMedalParser.swift */; };
 		72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */; };
 		72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */; };
 		72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */; };
@@ -55,6 +57,8 @@
 		72D0F5C21D2B8EF300400F03 /* KDCountryParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCountryParser.swift; sourceTree = "<group>"; };
 		72D0F5C41D2B8FED00400F03 /* KDScheduleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDScheduleParser.swift; sourceTree = "<group>"; };
 		72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDProfileParser.swift; sourceTree = "<group>"; };
+		72D0F5C81D2C248600400F03 /* KDSplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDSplashViewController.swift; sourceTree = "<group>"; };
+		72D0F5CA1D2C2A7100400F03 /* KDMedalParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalParser.swift; sourceTree = "<group>"; };
 		72DA106B1D0BA16B00AA8EE3 /* Olympics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Olympics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics.xcdatamodel; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 		72DA10861D0BA22F00AA8EE3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				72D0F5C81D2C248600400F03 /* KDSplashViewController.swift */,
 				72DA10881D0BA25000AA8EE3 /* KDCountriesViewController.swift */,
 				72DA108A1D0BE36F00AA8EE3 /* KDEventsViewController.swift */,
 				72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */,
@@ -213,6 +218,7 @@
 				72D0F5C21D2B8EF300400F03 /* KDCountryParser.swift */,
 				72D0F5C41D2B8FED00400F03 /* KDScheduleParser.swift */,
 				72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */,
+				72D0F5CA1D2C2A7100400F03 /* KDMedalParser.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -377,10 +383,12 @@
 				72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */,
 				72DA12061D1251DB00AA8EE3 /* Location+CoreDataProperties.swift in Sources */,
 				72DA10901D0BECB500AA8EE3 /* KDScrollerBar.swift in Sources */,
+				72D0F5C91D2C248600400F03 /* KDSplashViewController.swift in Sources */,
 				72DA121A1D1256C900AA8EE3 /* KDAPIManager.swift in Sources */,
 				72DA12201D128D1D00AA8EE3 /* KDUnitsViewController.swift in Sources */,
 				72DA12051D1251DB00AA8EE3 /* Sport.swift in Sources */,
 				72DA12081D1251DB00AA8EE3 /* Team+CoreDataProperties.swift in Sources */,
+				72D0F5CB1D2C2A7100400F03 /* KDMedalParser.swift in Sources */,
 				72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */,
 				72D0F5C31D2B8EF300400F03 /* KDCountryParser.swift in Sources */,
 				72DA12151D1251DB00AA8EE3 /* Discipline.swift in Sources */,

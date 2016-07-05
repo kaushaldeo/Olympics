@@ -22,6 +22,8 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
+        
+        KDAPIManager.sharedInstance.updateMedals()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -62,6 +64,12 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         let country = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Country
         cell.nameLabel.text = country.name
         cell.aliasLabel.text = country.alias
+        cell.goldLabel.text = "\(country.gold)"
+        cell.silverLabel.text = "\(country.silver)"
+        cell.brozeLabel.text = "\(country.bronze)"
+        cell.rankLabel.text = "\(indexPath.row + 1)"
+        
+        
         return cell
     }
     
@@ -125,9 +133,7 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false)]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

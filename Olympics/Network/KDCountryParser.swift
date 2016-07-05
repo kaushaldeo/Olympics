@@ -31,6 +31,11 @@ class KDCountryParser: KDParseOperation {
         }
     }
     
+    
+    override func parserDidEndDocument(parser: NSXMLParser) {
+        NSUserDefaults.country(true)
+    }
+    
     func processedData(countries: [Country]) {
         
         let fetchRequest = NSFetchRequest(entityName: "Country")

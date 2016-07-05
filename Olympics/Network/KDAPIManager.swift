@@ -145,4 +145,19 @@ class KDAPIManager : NSObject {
         })
         
     }
+    
+    func updateMedals() {
+        self.sessionManager.GET("2016/medals.xml", parameters: ["api_key":key], progress: { (progress) in
+            print(progress)
+            }, success: { (task, response) in
+                if let parser = response as? NSXMLParser {
+                    let operation = KDMedalParser(parser: parser)
+                    self.operationQueue.addOperation(operation)
+                }
+            }, failure: { (task, error) in
+                print(error)
+                
+        })
+        
+    }
 }

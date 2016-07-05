@@ -20,8 +20,14 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        KDAPIManager.sharedInstance.updateCountry()
-       
+        if NSUserDefaults.loadCountry() == false {
+            KDAPIManager.sharedInstance.updateCountry()
+        }
+        
+        if NSUserDefaults.loadSchedule() == false {
+            KDAPIManager.sharedInstance.updateSchedule()
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -32,6 +32,11 @@ class KDScheduleParser: KDParseOperation {
         return dateFormatter
     }()
     
+    override func parserDidEndDocument(parser: NSXMLParser) {
+        NSUserDefaults.schedule(true)
+    }
+    
+    
     override func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
         if elementName == "sport" {
