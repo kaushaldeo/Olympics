@@ -2,7 +2,7 @@
 //  Event+CoreDataProperties.swift
 //  Olympics
 //
-//  Created by Kaushal Deo on 6/15/16.
+//  Created by Kaushal Deo on 7/5/16.
 //  Copyright © 2016 Scorpion Inc. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -19,8 +19,8 @@ extension Event {
     @NSManaged var name: String?
     @NSManaged var country: Country?
     @NSManaged var discipline: Discipline?
-    @NSManaged var participants: Athlete?
-    @NSManaged var teams: Team?
+    @NSManaged var participants: NSSet?
+    @NSManaged var teams: NSSet?
     @NSManaged var units: NSSet?
 
 }

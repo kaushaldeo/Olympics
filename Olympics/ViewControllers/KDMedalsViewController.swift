@@ -24,6 +24,8 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         self.tableView.estimatedRowHeight = 64.0
         
         KDAPIManager.sharedInstance.updateMedals()
+        
+        self.showCountry()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -132,7 +134,7 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
-        // Edit the sort key as appropriate.
+
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false)]
         
         // Edit the section name key path and cache name if appropriate.

@@ -13,6 +13,9 @@
 		72D0F5C71D2B90E400400F03 /* KDProfileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */; };
 		72D0F5C91D2C248600400F03 /* KDSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C81D2C248600400F03 /* KDSplashViewController.swift */; };
 		72D0F5CB1D2C2A7100400F03 /* KDMedalParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5CA1D2C2A7100400F03 /* KDMedalParser.swift */; };
+		72D0F5CD1D2C669E00400F03 /* KDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */; };
+		72D0F5CF1D2C6A6300400F03 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 72D0F5CE1D2C6A6300400F03 /* Images */; };
+		72D0F5D11D2C6E4800400F03 /* KDCountryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */; };
 		72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */; };
 		72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */; };
 		72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */; };
@@ -59,6 +62,9 @@
 		72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDProfileParser.swift; sourceTree = "<group>"; };
 		72D0F5C81D2C248600400F03 /* KDSplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDSplashViewController.swift; sourceTree = "<group>"; };
 		72D0F5CA1D2C2A7100400F03 /* KDMedalParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalParser.swift; sourceTree = "<group>"; };
+		72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDExtensions.swift; sourceTree = "<group>"; };
+		72D0F5CE1D2C6A6300400F03 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
+		72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCountryViewCell.swift; sourceTree = "<group>"; };
 		72DA106B1D0BA16B00AA8EE3 /* Olympics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Olympics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics.xcdatamodel; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 		72DA106D1D0BA16B00AA8EE3 /* Olympics */ = {
 			isa = PBXGroup;
 			children = (
+				72D0F5CE1D2C6A6300400F03 /* Images */,
 				72DA12181D1256B300AA8EE3 /* Network */,
 				72DA10851D0BA22F00AA8EE3 /* Models */,
 				72DA10861D0BA22F00AA8EE3 /* ViewControllers */,
@@ -204,7 +211,9 @@
 			children = (
 				72DA108F1D0BECB500AA8EE3 /* KDScrollerBar.swift */,
 				72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */,
+				72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */,
 				728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */,
+				72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72D0F5CF1D2C6A6300400F03 /* Images in Resources */,
 				72DA107E1D0BA16B00AA8EE3 /* LaunchScreen.storyboard in Resources */,
 				72DA107B1D0BA16B00AA8EE3 /* Assets.xcassets in Resources */,
 				72DA10791D0BA16B00AA8EE3 /* Main.storyboard in Resources */,
@@ -381,10 +391,12 @@
 				728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */,
 				72DA12041D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift in Sources */,
 				72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */,
+				72D0F5CD1D2C669E00400F03 /* KDExtensions.swift in Sources */,
 				72DA12061D1251DB00AA8EE3 /* Location+CoreDataProperties.swift in Sources */,
 				72DA10901D0BECB500AA8EE3 /* KDScrollerBar.swift in Sources */,
 				72D0F5C91D2C248600400F03 /* KDSplashViewController.swift in Sources */,
 				72DA121A1D1256C900AA8EE3 /* KDAPIManager.swift in Sources */,
+				72D0F5D11D2C6E4800400F03 /* KDCountryViewCell.swift in Sources */,
 				72DA12201D128D1D00AA8EE3 /* KDUnitsViewController.swift in Sources */,
 				72DA12051D1251DB00AA8EE3 /* Sport.swift in Sources */,
 				72DA12081D1251DB00AA8EE3 /* Team+CoreDataProperties.swift in Sources */,

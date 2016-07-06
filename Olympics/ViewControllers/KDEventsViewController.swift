@@ -31,9 +31,10 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         let context = NSManagedObjectContext.mainContext()
         
         if  let country = Country.country(context) {
-            //     KDAPIManager.sharedInstance.updateProfile(country)
+                 KDAPIManager.sharedInstance.updateProfile(country)
         }
         
+        self.showCountry()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -48,12 +49,15 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
             abort()
         }
         
-        if let array = self.fetchedResultsController.fetchedObjects as? [Unit] {
+        if let array = self.fetchedResultsController.fetchedObjects as? [Event] {
             
             for unit in array {
-                print("Name:\(unit.name)Date:\(unit.startDate)\n")
+                print("Name:\(unit.name)\n")
             }
         }
+        
+        self.collectionView.reloadData()
+        
         
     }
     
@@ -182,12 +186,12 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
     }
     
     func scrollerBar(scrollerBar: KDScrollerBar, titleForItemAtIndexPath indexPath: NSIndexPath) -> String? {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
         return unit.name
     }
     
     func scrollerBar(scrollerBar: KDScrollerBar, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
         print(unit.name)
         
         self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: true)
@@ -205,7 +209,7 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Unit", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Event", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
@@ -217,7 +221,7 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         if  let country = Country.country(context) {
-            fetchRequest.predicate = NSPredicate(format: "event.country = %@", country)
+            fetchRequest.predicate = NSPredicate(format: "country = %@", country)
         }
         
         // Edit the section name key path and cache name if appropriate.

@@ -28,6 +28,10 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
             KDAPIManager.sharedInstance.updateSchedule()
         }
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 64.0
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -62,12 +66,16 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDCountryViewCell
         
         // Configure the cell...
         let country = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Country
-        cell.textLabel?.text = country.name
-        cell.detailTextLabel?.text = country.alias
+        cell.nameLabel.text = country.name
+        cell.aliasLabel.text = country.alias
+        if let text = country.alias?.lowercaseString {
+            cell.iconView.image = UIImage(named: "Images/\(text).png")
+        }
+        
         return cell
     }
     

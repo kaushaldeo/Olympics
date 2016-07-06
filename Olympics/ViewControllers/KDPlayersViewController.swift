@@ -19,7 +19,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+        self.showCountry()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -57,8 +57,16 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         // Configure the cell...
-        let country = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Country
-        cell.textLabel?.text = country.name
+        let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
+        cell.textLabel?.text = athlete.name
+        var event = athlete.event
+        //if event == nil {
+            //event = athlete.team?.event
+        //}
+        cell.detailTextLabel?.text = event?.fullName()
+        if let text = athlete.gender {
+            cell.imageView?.image = UIImage(named: text)
+        }
         return cell
     }
     
@@ -98,6 +106,12 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
      }
      */
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
+    print(athlete)
+    }
+    
+    
     /*
      // MARK: - Navigation
      
@@ -115,16 +129,21 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Country", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Athlete", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if  let country = Country.country(context) {
+            fetchRequest.predicate = NSPredicate(format: "country = %@", country)
+        }
+
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

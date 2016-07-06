@@ -1,0 +1,56 @@
+//
+//  KDExtensions.swift
+//  Olympics
+//
+//  Created by Kaushal Deo on 7/5/16.
+//  Copyright © 2016 Scorpion Inc. All rights reserved.
+//
+
+import Foundation
+import UIKit
+import CoreData
+
+extension UIViewController {
+    
+    func showCountry() {
+        if let country = Country.country(NSManagedObjectContext.mainContext()) {
+            var image = UIImage(named: "country.png")
+            if let text = country.alias?.lowercaseString {
+                if let countryImage = UIImage(named: "Images/\(text).png") {
+                    image = countryImage
+                }
+            }
+            
+            let button = UIButton(type: .Custom)
+            button.setImage(image, forState: .Normal)
+            button.addTarget(self, action: #selector(UIViewController.showCountryTapped(_:)), forControlEvents: .TouchUpInside)
+            button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+               // UIBarButtonItem(image: image, style: .Plain, target: self, action: #selector(UIViewController.showCountryTapped(_:)))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
+        }
+       
+    }
+    
+    func showCountryTapped(sender: AnyObject) {
+        if let window = self.view.window {
+        if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCountriesNavigationController") {
+            window.rootViewController = viewController
+        }
+        }
+    }
+}
+
+extension UIImage{
+    
+    func roundedImage()-> UIImage {
+        let imageSize = self.size
+        UIGraphicsBeginImageContextWithOptions(imageSize,false,UIScreen.mainScreen().scale)
+        let bounds=CGRect(origin: CGPointZero, size: imageSize)
+        UIBezierPath(roundedRect: bounds, cornerRadius: imageSize.width/2.0).addClip()
+        self.drawInRect(bounds)
+        let finalImage=UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return finalImage
+    }
+    
+}
