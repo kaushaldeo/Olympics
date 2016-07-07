@@ -11,10 +11,29 @@ import CoreData
 
 private let reuseIdentifier = "Cell"
 
-class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetchedResultsControllerDelegate {
+class KDEventsViewController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var scrollerBar: KDScrollerBar!
+    var days = [NSDate]()
+    
+    @IBOutlet weak var headerView: UIView!
+    
+    //MARK: - Private functions
+    func calulateDate() {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day , .Month , .Year], fromDate: NSDate())
+        for index in 0...7  {
+            components.day = components.day + index
+            if let date = calendar.dateFromComponents(components) {
+                self.days.append(date)
+            }
+        }
+    }
+    
+    lazy var dateFormatter : NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MMM d"
+        return dateFormatter
+    }()
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -24,55 +43,30 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         // self.clearsSelectionOnViewWillAppear = false
         
         // Do any additional setup after loading the view.
+        self.headerView.backgroundColor = self.navigationController?.navigationBar.barTintColor
         
-        self.scrollerBar.delegate = self
-        
-        //KDAPIManager.sharedInstance.updateSchedule()
         let context = NSManagedObjectContext.mainContext()
+        self.calulateDate()
+        self.showCountry()
         
-        if  let country = Country.country(context) {
-                 KDAPIManager.sharedInstance.updateProfile(country)
+        if let country = Country.country(context) {
+            if let sets = country.events where sets.count > 0 {
+                return
+            }
+            KDAPIManager.sharedInstance.updateProfile(country)
         }
         
-        self.showCountry()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        do {
-            try self.fetchedResultsController.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
-        
-        if let array = self.fetchedResultsController.fetchedObjects as? [Event] {
-            
-            for unit in array {
-                print("Name:\(unit.name)\n")
-            }
-        }
-        
-        self.collectionView.reloadData()
         
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.sectionInset = UIEdgeInsetsZero
-            flowLayout.minimumLineSpacing = 10.0
-            flowLayout.minimumInteritemSpacing = 0.0
-            self.collectionView.setCollectionViewLayout(flowLayout, animated: true)
-        }
-        self.collectionView.layoutIfNeeded()
-        self.collectionView.reloadData()
-        
-        self.scrollerBar.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,8 +94,7 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        return sectionInfo.numberOfObjects
+        return self.days.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -118,33 +111,33 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
         return CGSize(width: CGRectGetWidth(collectionView.bounds), height: CGRectGetHeight(collectionView.bounds))
     }
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        var pageWidth = Double(scrollView.frame.size.width) + 10.0
-        
-        if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            pageWidth = Double(scrollView.frame.size.width + layout.minimumLineSpacing)
-        }
-        
-        let currentOffset = Double(scrollView.contentOffset.x)
-        let targetOffset = Double(targetContentOffset.memory.x)
-        var newTargetOffset : Double = 0
-        
-        if (targetOffset > currentOffset) {
-            newTargetOffset = ceil(currentOffset / pageWidth) * pageWidth
-        }
-        else {
-            newTargetOffset = floor(currentOffset / pageWidth) * pageWidth;
-        }
-        if (newTargetOffset < 0) {
-            newTargetOffset = 0
-        }
-        
-        targetContentOffset.memory.x = CGFloat(currentOffset)
-        scrollView.setContentOffset(CGPoint(x:newTargetOffset, y:0), animated: true)
-        
-        let index = Int(newTargetOffset/pageWidth)
-        self.scrollerBar.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), animated: true)
-    }
+//    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        var pageWidth = Double(scrollView.frame.size.width) + 10.0
+//        
+//        if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+//            pageWidth = Double(scrollView.frame.size.width + layout.minimumLineSpacing)
+//        }
+//        
+//        let currentOffset = Double(scrollView.contentOffset.x)
+//        let targetOffset = Double(targetContentOffset.memory.x)
+//        var newTargetOffset : Double = 0
+//        
+//        if (targetOffset > currentOffset) {
+//            newTargetOffset = ceil(currentOffset / pageWidth) * pageWidth
+//        }
+//        else {
+//            newTargetOffset = floor(currentOffset / pageWidth) * pageWidth;
+//        }
+//        if (newTargetOffset < 0) {
+//            newTargetOffset = 0
+//        }
+//        
+//        targetContentOffset.memory.x = CGFloat(currentOffset)
+//        scrollView.setContentOffset(CGPoint(x:newTargetOffset, y:0), animated: true)
+//        
+//        let index = Int(newTargetOffset/pageWidth)
+//        self.scrollerBar.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), animated: true)
+//    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
@@ -179,74 +172,5 @@ class KDEventsViewController: UIViewController, KDScrollerBarDelegate, NSFetched
      }
      */
     
-    //MARK: - ScrollerBar delegate Methods
-    func scrollerBar(scrollerBar: KDScrollerBar, numberOfItemsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        return sectionInfo.numberOfObjects
-    }
-    
-    func scrollerBar(scrollerBar: KDScrollerBar, titleForItemAtIndexPath indexPath: NSIndexPath) -> String? {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
-        return unit.name
-    }
-    
-    func scrollerBar(scrollerBar: KDScrollerBar, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
-        print(unit.name)
-        
-        self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: true)
-    }
-    
-    func scrollerBar(scrollerBar: KDScrollerBar, scrollToOffset point: CGPoint) {
-        self.collectionView.setContentOffset(point, animated: true)
-    }
-    
-    
-    // MARK: - Fetched results controller
-    
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        let context = NSManagedObjectContext.mainContext()
-        
-        let fetchRequest = NSFetchRequest()
-        // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Event", inManagedObjectContext: context)
-        fetchRequest.entity = entity
-        
-        // Set the batch size to a suitable number.
-        fetchRequest.fetchBatchSize = 20
-        
-        // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        if  let country = Country.country(context) {
-            fetchRequest.predicate = NSPredicate(format: "country = %@", country)
-        }
-        
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:nil, cacheName: nil)
-        fetchedResultsController.delegate = self
-        
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
-        
-        return fetchedResultsController
-    }()
-    
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        // In the simplest, most efficient, case, reload the table view.
-        self.scrollerBar.reloadData()
-    }
     
 }

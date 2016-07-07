@@ -59,11 +59,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // Configure the cell...
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
         cell.textLabel?.text = athlete.name
-        var event = athlete.event
-        //if event == nil {
-            //event = athlete.team?.event
-        //}
-        cell.detailTextLabel?.text = event?.fullName()
+        cell.detailTextLabel?.text = athlete.association
         if let text = athlete.gender {
             cell.imageView?.image = UIImage(named: text)
         }
@@ -108,7 +104,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
-    print(athlete)
+        print(athlete)
     }
     
     
@@ -138,7 +134,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
         
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gender", ascending: true), sortDescriptor]
         
         if  let country = Country.country(context) {
             fetchRequest.predicate = NSPredicate(format: "country = %@", country)
@@ -149,7 +145,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // nil for section name key path means "no sections".
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: "gender", cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {

@@ -11,7 +11,19 @@ import CoreData
 
 
 class Athlete: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-
+    
+    // Insert code here to add functionality to your managed object subclass
+    
+    var association: String? {
+        get {
+            if let  event = self.event {
+                return event.fullName()
+            }
+            if let  event = self.team?.event {
+                return event.fullName()
+            }
+            return nil
+        }
+    }
+    
 }
