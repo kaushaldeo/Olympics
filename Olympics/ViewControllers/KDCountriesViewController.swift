@@ -24,10 +24,6 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
             KDAPIManager.sharedInstance.updateCountry()
         }
         
-        if NSUserDefaults.loadSchedule() == false {
-            KDAPIManager.sharedInstance.updateSchedule()
-        }
-        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
         

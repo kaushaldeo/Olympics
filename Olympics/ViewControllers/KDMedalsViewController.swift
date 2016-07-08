@@ -23,13 +23,13 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
         
-        KDAPIManager.sharedInstance.updateMedals()
         
         self.showCountry()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        KDAPIManager.sharedInstance.updateMedals()
         
         do {
             try self.fetchedResultsController.performFetch()

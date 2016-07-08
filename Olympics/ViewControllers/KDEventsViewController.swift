@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ViewPagerController
 
 private let reuseIdentifier = "Cell"
 
@@ -15,14 +16,16 @@ class KDEventsViewController: UIViewController {
     
     var days = [NSDate]()
     
-    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var overlay: UIView!
     
     //MARK: - Private functions
     func calulateDate() {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Day , .Month , .Year], fromDate: NSDate())
-        for index in 0...7  {
-            components.day = components.day + index
+        components.day = 2
+        components.month = 8
+        for _ in 0...18  {
+            components.day = components.day + 1
             if let date = calendar.dateFromComponents(components) {
                 self.days.append(date)
             }
@@ -35,6 +38,53 @@ class KDEventsViewController: UIViewController {
         return dateFormatter
     }()
     
+    
+    
+    lazy var pagerController : ViewPagerController = {
+        
+        var pagerController = ViewPagerController()
+        
+        pagerController.setParentController(self, parentView: self.overlay)
+        
+        var appearance = ViewPagerControllerAppearance()
+        
+        appearance.tabMenuHeight = 44.0
+        appearance.scrollViewMinPositionY = 20.0
+        appearance.scrollViewObservingType = .NavigationBar(targetNavigationBar: self.navigationController!.navigationBar)
+        
+        appearance.tabMenuAppearance.backgroundColor = UIColor(red: 57, green: 150, blue: 27)
+        appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.whiteColor()
+        appearance.tabMenuAppearance.defaultTitleColor = UIColor.lightTextColor()
+        appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsets(top: 39, left: 0, bottom: 0, right: 0)
+        
+        pagerController.updateAppearance(appearance)
+        
+        pagerController.willBeginTabMenuUserScrollingHandler = { selectedView in
+            selectedView.alpha = 0.0
+        }
+        
+        pagerController.didEndTabMenuUserScrollingHandler = { selectedView in
+            selectedView.alpha = 1.0
+        }
+        
+        pagerController.didChangeHeaderViewHeightHandler = { height in
+            print("call didShowViewControllerHandler : \(height)")
+        }
+        
+        for date in self.days {
+            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("kUnitsViewController") as! KDUnitsViewController
+            controller.view.clipsToBounds = true
+            let title = self.dateFormatter.stringFromDate(date)
+            controller.title = title
+            controller.date = date
+            controller.parentController = self
+            pagerController.addContent(title, viewController: controller)
+        }
+        
+        return pagerController
+    }()
+    
+    
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +93,11 @@ class KDEventsViewController: UIViewController {
         // self.clearsSelectionOnViewWillAppear = false
         
         // Do any additional setup after loading the view.
-        self.headerView.backgroundColor = self.navigationController?.navigationBar.barTintColor
+        //self.headerView.backgroundColor = self.navigationController?.navigationBar.barTintColor
         
-        let context = NSManagedObjectContext.mainContext()
         self.calulateDate()
+        self.pagerController.currentContent()
+        let context = NSManagedObjectContext.mainContext()
         self.showCountry()
         
         if let country = Country.country(context) {

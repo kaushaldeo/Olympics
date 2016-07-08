@@ -14,13 +14,16 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - ViewPagerController (1.1.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - ViewPagerController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  ViewPagerController: 8a8ab6662ee811a6163997adbd2869107e223a31
 
-PODFILE CHECKSUM: 4e80903f5f5f279e1453dfbe6ac5b684cc117275
+PODFILE CHECKSUM: efd6ecee4a6ac5c582b904e0f81b669109925fc4
 
 COCOAPODS: 1.0.1

@@ -16,6 +16,7 @@
 		72D0F5CD1D2C669E00400F03 /* KDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */; };
 		72D0F5CF1D2C6A6300400F03 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 72D0F5CE1D2C6A6300400F03 /* Images */; };
 		72D0F5D11D2C6E4800400F03 /* KDCountryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */; };
+		72D6ABD41D2F68CA0010ECE7 /* KDUnitViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */; };
 		72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */; };
 		72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */; };
 		72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */; };
@@ -65,6 +66,7 @@
 		72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDExtensions.swift; sourceTree = "<group>"; };
 		72D0F5CE1D2C6A6300400F03 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCountryViewCell.swift; sourceTree = "<group>"; };
+		72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDUnitViewCell.swift; sourceTree = "<group>"; };
 		72DA106B1D0BA16B00AA8EE3 /* Olympics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Olympics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics.xcdatamodel; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */,
 				72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */,
 				728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */,
+				72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */,
 				72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */,
 			);
 			path = Views;
@@ -364,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72DA120C1D1251DB00AA8EE3 /* Event+CoreDataProperties.swift in Sources */,
+				72D6ABD41D2F68CA0010ECE7 /* KDUnitViewCell.swift in Sources */,
 				72DA12111D1251DB00AA8EE3 /* Venue.swift in Sources */,
 				72DC6C941D224697001E5AF9 /* KDMedalsViewController.swift in Sources */,
 				72DA12121D1251DB00AA8EE3 /* Competitor+CoreDataProperties.swift in Sources */,
@@ -447,7 +451,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kaushal Deo (FTZ7RGMBTF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kaushal Deo (FTZ7RGMBTF)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -469,6 +474,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "9b198d04-dcfc-4134-96df-71dd1591cc0d";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -492,7 +498,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kaushal Deo (FTZ7RGMBTF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kaushal Deo (FTZ7RGMBTF)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -507,6 +514,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "9b198d04-dcfc-4134-96df-71dd1591cc0d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -517,9 +525,10 @@
 			baseConfigurationReference = E8B1B2F22D61F37DAF0E991E /* Pods-Olympics.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Olympics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kaushal.Olympics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yp.Olympics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -529,9 +538,10 @@
 			baseConfigurationReference = 7A1D1F68A84A2A69C308D6AC /* Pods-Olympics.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Olympics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kaushal.Olympics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yp.Olympics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

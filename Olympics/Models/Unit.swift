@@ -26,6 +26,20 @@ class Unit: NSManagedObject {
     }
     
     
+    func locationName() -> String {
+        var string = ""
+        if let text = self.location?.name {
+            string = string + text
+        }
+        if let text = self.venue?.name {
+            if string.isEmpty == false {
+                string = string + "-"
+            }
+            string = string + text
+        }
+        return string
+    }
+    
     
     class func minDay(context: NSManagedObjectContext) -> NSDate {
         let sortDescriptor = NSSortDescriptor(key: "startDate", ascending: true)

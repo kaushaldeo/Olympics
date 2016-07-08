@@ -11,6 +11,16 @@ import CoreData
 
 class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    weak var parentController : UIViewController?
+    
+    var date : NSDate!
+    
+    lazy var dateFormatter : NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MMM d 'at' hh:mm a"
+        return dateFormatter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +29,12 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.tableView.registerClass(UITableViewHeaderFooterView.classForCoder(), forHeaderFooterViewReuseIdentifier: "kHeaderView")
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 64.0
+        
         
     }
     
@@ -54,11 +70,13 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDUnitViewCell
         
         // Configure the cell...
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        cell.textLabel?.text = "\(unit.day)"
+        cell.nameLabel.text = unit.name
+        cell.timeLabel.text = self.dateFormatter.stringFromDate(unit.startDate!)
+        cell.locationLabel.text = unit.locationName()
         return cell
     }
     
@@ -97,6 +115,20 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
      return true
      }
      */
+    //MARK: Table View Delegate Method
+    
+    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView")
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        headerView?.textLabel?.text = sectionInfo.name
+        return headerView
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        print(unit)
+    }
     
     /*
      // MARK: - Navigation
@@ -122,13 +154,23 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "event.discipline.name", ascending: true),NSSortDescriptor(key: "startDate", ascending: true)]
+        
+        if  let country = Country.country(context) {
+            if let nextDate = self.date.nextDate() {
+                fetchRequest.predicate = NSPredicate(format: "event.country = %@ AND startDate > %@ AND startDate < %@", country, self.date, nextDate)
+            }
+            else {
+                fetchRequest.predicate = NSPredicate(format: "event.country = %@", country)
+            }
+        }
+        
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"event.discipline.name", cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {

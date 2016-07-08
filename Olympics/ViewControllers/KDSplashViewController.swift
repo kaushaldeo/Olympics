@@ -15,6 +15,10 @@ class KDSplashViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        if NSUserDefaults.loadSchedule() == false {
+            KDAPIManager.sharedInstance.updateSchedule()
+        }
     }
 
     override func didReceiveMemoryWarning() {

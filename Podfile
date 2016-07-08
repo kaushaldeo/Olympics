@@ -6,5 +6,6 @@ target 'Olympics' do
   use_frameworks!
   # Pods for Olympics
 pod 'AFNetworking', '~> 3.0'
+pod 'ViewPagerController'
 
 end

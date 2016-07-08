@@ -25,17 +25,17 @@ extension UIViewController {
             button.setImage(image, forState: .Normal)
             button.addTarget(self, action: #selector(UIViewController.showCountryTapped(_:)), forControlEvents: .TouchUpInside)
             button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-               // UIBarButtonItem(image: image, style: .Plain, target: self, action: #selector(UIViewController.showCountryTapped(_:)))
+            // UIBarButtonItem(image: image, style: .Plain, target: self, action: #selector(UIViewController.showCountryTapped(_:)))
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
         }
-       
+        
     }
     
     func showCountryTapped(sender: AnyObject) {
         if let window = self.view.window {
-        if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCountriesNavigationController") {
-            window.rootViewController = viewController
-        }
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCountriesNavigationController") {
+                window.rootViewController = viewController
+            }
         }
     }
 }
@@ -62,5 +62,15 @@ extension UIColor {
         let newBlue = CGFloat(blue)/255
         
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+    }
+}
+
+
+extension NSDate {
+    func nextDate() -> NSDate? {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day , .Month , .Year], fromDate: self)
+        components.day = components.day + 1
+        return calendar.dateFromComponents(components)
     }
 }
