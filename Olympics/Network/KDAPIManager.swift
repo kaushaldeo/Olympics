@@ -120,9 +120,18 @@ class KDAPIManager : NSObject {
                     let operation = KDScheduleParser(parser: parser)
                     self.operationQueue.addOperation(operation)
                 }
+                dispatch_async(dispatch_get_main_queue(), { 
+                    if NSUserDefaults.loadCountry() == false {
+                        KDAPIManager.sharedInstance.updateCountry()
+                    }
+                })
             }, failure: { (task, error) in
                 print(error)
-                
+                dispatch_async(dispatch_get_main_queue(), {
+                    if NSUserDefaults.loadCountry() == false {
+                        KDAPIManager.sharedInstance.updateCountry()
+                    }
+                })
         })
         
     }

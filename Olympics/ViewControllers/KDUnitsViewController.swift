@@ -77,6 +77,8 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         cell.nameLabel.text = unit.name
         cell.timeLabel.text = self.dateFormatter.stringFromDate(unit.startDate!)
         cell.locationLabel.text = unit.locationName()
+        cell.medalView.image = unit.medalImage()
+        cell.genderView.image = unit.event?.genderImage()
         return cell
     }
     
@@ -158,7 +160,8 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         if  let country = Country.country(context) {
             if let nextDate = self.date.nextDate() {
-                fetchRequest.predicate = NSPredicate(format: "event.country = %@ AND startDate > %@ AND startDate < %@", country, self.date, nextDate)
+                 fetchRequest.predicate = NSPredicate(format: "startDate > %@ AND startDate < %@", self.date, nextDate)
+                //fetchRequest.predicate = NSPredicate(format: "event.country = %@ AND startDate > %@ AND startDate < %@", country, self.date, nextDate)
             }
             else {
                 fetchRequest.predicate = NSPredicate(format: "event.country = %@", country)

@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import UIKit
 
 class Unit: NSManagedObject {
     
@@ -38,6 +38,13 @@ class Unit: NSManagedObject {
             string = string + text
         }
         return string
+    }
+    
+    func medalImage() -> UIImage? {
+        if let text = self.medal {
+            return UIImage(named: text)
+        }
+        return nil
     }
     
     

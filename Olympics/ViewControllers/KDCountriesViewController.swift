@@ -20,10 +20,6 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        if NSUserDefaults.loadCountry() == false {
-            KDAPIManager.sharedInstance.updateCountry()
-        }
-        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
         

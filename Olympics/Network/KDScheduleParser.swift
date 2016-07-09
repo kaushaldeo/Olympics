@@ -68,11 +68,17 @@ class KDScheduleParser: KDParseOperation {
             
         }
         else if elementName == "unit" {
+            
+            //<unit updated="2016-06-27T10:36:57Z" id="713128c1-d615-42de-83b8-c8ac0c898f30" name="Men's 200m Final" phase="Final" status="scheduled" type="Individuals" medal="gold" start_date="2016-08-18T22:30:00+00:00" end_date="2016-08-18T22:31:00+00:00" odf_id="ATM002101">
+            
             let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
             self.unit = self.context.findOrCreate(Unit.classForCoder(), predicate: predicate) as? Unit
             self.unit?.identifier = attributeDict["id"]
             self.unit?.name = attributeDict["name"]
-            self.unit?.phase = attributeDict["gender"]
+            self.unit?.phase = attributeDict["phase"]
+            self.unit?.status = attributeDict["status"]
+            self.unit?.type = attributeDict["type"]
+            self.unit?.medal = attributeDict["medal"]
             if let text = attributeDict["start_date"] {
                 self.unit?.startDate = self.dateFormatter.dateFromString(text)
             }

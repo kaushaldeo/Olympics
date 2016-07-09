@@ -13,6 +13,11 @@ class KDUnitViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var genderView: UIImageView!
+    @IBOutlet weak var medalView: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

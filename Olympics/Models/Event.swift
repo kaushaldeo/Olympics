@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import UIKit
 
 class Event: NSManagedObject {
 
@@ -26,6 +26,14 @@ class Event: NSManagedObject {
             string = string + text
         }
         return string
+    }
+    
+    
+    func genderImage() -> UIImage? {
+        if let text = self.gender {
+            return UIImage(named: "\(text)Icon")
+        }
+        return nil
     }
 
 }

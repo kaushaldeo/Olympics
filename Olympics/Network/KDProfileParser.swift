@@ -17,6 +17,12 @@ class KDProfileParser: KDParseOperation {
     
     var teams = [Team]()
     
+    lazy var dateFormatter : NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        return dateFormatter
+    }()
     
     override func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
@@ -42,6 +48,9 @@ class KDProfileParser: KDParseOperation {
                 athlete.lastName = attributeDict["last_name"]
                 athlete.gender = attributeDict["gender"]
                 athlete.name = attributeDict["print_name"]
+                if let text = attributeDict["birth_date"] {
+                    athlete.date = self.dateFormatter.dateFromString(text)
+                }
                 self.participants.append(athlete)
             }
             
