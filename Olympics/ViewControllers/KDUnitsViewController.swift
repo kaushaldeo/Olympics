@@ -130,6 +130,14 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
         print(unit)
+        
+        if let sets = unit.competitors where sets.count > 0 {
+            return
+        }
+        if let event = unit.event {
+        KDAPIManager.sharedInstance.update(event)
+        }
+        
     }
     
     /*

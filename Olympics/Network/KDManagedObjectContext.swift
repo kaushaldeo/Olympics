@@ -86,6 +86,10 @@ extension NSManagedObjectContext {
         }
         return self.create(self.entityDescription(entity)!)
     }
+    
+    func createObject(entity: AnyClass) -> AnyObject? {
+        return self.create(self.entityDescription(entity)!)
+    }
 }
 
 extension NSManagedObject {

@@ -73,4 +73,10 @@ extension NSDate {
         components.day = components.day + 1
         return calendar.dateFromComponents(components)
     }
+    
+    func today() -> NSDate? {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day , .Month , .Year], fromDate: self)
+        return calendar.dateFromComponents(components)
+    }
 }

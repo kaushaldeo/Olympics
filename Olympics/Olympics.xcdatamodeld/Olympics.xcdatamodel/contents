@@ -15,8 +15,17 @@
     </entity>
     <entity name="Competitor" representedClassName=".Competitor" syncable="YES">
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="outcome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="resultType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="resultValue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sort" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="start" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="athlete" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Athlete" inverseName="competitor" inverseEntity="Athlete" syncable="YES"/>
+        <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Result" inverseName="competitor" inverseEntity="Result" syncable="YES"/>
+        <relationship name="scores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Score" inverseName="competitor" inverseEntity="Score" syncable="YES"/>
         <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="competitor" inverseEntity="Team" syncable="YES"/>
         <relationship name="unit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="competitors" inverseEntity="Unit" syncable="YES"/>
     </entity>
@@ -59,6 +68,24 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="units" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Unit" inverseName="location" inverseEntity="Unit" syncable="YES"/>
     </entity>
+    <entity name="Result" representedClassName=".Result" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="difference" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sequence" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="valueType" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="competitor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Competitor" inverseName="results" inverseEntity="Competitor" syncable="YES"/>
+    </entity>
+    <entity name="Score" representedClassName=".Score" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="competitor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Competitor" inverseName="scores" inverseEntity="Competitor" syncable="YES"/>
+    </entity>
     <entity name="Sport" representedClassName=".Sport" syncable="YES">
         <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
@@ -74,10 +101,12 @@
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athlete" inverseName="team" inverseEntity="Athlete" syncable="YES"/>
     </entity>
     <entity name="Unit" representedClassName=".Unit" syncable="YES">
+        <attribute name="clock" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="medal" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="period" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phase" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
@@ -95,14 +124,16 @@
     </entity>
     <elements>
         <element name="Athlete" positionX="-389" positionY="468" width="128" height="210"/>
-        <element name="Competitor" positionX="297" positionY="603" width="128" height="118"/>
+        <element name="Competitor" positionX="297" positionY="603" width="128" height="255"/>
         <element name="Country" positionX="-56" positionY="333" width="128" height="180"/>
         <element name="Discipline" positionX="664" positionY="435" width="128" height="150"/>
         <element name="Event" positionX="241" positionY="414" width="128" height="165"/>
         <element name="Location" positionX="657" positionY="270" width="128" height="105"/>
         <element name="Sport" positionX="855" positionY="270" width="128" height="105"/>
         <element name="Team" positionX="-216" positionY="630" width="128" height="135"/>
-        <element name="Unit" positionX="484" positionY="270" width="128" height="225"/>
+        <element name="Unit" positionX="484" positionY="270" width="128" height="255"/>
         <element name="Venue" positionX="286" positionY="270" width="128" height="105"/>
+        <element name="Result" positionX="513" positionY="765" width="128" height="180"/>
+        <element name="Score" positionX="502" positionY="594" width="128" height="120"/>
     </elements>
 </model>

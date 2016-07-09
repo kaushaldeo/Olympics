@@ -16,12 +16,14 @@ extension Unit {
 
     @NSManaged var endDate: NSDate?
     @NSManaged var identifier: String?
+    @NSManaged var medal: String?
     @NSManaged var name: String?
     @NSManaged var phase: String?
     @NSManaged var startDate: NSDate?
     @NSManaged var status: String?
     @NSManaged var type: String?
-    @NSManaged var medal: String?
+    @NSManaged var period: String?
+    @NSManaged var clock: String?
     @NSManaged var competitors: NSSet?
     @NSManaged var event: Event?
     @NSManaged var location: Location?

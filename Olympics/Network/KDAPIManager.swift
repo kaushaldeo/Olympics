@@ -52,7 +52,10 @@ class KDAPIManager : NSObject {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            let option = [NSMigratePersistentStoresAutomaticallyOption:true,
+                NSInferMappingModelAutomaticallyOption:true]
+            
+            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: option)
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -167,6 +170,22 @@ class KDAPIManager : NSObject {
                 print(error)
                 
         })
-        
+    }
+    
+    func update(event:Event) {
+        guard let identifier = event.identifier else {
+            return
+        }
+        self.sessionManager.GET("event/\(identifier)/results.xml", parameters: ["api_key":key], progress: { (progress) in
+            print(progress)
+            }, success: { (task, response) in
+                if let parser = response as? NSXMLParser {
+                    let operation = KDEventParser(parser: parser)
+                    self.operationQueue.addOperation(operation)
+                }
+            }, failure: { (task, error) in
+                print(error)
+                
+        })
     }
 }
