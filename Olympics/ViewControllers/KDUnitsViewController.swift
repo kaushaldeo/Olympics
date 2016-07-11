@@ -168,8 +168,8 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         if  let country = Country.country(context) {
             if let nextDate = self.date.nextDate() {
-                 fetchRequest.predicate = NSPredicate(format: "startDate > %@ AND startDate < %@", self.date, nextDate)
-                //fetchRequest.predicate = NSPredicate(format: "event.country = %@ AND startDate > %@ AND startDate < %@", country, self.date, nextDate)
+                 //fetchRequest.predicate = NSPredicate(format: "startDate > %@ AND startDate < %@", self.date, nextDate)
+                fetchRequest.predicate = NSPredicate(format: "event.country = %@ AND startDate > %@ AND startDate < %@", country, self.date, nextDate)
             }
             else {
                 fetchRequest.predicate = NSPredicate(format: "event.country = %@", country)

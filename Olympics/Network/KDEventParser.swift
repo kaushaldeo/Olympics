@@ -53,30 +53,31 @@ class KDEventParser: KDParseOperation {
             }
         }
         else if elementName == "competitor" {
-            let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
-            if let competitor = self.context.findOrCreate(Competitor.classForCoder(), predicate: predicate) as? Competitor {
-                competitor.identifier = attributeDict["id"]
-                if let athlete = self.context.findFirst(Athlete.classForCoder(), predicate: predicate) as? Athlete {
-                    competitor.athlete = athlete
+            if let identifier = attributeDict["id"] {
+                let predicate = NSPredicate(format: "identifier = %@", identifier)
+                if let competitor = self.context.findOrCreate(Competitor.classForCoder(), predicate: predicate) as? Competitor {
+                    competitor.identifier = identifier
+                    if let athlete = self.context.findFirst(Athlete.classForCoder(), predicate: predicate) as? Athlete {
+                        competitor.athlete = athlete
+                    }
+                    if let team = self.context.findFirst(Team.classForCoder(), predicate: predicate) as? Team {
+                        competitor.team = team
+                    }
+                    competitor.type = attributeDict["type"]
+                    competitor.medal = attributeDict["medal"]
+                    competitor.status = attributeDict["status"]
+                    competitor.outcome = attributeDict["outcome"]
+                    competitor.resultValue = attributeDict["result"]
+                    competitor.resultType = attributeDict["result_type"]
+                    if let text = attributeDict["sort_order"] {
+                        competitor.sort = Int16(text)!
+                    }
+                    if let text = attributeDict["start_order"] {
+                        competitor.start = Int16(text)!
+                    }
+                    competitor.unit = self.unit
+                    self.competitor = competitor
                 }
-                if let team = self.context.findFirst(Team.classForCoder(), predicate: predicate) as? Team {
-                    competitor.team = team
-                }
-                competitor.type = attributeDict["type"]
-                competitor.medal = attributeDict["medal"]
-                competitor.status = attributeDict["status"]
-                competitor.outcome = attributeDict["outcome"]
-                competitor.resultValue = attributeDict["result"]
-                competitor.resultType = attributeDict["result_type"]
-                if let text = attributeDict["sort_order"] {
-                    competitor.sort = Int16(text)!
-                }
-                if let text = attributeDict["start_order"] {
-                    competitor.start = Int16(text)!
-                }
-                competitor.unit = self.unit
-                self.competitor = competitor
-                
             }
         }
             
@@ -93,7 +94,7 @@ class KDEventParser: KDParseOperation {
                 score.competitor = self.competitor
             }
         }
-        
+            
         else if elementName == "extended-result" {
             if let result = self.context.createObject(Result.classForCoder()) as? Result {
                 result.code = attributeDict["code"]
@@ -101,7 +102,7 @@ class KDEventParser: KDParseOperation {
                 result.type = attributeDict["type"]
                 result.value = attributeDict["value"]
                 result.valueType = attributeDict["value_type"]
-
+                
                 if let text = attributeDict["rank"] {
                     result.rank = Int16(text)!
                 }

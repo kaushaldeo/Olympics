@@ -10,8 +10,8 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="competitor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Competitor" inverseName="athlete" inverseEntity="Competitor" syncable="YES"/>
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="members" inverseEntity="Country" syncable="YES"/>
-        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="participants" inverseEntity="Event" syncable="YES"/>
-        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Team" inverseName="members" inverseEntity="Team" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="participants" inverseEntity="Event" syncable="YES"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="members" inverseEntity="Team" syncable="YES"/>
     </entity>
     <entity name="Competitor" representedClassName=".Competitor" syncable="YES">
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
@@ -58,8 +58,8 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="events" inverseEntity="Country" syncable="YES"/>
         <relationship name="discipline" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Discipline" inverseName="events" inverseEntity="Discipline" syncable="YES"/>
-        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athlete" inverseName="event" inverseEntity="Athlete" syncable="YES"/>
-        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="event" inverseEntity="Team" syncable="YES"/>
+        <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athlete" inverseName="events" inverseEntity="Athlete" syncable="YES"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="events" inverseEntity="Team" syncable="YES"/>
         <relationship name="units" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Unit" inverseName="event" inverseEntity="Unit" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName=".Location" syncable="YES">
@@ -97,8 +97,8 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="competitor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Competitor" inverseName="team" inverseEntity="Competitor" syncable="YES"/>
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="teams" inverseEntity="Country" syncable="YES"/>
-        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="teams" inverseEntity="Event" syncable="YES"/>
-        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athlete" inverseName="team" inverseEntity="Athlete" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="teams" inverseEntity="Event" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athlete" inverseName="teams" inverseEntity="Athlete" syncable="YES"/>
     </entity>
     <entity name="Unit" representedClassName=".Unit" syncable="YES">
         <attribute name="clock" optional="YES" attributeType="String" syncable="YES"/>
@@ -123,17 +123,17 @@
         <relationship name="units" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Unit" inverseName="venue" inverseEntity="Unit" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Athlete" positionX="-389" positionY="468" width="128" height="210"/>
+        <element name="Athlete" positionX="-389" positionY="468" width="128" height="208"/>
         <element name="Competitor" positionX="297" positionY="603" width="128" height="255"/>
         <element name="Country" positionX="-56" positionY="333" width="128" height="180"/>
         <element name="Discipline" positionX="664" positionY="435" width="128" height="150"/>
         <element name="Event" positionX="241" positionY="414" width="128" height="165"/>
         <element name="Location" positionX="657" positionY="270" width="128" height="105"/>
-        <element name="Sport" positionX="855" positionY="270" width="128" height="105"/>
-        <element name="Team" positionX="-216" positionY="630" width="128" height="135"/>
-        <element name="Unit" positionX="484" positionY="270" width="128" height="255"/>
-        <element name="Venue" positionX="286" positionY="270" width="128" height="105"/>
         <element name="Result" positionX="513" positionY="765" width="128" height="180"/>
         <element name="Score" positionX="502" positionY="594" width="128" height="120"/>
+        <element name="Sport" positionX="855" positionY="270" width="128" height="105"/>
+        <element name="Team" positionX="-216" positionY="630" width="128" height="133"/>
+        <element name="Unit" positionX="484" positionY="270" width="128" height="255"/>
+        <element name="Venue" positionX="286" positionY="270" width="128" height="105"/>
     </elements>
 </model>

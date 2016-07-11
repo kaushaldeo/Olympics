@@ -72,6 +72,15 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
     }
     
     
+    
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        return self.fetchedResultsController.sectionIndexTitles
+    }
+    
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return self.fetchedResultsController.sectionForSectionIndexTitle(title, atIndex: index)
+    }
+    
     /*
      // Override to support conditional editing of the table view.
      override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -138,15 +147,13 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true), NSSortDescriptor(key: "alias", ascending: true)]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: "name", cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {
