@@ -7,5 +7,6 @@ target 'Olympics' do
   # Pods for Olympics
 pod 'AFNetworking', '~> 3.0'
 pod 'ViewPagerController'
+pod 'STPopup'
 
 end

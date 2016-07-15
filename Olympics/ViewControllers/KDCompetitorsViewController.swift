@@ -1,8 +1,8 @@
 //
-//  KDUnitsViewController.swift
+//  KDCompetitorsViewController.swift
 //  Olympics
 //
-//  Created by Kaushal Deo on 6/16/16.
+//  Created by Kaushal Deo on 7/15/16.
 //  Copyright © 2016 Scorpion Inc. All rights reserved.
 //
 
@@ -10,17 +10,9 @@ import UIKit
 import CoreData
 import STPopup
 
-class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class KDCompetitorsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    weak var parentController : UIViewController?
-    
-    var date : NSDate!
-    
-    lazy var dateFormatter : NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMM d 'at' hh:mm a"
-        return dateFormatter
-    }()
+    var unit : Unit!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +23,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.tableView.registerClass(UITableViewHeaderFooterView.classForCoder(), forHeaderFooterViewReuseIdentifier: "kHeaderView")
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 64.0
-        
-        
+        self.contentSizeInPopup = CGSizeMake(300, 400)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -71,15 +58,18 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDUnitViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         // Configure the cell...
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        cell.nameLabel.text = unit.name
-        cell.timeLabel.text = self.dateFormatter.stringFromDate(unit.startDate!)
-        cell.locationLabel.text = unit.locationName()
-        cell.medalView.image = unit.medalImage()
-        cell.genderView.image = unit.event?.genderImage()
+        let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Competitor
+        if let type = competitor?.type where type == "team" {
+            cell.textLabel?.text = competitor?.team?.name
+        }
+        else {
+             cell.textLabel?.text = competitor?.athlete?.firstName
+        }
+        cell.detailTextLabel?.text = competitor?.outcome
+        
         return cell
     }
     
@@ -118,45 +108,6 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
      return true
      }
      */
-    //MARK: Table View Delegate Method
-    
-    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView")
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        headerView?.textLabel?.text = sectionInfo.name
-        return headerView
-    }
-    
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        print(unit)
-        if let event = unit.event {
-            if let units = event.units?.allObjects as? [Unit] {
-                for unit in units {
-                    if let set = unit.competitors?.allObjects as? [Competitor] {
-                        for competitor in set {
-                            print(competitor.athlete?.firstName)
-                            print(competitor.team?.name)
-                            print(competitor.type)
-                        }
-                    }
-                }
-            }
-        }
-        if let sets = unit.competitors where sets.count > 0 {
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCompetitorsViewController") as? KDCompetitorsViewController {
-                viewController.unit = unit
-                let popupController = STPopupController(rootViewController: viewController)
-                popupController.presentInViewController(self)
-            }
-            return
-        }
-        if let event = unit.event {
-            KDAPIManager.sharedInstance.update(event)
-        }
-        
-    }
     
     /*
      // MARK: - Navigation
@@ -168,6 +119,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
      }
      */
     
+    
     // MARK: - Fetched results controller
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
@@ -175,31 +127,24 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Unit", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Competitor", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "event.discipline.name", ascending: true),NSSortDescriptor(key: "startDate", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
         
-        if  let country = Country.country(context) {
-            if let nextDate = self.date.nextDate() {
-                //fetchRequest.predicate = NSPredicate(format: "startDate > %@ AND startDate < %@", self.date, nextDate)
-                fetchRequest.predicate = NSPredicate(format: "event.country = %@ AND startDate > %@ AND startDate < %@", country, self.date, nextDate)
-            }
-            else {
-                fetchRequest.predicate = NSPredicate(format: "event.country = %@", country)
-            }
-        }
+        fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.unit.event!)
+        fetchRequest.predicate = NSPredicate(format: "unit = %@", self.unit)
         
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"event.discipline.name", cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {
@@ -255,4 +200,5 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
      self.tableView.reloadData()
      }
      */
+    
 }

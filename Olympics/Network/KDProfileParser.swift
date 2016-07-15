@@ -60,6 +60,7 @@ class KDProfileParser: KDParseOperation {
             if let team = self.context.findOrCreate(Team.classForCoder(), predicate: predicate) as? Team {
                 team.identifier = attributeDict["id"]
                 team.name = attributeDict["description"]
+                team.country = self.country
                 self.teams.append(team)
                 self.participants = [Athlete]()
             }

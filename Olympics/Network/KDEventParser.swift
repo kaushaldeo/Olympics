@@ -57,13 +57,33 @@ class KDEventParser: KDParseOperation {
                 let predicate = NSPredicate(format: "identifier = %@", identifier)
                 if let competitor = self.context.findOrCreate(Competitor.classForCoder(), predicate: predicate) as? Competitor {
                     competitor.identifier = identifier
-                    if let athlete = self.context.findFirst(Athlete.classForCoder(), predicate: predicate) as? Athlete {
-                        competitor.athlete = athlete
-                    }
-                    if let team = self.context.findFirst(Team.classForCoder(), predicate: predicate) as? Team {
-                        competitor.team = team
-                    }
                     competitor.type = attributeDict["type"]
+                    if let type = competitor.type  where type == "individual" {
+                        if let athlete = self.context.findOrCreate(Athlete.classForCoder(), predicate: predicate) as? Athlete {
+                            athlete.identifier = identifier
+                            athlete.firstName = attributeDict["first_name"]
+                            athlete.lastName = attributeDict["last_name"]
+                            athlete.gender = attributeDict["gender"]
+                            athlete.name = attributeDict["print_name"]
+                            if let text = attributeDict["birth_date"] {
+                                athlete.date = self.dateFormatter.dateFromString(text)
+                            }
+                            if let alias = attributeDict["organization"] {
+                             athlete.country = self.context.findFirst(Country.classForCoder(), predicate: NSPredicate(format: "alias = %@",alias)) as? Country
+                            }
+                            competitor.athlete = athlete
+                        }
+                    }
+                    else {
+                        if let team = self.context.findOrCreate(Team.classForCoder(), predicate: predicate) as? Team {
+                            team.identifier = identifier
+                            team.name = attributeDict["description"]
+                            if let alias = attributeDict["organization"] {
+                                team.country = self.context.findFirst(Country.classForCoder(), predicate: NSPredicate(format: "alias = %@",alias)) as? Country
+                            }
+                            competitor.team = team
+                        }
+                    }
                     competitor.medal = attributeDict["medal"]
                     competitor.status = attributeDict["status"]
                     competitor.outcome = attributeDict["outcome"]

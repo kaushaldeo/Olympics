@@ -58,6 +58,7 @@
 		72DC6C901D223F19001E5AF9 /* KDStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */; };
 		72DC6C921D224685001E5AF9 /* KDPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */; };
 		72DC6C941D224697001E5AF9 /* KDMedalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */; };
+		72F0B3CF1D39A9CA00305193 /* KDCompetitorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0B3CE1D39A9CA00305193 /* KDCompetitorsViewController.swift */; };
 		A5024B28232EDAD4E98032CF /* Pods_Olympics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE87072582A5606C63FB444 /* Pods_Olympics.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDStoryboardSegue.swift; sourceTree = "<group>"; };
 		72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDPlayersViewController.swift; sourceTree = "<group>"; };
 		72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalsViewController.swift; sourceTree = "<group>"; };
+		72F0B3CE1D39A9CA00305193 /* KDCompetitorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCompetitorsViewController.swift; sourceTree = "<group>"; };
 		7A1D1F68A84A2A69C308D6AC /* Pods-Olympics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olympics.release.xcconfig"; path = "Pods/Target Support Files/Pods-Olympics/Pods-Olympics.release.xcconfig"; sourceTree = "<group>"; };
 		AFE87072582A5606C63FB444 /* Pods_Olympics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Olympics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8B1B2F22D61F37DAF0E991E /* Pods-Olympics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olympics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Olympics/Pods-Olympics.debug.xcconfig"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */,
 				72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */,
 				72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */,
+				72F0B3CE1D39A9CA00305193 /* KDCompetitorsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				72DA12131D1251DB00AA8EE3 /* Competitor.swift in Sources */,
 				72DA12101D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift in Sources */,
 				72DA120E1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift in Sources */,
+				72F0B3CF1D39A9CA00305193 /* KDCompetitorsViewController.swift in Sources */,
 				72DA121C1D125C8900AA8EE3 /* KDManagedObjectContext.swift in Sources */,
 				72DA12071D1251DB00AA8EE3 /* Location.swift in Sources */,
 				72DA108B1D0BE36F00AA8EE3 /* KDEventsViewController.swift in Sources */,
