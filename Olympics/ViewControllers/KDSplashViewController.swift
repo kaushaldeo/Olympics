@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class KDSplashViewController: UIViewController {
 
@@ -19,6 +20,12 @@ class KDSplashViewController: UIViewController {
         if NSUserDefaults.loadSchedule() == false {
             KDAPIManager.sharedInstance.updateSchedule()
         }
+        print(kFIREventSelectContent);
+        
+        FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
+            kFIRParameterContentType:"cont",
+            kFIRParameterItemID:"1"
+            ])
     }
 
     override func didReceiveMemoryWarning() {

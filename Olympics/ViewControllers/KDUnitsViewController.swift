@@ -144,18 +144,40 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
                 }
             }
         }
+        
+        if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCompetitorsViewController") as? KDCompetitorsViewController {
+            viewController.unit = unit
+            let popupController = STPopupController(rootViewController: viewController)
+            popupController.presentInViewController(self)
+        }
+        
         if let sets = unit.competitors where sets.count > 0 {
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCompetitorsViewController") as? KDCompetitorsViewController {
-                viewController.unit = unit
-                let popupController = STPopupController(rootViewController: viewController)
-                popupController.presentInViewController(self)
-            }
             return
         }
         if let event = unit.event {
             KDAPIManager.sharedInstance.update(event)
         }
+    }
+    
+    
+    override func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    override func tableView(tableView: UITableView, shouldUpdateFocusInContext context: UITableViewFocusUpdateContext) -> Bool {
+        return true
+    }
+    override func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator)
+    {
         
+        if let indexPath = context.nextFocusedIndexPath {
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                cell.backgroundColor = UIColor.redColor()
+            }
+        }
+        
+    }
+    override func indexPathForPreferredFocusedViewInTableView(tableView: UITableView) -> NSIndexPath? {
+        return NSIndexPath(forItem: 0, inSection: 0)
     }
     
     /*
@@ -182,7 +204,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "event.discipline.name", ascending: true),NSSortDescriptor(key: "startDate", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "event.discipline.name", ascending: true),NSSortDescriptor(key: "startDate", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
         
         if  let country = Country.country(context) {
             if let nextDate = self.date.nextDate() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		724CB2DC1D3A0164003C4D28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */; };
 		724FA9091D319FF600ADCB8D /* KDEventParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA9081D319FF600ADCB8D /* KDEventParser.swift */; };
 		724FA90E1D31A74600ADCB8D /* Result+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA90A1D31A74600ADCB8D /* Result+CoreDataProperties.swift */; };
 		724FA90F1D31A74600ADCB8D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA90B1D31A74600ADCB8D /* Result.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		724FA9081D319FF600ADCB8D /* KDEventParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDEventParser.swift; sourceTree = "<group>"; };
 		724FA90A1D31A74600ADCB8D /* Result+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Result+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		724FA90B1D31A74600ADCB8D /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				72DA107A1D0BA16B00AA8EE3 /* Assets.xcassets */,
 				72DA107C1D0BA16B00AA8EE3 /* LaunchScreen.storyboard */,
 				72DA107F1D0BA16B00AA8EE3 /* Info.plist */,
+				724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */,
 				72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */,
 			);
 			path = Olympics;
@@ -324,6 +327,7 @@
 			files = (
 				72D0F5CF1D2C6A6300400F03 /* Images in Resources */,
 				72DA107E1D0BA16B00AA8EE3 /* LaunchScreen.storyboard in Resources */,
+				724CB2DC1D3A0164003C4D28 /* GoogleService-Info.plist in Resources */,
 				72DA107B1D0BA16B00AA8EE3 /* Assets.xcassets in Resources */,
 				72DA10791D0BA16B00AA8EE3 /* Main.storyboard in Resources */,
 			);

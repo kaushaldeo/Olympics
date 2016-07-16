@@ -61,14 +61,9 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         // Configure the cell...
-        let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Competitor
-        if let type = competitor?.type where type == "team" {
-            cell.textLabel?.text = competitor?.team?.name
-        }
-        else {
-             cell.textLabel?.text = competitor?.athlete?.firstName
-        }
-        cell.detailTextLabel?.text = competitor?.outcome
+        let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
+            cell.textLabel?.text = competitor.name()
+        cell.detailTextLabel?.text = competitor.outcome
         
         return cell
     }
@@ -136,7 +131,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         // Edit the sort key as appropriate.
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
         
-        fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.unit.event!)
+       // fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.unit.event!)
         fetchRequest.predicate = NSPredicate(format: "unit = %@", self.unit)
         
         
