@@ -12,7 +12,7 @@ import STPopup
 
 class KDCompetitorsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var unit : Unit!
+    var event : Event!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,14 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.contentSizeInPopup = CGSizeMake(300, 400)
+        
+        self.tableView.registerClass(UITableViewHeaderFooterView.classForCoder(), forHeaderFooterViewReuseIdentifier: "kHeaderView")
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 64.0
+        
+        self.title = self.event.name
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -62,7 +70,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         
         // Configure the cell...
         let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
-            cell.textLabel?.text = competitor.name()
+        cell.textLabel?.text = competitor.name()
         cell.detailTextLabel?.text = competitor.resultText()
         
         return cell
@@ -104,6 +112,13 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
      }
      */
     
+    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView")
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        headerView?.textLabel?.text = sectionInfo.name
+        return headerView
+    }
+    
     /*
      // MARK: - Navigation
      
@@ -129,17 +144,17 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.phase", ascending: true),NSSortDescriptor(key: "unit.name", ascending: true),NSSortDescriptor(key: "sort", ascending: true)]
         
-       // fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.unit.event!)
-        fetchRequest.predicate = NSPredicate(format: "unit = %@", self.unit)
+        // fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.unit.event!)
+        fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.event)
         
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"unit.phase", cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {

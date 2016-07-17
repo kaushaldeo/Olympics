@@ -52,7 +52,7 @@ class KDEventsViewController: UIViewController {
         appearance.scrollViewMinPositionY = 20.0
         appearance.scrollViewObservingType = .NavigationBar(targetNavigationBar: self.navigationController!.navigationBar)
         
-        appearance.tabMenuAppearance.backgroundColor = UIColor(red: 57, green: 150, blue: 27)
+        appearance.tabMenuAppearance.backgroundColor = UIColor(red: 0, green: 160, blue: 25)
         appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.whiteColor()
         appearance.tabMenuAppearance.defaultTitleColor = UIColor.lightTextColor()
         appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsets(top: 39, left: 0, bottom: 0, right: 0)
@@ -91,6 +91,8 @@ class KDEventsViewController: UIViewController {
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 160, blue: 25)
         
         // Do any additional setup after loading the view.
         //self.headerView.backgroundColor = self.navigationController?.navigationBar.barTintColor

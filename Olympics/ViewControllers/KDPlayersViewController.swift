@@ -17,9 +17,14 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 240, green: 91, blue: 34)
+      
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.showCountry()
+        
+        self.tabBarController?.tabBar.itemPositioning = .Fill
     }
     
     override func viewDidAppear(animated: Bool) {

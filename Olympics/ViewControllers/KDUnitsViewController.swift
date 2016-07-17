@@ -74,12 +74,24 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDUnitViewCell
         
         // Configure the cell...
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        cell.nameLabel.text = unit.event?.name
-        cell.timeLabel.text = self.dateFormatter.stringFromDate(unit.startDate!)
-        cell.locationLabel.text = unit.locationName()
-        cell.medalView.image = unit.medalImage()
-        cell.genderView.image = unit.event?.genderImage()
+        //        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        //        cell.nameLabel.text = unit.event?.name
+        //        cell.timeLabel.text = self.dateFormatter.stringFromDate(unit.startDate!)
+        //        cell.locationLabel.text = unit.locationName()
+        //        cell.medalView.image = unit.medalImage()
+        //        cell.genderView.image = unit.event?.genderImage()
+        
+        
+        let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
+        cell.nameLabel.text = event.name
+        cell.genderView.image = event.genderImage()
+        if let unit = event.unit(self.date) {
+            cell.timeLabel.text = self.dateFormatter.stringFromDate(unit.startDate!)
+            cell.locationLabel.text = unit.locationName()
+            cell.medalView.image = unit.medalImage()
+            
+        }
+        
         return cell
     }
     
@@ -129,56 +141,18 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        print(unit)
-        if let event = unit.event {
-            if let units = event.units?.allObjects as? [Unit] {
-                for unit in units {
-                    if let set = unit.competitors?.allObjects as? [Competitor] {
-                        for competitor in set {
-                            print(competitor.athlete?.firstName)
-                            print(competitor.team?.name)
-                            print(competitor.type)
-                        }
-                    }
-                }
-            }
-        }
-        
+        let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
         if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCompetitorsViewController") as? KDCompetitorsViewController {
-            viewController.unit = unit
+            viewController.event = event
+            //self.navigationController?.pushViewController(viewController, animated: true)
             let popupController = STPopupController(rootViewController: viewController)
             popupController.presentInViewController(self)
         }
         
-        if let sets = unit.competitors where sets.count > 0 {
-            return
-        }
-        if let event = unit.event {
-            KDAPIManager.sharedInstance.update(event)
-        }
-    }
-    
-    
-    override func tableView(tableView: UITableView, canFocusRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    override func tableView(tableView: UITableView, shouldUpdateFocusInContext context: UITableViewFocusUpdateContext) -> Bool {
-        return true
-    }
-    override func tableView(tableView: UITableView, didUpdateFocusInContext context: UITableViewFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator)
-    {
-        
-        if let indexPath = context.nextFocusedIndexPath {
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                cell.backgroundColor = UIColor.redColor()
-            }
-        }
+        KDAPIManager.sharedInstance.update(event)
         
     }
-    override func indexPathForPreferredFocusedViewInTableView(tableView: UITableView) -> NSIndexPath? {
-        return NSIndexPath(forItem: 0, inSection: 0)
-    }
+    
     
     /*
      // MARK: - Navigation
@@ -197,19 +171,22 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Unit", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Event", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "event.discipline.name", ascending: true),NSSortDescriptor(key: "startDate", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
+        //NSSortDescriptor(key: "startDate", ascending: true)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "discipline.name", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
         
         if  let country = Country.country(context) {
             if let nextDate = self.date.nextDate() {
+                fetchRequest.predicate = NSPredicate(format: "country = %@ AND SUBQUERY(units, $unit, $unit.startDate > %@ AND $unit.startDate < %@).@count != 0", country,self.date, nextDate)
+                //SUBQUERY(friendToCurrentUser.trackingSessions, $x, $x.dataIsStale == false AND $x.endDate == nil).@count != 0"
                 //fetchRequest.predicate = NSPredicate(format: "startDate > %@ AND startDate < %@", self.date, nextDate)
-                fetchRequest.predicate = NSPredicate(format: "event.country = %@ AND startDate > %@ AND startDate < %@", country, self.date, nextDate)
+                //fetchRequest.predicate = NSPredicate(format: "event.country = %@ AND startDate > %@ AND startDate < %@", country, self.date, nextDate)
             }
             else {
                 fetchRequest.predicate = NSPredicate(format: "event.country = %@", country)
@@ -225,7 +202,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         // nil for section name key path means "no sections".
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"event.discipline.name", cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"discipline.name", cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {

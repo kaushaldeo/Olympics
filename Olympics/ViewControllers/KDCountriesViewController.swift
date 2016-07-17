@@ -24,6 +24,9 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         self.tableView.estimatedRowHeight = 64.0
         
         
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 103, blue: 173)
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {

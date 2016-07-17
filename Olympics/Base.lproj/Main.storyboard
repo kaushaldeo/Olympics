@@ -162,10 +162,10 @@
             </objects>
             <point key="canvasLocation" x="-328.5" y="-822.75"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="c5N-wH-f0P">
             <objects>
-                <tabBarController id="LdC-bc-T7b" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="kTabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LdC-bc-T7b" customClass="KDTabBarViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="dTH-ZO-mhf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

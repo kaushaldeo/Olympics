@@ -11,8 +11,8 @@ import CoreData
 import UIKit
 
 class Event: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    // Insert code here to add functionality to your managed object subclass
     
     func fullName() -> String? {
         var string = ""
@@ -35,5 +35,15 @@ class Event: NSManagedObject {
         }
         return nil
     }
-
+    
+    func unit(date: NSDate) -> Unit? {
+        if let items = self.units?.allObjects as? [Unit] {
+            if let nextDate = date.nextDate() {
+                let predicate = NSPredicate(format: "startDate > %@ AND startDate < %@",date, nextDate)
+             return (items as NSArray).filteredArrayUsingPredicate(predicate).first as? Unit
+            }
+        }
+        return nil
+    }
+    
 }

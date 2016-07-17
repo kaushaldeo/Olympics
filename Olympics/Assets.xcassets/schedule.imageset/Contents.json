@@ -2,11 +2,6 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "schedule.png",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
       "filename" : "schedule@2x.png",
       "scale" : "2x"
     },

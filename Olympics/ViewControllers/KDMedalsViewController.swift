@@ -23,6 +23,7 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
         
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 145, blue: 202)
         
         self.showCountry()
     }
