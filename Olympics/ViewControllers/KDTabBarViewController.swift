@@ -26,6 +26,11 @@ class KDTabBarViewController: UITabBarController {
             
             self.tabBar.layer.insertSublayer(layer, atIndex: 0)
         }
+        
+        
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName:UIColor.whiteColor()], forState: .Normal)
+        
     }
     
     override func didReceiveMemoryWarning() {
