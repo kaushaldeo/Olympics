@@ -75,7 +75,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         // Configure the cell...
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        cell.nameLabel.text = unit.name
+        cell.nameLabel.text = unit.event?.name
         cell.timeLabel.text = self.dateFormatter.stringFromDate(unit.startDate!)
         cell.locationLabel.text = unit.locationName()
         cell.medalView.image = unit.medalImage()
@@ -216,6 +216,10 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
             }
         }
         
+        //        if let group = entity?.relationshipsByName["event"] {
+        //            fetchRequest.propertiesToGroupBy = [group]
+        //            fetchRequest.resultType = .DictionaryResultType
+        //        }
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

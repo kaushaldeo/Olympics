@@ -23,6 +23,22 @@ import CoreData
  </competitor>
  
  
+ @NSManaged var identifier: String?
+ @NSManaged var type: String?
+ @NSManaged var medal: String?
+ @NSManaged var sort: Int16
+ @NSManaged var start: Int16
+ @NSManaged var status: String?
+ @NSManaged var outcome: String?
+ @NSManaged var resultValue: String?
+ @NSManaged var resultType: String?
+ @NSManaged var athlete: Athlete?
+ @NSManaged var team: Team?
+ @NSManaged var unit: Unit?
+ @NSManaged var scores: NSSet?
+ @NSManaged var results: NSSet?
+
+ 
  ****/
 
 
@@ -32,6 +48,9 @@ class Competitor: NSManagedObject {
     
     
     func name () -> String? {
+        print("\n")
+        print(self.unit?.event?.identifier)
+        print(self.committedValuesForKeys(["sort","resultValue","resultType","outcome","start"]))
         if let type = self.type where type == "team" {
             return self.team?.name
         }
@@ -49,8 +68,32 @@ class Competitor: NSManagedObject {
                 }
                 string += text
             }
+            return string
         }
         return nil
+    }
+    
+    func resultText() -> String {
+        var string = ""
+        if let text = self.outcome {
+            string += text
+        }
+        
+        if let text = self.resultValue {
+            if string.isEmpty == false {
+                string += "   "
+            }
+            string += text
+        }
+        
+        if let text = self.resultType {
+            if string.isEmpty == false {
+                string += " with "
+            }
+            string += text
+        }
+        
+        return string
     }
     
 }

@@ -63,7 +63,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         // Configure the cell...
         let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
             cell.textLabel?.text = competitor.name()
-        cell.detailTextLabel?.text = competitor.outcome
+        cell.detailTextLabel?.text = competitor.resultText()
         
         return cell
     }
