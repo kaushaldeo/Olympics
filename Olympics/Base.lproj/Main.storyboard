@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FZ7-c7-7Fd">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
@@ -151,9 +152,75 @@
                     <view key="view" contentMode="scaleToFill" id="mnU-Gx-eIM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t5B-8n-5Nk">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T7S-qM-TWl">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="JL4-kU-7Mc">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="127"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="100" id="bfc-Fj-Dad">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="127"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="JL4-kU-7Mc"/>
+                                        <exclude reference="bfc-Fj-Dad"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="JL4-kU-7Mc"/>
+                                        <include reference="bfc-Fj-Dad"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="T7S-qM-TWl" firstAttribute="centerX" secondItem="mnU-Gx-eIM" secondAttribute="centerX" id="1QI-yb-en9"/>
+                            <constraint firstAttribute="trailing" secondItem="t5B-8n-5Nk" secondAttribute="trailing" id="EIJ-F4-0cw"/>
+                            <constraint firstItem="T7S-qM-TWl" firstAttribute="centerY" secondItem="mnU-Gx-eIM" secondAttribute="centerY" id="P4B-Ku-ChB"/>
+                            <constraint firstItem="t5B-8n-5Nk" firstAttribute="leading" secondItem="mnU-Gx-eIM" secondAttribute="leading" id="jml-rv-ZHh"/>
+                            <constraint firstItem="AeD-uE-bPJ" firstAttribute="top" secondItem="t5B-8n-5Nk" secondAttribute="bottom" id="jyX-kF-ofs"/>
+                            <constraint firstItem="t5B-8n-5Nk" firstAttribute="top" secondItem="mnU-Gx-eIM" secondAttribute="top" id="smD-7i-mLZ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="t5B-8n-5Nk"/>
+                                <exclude reference="T7S-qM-TWl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="jyX-kF-ofs"/>
+                                <exclude reference="1QI-yb-en9"/>
+                                <exclude reference="P4B-Ku-ChB"/>
+                                <exclude reference="EIJ-F4-0cw"/>
+                                <exclude reference="jml-rv-ZHh"/>
+                                <exclude reference="smD-7i-mLZ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="t5B-8n-5Nk"/>
+                                <include reference="T7S-qM-TWl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="jyX-kF-ofs"/>
+                                <include reference="1QI-yb-en9"/>
+                                <include reference="P4B-Ku-ChB"/>
+                                <include reference="EIJ-F4-0cw"/>
+                                <include reference="jml-rv-ZHh"/>
+                                <include reference="smD-7i-mLZ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="t5B-8n-5Nk" id="pOj-tM-s72"/>
+                        <outlet property="imageView" destination="T7S-qM-TWl" id="FHs-S2-6SF"/>
                         <segue destination="jrY-rJ-gp5" kind="custom" identifier="showCountry" customClass="KDStoryboardSegue" customModule="Olympics" customModuleProvider="target" id="w4y-zP-Zeb"/>
                         <segue destination="LdC-bc-T7b" kind="custom" identifier="showEvent" customClass="KDStoryboardSegue" customModule="Olympics" customModuleProvider="target" id="kDN-ap-Svd"/>
                     </connections>
@@ -826,6 +893,6 @@
         <image name="schedule" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="B5H-27-A3s"/>
+        <segue reference="kDN-ap-Svd"/>
     </inferredMetricsTieBreakers>
 </document>
