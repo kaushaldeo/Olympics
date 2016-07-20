@@ -16,8 +16,6 @@ class KDEventParser: KDParseOperation {
     
     var competitor : Competitor? = nil
     
-    var units = [Unit]()
-    
     lazy var dateFormatter : NSDateFormatter = {
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
@@ -32,7 +30,7 @@ class KDEventParser: KDParseOperation {
         }
         else if elementName == "unit" {
             let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
-            if let unit = self.context.findFirst(Unit.classForCoder(), predicate: predicate) as? Unit {
+            if let unit = self.context.findOrCreate(Unit.classForCoder(), predicate: predicate) as? Unit {
                 unit.name = attributeDict["name"]
                 unit.phase = attributeDict["phase"]
                 unit.status = attributeDict["status"]
@@ -48,7 +46,6 @@ class KDEventParser: KDParseOperation {
                 unit.period = attributeDict["period"]
                 unit.clock = attributeDict["clock"]
                 unit.event = self.event
-                self.units.append(unit)
                 self.unit = unit
             }
         }
@@ -127,7 +124,7 @@ class KDEventParser: KDParseOperation {
                     result.rank = Int16(text)!
                 }
                 if let text = attributeDict["sequence"] {
-                    result.sequence = Int16(text)!
+                    //result.sequence = Int16(text)!
                 }
                 if let text = attributeDict["sort_order"] {
                     result.order = Int16(text)!
@@ -139,7 +136,7 @@ class KDEventParser: KDParseOperation {
     
     // sent when an end tag is encountered. The various parameters are supplied as above.
     override func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "event" {
+        if elementName == "unit" ||  elementName == "event" {
             self.context.saveContext()
         }
     }

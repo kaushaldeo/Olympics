@@ -15,6 +15,7 @@
 		724FA9101D31A74600ADCB8D /* Score+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA90C1D31A74600ADCB8D /* Score+CoreDataProperties.swift */; };
 		724FA9111D31A74600ADCB8D /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA90D1D31A74600ADCB8D /* Score.swift */; };
 		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
+		729A03191D3F59F400E300F1 /* KDCompetitorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */; };
 		72D0F5C31D2B8EF300400F03 /* KDCountryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C21D2B8EF300400F03 /* KDCountryParser.swift */; };
 		72D0F5C51D2B8FED00400F03 /* KDScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C41D2B8FED00400F03 /* KDScheduleParser.swift */; };
 		72D0F5C71D2B90E400400F03 /* KDProfileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */; };
@@ -72,6 +73,7 @@
 		724FA90C1D31A74600ADCB8D /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		724FA90D1D31A74600ADCB8D /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
+		729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCompetitorViewCell.swift; sourceTree = "<group>"; };
 		72D0F5C21D2B8EF300400F03 /* KDCountryParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCountryParser.swift; sourceTree = "<group>"; };
 		72D0F5C41D2B8FED00400F03 /* KDScheduleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDScheduleParser.swift; sourceTree = "<group>"; };
 		72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDProfileParser.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */,
 				728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */,
 				72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */,
+				729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */,
 				72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */,
 			);
 			path = Views;
@@ -398,6 +401,7 @@
 				724FA9101D31A74600ADCB8D /* Score+CoreDataProperties.swift in Sources */,
 				72D0F5C51D2B8FED00400F03 /* KDScheduleParser.swift in Sources */,
 				72D0F5C71D2B90E400400F03 /* KDProfileParser.swift in Sources */,
+				729A03191D3F59F400E300F1 /* KDCompetitorViewCell.swift in Sources */,
 				72DA120B1D1251DB00AA8EE3 /* Country.swift in Sources */,
 				72DC6C921D224685001E5AF9 /* KDPlayersViewController.swift in Sources */,
 				72DA12171D1251DB00AA8EE3 /* Athlete.swift in Sources */,

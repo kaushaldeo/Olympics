@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //UITabBar.appearance().barTintColor = UIColor(red: 14, green: 101, blue: 171)
         UITabBar.appearance().tintColor = UIColor.whiteColor()
+        
+        UIBarButtonItem.appearance().setBackButtonBackgroundImage(UIImage(named: "backButton")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal, barMetrics: .Default)
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

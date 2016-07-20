@@ -37,6 +37,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         self.tableView.estimatedRowHeight = 64.0
         
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -144,9 +145,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
         if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCompetitorsViewController") as? KDCompetitorsViewController {
             viewController.event = event
-            //self.navigationController?.pushViewController(viewController, animated: true)
-            let popupController = STPopupController(rootViewController: viewController)
-            popupController.presentInViewController(self)
+            self.navigationController?.pushViewController(viewController, animated: true)
         }
         
         KDAPIManager.sharedInstance.update(event)

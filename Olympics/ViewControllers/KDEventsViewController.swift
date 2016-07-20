@@ -109,6 +109,7 @@ class KDEventsViewController: UIViewController {
             KDAPIManager.sharedInstance.updateProfile(country)
         }
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
         
     }
     

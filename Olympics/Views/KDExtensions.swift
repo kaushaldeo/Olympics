@@ -28,7 +28,12 @@ extension UIViewController {
             // UIBarButtonItem(image: image, style: .Plain, target: self, action: #selector(UIViewController.showCountryTapped(_:)))
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
         }
-        
+    }
+    
+    func addBackButton() {
+        if self.navigationController?.viewControllers.count > 1 {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backButton")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(UIViewController.backButtonTapped(_:)))
+        }
     }
     
     func showCountryTapped(sender: AnyObject) {
@@ -37,6 +42,10 @@ extension UIViewController {
                 window.rootViewController = viewController
             }
         }
+    }
+    
+    func backButtonTapped(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 }
 

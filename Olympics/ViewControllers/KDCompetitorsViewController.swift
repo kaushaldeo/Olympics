@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import STPopup
 
 class KDCompetitorsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
@@ -23,15 +22,16 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.contentSizeInPopup = CGSizeMake(300, 400)
         
         self.tableView.registerClass(UITableViewHeaderFooterView.classForCoder(), forHeaderFooterViewReuseIdentifier: "kHeaderView")
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
         
-        self.title = self.event.name
+        self.title = self.event.discipline?.name
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
+        self.addBackButton()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -66,12 +66,18 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDCompetitorViewCell
         
         // Configure the cell...
         let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
-        cell.textLabel?.text = competitor.name()
-        cell.detailTextLabel?.text = competitor.resultText()
+        if let country = competitor.country() {
+            cell.countryLabel.text = country.name
+            if let text = country.alias?.lowercaseString {
+                cell.iconView.image = UIImage(named: "Images/\(text).png")
+            }
+        }
+        cell.nameLabel.text = competitor.name()
+        cell.timeLabel.text = competitor.resultText()
         
         return cell
     }
@@ -144,11 +150,14 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.phase", ascending: true),NSSortDescriptor(key: "unit.name", ascending: true),NSSortDescriptor(key: "sort", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.name", ascending: true), NSSortDescriptor(key: "unit.startDate", ascending: true)]
         
         // fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.unit.event!)
         fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.event)
-        
+        if let country = Country.country(context) {
+            fetchRequest.predicate = NSPredicate(format: "unit.event = %@ AND (athlete.country = %@ OR team.country = %@)", self.event,country,country)
+        }
+//
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
@@ -169,7 +178,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         return fetchedResultsController
     }()
     
-    
+    /*
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
@@ -201,14 +210,14 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
+    */
     
-    /*
      // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
      
      func controllerDidChangeContent(controller: NSFetchedResultsController) {
      // In the simplest, most efficient, case, reload the table view.
      self.tableView.reloadData()
      }
-     */
+    
     
 }

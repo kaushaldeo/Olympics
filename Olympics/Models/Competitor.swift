@@ -73,6 +73,17 @@ class Competitor: NSManagedObject {
         return nil
     }
     
+    func country() -> Country? {
+        if let type = self.type where type == "team" {
+            return self.team?.country
+        }
+        if let player = self.athlete {
+           return player.country
+        }
+        return nil
+    }
+    
+    
     func resultText() -> String {
         var string = ""
         if let text = self.outcome {

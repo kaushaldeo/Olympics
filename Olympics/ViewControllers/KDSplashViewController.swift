@@ -52,7 +52,17 @@ class KDSplashViewController: UIViewController {
         self.imageView.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
         
         
-        
+        self.performSelector(#selector(KDSplashViewController.showView(_:)), withObject: nil, afterDelay: 3.0)
+    }
+    
+    
+    func showView(sender: AnyObject) {
+        if let _ = Country.country(NSManagedObjectContext.mainContext()) {
+            self.performSegueWithIdentifier("showEvent", sender: nil)
+        }
+        else {
+            self.performSegueWithIdentifier("showCountry", sender: nil)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,13 +72,7 @@ class KDSplashViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
-        if let _ = Country.country(NSManagedObjectContext.mainContext()) {
-            self.performSegueWithIdentifier("showEvent", sender: nil)
-        }
-        else {
-            self.performSegueWithIdentifier("showCountry", sender: nil)
-        }
+        
     }
     
     
