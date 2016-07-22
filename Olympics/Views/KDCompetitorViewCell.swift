@@ -7,24 +7,126 @@
 //
 
 import UIKit
+import CoreData
 
-class KDCompetitorViewCell: UITableViewCell {
+class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate {
 
     
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var heightLayout: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
+    
+    //MARK: - Table View Delegate Methods
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return self.fetchedResultsController.sections?.count ?? 0
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        return sectionInfo.numberOfObjects
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        
+        // Configure the cell...
+        let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
+        cell.textLabel?.text = competitor.name()
+        return cell
+    }
+    
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        let context = NSManagedObjectContext.mainContext()
+        
+        let fetchRequest = NSFetchRequest()
+        // Edit the entity name as appropriate.
+        let entity = NSEntityDescription.entityForName("Competitor", inManagedObjectContext: context)
+        fetchRequest.entity = entity
+        
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+        
+        // Edit the sort key as appropriate.
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
+       
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+    
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        switch type {
+        case .Insert:
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Delete:
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        default:
+            return
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Update:
+            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Move:
+            tableView.moveRowAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
+        self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
+    }
+    
+    
+    // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
+    
+    //    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    //        // In the simplest, most efficient, case, reload the table view.
+    //        self.tableView.reloadData()
+    //    }
 
+    
+    func setUnit(unit:Unit) {
+        let country = Country.country(NSManagedObjectContext.mainContext())!
+        self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "(team.country = %@ OR athlete.country = %@) AND SUBQUERY(units, $unit, $unit = %@).@count > 0",country, country, unit)
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            //print("Unresolved error \(error), \(error.userInfo)")
+            abort()
+        }
+        
+        
+    }
 }

@@ -70,9 +70,8 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         
         // Configure the cell...
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        cell.countryLabel.text = unit.phase
         cell.nameLabel.text = unit.name
-        cell.timeLabel.text = unit.day
+        cell.setUnit(unit)
         return cell
     }
     
