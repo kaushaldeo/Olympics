@@ -46,11 +46,18 @@ class Competitor: NSManagedObject {
     
     // Insert code here to add functionality to your managed object subclass
     
+    func addUnit(item: Unit?) {
+        if let unit = item {
+            var sets = NSMutableSet()
+            if let set = self.units {
+                sets = NSMutableSet(set: set)
+            }
+            sets.addObject(unit)
+            self.units = sets
+        }
+    }
     
     func name () -> String? {
-        print("\n")
-        print(self.unit?.event?.identifier)
-        print(self.committedValuesForKeys(["sort","resultValue","resultType","outcome","start"]))
         if let type = self.type where type == "team" {
             return self.team?.name
         }
@@ -72,16 +79,7 @@ class Competitor: NSManagedObject {
         }
         return nil
     }
-    
-    func country() -> Country? {
-        if let type = self.type where type == "team" {
-            return self.team?.country
-        }
-        if let player = self.athlete {
-           return player.country
-        }
-        return nil
-    }
+
     
     
     func resultText() -> String {

@@ -69,16 +69,10 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDCompetitorViewCell
         
         // Configure the cell...
-        let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
-        if let country = competitor.country() {
-            cell.countryLabel.text = country.name
-            if let text = country.alias?.lowercaseString {
-                cell.iconView.image = UIImage(named: "Images/\(text).png")
-            }
-        }
-        cell.nameLabel.text = competitor.name()
-        cell.timeLabel.text = competitor.resultText()
-        
+        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        cell.countryLabel.text = unit.phase
+        cell.nameLabel.text = unit.name
+        cell.timeLabel.text = unit.day
         return cell
     }
     
@@ -118,13 +112,19 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
      }
      */
     
-    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView")
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        headerView?.textLabel?.text = sectionInfo.name
-        return headerView
-    }
+//    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView")
+//        let sectionInfo = self.fetchedResultsController.sections![section]
+//        headerView?.textLabel?.text = sectionInfo.name
+//        return headerView
+//    }
     
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        print(event.competitors)
+        
+    }
     /*
      // MARK: - Navigation
      
@@ -143,27 +143,26 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Competitor", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Unit", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.name", ascending: true), NSSortDescriptor(key: "unit.startDate", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
+        //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         // fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.unit.event!)
-        fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.event)
+        //fetchRequest.predicate = NSPredicate(format: "SUBQUERY(units, $unit, $unit.event = %@).@count != 0", self.event)
         if let country = Country.country(context) {
-            fetchRequest.predicate = NSPredicate(format: "unit.event = %@ AND (athlete.country = %@ OR team.country = %@)", self.event,country,country)
+            fetchRequest.predicate = NSPredicate(format: "event = %@ AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,country,country)
         }
-//
+        //
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"unit.phase", cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {
@@ -178,7 +177,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         return fetchedResultsController
     }()
     
-    /*
+    
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
@@ -210,14 +209,14 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
-    */
     
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-     // In the simplest, most efficient, case, reload the table view.
-     self.tableView.reloadData()
-     }
     
+    // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
+    
+    //    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    //        // In the simplest, most efficient, case, reload the table view.
+    //        self.tableView.reloadData()
+    //    }
+    //
     
 }

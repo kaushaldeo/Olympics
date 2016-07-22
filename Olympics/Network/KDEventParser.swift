@@ -92,7 +92,7 @@ class KDEventParser: KDParseOperation {
                     if let text = attributeDict["start_order"] {
                         competitor.start = Int16(text)!
                     }
-                    competitor.unit = self.unit
+                    competitor.addUnit(self.unit)
                     self.competitor = competitor
                 }
             }

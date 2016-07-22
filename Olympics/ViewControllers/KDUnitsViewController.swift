@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import STPopup
 
 class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
