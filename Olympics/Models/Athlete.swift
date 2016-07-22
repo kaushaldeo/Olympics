@@ -17,11 +17,25 @@ class Athlete: NSManagedObject {
     var association: String? {
         get {
             if let  event = self.events?.anyObject() as? Event {
-                return event.fullName()
+                return event.discipline?.name
             }
             if let team = self.teams?.anyObject() as? Team {
                 if let event = team.events?.anyObject() as? Event {
-                    return event.fullName()
+                    return event.discipline?.name
+                }
+            }
+            return nil
+        }
+    }
+    
+    var imageName: String? {
+        get {
+            if let  event = self.events?.anyObject() as? Event {
+                return event.discipline?.alias?.lowercaseString
+            }
+            if let team = self.teams?.anyObject() as? Team {
+                if let event = team.events?.anyObject() as? Event {
+                    return event.discipline?.alias?.lowercaseString
                 }
             }
             return nil

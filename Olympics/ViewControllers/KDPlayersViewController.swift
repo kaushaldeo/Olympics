@@ -18,7 +18,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // self.clearsSelectionOnViewWillAppear = false
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 240, green: 91, blue: 34)
-      
+        
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -65,9 +65,10 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
         cell.textLabel?.text = athlete.name
         cell.detailTextLabel?.text = athlete.association
-        if let text = athlete.gender {
-            cell.imageView?.image = UIImage(named: text)
+        if let text = athlete.imageName {
+            cell.imageView?.image = UIImage(named: "Icon/\(text).png")
         }
+        cell.imageView?.tintColor = UIColor.blackColor()
         return cell
     }
     
@@ -139,18 +140,18 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
         
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gender", ascending: true), sortDescriptor]
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
         if  let country = Country.country(context) {
             fetchRequest.predicate = NSPredicate(format: "country = %@", country)
         }
-
+        
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: "gender", cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {
@@ -206,5 +207,5 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
      self.tableView.reloadData()
      }
      */
-
+    
 }
