@@ -451,23 +451,23 @@
                                             <exclude reference="N7n-1N-HRf"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <exclude reference="eXD-tG-h2d"/>
+                                            <exclude reference="eaq-ib-dlm"/>
+                                            <exclude reference="5D6-I7-aze"/>
+                                            <exclude reference="QKy-Ww-OM5"/>
+                                            <exclude reference="PaO-Vr-LfZ"/>
+                                            <exclude reference="Zxh-jz-js8"/>
+                                            <exclude reference="oki-XG-6W6"/>
                                             <exclude reference="Qep-j3-fOA"/>
                                             <exclude reference="m1T-bY-F0K"/>
-                                            <exclude reference="4N9-gh-taY"/>
-                                            <exclude reference="AO5-Bx-T45"/>
+                                            <exclude reference="EJP-d6-8vx"/>
+                                            <exclude reference="F0N-Ss-Djw"/>
                                             <exclude reference="DDq-rt-xp3"/>
                                             <exclude reference="V3n-k4-PSy"/>
                                             <exclude reference="rYT-YF-Oi1"/>
                                             <exclude reference="rek-oQ-F4a"/>
-                                            <exclude reference="5D6-I7-aze"/>
-                                            <exclude reference="QKy-Ww-OM5"/>
-                                            <exclude reference="eXD-tG-h2d"/>
-                                            <exclude reference="eaq-ib-dlm"/>
-                                            <exclude reference="EJP-d6-8vx"/>
-                                            <exclude reference="F0N-Ss-Djw"/>
-                                            <exclude reference="PaO-Vr-LfZ"/>
-                                            <exclude reference="Zxh-jz-js8"/>
-                                            <exclude reference="oki-XG-6W6"/>
+                                            <exclude reference="4N9-gh-taY"/>
+                                            <exclude reference="AO5-Bx-T45"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -481,23 +481,23 @@
                                             <include reference="N7n-1N-HRf"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <include reference="eXD-tG-h2d"/>
+                                            <include reference="eaq-ib-dlm"/>
+                                            <include reference="5D6-I7-aze"/>
+                                            <include reference="QKy-Ww-OM5"/>
+                                            <include reference="PaO-Vr-LfZ"/>
+                                            <include reference="Zxh-jz-js8"/>
+                                            <include reference="oki-XG-6W6"/>
                                             <include reference="Qep-j3-fOA"/>
                                             <include reference="m1T-bY-F0K"/>
-                                            <include reference="4N9-gh-taY"/>
-                                            <include reference="AO5-Bx-T45"/>
+                                            <include reference="EJP-d6-8vx"/>
+                                            <include reference="F0N-Ss-Djw"/>
                                             <include reference="DDq-rt-xp3"/>
                                             <include reference="V3n-k4-PSy"/>
                                             <include reference="rYT-YF-Oi1"/>
                                             <include reference="rek-oQ-F4a"/>
-                                            <include reference="5D6-I7-aze"/>
-                                            <include reference="QKy-Ww-OM5"/>
-                                            <include reference="eXD-tG-h2d"/>
-                                            <include reference="eaq-ib-dlm"/>
-                                            <include reference="EJP-d6-8vx"/>
-                                            <include reference="F0N-Ss-Djw"/>
-                                            <include reference="PaO-Vr-LfZ"/>
-                                            <include reference="Zxh-jz-js8"/>
-                                            <include reference="oki-XG-6W6"/>
+                                            <include reference="4N9-gh-taY"/>
+                                            <include reference="AO5-Bx-T45"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -700,7 +700,7 @@
         <scene sceneID="lYU-xd-YzQ">
             <objects>
                 <tableViewController storyboardIdentifier="kCompetitorsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tUI-ui-HQA" customClass="KDCompetitorsViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="140" sectionHeaderHeight="44" sectionFooterHeight="10" id="dqa-n8-cPy">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="130" sectionHeaderHeight="44" sectionFooterHeight="10" id="dqa-n8-cPy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -723,7 +723,7 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="140" id="lAF-SX-FI1">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="110"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="100"/>
                                                 </constraint>
                                             </constraints>
                                             <prototypes>
