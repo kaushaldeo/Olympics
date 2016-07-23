@@ -88,6 +88,24 @@ extension UIColor {
     
 }
 
+extension String {
+    
+    func size(font:UIFont, width:CGFloat) -> CGSize {
+        return size(font, width: width, numberOfLines: 0)
+    }
+    
+    func size(font:UIFont, width:CGFloat, numberOfLines:Int) -> CGSize {
+        var size = CGSizeMake(width, CGFloat.max)
+        if numberOfLines > 0 {
+            size.height = CGFloat(numberOfLines)*font.lineHeight
+        }
+        let frame = self.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        return frame.size
+    }
+    
+    
+}
+
 
 
 extension NSDate {

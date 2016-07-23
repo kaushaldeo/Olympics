@@ -38,7 +38,6 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         self.tableView.estimatedRowHeight = 64.0
         
         self.tableView.backgroundColor = UIColor.backgroundColor()
-        self.tableView.backgroundView = nil
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
     }
@@ -46,15 +45,16 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        do {
-            try self.fetchedResultsController.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
+        self.fetchedResultsController.update()
         
+        self.tableView.backgroundView = nil
+        if self.fetchedResultsController.count == 0 {
+            var message = "No Events"
+            if let text = self.title {
+                message = message + " for \(text)"
+            }
+            self.tableView.backgroundView = KDErrorView.view(message)
+        }
     }
     
     override func didReceiveMemoryWarning() {

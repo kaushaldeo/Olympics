@@ -32,9 +32,9 @@
 		72D0F5CF1D2C6A6300400F03 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 72D0F5CE1D2C6A6300400F03 /* Images */; };
 		72D0F5D11D2C6E4800400F03 /* KDCountryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */; };
 		72D6ABD41D2F68CA0010ECE7 /* KDUnitViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */; };
+		72D8B6E11D43711F008E86C0 /* KDErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D8B6E01D43711F008E86C0 /* KDErrorView.swift */; };
 		72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */; };
 		72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10701D0BA16B00AA8EE3 /* Olympics.xcdatamodeld */; };
-		72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */; };
 		72DA10791D0BA16B00AA8EE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72DA10771D0BA16B00AA8EE3 /* Main.storyboard */; };
 		72DA107B1D0BA16B00AA8EE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72DA107A1D0BA16B00AA8EE3 /* Assets.xcassets */; };
 		72DA10891D0BA25000AA8EE3 /* KDCountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DA10881D0BA25000AA8EE3 /* KDCountriesViewController.swift */; };
@@ -97,10 +97,10 @@
 		72D0F5CE1D2C6A6300400F03 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCountryViewCell.swift; sourceTree = "<group>"; };
 		72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDUnitViewCell.swift; sourceTree = "<group>"; };
+		72D8B6E01D43711F008E86C0 /* KDErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDErrorView.swift; sourceTree = "<group>"; };
 		72DA106B1D0BA16B00AA8EE3 /* Olympics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Olympics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics.xcdatamodel; sourceTree = "<group>"; };
-		72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		72DA10781D0BA16B00AA8EE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		72DA107A1D0BA16B00AA8EE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72DA107F1D0BA16B00AA8EE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -200,7 +200,6 @@
 				72DA10871D0BA22F00AA8EE3 /* Views */,
 				729A03311D42DC5600E300F1 /* Resources */,
 				72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */,
-				72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */,
 				72DA10771D0BA16B00AA8EE3 /* Main.storyboard */,
 				72DA107A1D0BA16B00AA8EE3 /* Assets.xcassets */,
 				72DA107F1D0BA16B00AA8EE3 /* Info.plist */,
@@ -268,6 +267,7 @@
 				729A033A1D43406700E300F1 /* KDResultViewCell.swift */,
 				729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */,
 				729A03381D432B5D00E300F1 /* KDPhaseView.swift */,
+				72D8B6E01D43711F008E86C0 /* KDErrorView.swift */,
 				72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */,
 			);
 			path = Views;
@@ -455,6 +455,7 @@
 				721B96331D3B72650064E485 /* KDTabBarViewController.swift in Sources */,
 				72DA12071D1251DB00AA8EE3 /* Location.swift in Sources */,
 				72DA108B1D0BE36F00AA8EE3 /* KDEventsViewController.swift in Sources */,
+				72D8B6E11D43711F008E86C0 /* KDErrorView.swift in Sources */,
 				72DA120D1D1251DB00AA8EE3 /* Event.swift in Sources */,
 				728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */,
 				72DA12041D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift in Sources */,
@@ -473,7 +474,6 @@
 				729A03391D432B5D00E300F1 /* KDPhaseView.swift in Sources */,
 				729A033B1D43406700E300F1 /* KDResultViewCell.swift in Sources */,
 				72D0F5CB1D2C2A7100400F03 /* KDMedalParser.swift in Sources */,
-				72DA10741D0BA16B00AA8EE3 /* MasterViewController.swift in Sources */,
 				72D0F5C31D2B8EF300400F03 /* KDCountryParser.swift in Sources */,
 				72DA12151D1251DB00AA8EE3 /* Discipline.swift in Sources */,
 			);

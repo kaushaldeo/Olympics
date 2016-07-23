@@ -106,6 +106,13 @@ extension NSFetchedResultsController {
         }
     }
     
+    var count : Int {
+        if let objects = self.fetchedObjects {
+            return objects.count
+        }
+        return 0
+    }
+    
 }
 
 extension NSManagedObject {
