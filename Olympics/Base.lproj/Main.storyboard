@@ -252,7 +252,7 @@
         <scene sceneID="5oa-N2-JZe">
             <objects>
                 <tableViewController storyboardIdentifier="kMedalsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ddX-ZJ-gbO" customClass="KDMedalsViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="28" sectionFooterHeight="28" id="KBJ-xf-EtX">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="67" sectionHeaderHeight="28" sectionFooterHeight="28" id="KBJ-xf-EtX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -753,13 +753,13 @@
                                                                     </mask>
                                                                 </variation>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="21" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liL-jM-qJC">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="286" placeholderIntrinsicHeight="39" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liL-jM-qJC">
                                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znb-2R-hJm">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znb-2R-hJm">
                                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="mPh-Rw-tXA">
@@ -795,7 +795,6 @@
                                                             </constraint>
                                                             <constraint firstItem="znb-2R-hJm" firstAttribute="leading" secondItem="liL-jM-qJC" secondAttribute="trailing" constant="5" id="ZBe-jw-bMd"/>
                                                             <constraint firstItem="znb-2R-hJm" firstAttribute="centerY" secondItem="fRF-Xy-c62" secondAttribute="centerY" id="czb-8Y-KXZ"/>
-                                                            <constraint firstItem="liL-jM-qJC" firstAttribute="centerY" secondItem="fRF-Xy-c62" secondAttribute="centerY" id="hcM-wq-o2k"/>
                                                             <constraint firstItem="W4a-cw-VhC" firstAttribute="leading" secondItem="fRF-Xy-c62" secondAttribute="leading" constant="16" id="mjy-MS-CFt"/>
                                                         </constraints>
                                                         <variation key="default">
@@ -808,7 +807,6 @@
                                                                 <exclude reference="3Me-3z-WQ9"/>
                                                                 <exclude reference="S0d-cM-V1b"/>
                                                                 <exclude reference="UxL-KQ-Ef2"/>
-                                                                <exclude reference="hcM-wq-o2k"/>
                                                                 <exclude reference="4Q3-lw-iXz"/>
                                                                 <exclude reference="ZBe-jw-bMd"/>
                                                                 <exclude reference="czb-8Y-KXZ"/>
@@ -826,7 +824,6 @@
                                                                 <include reference="3Me-3z-WQ9"/>
                                                                 <include reference="S0d-cM-V1b"/>
                                                                 <include reference="UxL-KQ-Ef2"/>
-                                                                <include reference="hcM-wq-o2k"/>
                                                                 <include reference="4Q3-lw-iXz"/>
                                                                 <include reference="ZBe-jw-bMd"/>
                                                                 <include reference="czb-8Y-KXZ"/>
@@ -991,7 +988,7 @@
         <scene sceneID="Sjw-O6-dyP">
             <objects>
                 <tableViewController storyboardIdentifier="kPlayersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zhm-w5-xHt" customClass="KDPlayersViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jYR-6Q-mQ3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jYR-6Q-mQ3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

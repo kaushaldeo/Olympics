@@ -14,8 +14,12 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
     //MARK: - Private Methods
     func refreshData() {
         
-        KDAPIManager.sharedInstance.updateMedals()
-        self.refreshControl?.endRefreshing()
+        KDAPIManager.sharedInstance.updateMedals({ [weak self] (error) in
+            if let strongSelf = self {
+                strongSelf.refreshControl?.endRefreshing()
+            }
+            })
+        
     }
     
     
@@ -44,8 +48,8 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        KDAPIManager.sharedInstance.updateMedals()
         
+        self.refreshData()
         self.fetchedResultsController.update()
         
     }

@@ -106,7 +106,11 @@ class KDEventsViewController: UIViewController {
             if let sets = country.events where sets.count > 0 {
                 return
             }
-            KDAPIManager.sharedInstance.updateProfile(country)
+            KDAPIManager.sharedInstance.updateProfile(country, { [weak self] (error) in
+                if let _ = self {
+                    
+                }
+                })
         }
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
@@ -165,33 +169,33 @@ class KDEventsViewController: UIViewController {
         return CGSize(width: CGRectGetWidth(collectionView.bounds), height: CGRectGetHeight(collectionView.bounds))
     }
     
-//    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        var pageWidth = Double(scrollView.frame.size.width) + 10.0
-//        
-//        if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-//            pageWidth = Double(scrollView.frame.size.width + layout.minimumLineSpacing)
-//        }
-//        
-//        let currentOffset = Double(scrollView.contentOffset.x)
-//        let targetOffset = Double(targetContentOffset.memory.x)
-//        var newTargetOffset : Double = 0
-//        
-//        if (targetOffset > currentOffset) {
-//            newTargetOffset = ceil(currentOffset / pageWidth) * pageWidth
-//        }
-//        else {
-//            newTargetOffset = floor(currentOffset / pageWidth) * pageWidth;
-//        }
-//        if (newTargetOffset < 0) {
-//            newTargetOffset = 0
-//        }
-//        
-//        targetContentOffset.memory.x = CGFloat(currentOffset)
-//        scrollView.setContentOffset(CGPoint(x:newTargetOffset, y:0), animated: true)
-//        
-//        let index = Int(newTargetOffset/pageWidth)
-//        self.scrollerBar.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), animated: true)
-//    }
+    //    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    //        var pageWidth = Double(scrollView.frame.size.width) + 10.0
+    //
+    //        if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+    //            pageWidth = Double(scrollView.frame.size.width + layout.minimumLineSpacing)
+    //        }
+    //
+    //        let currentOffset = Double(scrollView.contentOffset.x)
+    //        let targetOffset = Double(targetContentOffset.memory.x)
+    //        var newTargetOffset : Double = 0
+    //
+    //        if (targetOffset > currentOffset) {
+    //            newTargetOffset = ceil(currentOffset / pageWidth) * pageWidth
+    //        }
+    //        else {
+    //            newTargetOffset = floor(currentOffset / pageWidth) * pageWidth;
+    //        }
+    //        if (newTargetOffset < 0) {
+    //            newTargetOffset = 0
+    //        }
+    //
+    //        targetContentOffset.memory.x = CGFloat(currentOffset)
+    //        scrollView.setContentOffset(CGPoint(x:newTargetOffset, y:0), animated: true)
+    //
+    //        let index = Int(newTargetOffset/pageWidth)
+    //        self.scrollerBar.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), animated: true)
+    //    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         

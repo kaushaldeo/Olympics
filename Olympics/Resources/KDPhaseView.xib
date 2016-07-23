@@ -12,7 +12,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="568" placeholderIntrinsicHeight="20" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kle-fQ-8vB">
-                    <rect key="frame" x="16" y="10" width="568" height="20"/>
+                    <rect key="frame" x="16" y="290" width="568" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="yel-Cy-hpG"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -21,7 +24,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Kle-fQ-8vB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="2Ho-pi-lHO"/>
-                <constraint firstItem="Kle-fQ-8vB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="ARK-oh-UId"/>
+                <constraint firstItem="Kle-fQ-8vB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Cml-nk-I0d"/>
                 <constraint firstAttribute="trailing" secondItem="Kle-fQ-8vB" secondAttribute="trailing" constant="16" id="Ovy-PV-bw6"/>
             </constraints>
             <connections>

@@ -162,8 +162,6 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
             self.navigationController?.pushViewController(viewController, animated: true)
         }
         
-        KDAPIManager.sharedInstance.update(event)
-        
     }
     
     

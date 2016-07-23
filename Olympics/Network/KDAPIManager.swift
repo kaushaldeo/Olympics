@@ -53,7 +53,7 @@ class KDAPIManager : NSObject {
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
             let option = [NSMigratePersistentStoresAutomaticallyOption:true,
-                NSInferMappingModelAutomaticallyOption:true]
+                          NSInferMappingModelAutomaticallyOption:true]
             
             try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: option)
         } catch {
@@ -62,7 +62,7 @@ class KDAPIManager : NSObject {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             
-           // dict[NSUnderlyingErrorKey] = error as NSError
+            dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -101,46 +101,50 @@ class KDAPIManager : NSObject {
     
     //MARK: - Web-Service Methods
     
-    func updateCountry() {
+    func dispatchOnMain(block:((NSError?) -> Void)?, _ error: NSError?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            if let completionBlock = block {
+                completionBlock(error)
+            }
+        }
+    }
+    
+    func updateCountry(block:((NSError?) -> Void)?) {
         self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], progress: { (progress) in
             print(progress)
             }, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDCountryParser(parser: parser)
+                    operation.completionBlock = {
+                        self.dispatchOnMain(block, nil)
+                    }
                     self.operationQueue.addOperation(operation)
                 }
             }, failure: { (task, error) in
-                print(error)
+                self.dispatchOnMain(block, error)
                 
         })
     }
     
-    func updateSchedule() {
+    func updateSchedule(block:((NSError?) -> Void)?) {
         self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress: { (progress) in
             print(progress)
             }, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDScheduleParser(parser: parser)
+                    operation.completionBlock = {
+                       self.dispatchOnMain(block, nil)
+                    }
                     self.operationQueue.addOperation(operation)
                 }
-                dispatch_async(dispatch_get_main_queue(), { 
-                    if NSUserDefaults.loadCountry() == false {
-                        KDAPIManager.sharedInstance.updateCountry()
-                    }
-                })
             }, failure: { (task, error) in
-                print(error)
-                dispatch_async(dispatch_get_main_queue(), {
-                    if NSUserDefaults.loadCountry() == false {
-                        KDAPIManager.sharedInstance.updateCountry()
-                    }
-                })
+                self.dispatchOnMain(block, error)
+                
         })
-        
     }
     
     
-    func updateProfile(country:Country) {
+    func updateProfile(country:Country, _ block:((NSError?) -> Void)?) {
         guard let identifier = country.identifier else {
             return
         }
@@ -149,30 +153,35 @@ class KDAPIManager : NSObject {
             }, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDProfileParser(parser: parser)
+                    operation.completionBlock = {
+                        self.dispatchOnMain(block, nil)
+                    }
                     self.operationQueue.addOperation(operation)
                 }
             }, failure: { (task, error) in
-                print(error)
-                
+                self.dispatchOnMain(block, error)
         })
         
     }
     
-    func updateMedals() {
+    func updateMedals(block:((NSError?) -> Void)?) {
         self.sessionManager.GET("2016/medals.xml", parameters: ["api_key":key], progress: { (progress) in
             print(progress)
             }, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDMedalParser(parser: parser)
+                    operation.completionBlock = {
+                       self.dispatchOnMain(block, nil)
+                    }
                     self.operationQueue.addOperation(operation)
                 }
             }, failure: { (task, error) in
-                print(error)
+                self.dispatchOnMain(block, error)
                 
         })
     }
     
-    func update(event:Event) {
+    func update(event:Event, _ block:((NSError?) -> Void)?) {
         guard let identifier = event.identifier else {
             return
         }
@@ -181,11 +190,13 @@ class KDAPIManager : NSObject {
             }, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDEventParser(parser: parser)
+                    operation.completionBlock = {
+                       self.dispatchOnMain(block, nil)
+                    }
                     self.operationQueue.addOperation(operation)
                 }
             }, failure: { (task, error) in
-                print(error)
-                
+                self.dispatchOnMain(block, error)
         })
     }
 }

@@ -23,9 +23,12 @@ class KDSplashViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         if NSUserDefaults.loadSchedule() == false {
-            KDAPIManager.sharedInstance.updateSchedule()
+            KDAPIManager.sharedInstance.updateSchedule({ [weak self] (error) in
+                if let _ = self {
+                    
+                }
+            })
         }
-        print(kFIREventSelectContent);
         
         FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
             kFIRParameterContentType:"cont",

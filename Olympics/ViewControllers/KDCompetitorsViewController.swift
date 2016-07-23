@@ -32,7 +32,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         self.tableView.registerNib(UINib(nibName: "KDFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kFooterView")
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 64.0
+        self.tableView.estimatedRowHeight = 200
         
         self.title = self.event.discipline?.name
         
@@ -41,6 +41,14 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         
         self.tableView.backgroundColor = UIColor.backgroundColor()
         self.tableView.backgroundView = nil
+        
+        
+        KDAPIManager.sharedInstance.update(event, { [weak self] (error) in
+            if let strongSelf = self {
+                strongSelf.fetchedResultsController.update()
+                strongSelf.tableView.reloadData()
+            }
+            })
         
     }
     
@@ -73,10 +81,17 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         // Configure the cell...
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
         if let date = unit.startDate {
-        cell.nameLabel.text = self.dateFormatter.stringFromDate(date)
+            cell.nameLabel.text = self.dateFormatter.stringFromDate(date)
         }
         else {
             cell.nameLabel.text = nil
+        }
+        cell.reloadBlock = {[weak self] (reloadCell) in
+            if let strongSelf = self {
+                if let indexPath = strongSelf.tableView.indexPathForCell(reloadCell) {
+                    strongSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                }
+            }
         }
         cell.setUnit(unit)
         return cell
@@ -186,7 +201,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"phase", cacheName: nil)
         fetchedResultsController.delegate = self
         
-         fetchedResultsController.update()
+        fetchedResultsController.update()
         
         return fetchedResultsController
     }()
