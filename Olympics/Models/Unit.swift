@@ -39,7 +39,7 @@ class Unit: NSManagedObject {
         }
         if let text = self.venue?.name {
             if string.isEmpty == false {
-                string = string + "-"
+                string = string + "\n"
             }
             string = string + text
         }

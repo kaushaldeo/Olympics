@@ -152,7 +152,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
         //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
-        // fetchRequest.predicate = NSPredicate(format: "unit.event = %@", self.unit.event!)
+        //fetchRequest.predicate = NSPredicate(format: "event = %@",self.event)
         //fetchRequest.predicate = NSPredicate(format: "SUBQUERY(units, $unit, $unit.event = %@).@count != 0", self.event)
         if let country = Country.country(context) {
             fetchRequest.predicate = NSPredicate(format: "event = %@ AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,country,country)

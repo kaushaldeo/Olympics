@@ -117,7 +117,8 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     
     func setUnit(unit:Unit) {
         let country = Country.country(NSManagedObjectContext.mainContext())!
-        self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "(team.country = %@ OR athlete.country = %@) AND SUBQUERY(units, $unit, $unit = %@).@count > 0",country, country, unit)
+        self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "SUBQUERY(units, $unit, $unit = %@).@count > 0", unit)
+        //self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "(team.country = %@ OR athlete.country = %@) AND SUBQUERY(units, $unit, $unit = %@).@count > 0",country, country, unit)
         do {
             try self.fetchedResultsController.performFetch()
         } catch {

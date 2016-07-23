@@ -17,6 +17,9 @@
 		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
 		729A03191D3F59F400E300F1 /* KDCompetitorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */; };
 		729A03291D42033100E300F1 /* Icon in Resources */ = {isa = PBXBuildFile; fileRef = 729A03281D42033100E300F1 /* Icon */; };
+		729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */; };
+		729A03331D42DC9D00E300F1 /* KDDisciplineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 729A03321D42DC9C00E300F1 /* KDDisciplineView.xib */; };
+		729A03351D42F64200E300F1 /* KDFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 729A03341D42F64200E300F1 /* KDFooterView.xib */; };
 		72D0F5C31D2B8EF300400F03 /* KDCountryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C21D2B8EF300400F03 /* KDCountryParser.swift */; };
 		72D0F5C51D2B8FED00400F03 /* KDScheduleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C41D2B8FED00400F03 /* KDScheduleParser.swift */; };
 		72D0F5C71D2B90E400400F03 /* KDProfileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */; };
@@ -76,6 +79,9 @@
 		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
 		729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCompetitorViewCell.swift; sourceTree = "<group>"; };
 		729A03281D42033100E300F1 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
+		729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDisciplineView.swift; sourceTree = "<group>"; };
+		729A03321D42DC9C00E300F1 /* KDDisciplineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KDDisciplineView.xib; sourceTree = "<group>"; };
+		729A03341D42F64200E300F1 /* KDFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KDFooterView.xib; sourceTree = "<group>"; };
 		72D0F5C21D2B8EF300400F03 /* KDCountryParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCountryParser.swift; sourceTree = "<group>"; };
 		72D0F5C41D2B8FED00400F03 /* KDScheduleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDScheduleParser.swift; sourceTree = "<group>"; };
 		72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDProfileParser.swift; sourceTree = "<group>"; };
@@ -149,6 +155,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		729A03311D42DC5600E300F1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				729A03321D42DC9C00E300F1 /* KDDisciplineView.xib */,
+				729A03341D42F64200E300F1 /* KDFooterView.xib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		72DA10621D0BA16B00AA8EE3 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +191,7 @@
 				72DA10851D0BA22F00AA8EE3 /* Models */,
 				72DA10861D0BA22F00AA8EE3 /* ViewControllers */,
 				72DA10871D0BA22F00AA8EE3 /* Views */,
+				729A03311D42DC5600E300F1 /* Resources */,
 				72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */,
 				72DA10731D0BA16B00AA8EE3 /* MasterViewController.swift */,
 				72DA10771D0BA16B00AA8EE3 /* Main.storyboard */,
@@ -242,6 +258,7 @@
 				728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */,
 				72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */,
 				729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */,
+				729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */,
 				72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */,
 			);
 			path = Views;
@@ -332,7 +349,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				72D0F5CF1D2C6A6300400F03 /* Images in Resources */,
+				729A03331D42DC9D00E300F1 /* KDDisciplineView.xib in Resources */,
 				724CB2DC1D3A0164003C4D28 /* GoogleService-Info.plist in Resources */,
+				729A03351D42F64200E300F1 /* KDFooterView.xib in Resources */,
 				72DA107B1D0BA16B00AA8EE3 /* Assets.xcassets in Resources */,
 				72DA10791D0BA16B00AA8EE3 /* Main.storyboard in Resources */,
 				729A03291D42033100E300F1 /* Icon in Resources */,
@@ -420,6 +439,7 @@
 				72DA12131D1251DB00AA8EE3 /* Competitor.swift in Sources */,
 				72DA12101D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift in Sources */,
 				72DA120E1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift in Sources */,
+				729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */,
 				72F0B3CF1D39A9CA00305193 /* KDCompetitorsViewController.swift in Sources */,
 				72DA121C1D125C8900AA8EE3 /* KDManagedObjectContext.swift in Sources */,
 				721B96331D3B72650064E485 /* KDTabBarViewController.swift in Sources */,

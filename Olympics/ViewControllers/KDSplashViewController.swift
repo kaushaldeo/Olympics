@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 import Firebase
+import iLink
+
 
 class KDSplashViewController: UIViewController {
     
@@ -63,6 +65,12 @@ class KDSplashViewController: UIViewController {
         else {
             self.performSegueWithIdentifier("showCountry", sender: nil)
         }
+        
+        iLink.sharedInstance().previewMode = true
+        iLink.sharedInstance().verboseLogging = true
+        iLink.sharedInstance().globalPromptForUpdate = true
+        
+        print(iLink.sharedInstance().iLinkGetAppURLforLocal())
     }
     
     override func didReceiveMemoryWarning() {

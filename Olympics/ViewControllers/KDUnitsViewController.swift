@@ -17,7 +17,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     
     lazy var dateFormatter : NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMM d 'at' hh:mm a"
+        dateFormatter.dateFormat = "'at' hh:mm a"
         return dateFormatter
     }()
     
@@ -30,11 +30,15 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.tableView.registerClass(UITableViewHeaderFooterView.classForCoder(), forHeaderFooterViewReuseIdentifier: "kHeaderView")
+        let nib = UINib(nibName: "KDDisciplineView", bundle: nil)
+        self.tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "kHeaderView")
+        self.tableView.registerNib(UINib(nibName: "KDFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kFooterView")
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
         
+        self.tableView.backgroundColor = UIColor.backgroundColor()
+        self.tableView.backgroundView = nil
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
     }
@@ -84,7 +88,6 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
         cell.nameLabel.text = event.name
-        cell.genderView.image = event.genderImage()
         if let unit = event.unit(self.date) {
             cell.timeLabel.text = self.dateFormatter.stringFromDate(unit.startDate!)
             cell.locationLabel.text = unit.locationName()
@@ -133,11 +136,23 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     //MARK: Table View Delegate Method
     
     override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView")
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView") as! KDDisciplineView
         let sectionInfo = self.fetchedResultsController.sections![section]
-        headerView?.textLabel?.text = sectionInfo.name
+        headerView.titleLabel.text = sectionInfo.name
+        let indexPath = NSIndexPath(forRow: 0, inSection: section)
+        let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
+        if let text = event.discipline?.alias?.lowercaseString {
+            headerView.imageView.image = UIImage(named: "Icon/\(text).png")
+        }
+        
         return headerView
     }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kFooterView") as! KDFooterView
+        return headerView
+    }
+
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
