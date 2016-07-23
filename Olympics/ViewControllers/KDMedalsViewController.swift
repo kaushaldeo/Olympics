@@ -11,6 +11,16 @@ import CoreData
 
 class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    //MARK: - Private Methods
+    func refreshData() {
+        
+        KDAPIManager.sharedInstance.updateMedals()
+        self.refreshControl?.endRefreshing()
+    }
+    
+    
+    
+    //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,20 +36,17 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 145, blue: 202)
         
         self.showCountry()
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+        self.refreshControl?.addTarget(self, action: #selector(KDMedalsViewController.refreshData), forControlEvents: .ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         KDAPIManager.sharedInstance.updateMedals()
         
-        do {
-            try self.fetchedResultsController.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
+        self.fetchedResultsController.update()
         
     }
     
@@ -71,8 +78,9 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         cell.silverLabel.text = "\(country.silver)"
         cell.brozeLabel.text = "\(country.bronze)"
         cell.rankLabel.text = "\(indexPath.row + 1)"
-        
-        
+        if let text = country.alias?.lowercaseString {
+            cell.iconView.image = UIImage(named: "Images/\(text).png")
+        }
         return cell
     }
     
@@ -135,24 +143,15 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
-
+        
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false)]
         
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
+        fetchedResultsController.update()
         
         return fetchedResultsController
     }()

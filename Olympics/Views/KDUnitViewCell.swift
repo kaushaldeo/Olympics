@@ -37,10 +37,10 @@ class KDUnitViewCell: UITableViewCell {
         // Drawing code
         let bezierPath = UIBezierPath()
         bezierPath.moveToPoint(CGPoint(x: 16, y: CGRectGetHeight(rect)))
-        bezierPath.addLineToPoint(CGPoint(x: CGRectGetWidth(rect), y: CGRectGetHeight(rect) - 1))
-        bezierPath.lineWidth = 1.0
-        UIColor.backgroundColor().setStroke()
-        bezierPath.stroke()
+        bezierPath.addLineToPoint(CGPoint(x: CGRectGetWidth(rect), y: CGRectGetHeight(rect)))
+        bezierPath.lineWidth = 0.25
+        UIColor.sepratorColor().setStroke()
+        bezierPath.strokeWithBlendMode(.Exclusion, alpha: 1.0)
         
     }
     

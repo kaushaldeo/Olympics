@@ -149,19 +149,10 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
         var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
+        fetchedResultsController.update()
         
         return fetchedResultsController
     }()

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate {
-
+    
     
     @IBOutlet weak var heightLayout: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
@@ -20,11 +20,11 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -66,7 +66,7 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
         
         // Edit the sort key as appropriate.
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sort", ascending: true)]
-       
+        
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
@@ -107,7 +107,7 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
-       self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
+        self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
     }
     
     
@@ -117,20 +117,13 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     //        // In the simplest, most efficient, case, reload the table view.
     //        self.tableView.reloadData()
     //    }
-
+    
     
     func setUnit(unit:Unit) {
-       // let country = Country.country(NSManagedObjectContext.mainContext())!
+        // let country = Country.country(NSManagedObjectContext.mainContext())!
         self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "SUBQUERY(units, $unit, $unit = %@).@count > 0", unit)
         //self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "(team.country = %@ OR athlete.country = %@) AND SUBQUERY(units, $unit, $unit = %@).@count > 0",country, country, unit)
-        do {
-            try self.fetchedResultsController.performFetch()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
+        self.fetchedResultsController.update()
         
         
     }

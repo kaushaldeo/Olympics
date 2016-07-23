@@ -78,11 +78,16 @@ extension UIColor {
         return UIColor(red: 241, green: 241, blue: 241)
     }
     
+    class func sepratorColor() -> UIColor {
+        return UIColor(red: 200, green: 199, blue: 204)
+    }
+    
     class func cellBackgroundColor() -> UIColor {
         return UIColor(red: 254, green: 254, blue: 254)
     }
     
 }
+
 
 
 extension NSDate {

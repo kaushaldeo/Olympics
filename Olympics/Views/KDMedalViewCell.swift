@@ -16,6 +16,7 @@ class KDMedalViewCell: UITableViewCell {
     @IBOutlet weak var aliasLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet weak var iconView: UIImageView!
     
     
     override func awakeFromNib() {
