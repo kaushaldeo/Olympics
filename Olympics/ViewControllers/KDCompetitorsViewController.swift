@@ -13,6 +13,11 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     
     var event : Event!
     
+    lazy var dateFormatter : NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd MMM 'at' hh:mm a"
+        return dateFormatter
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +28,8 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         
-        self.tableView.registerClass(UITableViewHeaderFooterView.classForCoder(), forHeaderFooterViewReuseIdentifier: "kHeaderView")
+        self.tableView.registerNib(UINib(nibName: "KDPhaseView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kHeaderView")
+        self.tableView.registerNib(UINib(nibName: "KDFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kFooterView")
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
@@ -32,6 +38,10 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
         self.addBackButton()
+        
+        self.tableView.backgroundColor = UIColor.backgroundColor()
+        self.tableView.backgroundView = nil
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -70,7 +80,12 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         
         // Configure the cell...
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        cell.nameLabel.text = unit.name
+        if let date = unit.startDate {
+        cell.nameLabel.text = self.dateFormatter.stringFromDate(date)
+        }
+        else {
+            cell.nameLabel.text = nil
+        }
         cell.setUnit(unit)
         return cell
     }
@@ -111,13 +126,28 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
      }
      */
     
-//    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView")
-//        let sectionInfo = self.fetchedResultsController.sections![section]
-//        headerView?.textLabel?.text = sectionInfo.name
-//        return headerView
-//    }
+    //    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView")
+    //        let sectionInfo = self.fetchedResultsController.sections![section]
+    //        headerView?.textLabel?.text = sectionInfo.name
+    //        return headerView
+    //    }
     
+    
+    //MARK: Table View Delegate Method
+    
+    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView") as! KDPhaseView
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        headerView.titleLabel.text = sectionInfo.name
+        
+        return headerView
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kFooterView") as! KDFooterView
+        return headerView
+    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
@@ -149,7 +179,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "phase", ascending: true), NSSortDescriptor(key: "startDate", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
         //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         //fetchRequest.predicate = NSPredicate(format: "event = %@",self.event)
@@ -161,7 +191,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"phase", cacheName: nil)
         fetchedResultsController.delegate = self
         
         do {
@@ -207,6 +237,8 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
+        
+        print(self.fetchedResultsController.fetchedObjects?.count)
     }
     
     

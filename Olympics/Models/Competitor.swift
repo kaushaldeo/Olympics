@@ -105,4 +105,14 @@ class Competitor: NSManagedObject {
         return string
     }
     
+    func iconName() -> String? {
+        if let type = self.type where type == "team" {
+            return self.team?.country?.alias?.lowercaseString
+        }
+        if let player = self.athlete {
+          return player.country?.alias?.lowercaseString
+        }
+        return nil
+    }
+    
 }

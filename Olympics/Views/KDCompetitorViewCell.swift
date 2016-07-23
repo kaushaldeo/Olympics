@@ -40,11 +40,15 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDResultViewCell
         
         // Configure the cell...
         let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
-        cell.textLabel?.text = competitor.name()
+        cell.nameLabel.text = competitor.name()
+        if let text = competitor.iconName() {
+            cell.iconView.image = UIImage(named: "Images/\(text).png")
+        }
+        cell.rankLabel.text = competitor.resultValue
         return cell
     }
     
@@ -103,7 +107,7 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
-        self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
+       self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
     }
     
     
@@ -116,7 +120,7 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
 
     
     func setUnit(unit:Unit) {
-        let country = Country.country(NSManagedObjectContext.mainContext())!
+       // let country = Country.country(NSManagedObjectContext.mainContext())!
         self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "SUBQUERY(units, $unit, $unit = %@).@count > 0", unit)
         //self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "(team.country = %@ OR athlete.country = %@) AND SUBQUERY(units, $unit, $unit = %@).@count > 0",country, country, unit)
         do {
