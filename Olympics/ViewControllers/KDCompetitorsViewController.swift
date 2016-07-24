@@ -120,13 +120,6 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         else {
             cell.nameLabel.text = "YYYYYYY"
         }
-        cell.reloadBlock = {[weak self] (reloadCell) in
-            if let strongSelf = self {
-                if let indexPath = strongSelf.tableView.indexPathForCell(reloadCell) {
-                    strongSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                }
-            }
-        }
         cell.setUnit(unit)
         return cell
     }
@@ -248,9 +241,9 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
         case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .None)
         case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .None)
         default:
             return
         }
@@ -259,11 +252,11 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .None)
         case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .None)
         case .Update:
-            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .None)
         case .Move:
             tableView.moveRowAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
         }
@@ -271,8 +264,6 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
-        
-        print(self.fetchedResultsController.fetchedObjects?.count)
     }
     
     

@@ -11,6 +11,14 @@ import CoreData
 
 class KDCountriesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    
+    //MARK: - Private Methods
+    
+    func cancelTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("replace", sender: nil)
+    }
+    
+    //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +33,11 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 103, blue: 173)
+        
+        let setting = NSUserDefaults.standardUserDefaults()
+        if let _ = setting.valueForKey("kCountry") {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(KDCountriesViewController.cancelTapped(_:)))
+        }
         
         
     }

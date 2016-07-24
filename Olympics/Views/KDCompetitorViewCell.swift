@@ -16,8 +16,17 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var reloadBlock: ((UITableViewCell) -> Void)?
     
+    override func drawRect(rect: CGRect) {
+        // Drawing code
+        let bezierPath = UIBezierPath()
+        bezierPath.moveToPoint(CGPoint(x: 16, y: CGRectGetMinY(self.tableView.frame)))
+        bezierPath.addLineToPoint(CGPoint(x: CGRectGetWidth(rect), y: CGRectGetMinY(self.tableView.frame)))
+        bezierPath.lineWidth = 0.25
+        UIColor.sepratorColor().setStroke()
+        bezierPath.strokeWithBlendMode(.Exclusion, alpha: 1.0)
+        
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +34,6 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
         
         //        self.tableView.rowHeight = UITableViewAutomaticDimension
         //        self.tableView.estimatedRowHeight = 41
-        
     }
     
     
@@ -93,39 +101,39 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     }()
     
     /*
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        switch type {
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        default:
-            return
-        }
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch type {
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Update:
-            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Move:
-            tableView.moveRowAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
-        }
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
-        //self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
-    }
-    */
+     func controllerWillChangeContent(controller: NSFetchedResultsController) {
+     self.tableView.beginUpdates()
+     }
+     
+     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+     switch type {
+     case .Insert:
+     self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+     case .Delete:
+     self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+     default:
+     return
+     }
+     }
+     
+     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+     switch type {
+     case .Insert:
+     tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+     case .Delete:
+     tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+     case .Update:
+     tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+     case .Move:
+     tableView.moveRowAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
+     }
+     }
+     
+     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+     self.tableView.endUpdates()
+     //self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
+     }
+     */
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.reloadData()
