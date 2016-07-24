@@ -23,9 +23,9 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
         super.awakeFromNib()
         // Initialization code
         
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
-//        self.tableView.estimatedRowHeight = 41
-
+        //        self.tableView.rowHeight = UITableViewAutomaticDimension
+        //        self.tableView.estimatedRowHeight = 41
+        
     }
     
     
@@ -33,6 +33,12 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.heightLayout.constant = CGFloat(self.fetchedResultsController.count*44)
     }
     
     //MARK: - Table View Delegate Methods
@@ -51,6 +57,7 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
         
         // Configure the cell...
         let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
+        print("name of com: \(competitor.name())")
         cell.nameLabel.text = competitor.name()
         if let text = competitor.iconName() {
             cell.iconView.image = UIImage(named: "Images/\(text).png")
@@ -85,7 +92,7 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
         return fetchedResultsController
     }()
     
-    
+    /*
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
@@ -116,32 +123,24 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
-        self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
+        //self.heightLayout.constant = CGFloat(Int(self.tableView.contentSize.height))
+    }
+    */
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.reloadData()
     }
     
-    
-    // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-    
-    //    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    //        // In the simplest, most efficient, case, reload the table view.
-    //        self.tableView.reloadData()
-    //
-    //        let frame = self.tableView.rectForFooterInSection(0)
-    //        let rows = self.fetchedResultsController.count
-    //        self.heightLayout.constant = min(CGRectGetMaxY(frame), CGFloat(41*rows))
-    //        self.updateConstraints()
-    //
-    //        if let block = self.reloadBlock {
-    //            block(self)
-    //        }
-    //        print("Kaushal has made some change \(frame)\(self.heightLayout.constant)")
-    //    }
-    
-    
     func setUnit(unit:Unit) {
-        // let country = Country.country(NSManagedObjectContext.mainContext())!
-        self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "SUBQUERY(units, $unit, $unit = %@).@count > 0", unit)
-        //self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "(team.country = %@ OR athlete.country = %@) AND SUBQUERY(units, $unit, $unit = %@).@count > 0",country, country, unit)
+        let country = Country.country(NSManagedObjectContext.mainContext())!
+        print("\(unit.type) with phase:\(unit.phase)")
+        if let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
+            self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "unit = %@", unit)
+        }
+        else {
+            self.fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "(team.country = %@ OR athlete.country = %@) AND unit = %@",country, country, unit)
+        }
         self.fetchedResultsController.update()
+        self.tableView.reloadData()
     }
 }

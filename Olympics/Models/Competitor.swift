@@ -46,17 +46,6 @@ class Competitor: NSManagedObject {
     
     // Insert code here to add functionality to your managed object subclass
     
-    func addUnit(item: Unit?) {
-        if let unit = item {
-            var sets = NSMutableSet()
-            if let set = self.units {
-                sets = NSMutableSet(set: set)
-            }
-            sets.addObject(unit)
-            self.units = sets
-        }
-    }
-    
     func name () -> String? {
         if let type = self.type where type == "team" {
             return self.team?.name

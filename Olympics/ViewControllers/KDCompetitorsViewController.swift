@@ -15,9 +15,46 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     
     lazy var dateFormatter : NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd MMM 'at' hh:mm a"
+        dateFormatter.dateFormat = "dd MMM yyyy 'at' hh:mm a"
         return dateFormatter
     }()
+    
+    
+    //MARK: - Private Data
+    func process(error:NSError) {
+        var message = "We had a problem retrieving information.  Do you want to try again?";
+        if (error.code == NSURLErrorNotConnectedToInternet) {
+            message = "No Network Connection. Please try again.";
+        }
+        
+        let alertController = UIAlertController(title: "Oops!!", message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Retry", style: .Destructive, handler: { [weak self] (action) in
+            if let strongSelf = self {
+                strongSelf.refreshData()
+            }
+            }))
+        self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func refreshData() {
+        KDAPIManager.sharedInstance.update(event, { [weak self] (error) in
+            if let strongSelf = self {
+                if let nserror = error {
+                    strongSelf.process(nserror)
+                }
+                else {
+                    //TODO: Stamp the time on refresh control
+                }
+                strongSelf.fetchedResultsController.update()
+                strongSelf.tableView.reloadData()
+                strongSelf.refreshControl?.endRefreshing()
+            }
+            })
+    }
+    
+    
+    //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +69,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         self.tableView.registerNib(UINib(nibName: "KDFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kFooterView")
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 200
+        self.tableView.estimatedRowHeight = 44
         
         self.title = self.event.discipline?.name
         
@@ -42,20 +79,17 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         self.tableView.backgroundColor = UIColor.backgroundColor()
         self.tableView.backgroundView = nil
         
-        
-        KDAPIManager.sharedInstance.update(event, { [weak self] (error) in
-            if let strongSelf = self {
-                strongSelf.fetchedResultsController.update()
-                strongSelf.tableView.reloadData()
-            }
-            })
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+        self.refreshControl?.addTarget(self, action: #selector(KDCompetitorsViewController.refreshData), forControlEvents: .ValueChanged)
         
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.fetchedResultsController.update()
+        self.tableView.reloadData()
+        self.refreshData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,7 +118,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
             cell.nameLabel.text = self.dateFormatter.stringFromDate(date)
         }
         else {
-            cell.nameLabel.text = nil
+            cell.nameLabel.text = "YYYYYYY"
         }
         cell.reloadBlock = {[weak self] (reloadCell) in
             if let strongSelf = self {
@@ -186,8 +220,8 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "phase", ascending: true), NSSortDescriptor(key: "startDate", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
-        //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false),NSSortDescriptor(key: "phase", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
+    
         
         //fetchRequest.predicate = NSPredicate(format: "event = %@",self.event)
         //fetchRequest.predicate = NSPredicate(format: "SUBQUERY(units, $unit, $unit.event = %@).@count != 0", self.event)

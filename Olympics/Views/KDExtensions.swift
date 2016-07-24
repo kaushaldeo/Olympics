@@ -86,6 +86,20 @@ extension UIColor {
         return UIColor(red: 254, green: 254, blue: 254)
     }
     
+    
+    class func goldColor() -> UIColor {
+        return UIColor(red: 218, green: 181, blue: 10)
+    }
+    
+    class func silverColor() -> UIColor {
+        return UIColor(red: 203, green: 203, blue: 203)
+    }
+    
+    
+    class func bronzeColor() -> UIColor {
+        return UIColor(red: 232, green: 147, blue: 114)
+    }
+    
 }
 
 extension String {

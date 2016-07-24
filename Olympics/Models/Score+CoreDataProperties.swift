@@ -2,7 +2,7 @@
 //  Score+CoreDataProperties.swift
 //  Olympics
 //
-//  Created by Kaushal Deo on 7/9/16.
+//  Created by Kaushal Deo on 7/23/16.
 //  Copyright © 2016 Scorpion Inc. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,10 +14,10 @@ import CoreData
 
 extension Score {
 
-    @NSManaged var name: String?
     @NSManaged var code: String?
-    @NSManaged var number: Int16
-    @NSManaged var value: Int16
+    @NSManaged var name: String?
+    @NSManaged var number: String?
+    @NSManaged var value: String?
     @NSManaged var competitor: Competitor?
 
 }

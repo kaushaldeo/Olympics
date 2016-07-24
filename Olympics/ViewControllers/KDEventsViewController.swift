@@ -141,7 +141,7 @@ class KDEventsViewController: UIViewController {
     func process(error:NSError) {
         
         self.imageView.layer.removeAllAnimations()
-        var message = "We had a problem retrieving your information.  Do you want to try again?";
+        var message = "We had a problem retrieving information.  Do you want to try again?";
         if (error.code == NSURLErrorNotConnectedToInternet) {
             message = "No Network Connection. Please try again.";
         }

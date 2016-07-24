@@ -2,7 +2,7 @@
 //  Athlete+CoreDataProperties.swift
 //  Olympics
 //
-//  Created by Kaushal Deo on 7/10/16.
+//  Created by Kaushal Deo on 7/23/16.
 //  Copyright © 2016 Scorpion Inc. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,7 +21,7 @@ extension Athlete {
     @NSManaged var lastName: String?
     @NSManaged var name: String?
     @NSManaged var status: String?
-    @NSManaged var competitor: Competitor?
+    @NSManaged var competitors: NSSet?
     @NSManaged var country: Country?
     @NSManaged var events: NSSet?
     @NSManaged var teams: NSSet?

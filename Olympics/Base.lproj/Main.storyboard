@@ -718,7 +718,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r50-jX-t2g">
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r50-jX-t2g">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -963,12 +963,12 @@
                                 <exclude reference="tQM-Jb-Vf9"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="acA-9z-pg1"/>
+                                <exclude reference="7sA-TS-WBc"/>
+                                <exclude reference="Fbh-NK-Ejq"/>
                                 <exclude reference="71R-zI-ce5"/>
                                 <exclude reference="CjK-Y6-Yps"/>
                                 <exclude reference="fzL-u0-JvV"/>
-                                <exclude reference="7sA-TS-WBc"/>
-                                <exclude reference="Fbh-NK-Ejq"/>
-                                <exclude reference="acA-9z-pg1"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -977,12 +977,12 @@
                                 <include reference="tQM-Jb-Vf9"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="acA-9z-pg1"/>
+                                <include reference="7sA-TS-WBc"/>
+                                <include reference="Fbh-NK-Ejq"/>
                                 <include reference="71R-zI-ce5"/>
                                 <include reference="CjK-Y6-Yps"/>
                                 <include reference="fzL-u0-JvV"/>
-                                <include reference="7sA-TS-WBc"/>
-                                <include reference="Fbh-NK-Ejq"/>
-                                <include reference="acA-9z-pg1"/>
                             </mask>
                         </variation>
                     </view>

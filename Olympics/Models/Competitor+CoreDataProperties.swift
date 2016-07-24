@@ -2,7 +2,7 @@
 //  Competitor+CoreDataProperties.swift
 //  Olympics
 //
-//  Created by Kaushal Deo on 7/21/16.
+//  Created by Kaushal Deo on 7/23/16.
 //  Copyright © 2016 Scorpion Inc. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,14 +20,14 @@ extension Competitor {
     @NSManaged var rank: String?
     @NSManaged var resultType: String?
     @NSManaged var resultValue: String?
-    @NSManaged var sort: Int16
-    @NSManaged var start: Int16
+    @NSManaged var sort: String?
+    @NSManaged var start: String?
     @NSManaged var status: String?
     @NSManaged var type: String?
     @NSManaged var athlete: Athlete?
     @NSManaged var results: NSSet?
     @NSManaged var scores: NSSet?
     @NSManaged var team: Team?
-    @NSManaged var units: NSSet?
+    @NSManaged var unit: Unit?
 
 }
