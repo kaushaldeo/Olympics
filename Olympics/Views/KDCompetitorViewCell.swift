@@ -47,6 +47,7 @@ class KDCompetitorViewCell: UITableViewCell, NSFetchedResultsControllerDelegate 
     override func layoutSubviews() {
         super.layoutSubviews()
         self.heightLayout.constant = CGFloat(self.fetchedResultsController.count*44)
+        self.updateConstraints()
     }
     
     //MARK: - Table View Delegate Methods

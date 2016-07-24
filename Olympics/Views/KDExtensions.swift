@@ -135,4 +135,10 @@ extension NSDate {
         let components = calendar.components([.Day , .Month , .Year], fromDate: self)
         return calendar.dateFromComponents(components)
     }
+    
+    func time() -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd MMM hh:mm a"
+        return dateFormatter.stringFromDate(self)
+    }
 }

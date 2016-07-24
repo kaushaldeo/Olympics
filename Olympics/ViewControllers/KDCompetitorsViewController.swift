@@ -114,12 +114,12 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         
         // Configure the cell...
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        if let date = unit.startDate {
-            cell.nameLabel.text = self.dateFormatter.stringFromDate(date)
-        }
-        else {
-            cell.nameLabel.text = "YYYYYYY"
-        }
+//        if let date = unit.startDate {
+//            cell.nameLabel.text = self.dateFormatter.stringFromDate(date)
+//        }
+//        else {
+//            cell.nameLabel.text = "YYYYYYY"
+//        }
         cell.setUnit(unit)
         return cell
     }
@@ -200,7 +200,6 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
     
     
     // MARK: - Fetched results controller
-    
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let context = NSManagedObjectContext.mainContext()
         
@@ -233,7 +232,7 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
         return fetchedResultsController
     }()
     
-    
+    /*
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
@@ -261,18 +260,19 @@ class KDCompetitorsViewController: UITableViewController, NSFetchedResultsContro
             tableView.moveRowAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
         }
     }
-    
+ 
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
+ */
     
     
     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
     
-    //    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    //        // In the simplest, most efficient, case, reload the table view.
-    //        self.tableView.reloadData()
-    //    }
-    //
+        func controllerDidChangeContent(controller: NSFetchedResultsController) {
+            // In the simplest, most efficient, case, reload the table view.
+            self.tableView.reloadData()
+        }
+    
     
 }

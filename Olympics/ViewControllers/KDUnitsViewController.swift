@@ -157,7 +157,8 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Event
-        if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCompetitorsViewController") as? KDCompetitorsViewController {
+        //if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kCompetitorsViewController") as? KDCompetitorsViewController {
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kResultViewController") as? KDResultViewController {
             viewController.event = event
             self.navigationController?.pushViewController(viewController, animated: true)
         }

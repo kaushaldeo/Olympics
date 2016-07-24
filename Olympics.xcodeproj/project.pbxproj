@@ -14,6 +14,8 @@
 		724FA90F1D31A74600ADCB8D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA90B1D31A74600ADCB8D /* Result.swift */; };
 		724FA9101D31A74600ADCB8D /* Score+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA90C1D31A74600ADCB8D /* Score+CoreDataProperties.swift */; };
 		724FA9111D31A74600ADCB8D /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA90D1D31A74600ADCB8D /* Score.swift */; };
+		725FBEB21D44A520003D81ED /* KDResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB11D44A520003D81ED /* KDResultViewController.swift */; };
+		725FBEB41D44A805003D81ED /* KDHeadsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */; };
 		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
 		729A03191D3F59F400E300F1 /* KDCompetitorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */; };
 		729A03291D42033100E300F1 /* Icon in Resources */ = {isa = PBXBuildFile; fileRef = 729A03281D42033100E300F1 /* Icon */; };
@@ -79,6 +81,8 @@
 		724FA90B1D31A74600ADCB8D /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		724FA90C1D31A74600ADCB8D /* Score+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Score+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		724FA90D1D31A74600ADCB8D /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		725FBEB11D44A520003D81ED /* KDResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDResultViewController.swift; sourceTree = "<group>"; };
+		725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDHeadsViewCell.swift; sourceTree = "<group>"; };
 		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
 		729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCompetitorViewCell.swift; sourceTree = "<group>"; };
 		729A03281D42033100E300F1 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 				72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */,
 				72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */,
 				72F0B3CE1D39A9CA00305193 /* KDCompetitorsViewController.swift */,
+				725FBEB11D44A520003D81ED /* KDResultViewController.swift */,
 				721B96321D3B72650064E485 /* KDTabBarViewController.swift */,
 			);
 			path = ViewControllers;
@@ -265,6 +270,7 @@
 				72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */,
 				729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */,
 				729A033A1D43406700E300F1 /* KDResultViewCell.swift */,
+				725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */,
 				729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */,
 				729A03381D432B5D00E300F1 /* KDPhaseView.swift */,
 				72D8B6E01D43711F008E86C0 /* KDErrorView.swift */,
@@ -438,7 +444,9 @@
 				72DA120B1D1251DB00AA8EE3 /* Country.swift in Sources */,
 				72DC6C921D224685001E5AF9 /* KDPlayersViewController.swift in Sources */,
 				72DA12171D1251DB00AA8EE3 /* Athlete.swift in Sources */,
+				725FBEB41D44A805003D81ED /* KDHeadsViewCell.swift in Sources */,
 				724FA9091D319FF600ADCB8D /* KDEventParser.swift in Sources */,
+				725FBEB21D44A520003D81ED /* KDResultViewController.swift in Sources */,
 				72DA12091D1251DB00AA8EE3 /* Team.swift in Sources */,
 				72DA12161D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift in Sources */,
 				72DA120F1D1251DB00AA8EE3 /* Unit.swift in Sources */,
