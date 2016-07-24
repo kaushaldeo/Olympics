@@ -17,7 +17,6 @@
 		725FBEB21D44A520003D81ED /* KDResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB11D44A520003D81ED /* KDResultViewController.swift */; };
 		725FBEB41D44A805003D81ED /* KDHeadsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */; };
 		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
-		729A03191D3F59F400E300F1 /* KDCompetitorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */; };
 		729A03291D42033100E300F1 /* Icon in Resources */ = {isa = PBXBuildFile; fileRef = 729A03281D42033100E300F1 /* Icon */; };
 		729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */; };
 		729A03331D42DC9D00E300F1 /* KDDisciplineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 729A03321D42DC9C00E300F1 /* KDDisciplineView.xib */; };
@@ -69,7 +68,6 @@
 		72DC6C901D223F19001E5AF9 /* KDStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */; };
 		72DC6C921D224685001E5AF9 /* KDPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */; };
 		72DC6C941D224697001E5AF9 /* KDMedalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */; };
-		72F0B3CF1D39A9CA00305193 /* KDCompetitorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0B3CE1D39A9CA00305193 /* KDCompetitorsViewController.swift */; };
 		A5024B28232EDAD4E98032CF /* Pods_Olympics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE87072582A5606C63FB444 /* Pods_Olympics.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,7 +82,6 @@
 		725FBEB11D44A520003D81ED /* KDResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDResultViewController.swift; sourceTree = "<group>"; };
 		725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDHeadsViewCell.swift; sourceTree = "<group>"; };
 		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
-		729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCompetitorViewCell.swift; sourceTree = "<group>"; };
 		729A03281D42033100E300F1 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDisciplineView.swift; sourceTree = "<group>"; };
 		729A03321D42DC9C00E300F1 /* KDDisciplineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KDDisciplineView.xib; sourceTree = "<group>"; };
@@ -138,7 +135,6 @@
 		72DC6C8F1D223F19001E5AF9 /* KDStoryboardSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDStoryboardSegue.swift; sourceTree = "<group>"; };
 		72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDPlayersViewController.swift; sourceTree = "<group>"; };
 		72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalsViewController.swift; sourceTree = "<group>"; };
-		72F0B3CE1D39A9CA00305193 /* KDCompetitorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCompetitorsViewController.swift; sourceTree = "<group>"; };
 		7A1D1F68A84A2A69C308D6AC /* Pods-Olympics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olympics.release.xcconfig"; path = "Pods/Target Support Files/Pods-Olympics/Pods-Olympics.release.xcconfig"; sourceTree = "<group>"; };
 		AFE87072582A5606C63FB444 /* Pods_Olympics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Olympics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8B1B2F22D61F37DAF0E991E /* Pods-Olympics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olympics.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Olympics/Pods-Olympics.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,7 +249,6 @@
 				72DA121F1D128D1D00AA8EE3 /* KDUnitsViewController.swift */,
 				72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */,
 				72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */,
-				72F0B3CE1D39A9CA00305193 /* KDCompetitorsViewController.swift */,
 				725FBEB11D44A520003D81ED /* KDResultViewController.swift */,
 				721B96321D3B72650064E485 /* KDTabBarViewController.swift */,
 			);
@@ -268,7 +263,6 @@
 				72D0F5D01D2C6E4800400F03 /* KDCountryViewCell.swift */,
 				728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */,
 				72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */,
-				729A03181D3F59F400E300F1 /* KDCompetitorViewCell.swift */,
 				729A033A1D43406700E300F1 /* KDResultViewCell.swift */,
 				725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */,
 				729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */,
@@ -440,7 +434,6 @@
 				724FA9101D31A74600ADCB8D /* Score+CoreDataProperties.swift in Sources */,
 				72D0F5C51D2B8FED00400F03 /* KDScheduleParser.swift in Sources */,
 				72D0F5C71D2B90E400400F03 /* KDProfileParser.swift in Sources */,
-				729A03191D3F59F400E300F1 /* KDCompetitorViewCell.swift in Sources */,
 				72DA120B1D1251DB00AA8EE3 /* Country.swift in Sources */,
 				72DC6C921D224685001E5AF9 /* KDPlayersViewController.swift in Sources */,
 				72DA12171D1251DB00AA8EE3 /* Athlete.swift in Sources */,
@@ -458,7 +451,6 @@
 				72DA12101D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift in Sources */,
 				72DA120E1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift in Sources */,
 				729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */,
-				72F0B3CF1D39A9CA00305193 /* KDCompetitorsViewController.swift in Sources */,
 				72DA121C1D125C8900AA8EE3 /* KDManagedObjectContext.swift in Sources */,
 				721B96331D3B72650064E485 /* KDTabBarViewController.swift in Sources */,
 				72DA12071D1251DB00AA8EE3 /* Location.swift in Sources */,

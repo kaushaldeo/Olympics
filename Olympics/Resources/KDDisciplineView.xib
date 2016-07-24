@@ -67,11 +67,11 @@
                     <exclude reference="xy8-8t-0wE"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="2sS-Ck-O7j"/>
-                    <exclude reference="hSS-Ez-gOr"/>
                     <exclude reference="Ibd-Uz-gl7"/>
                     <exclude reference="j17-l0-EDR"/>
                     <exclude reference="kpe-CR-zqg"/>
+                    <exclude reference="2sS-Ck-O7j"/>
+                    <exclude reference="hSS-Ez-gOr"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
@@ -80,11 +80,11 @@
                     <include reference="xy8-8t-0wE"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="2sS-Ck-O7j"/>
-                    <include reference="hSS-Ez-gOr"/>
                     <include reference="Ibd-Uz-gl7"/>
                     <include reference="j17-l0-EDR"/>
                     <include reference="kpe-CR-zqg"/>
+                    <include reference="2sS-Ck-O7j"/>
+                    <include reference="hSS-Ez-gOr"/>
                 </mask>
             </variation>
             <connections>
