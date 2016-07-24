@@ -107,14 +107,19 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Configure the cell...
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        if let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
+        let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
+        if let unit = competitor.unit, let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDHeadsViewCell
             cell.setUnit(unit)
             return cell
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("Rank", forIndexPath: indexPath) as! KDCompetitorViewCell
-        cell.setUnit(unit)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Rank", forIndexPath: indexPath) as! KDResultViewCell
+        cell.nameLabel.text = competitor.name()
+        if let text = competitor.iconName() {
+            cell.iconView.image = UIImage(named: "Images/\(text).png")
+        }
+        cell.rankLabel.text = competitor.rank
+        cell.resultLabel.text = competitor.resultValue
         return cell
     }
     
@@ -135,8 +140,8 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        print(event.competitors)
+        //let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+       //print(event.competitors)
         
     }
     
@@ -150,33 +155,29 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
      }
      */
     
-    
     // MARK: - Fetched results controller
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let context = NSManagedObjectContext.mainContext()
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Unit", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Competitor", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false),NSSortDescriptor(key: "phase", ascending: true),NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.startDate", ascending: false),NSSortDescriptor(key: "unit.phase", ascending: true),NSSortDescriptor(key: "unit.name", ascending: true)]
         
         
-        //fetchRequest.predicate = NSPredicate(format: "event = %@",self.event)
-        //fetchRequest.predicate = NSPredicate(format: "SUBQUERY(units, $unit, $unit.event = %@).@count != 0", self.event)
         if let country = Country.country(context) {
-            fetchRequest.predicate = NSPredicate(format: "event = %@ AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,country,country)
+            fetchRequest.predicate = NSPredicate(format: "unit.event = %@ AND (team.country = %@ OR athlete.country = %@)", self.event,country,country)
         }
-        //
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"phase", cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"unit.phase", cacheName: nil)
         fetchedResultsController.delegate = self
         
         fetchedResultsController.update()
