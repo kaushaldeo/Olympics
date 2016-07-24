@@ -17,6 +17,7 @@ class KDEventsViewController: UIViewController {
     var days = [NSDate]()
     
     @IBOutlet weak var overlay: UIView!
+    @IBOutlet weak var imageView: UIImageView!
     
     //MARK: - Private functions
     func calulateDate() {
@@ -30,6 +31,18 @@ class KDEventsViewController: UIViewController {
                 self.days.append(date)
             }
         }
+    }
+    
+    func startAnimation() {
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotationAnimation.toValue = M_PI*2.0*0.3
+        
+        rotationAnimation.duration = 0.3
+        
+        rotationAnimation.cumulative = true
+        rotationAnimation.repeatCount = Float.infinity
+        
+        self.imageView.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
     }
     
     lazy var dateFormatter : NSDateFormatter = {
@@ -85,10 +98,14 @@ class KDEventsViewController: UIViewController {
         // Do any additional setup after loading the view.
         //self.headerView.backgroundColor = self.navigationController?.navigationBar.barTintColor
         
-        self.calulateDate()
         self.pagerController.currentContent()
         
+        self.calulateDate()
         self.showCountry()
+        
+        self.view.backgroundColor = UIColor.backgroundColor()
+        self.imageView.image = UIImage(named: "logo")?.imageWithRenderingMode(.AlwaysTemplate)
+        self.imageView.tintColor = UIColor.lightGrayColor()
         
         self.loadData()
         
@@ -123,7 +140,7 @@ class KDEventsViewController: UIViewController {
     //MARK: - Database Methods
     func process(error:NSError) {
         
-        //self.imageView.layer.removeAllAnimations()
+        self.imageView.layer.removeAllAnimations()
         var message = "We had a problem retrieving your information.  Do you want to try again?";
         if (error.code == NSURLErrorNotConnectedToInternet) {
             message = "No Network Connection. Please try again.";
@@ -136,10 +153,11 @@ class KDEventsViewController: UIViewController {
                 strongSelf.loadData()
             }
             }))
-        self.showViewController(alertController, sender: nil)
+        self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func populateDate(country: Country) {
+        self.imageView.layer.removeAllAnimations()
         let context = NSManagedObjectContext.mainContext()
         let sets = NSMutableSet()
         if let units = context.find(Unit.classForCoder(), predicate: NSPredicate(format:"event.country = %@",country), sortDescriptors: [NSSortDescriptor(key: "startDate", ascending: true)]) as? [Unit] {
@@ -179,6 +197,7 @@ class KDEventsViewController: UIViewController {
                     strongSelf.populateDate(country)
                 }
                 })
+            self.startAnimation()
         }
     }
     

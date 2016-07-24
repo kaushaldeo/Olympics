@@ -706,10 +706,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kCompetitorViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="GHn-KN-kSo" customClass="KDCompetitorViewCell" customModule="Olympics" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="600" height="140"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="130"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GHn-KN-kSo" id="6Ty-kC-tJ9">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="140"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="368" placeholderIntrinsicHeight="20" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsF-Ow-bVv">
@@ -924,43 +924,71 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rg6-JK-O2y">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="127" id="mRc-9o-2ho"/>
+                                    <constraint firstAttribute="width" constant="127" id="ruq-j3-uh3"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="mRc-9o-2ho"/>
+                                        <exclude reference="ruq-j3-uh3"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="mRc-9o-2ho"/>
+                                        <include reference="ruq-j3-uh3"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tQM-Jb-Vf9">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tQM-Jb-Vf9" firstAttribute="leading" secondItem="PBX-3a-NJw" secondAttribute="leading" id="71R-zI-ce5"/>
+                            <constraint firstItem="Rg6-JK-O2y" firstAttribute="centerX" secondItem="PBX-3a-NJw" secondAttribute="centerX" id="7sA-TS-WBc"/>
                             <constraint firstItem="tQM-Jb-Vf9" firstAttribute="top" secondItem="5un-dG-Ykz" secondAttribute="bottom" id="CjK-Y6-Yps"/>
+                            <constraint firstItem="Rg6-JK-O2y" firstAttribute="centerY" secondItem="PBX-3a-NJw" secondAttribute="centerY" id="Fbh-NK-Ejq"/>
                             <constraint firstItem="jyp-lb-R5v" firstAttribute="top" secondItem="tQM-Jb-Vf9" secondAttribute="bottom" id="acA-9z-pg1"/>
                             <constraint firstAttribute="trailing" secondItem="tQM-Jb-Vf9" secondAttribute="trailing" id="fzL-u0-JvV"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="Rg6-JK-O2y"/>
                                 <exclude reference="tQM-Jb-Vf9"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="acA-9z-pg1"/>
                                 <exclude reference="71R-zI-ce5"/>
                                 <exclude reference="CjK-Y6-Yps"/>
                                 <exclude reference="fzL-u0-JvV"/>
+                                <exclude reference="7sA-TS-WBc"/>
+                                <exclude reference="Fbh-NK-Ejq"/>
+                                <exclude reference="acA-9z-pg1"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
+                                <include reference="Rg6-JK-O2y"/>
                                 <include reference="tQM-Jb-Vf9"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="acA-9z-pg1"/>
                                 <include reference="71R-zI-ce5"/>
                                 <include reference="CjK-Y6-Yps"/>
                                 <include reference="fzL-u0-JvV"/>
+                                <include reference="7sA-TS-WBc"/>
+                                <include reference="Fbh-NK-Ejq"/>
+                                <include reference="acA-9z-pg1"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Olympics" id="UvY-SX-33D"/>
                     <connections>
+                        <outlet property="imageView" destination="Rg6-JK-O2y" id="fch-9W-2rE"/>
                         <outlet property="overlay" destination="tQM-Jb-Vf9" id="GaZ-ki-9zV"/>
                     </connections>
                 </viewController>

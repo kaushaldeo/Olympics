@@ -46,14 +46,13 @@ class KDSplashViewController: UIViewController {
     
     
     func showView() {
-//        if let _ = Country.country(NSManagedObjectContext.mainContext()) {
-//            self.performSegueWithIdentifier("showEvent", sender: nil)
-//        }
-//        else {
-//            self.performSegueWithIdentifier("showCountry", sender: nil)
-//        }
+        if let _ = Country.country(NSManagedObjectContext.mainContext()) {
+            self.performSegueWithIdentifier("showEvent", sender: nil)
+        }
+        else {
+            self.performSegueWithIdentifier("showCountry", sender: nil)
+        }
         
-        self.performSegueWithIdentifier("showCountry", sender: nil)
         iLink.sharedInstance().previewMode = true
         iLink.sharedInstance().verboseLogging = true
         iLink.sharedInstance().globalPromptForUpdate = true
@@ -75,7 +74,7 @@ class KDSplashViewController: UIViewController {
                 strongSelf.startAnimation()
             }
         }))
-        self.showViewController(alertController, sender: nil)
+        self.presentViewController(alertController, animated: true, completion: nil)
         print(message)
     }
     
