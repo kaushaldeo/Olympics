@@ -32,6 +32,39 @@ class Unit: NSManagedObject {
     }
     
     
+    func textColor(outcome: String?) -> UIColor {
+        if let status = self.status?.lowercaseString where status != "closed" {
+            return UIColor.blackColor()
+        }
+        
+        if let medal = self.medal, let result = outcome {
+            switch medal.lowercaseString {
+            case "gold":
+                switch result.lowercaseString {
+                case "win":
+                    return UIColor.goldColor()
+                case "victory":
+                    return UIColor.goldColor()
+                default:
+                    return UIColor.silverColor()
+                }
+            case "bronze":
+                switch result.lowercaseString {
+                case "win":
+                    return UIColor.bronzeColor()
+                case "victory":
+                    return UIColor.bronzeColor()
+                default:
+                    return UIColor.blackColor()
+                }
+            default:
+                return UIColor.blackColor()
+            }
+            
+        }
+        return UIColor.blackColor()
+    }
+    
     func locationName() -> String {
         var string = ""
         if let text = self.location?.name {
@@ -52,10 +85,10 @@ class Unit: NSManagedObject {
         }
         return nil
     }
-
+    
     func competitor() -> [Competitor]? {
         if let items = self.competitors?.allObjects as? [Competitor] {
-           return items.sort({return $0.sort < $1.sort})
+            return items.sort({return $0.sort < $1.sort})
         }
         return nil
     }

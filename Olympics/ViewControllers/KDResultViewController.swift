@@ -144,7 +144,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         if let text = competitor.iconName() {
             cell.iconView.image = UIImage(named: "Images/\(text).png")
         }
-        cell.rankLabel.text = competitor.rank
+        cell.rankLabel.text = competitor.rank ?? "-"
         cell.resultLabel.text = competitor.resultValue
         return cell
     }

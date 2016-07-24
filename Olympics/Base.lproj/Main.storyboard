@@ -817,11 +817,14 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" placeholderIntrinsicWidth="40" placeholderIntrinsicHeight="24" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hS2-VE-Yvg">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hS2-VE-Yvg">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Hmy-ty-G79">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="24"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="width" constant="40" id="HrO-lK-aWf">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="30"/>
                                                         </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
@@ -830,11 +833,13 @@
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="Hmy-ty-G79"/>
+                                                            <exclude reference="HrO-lK-aWf"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Hmy-ty-G79"/>
+                                                            <include reference="HrO-lK-aWf"/>
                                                         </mask>
                                                     </variation>
                                                 </label>

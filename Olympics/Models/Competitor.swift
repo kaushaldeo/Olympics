@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 /*****
  
@@ -37,7 +38,7 @@ import CoreData
  @NSManaged var unit: Unit?
  @NSManaged var scores: NSSet?
  @NSManaged var results: NSSet?
-
+ 
  
  ****/
 
@@ -68,40 +69,52 @@ class Competitor: NSManagedObject {
         }
         return nil
     }
-
-    
-    
-    func resultText() -> String {
-        var string = ""
-        if let text = self.outcome {
-            string += text
-        }
-        
-        if let text = self.resultValue {
-            if string.isEmpty == false {
-                string += "   "
-            }
-            string += text
-        }
-        
-        if let text = self.resultType {
-            if string.isEmpty == false {
-                string += " with "
-            }
-            string += text
-        }
-        
-        return string
-    }
     
     func iconName() -> String? {
         if let type = self.type where type == "team" {
             return self.team?.country?.alias?.lowercaseString
         }
         if let player = self.athlete {
-          return player.country?.alias?.lowercaseString
+            return player.country?.alias?.lowercaseString
         }
         return nil
+    }
+    
+    
+    func textColor() -> UIColor {
+        print(self.medal)
+        if let text = self.medal {
+            switch text.lowercaseString {
+            case "gold":
+                return UIColor.goldColor()
+            case "silver":
+                return UIColor.silverColor()
+            case "bronze":
+                return UIColor.silverColor()
+            default:
+                return UIColor.blackColor()
+            }
+        }
+        return UIColor.blackColor()
+    }
+    
+    func textFont() -> UIFont {
+        //UIFontWeightRegular: CGFloat
+        //UIFontWeightMedium
+        print(self.outcome)
+        if #available(iOS 8.2, *) {
+            if let text = self.outcome {
+                switch text.lowercaseString {
+                case "win":
+                    return UIFont.systemFontOfSize(14.0, weight:UIFontWeightMedium)
+                case "victory":
+                    return UIFont.systemFontOfSize(14.0, weight:UIFontWeightMedium)
+                default:()
+                }
+            }
+            return UIFont.systemFontOfSize(14.0, weight:UIFontWeightRegular)
+        }
+        return UIFont.systemFontOfSize(14)
     }
     
 }

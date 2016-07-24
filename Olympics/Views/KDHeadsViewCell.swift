@@ -44,17 +44,38 @@ class KDHeadsViewCell: UITableViewCell {
     
     func set(unit:Unit, country:Country) {
         if let competitors = unit.competitor() {
-            let home = competitors.first
-            let away = competitors.last
-            
-            self.homeLabel.text = home?.name()
-            if let text = home?.iconName() {
-                self.homeView.image = UIImage(named: "Images/\(text).png")
+            var string = ""
+            if let home = competitors.first {
+                self.homeLabel.text = home.name()
+                if let text = home.iconName() {
+                    self.homeView.image = UIImage(named: "Images/\(text).png")
+                }
+                self.homeLabel.textColor = unit.textColor(home.outcome)
+                self.homeLabel.font = home.textFont()
+                if let text = home.resultValue {
+                    string += text
+                }
+                else {
+                    string += " "
+                }
             }
+            string += " - "
             
-            self.awayLabel.text = away?.name()
-            if let text = away?.iconName() {
-                self.awayView.image = UIImage(named: "Images/\(text).png")
+            if let away = competitors.last {
+                self.awayLabel.text = away.name()
+                if let text = away.iconName() {
+                    self.awayView.image = UIImage(named: "Images/\(text).png")
+                }
+                
+                self.awayLabel.textColor = unit.textColor(away.outcome)
+                self.awayLabel.font = away.textFont()
+                
+                if let text = away.resultValue {
+                    string += text
+                }
+                else {
+                    string += " "
+                }
             }
             
             if let date = unit.startDate {
@@ -62,20 +83,6 @@ class KDHeadsViewCell: UITableViewCell {
             }
             if let status = unit.status?.lowercaseString {
                 if status == "closed" || status == "inprogress" {
-                    var string = ""
-                    if let text = home?.resultValue {
-                        string += text
-                    }
-                    else {
-                        string += " "
-                    }
-                    string += " - "
-                    if let text = away?.resultValue {
-                        string += text
-                    }
-                    else {
-                        string += " "
-                    }
                     self.resultLabel.text = string
                 }
             }

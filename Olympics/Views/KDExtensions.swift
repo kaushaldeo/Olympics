@@ -92,7 +92,7 @@ extension UIColor {
     }
     
     class func silverColor() -> UIColor {
-        return UIColor(red: 203, green: 203, blue: 203)
+        return UIColor(red: 192, green: 192, blue: 192)
     }
     
     
@@ -101,6 +101,7 @@ extension UIColor {
     }
     
 }
+
 
 extension String {
     

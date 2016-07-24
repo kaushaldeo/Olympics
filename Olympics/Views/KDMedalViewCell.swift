@@ -30,7 +30,7 @@ class KDMedalViewCell: UITableViewCell {
         self.goldLabel.layer.cornerRadius = 15.0
         self.goldLabel.textColor = color
         
-        color = UIColor(red: 203, green: 203, blue: 203)
+        color = UIColor.silverColor()
         self.silverLabel.layer.borderColor = color.CGColor
         self.silverLabel.layer.borderWidth = 1.0
         self.silverLabel.textAlignment = .Center
