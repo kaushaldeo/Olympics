@@ -17,6 +17,14 @@
 		725FBEB21D44A520003D81ED /* KDResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB11D44A520003D81ED /* KDResultViewController.swift */; };
 		725FBEB41D44A805003D81ED /* KDHeadsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */; };
 		725FBEB61D44DD18003D81ED /* KDInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB51D44DD18003D81ED /* KDInfoViewController.swift */; };
+		725FBEC01D45540E003D81ED /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB81D45540E003D81ED /* InfiniteScrollView.swift */; };
+		725FBEC11D45540E003D81ED /* PagerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB91D45540E003D81ED /* PagerContainerView.swift */; };
+		725FBEC21D45540E003D81ED /* PagerTabMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBA1D45540E003D81ED /* PagerTabMenuView.swift */; };
+		725FBEC31D45540E003D81ED /* UIColor+RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBB1D45540E003D81ED /* UIColor+RGBA.swift */; };
+		725FBEC41D45540E003D81ED /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBC1D45540E003D81ED /* UIView+AutoLayout.swift */; };
+		725FBEC51D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBD1D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift */; };
+		725FBEC61D45540E003D81ED /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBE1D45540E003D81ED /* ViewPagerController.swift */; };
+		725FBEC71D45540E003D81ED /* ViewPagerControllerAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBF1D45540E003D81ED /* ViewPagerControllerAppearance.swift */; };
 		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
 		729A03291D42033100E300F1 /* Icon in Resources */ = {isa = PBXBuildFile; fileRef = 729A03281D42033100E300F1 /* Icon */; };
 		729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */; };
@@ -83,6 +91,14 @@
 		725FBEB11D44A520003D81ED /* KDResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDResultViewController.swift; sourceTree = "<group>"; };
 		725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDHeadsViewCell.swift; sourceTree = "<group>"; };
 		725FBEB51D44DD18003D81ED /* KDInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDInfoViewController.swift; sourceTree = "<group>"; };
+		725FBEB81D45540E003D81ED /* InfiniteScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollView.swift; sourceTree = "<group>"; };
+		725FBEB91D45540E003D81ED /* PagerContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerContainerView.swift; sourceTree = "<group>"; };
+		725FBEBA1D45540E003D81ED /* PagerTabMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerTabMenuView.swift; sourceTree = "<group>"; };
+		725FBEBB1D45540E003D81ED /* UIColor+RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RGBA.swift"; sourceTree = "<group>"; };
+		725FBEBC1D45540E003D81ED /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
+		725FBEBD1D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewPagerController+ScrollHeaderSupport.swift"; sourceTree = "<group>"; };
+		725FBEBE1D45540E003D81ED /* ViewPagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerController.swift; sourceTree = "<group>"; };
+		725FBEBF1D45540E003D81ED /* ViewPagerControllerAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerControllerAppearance.swift; sourceTree = "<group>"; };
 		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
 		729A03281D42033100E300F1 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDisciplineView.swift; sourceTree = "<group>"; };
@@ -163,6 +179,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		725FBEB71D45540E003D81ED /* Pager */ = {
+			isa = PBXGroup;
+			children = (
+				725FBEB81D45540E003D81ED /* InfiniteScrollView.swift */,
+				725FBEB91D45540E003D81ED /* PagerContainerView.swift */,
+				725FBEBA1D45540E003D81ED /* PagerTabMenuView.swift */,
+				725FBEBB1D45540E003D81ED /* UIColor+RGBA.swift */,
+				725FBEBC1D45540E003D81ED /* UIView+AutoLayout.swift */,
+				725FBEBD1D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift */,
+				725FBEBE1D45540E003D81ED /* ViewPagerController.swift */,
+				725FBEBF1D45540E003D81ED /* ViewPagerControllerAppearance.swift */,
+			);
+			path = Pager;
+			sourceTree = "<group>";
+		};
 		729A03311D42DC5600E300F1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +225,7 @@
 		72DA106D1D0BA16B00AA8EE3 /* Olympics */ = {
 			isa = PBXGroup;
 			children = (
+				725FBEB71D45540E003D81ED /* Pager */,
 				729A03281D42033100E300F1 /* Icon */,
 				72D0F5CE1D2C6A6300400F03 /* Images */,
 				72DA12181D1256B300AA8EE3 /* Network */,
@@ -442,22 +474,27 @@
 				72DA12171D1251DB00AA8EE3 /* Athlete.swift in Sources */,
 				725FBEB41D44A805003D81ED /* KDHeadsViewCell.swift in Sources */,
 				724FA9091D319FF600ADCB8D /* KDEventParser.swift in Sources */,
+				725FBEC11D45540E003D81ED /* PagerContainerView.swift in Sources */,
 				725FBEB21D44A520003D81ED /* KDResultViewController.swift in Sources */,
 				72DA12091D1251DB00AA8EE3 /* Team.swift in Sources */,
 				72DA12161D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift in Sources */,
 				72DA120F1D1251DB00AA8EE3 /* Unit.swift in Sources */,
 				72DA10891D0BA25000AA8EE3 /* KDCountriesViewController.swift in Sources */,
+				725FBEC51D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift in Sources */,
 				72DA120A1D1251DB00AA8EE3 /* Country+CoreDataProperties.swift in Sources */,
 				72DC6C901D223F19001E5AF9 /* KDStoryboardSegue.swift in Sources */,
 				72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */,
 				72DA12131D1251DB00AA8EE3 /* Competitor.swift in Sources */,
 				72DA12101D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift in Sources */,
+				725FBEC31D45540E003D81ED /* UIColor+RGBA.swift in Sources */,
 				72DA120E1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift in Sources */,
 				729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */,
 				72DA121C1D125C8900AA8EE3 /* KDManagedObjectContext.swift in Sources */,
 				725FBEB61D44DD18003D81ED /* KDInfoViewController.swift in Sources */,
 				721B96331D3B72650064E485 /* KDTabBarViewController.swift in Sources */,
+				725FBEC61D45540E003D81ED /* ViewPagerController.swift in Sources */,
 				72DA12071D1251DB00AA8EE3 /* Location.swift in Sources */,
+				725FBEC71D45540E003D81ED /* ViewPagerControllerAppearance.swift in Sources */,
 				72DA108B1D0BE36F00AA8EE3 /* KDEventsViewController.swift in Sources */,
 				72D8B6E11D43711F008E86C0 /* KDErrorView.swift in Sources */,
 				72DA120D1D1251DB00AA8EE3 /* Event.swift in Sources */,
@@ -468,16 +505,19 @@
 				72D0F5CD1D2C669E00400F03 /* KDExtensions.swift in Sources */,
 				72DA12061D1251DB00AA8EE3 /* Location+CoreDataProperties.swift in Sources */,
 				72DA10901D0BECB500AA8EE3 /* KDScrollerBar.swift in Sources */,
+				725FBEC01D45540E003D81ED /* InfiniteScrollView.swift in Sources */,
 				72D0F5C91D2C248600400F03 /* KDSplashViewController.swift in Sources */,
 				72DA121A1D1256C900AA8EE3 /* KDAPIManager.swift in Sources */,
 				724FA90F1D31A74600ADCB8D /* Result.swift in Sources */,
 				72D0F5D11D2C6E4800400F03 /* KDCountryViewCell.swift in Sources */,
 				72DA12201D128D1D00AA8EE3 /* KDUnitsViewController.swift in Sources */,
+				725FBEC21D45540E003D81ED /* PagerTabMenuView.swift in Sources */,
 				72DA12051D1251DB00AA8EE3 /* Sport.swift in Sources */,
 				72DA12081D1251DB00AA8EE3 /* Team+CoreDataProperties.swift in Sources */,
 				729A03391D432B5D00E300F1 /* KDPhaseView.swift in Sources */,
 				729A033B1D43406700E300F1 /* KDResultViewCell.swift in Sources */,
 				72D0F5CB1D2C2A7100400F03 /* KDMedalParser.swift in Sources */,
+				725FBEC41D45540E003D81ED /* UIView+AutoLayout.swift in Sources */,
 				72D0F5C31D2B8EF300400F03 /* KDCountryParser.swift in Sources */,
 				72DA12151D1251DB00AA8EE3 /* Discipline.swift in Sources */,
 			);

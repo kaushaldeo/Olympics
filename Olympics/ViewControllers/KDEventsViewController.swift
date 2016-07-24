@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import ViewPagerController
 
 private let reuseIdentifier = "Cell"
 
@@ -98,8 +97,6 @@ class KDEventsViewController: UIViewController {
         // Do any additional setup after loading the view.
         //self.headerView.backgroundColor = self.navigationController?.navigationBar.barTintColor
         
-        self.pagerController.currentContent()
-        
         self.calulateDate()
         self.showCountry()
         
@@ -178,6 +175,8 @@ class KDEventsViewController: UIViewController {
             controller.parentController = self
             self.pagerController.addContent(title, viewController: controller)
         }
+        
+        self.pagerController.reloadData()
     }
     
     func loadData() {

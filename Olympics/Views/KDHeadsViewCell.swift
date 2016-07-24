@@ -81,6 +81,9 @@ class KDHeadsViewCell: UITableViewCell {
             if let date = unit.startDate {
                 self.resultLabel.text = date.time()
             }
+            else {
+                self.resultLabel.text = nil
+            }
             if let status = unit.status?.lowercaseString {
                 if status == "closed" || status == "inprogress" {
                     self.resultLabel.text = string
