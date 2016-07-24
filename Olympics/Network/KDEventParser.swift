@@ -86,11 +86,11 @@ class KDEventParser: KDParseOperation {
                     competitor.outcome = attributeDict["outcome"]
                     competitor.resultValue = attributeDict["result"]
                     competitor.resultType = attributeDict["result_type"]
-                    if let text = attributeDict["sort_order"] {
-                        competitor.sort = Int16(text)!
+                    if let text = attributeDict["sort_order"], let index = Int16(text) {
+                        competitor.sort = index
                     }
-                    if let text = attributeDict["start_order"] {
-                        competitor.start = Int16(text)!
+                    if let text = attributeDict["start_order"], let index = Int16(text) {
+                        competitor.start = index
                     }
                     competitor.addUnit(self.unit)
                     self.competitor = competitor
@@ -102,11 +102,11 @@ class KDEventParser: KDParseOperation {
             if let score = self.context.createObject(Score.classForCoder()) as? Score {
                 score.name = attributeDict["id"]
                 score.code = attributeDict["type"]
-                if let text = attributeDict["sort_order"] {
-                    score.number = Int16(text)!
+                if let text = attributeDict["sort_order"], let index = Int16(text) {
+                    score.number = index
                 }
-                if let text = attributeDict["start_order"] {
-                    score.value = Int16(text)!
+                if let text = attributeDict["start_order"], let index = Int16(text) {
+                    score.value = index
                 }
                 score.competitor = self.competitor
             }
@@ -120,14 +120,14 @@ class KDEventParser: KDParseOperation {
                 result.value = attributeDict["value"]
                 result.valueType = attributeDict["value_type"]
                 
-                if let text = attributeDict["rank"] {
-                    result.rank = Int16(text)!
+                if let text = attributeDict["rank"], let rank = Int16(text) {
+                    result.rank = rank
                 }
-                if let text = attributeDict["sequence"] {
-                    //result.sequence = Int16(text)!
+                if let text = attributeDict["sequence"], let sequence = Int16(text) {
+                    result.sequence = sequence
                 }
-                if let text = attributeDict["sort_order"] {
-                    result.order = Int16(text)!
+                if let text = attributeDict["sort_order"], let order = Int16(text) {
+                    result.order = order
                 }
                 result.competitor = self.competitor
             }

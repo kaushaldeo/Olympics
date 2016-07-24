@@ -168,7 +168,7 @@ class KDEventsViewController: UIViewController {
             }
         }
         
-        self.days = (sets.allObjects as! [NSDate]).sort({$0.compare($1) == NSComparisonResult.OrderedAscending})
+        //self.days = (sets.allObjects as! [NSDate]).sort({$0.compare($1) == NSComparisonResult.OrderedAscending})
         for date in self.days {
             let controller = self.storyboard?.instantiateViewControllerWithIdentifier("kUnitsViewController") as! KDUnitsViewController
             controller.view.clipsToBounds = true
