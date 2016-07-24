@@ -101,12 +101,66 @@ class KDAPIManager : NSObject {
     
     //MARK: - Web-Service Methods
     
-    func dispatchOnMain(block:((NSError?) -> Void)?, _ error: NSError?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            if let completionBlock = block {
-                completionBlock(error)
-            }
+    
+    
+    func loadData(block:((NSError?) -> Void)?) {
+        let serviceGroup = dispatch_group_create()
+        
+        var nserror : NSError? = nil
+        if NSUserDefaults.loadSchedule() == false {
+            dispatch_group_enter(serviceGroup)
+            self.updateSchedule({[weak self] in
+                if let strongSelf = self {
+                    if NSUserDefaults.loadCountry() == false {
+                        dispatch_group_enter(serviceGroup);
+                        strongSelf.updateCountry({ (error) in
+                            if let err = error {
+                                nserror = err
+                            }
+                            else {
+                                NSUserDefaults.country(true)
+                            }
+                            dispatch_group_leave(serviceGroup)
+                        })
+                    }
+                }
+                }, block: { (error) in
+                    if let err = error {
+                        nserror = err
+                    }
+                    else {
+                        NSUserDefaults.schedule(true)
+                    }
+                    dispatch_group_leave(serviceGroup)
+            })
         }
+        else if NSUserDefaults.loadCountry() == false {
+            dispatch_group_enter(serviceGroup);
+            self.updateCountry({ (error) in
+                if let err = error {
+                    nserror = err
+                }
+                else {
+                    NSUserDefaults.country(true)
+                }
+                dispatch_group_leave(serviceGroup)
+            })
+        }
+        else {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                if let completionBlock = block {
+                    completionBlock(nserror)
+                }
+            }
+            return
+        }
+        
+        dispatch_group_notify(serviceGroup,dispatch_get_main_queue(),{
+            if let completionBlock = block {
+                completionBlock(nserror)
+            }
+        })
     }
     
     func updateCountry(block:((NSError?) -> Void)?) {
@@ -126,14 +180,17 @@ class KDAPIManager : NSObject {
         })
     }
     
-    func updateSchedule(block:((NSError?) -> Void)?) {
+    func updateSchedule(process:(() -> Void)?, block:((NSError?) -> Void)?) {
         self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress: { (progress) in
             print(progress)
             }, success: { (task, response) in
+                if let block = process {
+                    block()
+                }
                 if let parser = response as? NSXMLParser {
                     let operation = KDScheduleParser(parser: parser)
                     operation.completionBlock = {
-                       self.dispatchOnMain(block, nil)
+                        self.dispatchOnMain(block, nil)
                     }
                     self.operationQueue.addOperation(operation)
                 }
@@ -143,6 +200,13 @@ class KDAPIManager : NSObject {
         })
     }
     
+    func dispatchOnMain(block:((NSError?) -> Void)?, _ error: NSError?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            if let completionBlock = block {
+                completionBlock(error)
+            }
+        }
+    }
     
     func updateProfile(country:Country, _ block:((NSError?) -> Void)?) {
         guard let identifier = country.identifier else {
@@ -171,7 +235,7 @@ class KDAPIManager : NSObject {
                 if let parser = response as? NSXMLParser {
                     let operation = KDMedalParser(parser: parser)
                     operation.completionBlock = {
-                       self.dispatchOnMain(block, nil)
+                        self.dispatchOnMain(block, nil)
                     }
                     self.operationQueue.addOperation(operation)
                 }
@@ -191,7 +255,7 @@ class KDAPIManager : NSObject {
                 if let parser = response as? NSXMLParser {
                     let operation = KDEventParser(parser: parser)
                     operation.completionBlock = {
-                       self.dispatchOnMain(block, nil)
+                        self.dispatchOnMain(block, nil)
                     }
                     self.operationQueue.addOperation(operation)
                 }

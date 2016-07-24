@@ -34,11 +34,9 @@ class KDEventsViewController: UIViewController {
     
     lazy var dateFormatter : NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMM d"
+        dateFormatter.dateFormat = "MMM d, yyyy"
         return dateFormatter
     }()
-    
-    
     
     lazy var pagerController : ViewPagerController = {
         
@@ -71,16 +69,6 @@ class KDEventsViewController: UIViewController {
             print("call didShowViewControllerHandler : \(height)")
         }
         
-        for date in self.days {
-            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("kUnitsViewController") as! KDUnitsViewController
-            controller.view.clipsToBounds = true
-            let title = self.dateFormatter.stringFromDate(date)
-            controller.title = title
-            controller.date = date
-            controller.parentController = self
-            pagerController.addContent(title, viewController: controller)
-        }
-        
         return pagerController
     }()
     
@@ -99,19 +87,10 @@ class KDEventsViewController: UIViewController {
         
         self.calulateDate()
         self.pagerController.currentContent()
-        let context = NSManagedObjectContext.mainContext()
+        
         self.showCountry()
         
-        if let country = Country.country(context) {
-            if let sets = country.events where sets.count > 0 {
-                return
-            }
-            KDAPIManager.sharedInstance.updateProfile(country, { [weak self] (error) in
-                if let _ = self {
-                    
-                }
-                })
-        }
+        self.loadData()
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
         
@@ -119,7 +98,6 @@ class KDEventsViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         
     }
     
@@ -142,93 +120,67 @@ class KDEventsViewController: UIViewController {
      }
      */
     
-    // MARK: UICollectionViewDataSource
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return self.days.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+    //MARK: - Database Methods
+    func process(error:NSError) {
         
-        // Configure the cell
+        //self.imageView.layer.removeAllAnimations()
+        var message = "We had a problem retrieving your information.  Do you want to try again?";
+        if (error.code == NSURLErrorNotConnectedToInternet) {
+            message = "No Network Connection. Please try again.";
+        }
         
-        return cell
+        let alertController = UIAlertController(title: "Oops!!", message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Retry", style: .Destructive, handler: { [weak self] (action) in
+            if let strongSelf = self {
+                strongSelf.loadData()
+            }
+            }))
+        self.showViewController(alertController, sender: nil)
     }
     
-    // MARK: UICollectionViewDelegate
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: CGRectGetWidth(collectionView.bounds), height: CGRectGetHeight(collectionView.bounds))
-    }
-    
-    //    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    //        var pageWidth = Double(scrollView.frame.size.width) + 10.0
-    //
-    //        if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-    //            pageWidth = Double(scrollView.frame.size.width + layout.minimumLineSpacing)
-    //        }
-    //
-    //        let currentOffset = Double(scrollView.contentOffset.x)
-    //        let targetOffset = Double(targetContentOffset.memory.x)
-    //        var newTargetOffset : Double = 0
-    //
-    //        if (targetOffset > currentOffset) {
-    //            newTargetOffset = ceil(currentOffset / pageWidth) * pageWidth
-    //        }
-    //        else {
-    //            newTargetOffset = floor(currentOffset / pageWidth) * pageWidth;
-    //        }
-    //        if (newTargetOffset < 0) {
-    //            newTargetOffset = 0
-    //        }
-    //
-    //        targetContentOffset.memory.x = CGFloat(currentOffset)
-    //        scrollView.setContentOffset(CGPoint(x:newTargetOffset, y:0), animated: true)
-    //
-    //        let index = Int(newTargetOffset/pageWidth)
-    //        self.scrollerBar.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), animated: true)
-    //    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func populateDate(country: Country) {
+        let context = NSManagedObjectContext.mainContext()
+        let sets = NSMutableSet()
+        if let units = context.find(Unit.classForCoder(), predicate: NSPredicate(format:"event.country = %@",country), sortDescriptors: [NSSortDescriptor(key: "startDate", ascending: true)]) as? [Unit] {
+            for unit in units {
+                if let date = unit.startDate?.today() {
+                    sets.addObject(date)
+                }
+            }
+        }
         
+        self.days = (sets.allObjects as! [NSDate]).sort({$0.compare($1) == NSComparisonResult.OrderedAscending})
+        for date in self.days {
+            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("kUnitsViewController") as! KDUnitsViewController
+            controller.view.clipsToBounds = true
+            let title = self.dateFormatter.stringFromDate(date)
+            controller.title = title
+            controller.date = date
+            controller.parentController = self
+            self.pagerController.addContent(title, viewController: controller)
+        }
     }
     
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-     return false
-     }
-     
-     func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-     return false
-     }
-     
-     func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-     
-     }
-     */
+    func loadData() {
+        let context = NSManagedObjectContext.mainContext()
+        if let country = Country.country(context) {
+            
+            if let sets = country.events where sets.count > 0 {
+                self.populateDate(country)
+                return
+            }
+            KDAPIManager.sharedInstance.updateProfile(country, { [weak self] (error) in
+                if let strongSelf = self {
+                    if let nserror = error {
+                        strongSelf.process(nserror)
+                        return
+                    }
+                    strongSelf.populateDate(country)
+                }
+                })
+        }
+    }
     
     
 }

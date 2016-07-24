@@ -35,7 +35,6 @@ class KDCountryParser: KDParseOperation {
     override func parserDidEndDocument(parser: NSXMLParser) {
         self.processedData(self.items)
         self.items.removeAll()
-        NSUserDefaults.country(true)
     }
     
     func processedData(countries: [Country]) {
