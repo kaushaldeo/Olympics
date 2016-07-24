@@ -92,15 +92,60 @@ class KDErrorView: UIView {
 
 
 class KDInfoView : UIView {
+    
+    class func appVersion() -> String {
+        var string = "v"
+        if let dictionary = NSBundle.mainBundle().infoDictionary  {
+            if let version = dictionary["CFBundleShortVersionString"] as? String {
+                string += version
+            }
+            else {
+                string += "1.0"
+            }
+            if let version = dictionary["CFBundleVersion"] as? String {
+                string += "(\(version))"
+            }
+            else {
+                string += "(10)"
+            }
+        }
+        else {
+            string += "1.0(10)"
+        }
+        return string
+    }
+    
     private lazy var imageView : UIImageView = {
         var imageView = UIImageView(image: UIImage(named: "infoLogo"))
         imageView.tintColor = UIColor.lightGrayColor()
         return imageView
     }()
 
+    private lazy var textLabel : UILabel = {
+        var textLabel = UILabel(frame: CGRectZero)
+        textLabel.font = UIFont.systemFontOfSize(15.0)
+        textLabel.textColor = UIColor.grayColor()
+        textLabel.numberOfLines = 0
+        textLabel.textAlignment = .Center
+        textLabel.text = "Data by Sportradar US"
+        return textLabel
+    }()
+    
+    private lazy var versionLabel : UILabel = {
+        var versionLabel = UILabel(frame: CGRectZero)
+        versionLabel.font = UIFont.systemFontOfSize(14.0)
+        versionLabel.textColor = UIColor.grayColor()
+        versionLabel.numberOfLines = 1
+        versionLabel.textAlignment = .Center
+        versionLabel.text = KDInfoView.appVersion()
+        return versionLabel
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(self.imageView)
+        self.addSubview(self.textLabel)
+        self.addSubview(self.versionLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -112,7 +157,22 @@ class KDInfoView : UIView {
         
         let frame = self.bounds
         
-        let size = self.imageView.bounds.size
+        var size = self.imageView.bounds.size
         self.imageView.frame = CGRect(x: CGRectGetMidX(frame) - size.width/2, y: CGRectGetMidY(frame) - size.height, width: size.width, height: size.height)
+        
+        size = CGSizeZero
+        if let text = self.versionLabel.text {
+            size = text.size(self.versionLabel.font, width: CGRectGetWidth(frame) - 32.0)
+            
+        }
+        self.versionLabel.frame = CGRect(x: CGRectGetMidX(frame) - size.width/2, y: CGRectGetMaxY(frame) - size.height, width: size.width, height: size.height)
+        
+        size = CGSizeZero
+        if let text = self.textLabel.text {
+            size = text.size(self.textLabel.font, width: CGRectGetWidth(frame) - 32.0)
+            
+        }
+        self.textLabel.frame = CGRect(x: CGRectGetMidX(frame) - size.width/2, y: CGRectGetMinY(self.versionLabel.frame) - size.height - 10.0, width: size.width, height: size.height)
+        
     }
 }

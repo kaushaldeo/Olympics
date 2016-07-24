@@ -25,6 +25,7 @@
 		725FBEC51D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBD1D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift */; };
 		725FBEC61D45540E003D81ED /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBE1D45540E003D81ED /* ViewPagerController.swift */; };
 		725FBEC71D45540E003D81ED /* ViewPagerControllerAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBF1D45540E003D81ED /* ViewPagerControllerAppearance.swift */; };
+		725FBEC91D45601E003D81ED /* KDInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEC81D45601E003D81ED /* KDInfoViewCell.swift */; };
 		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
 		729A03291D42033100E300F1 /* Icon in Resources */ = {isa = PBXBuildFile; fileRef = 729A03281D42033100E300F1 /* Icon */; };
 		729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */; };
@@ -99,6 +100,7 @@
 		725FBEBD1D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewPagerController+ScrollHeaderSupport.swift"; sourceTree = "<group>"; };
 		725FBEBE1D45540E003D81ED /* ViewPagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerController.swift; sourceTree = "<group>"; };
 		725FBEBF1D45540E003D81ED /* ViewPagerControllerAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerControllerAppearance.swift; sourceTree = "<group>"; };
+		725FBEC81D45601E003D81ED /* KDInfoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDInfoViewCell.swift; sourceTree = "<group>"; };
 		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
 		729A03281D42033100E300F1 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDisciplineView.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 		72DA10861D0BA22F00AA8EE3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				721B96321D3B72650064E485 /* KDTabBarViewController.swift */,
 				72D0F5C81D2C248600400F03 /* KDSplashViewController.swift */,
 				72DA10881D0BA25000AA8EE3 /* KDCountriesViewController.swift */,
 				72DA108A1D0BE36F00AA8EE3 /* KDEventsViewController.swift */,
@@ -285,7 +288,6 @@
 				72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */,
 				725FBEB11D44A520003D81ED /* KDResultViewController.swift */,
 				725FBEB51D44DD18003D81ED /* KDInfoViewController.swift */,
-				721B96321D3B72650064E485 /* KDTabBarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -300,6 +302,7 @@
 				72D6ABD31D2F68CA0010ECE7 /* KDUnitViewCell.swift */,
 				729A033A1D43406700E300F1 /* KDResultViewCell.swift */,
 				725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */,
+				725FBEC81D45601E003D81ED /* KDInfoViewCell.swift */,
 				729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */,
 				729A03381D432B5D00E300F1 /* KDPhaseView.swift */,
 				72D8B6E01D43711F008E86C0 /* KDErrorView.swift */,
@@ -511,6 +514,7 @@
 				724FA90F1D31A74600ADCB8D /* Result.swift in Sources */,
 				72D0F5D11D2C6E4800400F03 /* KDCountryViewCell.swift in Sources */,
 				72DA12201D128D1D00AA8EE3 /* KDUnitsViewController.swift in Sources */,
+				725FBEC91D45601E003D81ED /* KDInfoViewCell.swift in Sources */,
 				725FBEC21D45540E003D81ED /* PagerTabMenuView.swift in Sources */,
 				72DA12051D1251DB00AA8EE3 /* Sport.swift in Sources */,
 				72DA12081D1251DB00AA8EE3 /* Team+CoreDataProperties.swift in Sources */,
