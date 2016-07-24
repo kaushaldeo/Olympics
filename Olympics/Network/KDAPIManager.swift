@@ -114,6 +114,7 @@ class KDAPIManager : NSObject {
                     self.url = responseObject["baseURL"]!
                     self.key = responseObject["apiKey"]!
                     self.loadData(block)
+                    KDUpdate.sharedInstance.configuration(responseObject)
                 }
             }, failure: { (task, error) in
                 self.dispatchOnMain(block, error)

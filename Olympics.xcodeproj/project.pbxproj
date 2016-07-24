@@ -26,6 +26,7 @@
 		725FBEC61D45540E003D81ED /* ViewPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBE1D45540E003D81ED /* ViewPagerController.swift */; };
 		725FBEC71D45540E003D81ED /* ViewPagerControllerAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEBF1D45540E003D81ED /* ViewPagerControllerAppearance.swift */; };
 		725FBEC91D45601E003D81ED /* KDInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEC81D45601E003D81ED /* KDInfoViewCell.swift */; };
+		725FBECD1D45711D003D81ED /* KDUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBECC1D45711D003D81ED /* KDUpdate.swift */; };
 		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
 		729A03291D42033100E300F1 /* Icon in Resources */ = {isa = PBXBuildFile; fileRef = 729A03281D42033100E300F1 /* Icon */; };
 		729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */; };
@@ -101,6 +102,7 @@
 		725FBEBE1D45540E003D81ED /* ViewPagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerController.swift; sourceTree = "<group>"; };
 		725FBEBF1D45540E003D81ED /* ViewPagerControllerAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPagerControllerAppearance.swift; sourceTree = "<group>"; };
 		725FBEC81D45601E003D81ED /* KDInfoViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDInfoViewCell.swift; sourceTree = "<group>"; };
+		725FBECC1D45711D003D81ED /* KDUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDUpdate.swift; sourceTree = "<group>"; };
 		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
 		729A03281D42033100E300F1 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDisciplineView.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				72D0F5C61D2B90E400400F03 /* KDProfileParser.swift */,
 				72D0F5CA1D2C2A7100400F03 /* KDMedalParser.swift */,
 				724FA9081D319FF600ADCB8D /* KDEventParser.swift */,
+				725FBECC1D45711D003D81ED /* KDUpdate.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				72DC6C901D223F19001E5AF9 /* KDStoryboardSegue.swift in Sources */,
 				72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */,
 				72DA12131D1251DB00AA8EE3 /* Competitor.swift in Sources */,
+				725FBECD1D45711D003D81ED /* KDUpdate.swift in Sources */,
 				72DA12101D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift in Sources */,
 				725FBEC31D45540E003D81ED /* UIColor+RGBA.swift in Sources */,
 				72DA120E1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift in Sources */,

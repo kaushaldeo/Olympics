@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import Firebase
-import iLink
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,9 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = UIColor.whiteColor()
         
         UIBarButtonItem.appearance().setBackButtonBackgroundImage(UIImage(named: "backButton")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal, barMetrics: .Default)
-        
-        iLink.sharedInstance().applicationBundleID = "com.yellowpages.Mongoose"
-        iLink.sharedInstance().appStoreID = 610918370
         
     }
     
