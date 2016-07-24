@@ -20,7 +20,7 @@ class KDSplashViewController: UIViewController {
     
     //MARK: - Private Methods
     func loadData() {
-        KDAPIManager.sharedInstance.loadData({ [weak self] (error) in
+        KDAPIManager.sharedInstance.loadConfiguration({ [weak self] (error) in
             if let strongSelf = self {
                 if let nserror = error {
                     strongSelf.process(nserror)

@@ -10,10 +10,14 @@ import Foundation
 import CoreData
 import AFNetworking
 
-private let url = "https://api.sportradar.us/oly-testing2"
-private let key = "5hkjft4mvnbzc26875u6c2zv"
+
+
 
 class KDAPIManager : NSObject {
+    
+    private var url = "https://api.sportradar.us/oly-testing2"
+    
+    private var key = "5hkjft4mvnbzc26875u6c2zv"
     
     static let sharedInstance: KDAPIManager = {
         return KDAPIManager()
@@ -26,7 +30,7 @@ class KDAPIManager : NSObject {
     
     private lazy var sessionManager: AFHTTPSessionManager = {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        var sessionManager = AFHTTPSessionManager(baseURL: NSURL(string:url), sessionConfiguration: configuration)
+        var sessionManager = AFHTTPSessionManager(baseURL: NSURL(string:self.url), sessionConfiguration: configuration)
         sessionManager.responseSerializer = AFXMLParserResponseSerializer()
         return sessionManager
     }()
@@ -101,6 +105,22 @@ class KDAPIManager : NSObject {
     
     //MARK: - Web-Service Methods
     
+    func loadConfiguration(block:((NSError?) -> Void)?) {
+        let manager = AFHTTPSessionManager()
+        manager.GET("http://olympics.mybluemix.net/config/getAppVersion", parameters: nil, progress: { (progress) in
+            print(progress)
+            }, success: { (task, response) in
+                if let responseObject = response as? [String:String] {
+                    self.url = responseObject["baseURL"]!
+                    self.key = responseObject["apiKey"]!
+                    self.loadData(block)
+                }
+            }, failure: { (task, error) in
+                self.dispatchOnMain(block, error)
+                
+        })
+        KDAPIManager.sharedInstance.managedObjectContext.saveContext()
+    }
     
     
     func loadData(block:((NSError?) -> Void)?) {
