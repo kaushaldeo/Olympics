@@ -16,6 +16,7 @@
 		724FA9111D31A74600ADCB8D /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA90D1D31A74600ADCB8D /* Score.swift */; };
 		725FBEB21D44A520003D81ED /* KDResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB11D44A520003D81ED /* KDResultViewController.swift */; };
 		725FBEB41D44A805003D81ED /* KDHeadsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */; };
+		725FBEB61D44DD18003D81ED /* KDInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725FBEB51D44DD18003D81ED /* KDInfoViewController.swift */; };
 		728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */; };
 		729A03291D42033100E300F1 /* Icon in Resources */ = {isa = PBXBuildFile; fileRef = 729A03281D42033100E300F1 /* Icon */; };
 		729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */; };
@@ -81,6 +82,7 @@
 		724FA90D1D31A74600ADCB8D /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		725FBEB11D44A520003D81ED /* KDResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDResultViewController.swift; sourceTree = "<group>"; };
 		725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDHeadsViewCell.swift; sourceTree = "<group>"; };
+		725FBEB51D44DD18003D81ED /* KDInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDInfoViewController.swift; sourceTree = "<group>"; };
 		728A9D801D224E690020F1D0 /* KDMedalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMedalViewCell.swift; sourceTree = "<group>"; };
 		729A03281D42033100E300F1 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDDisciplineView.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */,
 				72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */,
 				725FBEB11D44A520003D81ED /* KDResultViewController.swift */,
+				725FBEB51D44DD18003D81ED /* KDInfoViewController.swift */,
 				721B96321D3B72650064E485 /* KDTabBarViewController.swift */,
 			);
 			path = ViewControllers;
@@ -452,6 +455,7 @@
 				72DA120E1D1251DB00AA8EE3 /* Unit+CoreDataProperties.swift in Sources */,
 				729A032E1D42DB8800E300F1 /* KDDisciplineView.swift in Sources */,
 				72DA121C1D125C8900AA8EE3 /* KDManagedObjectContext.swift in Sources */,
+				725FBEB61D44DD18003D81ED /* KDInfoViewController.swift in Sources */,
 				721B96331D3B72650064E485 /* KDTabBarViewController.swift in Sources */,
 				72DA12071D1251DB00AA8EE3 /* Location.swift in Sources */,
 				72DA108B1D0BE36F00AA8EE3 /* KDEventsViewController.swift in Sources */,

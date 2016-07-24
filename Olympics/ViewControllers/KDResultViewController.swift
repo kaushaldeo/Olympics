@@ -19,6 +19,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     lazy var refreshControl : UIRefreshControl = {
         var refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(KDResultViewController.refreshData), forControlEvents: .ValueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
         return refreshControl
     }()
     
@@ -93,6 +94,8 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         self.view.backgroundColor = UIColor.backgroundColor()
         self.tableView.backgroundView = nil
         self.tableView.backgroundColor = UIColor.backgroundColor()
+        
+        self.tableView.addSubview(self.refreshControl)
     }
     
     

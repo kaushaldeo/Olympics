@@ -12,10 +12,34 @@ import CoreData
 class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     //MARK: - Private Methods
+    
+    //MARK: - Private Data
+    func process(error:NSError) {
+        var message = "We had a problem retrieving information.  Do you want to try again?";
+        if (error.code == NSURLErrorNotConnectedToInternet) {
+            message = "No Network Connection. Please try again.";
+        }
+        
+        let alertController = UIAlertController(title: "Oops!!", message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Retry", style: .Destructive, handler: { [weak self] (action) in
+            if let strongSelf = self {
+                strongSelf.refreshData()
+            }
+            }))
+        self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     func refreshData() {
         
         KDAPIManager.sharedInstance.updateMedals({ [weak self] (error) in
             if let strongSelf = self {
+                if let nserror = error {
+                    strongSelf.process(nserror)
+                }
+                else {
+                    //TODO: Stamp the time on refresh control
+                }
                 strongSelf.refreshControl?.endRefreshing()
             }
             })
@@ -44,12 +68,12 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to Refresh")
         self.refreshControl?.addTarget(self, action: #selector(KDMedalsViewController.refreshData), forControlEvents: .ValueChanged)
+        self.refreshData()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.refreshData()
         self.fetchedResultsController.update()
         
     }

@@ -89,3 +89,30 @@ class KDErrorView: UIView {
         return view
     }
 }
+
+
+class KDInfoView : UIView {
+    private lazy var imageView : UIImageView = {
+        var imageView = UIImageView(image: UIImage(named: "infoLogo"))
+        imageView.tintColor = UIColor.lightGrayColor()
+        return imageView
+    }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.addSubview(self.imageView)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let frame = self.bounds
+        
+        let size = self.imageView.bounds.size
+        self.imageView.frame = CGRect(x: CGRectGetMidX(frame) - size.width/2, y: CGRectGetMidY(frame) - size.height, width: size.width, height: size.height)
+    }
+}

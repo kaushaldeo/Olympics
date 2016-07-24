@@ -18,6 +18,7 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         self.performSegueWithIdentifier("replace", sender: nil)
     }
     
+    
     //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         }
         
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style: .Plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(animated: Bool) {

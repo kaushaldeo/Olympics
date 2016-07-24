@@ -135,7 +135,13 @@
                             <outlet property="delegate" destination="2eo-4c-oYh" id="BfA-yT-UAV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Country" id="BqX-Jw-6ZA"/>
+                    <navigationItem key="navigationItem" title="Country" id="BqX-Jw-6ZA">
+                        <barButtonItem key="rightBarButtonItem" image="info" id="rHt-Ik-A8K">
+                            <connections>
+                                <segue destination="yzf-5C-tdb" kind="show" id="pz4-2s-Z9j"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLi-I2-yZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -228,6 +234,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z85-dc-C1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-328.5" y="-822.75"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="TPK-HG-v1B">
+            <objects>
+                <tableViewController storyboardIdentifier="kInfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yzf-5C-tdb" customClass="KDInfoViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="TjD-WG-RZm">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="dZY-Nv-UsT">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dZY-Nv-UsT" id="e33-ov-04Q">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="yzf-5C-tdb" id="fSq-X3-djf"/>
+                            <outlet property="delegate" destination="yzf-5C-tdb" id="uV2-pC-ujN"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tfe-Fo-HiH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="547.5" y="-822.75"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="c5N-wH-f0P">
@@ -1298,6 +1329,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="info" width="30" height="30"/>
         <image name="medals" width="30" height="30"/>
         <image name="players" width="30" height="30"/>
         <image name="schedule" width="30" height="30"/>
