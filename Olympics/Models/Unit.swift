@@ -52,6 +52,13 @@ class Unit: NSManagedObject {
         }
         return nil
     }
+
+    func competitor() -> [Competitor]? {
+        if let items = self.competitors?.allObjects as? [Competitor] {
+           return items.sort({return $0.sort < $1.sort})
+        }
+        return nil
+    }
     
     
     class func minDay(context: NSManagedObjectContext) -> NSDate {

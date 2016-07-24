@@ -42,6 +42,28 @@ class KDErrorView: UIView {
         super.init(coder: aDecoder)
     }
     
+    func startAnimation() {
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotationAnimation.toValue = M_PI*2.0*0.3
+        
+        rotationAnimation.duration = 0.3
+        
+        rotationAnimation.cumulative = true
+        rotationAnimation.repeatCount = Float.infinity
+        
+        self.imageView.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
+    }
+    
+    
+    func stopAnimation() {
+        self.imageView.layer.removeAllAnimations()
+    }
+    
+    func update(message: String) {
+        self.textLabel.text = message
+        self.setNeedsLayout()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         

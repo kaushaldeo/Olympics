@@ -55,7 +55,7 @@ class KDEventParser: KDParseOperation {
                 if let competitor = self.context.findOrCreate(Competitor.classForCoder(), predicate: predicate) as? Competitor {
                     competitor.identifier = identifier
                     competitor.type = attributeDict["type"]
-                     predicate = NSPredicate(format: "identifier = %@",identifier)
+                    predicate = NSPredicate(format: "identifier = %@",identifier)
                     if let type = competitor.type  where type == "individual" {
                         if let athlete = self.context.findOrCreate(Athlete.classForCoder(), predicate: predicate) as? Athlete {
                             athlete.identifier = identifier
@@ -67,7 +67,7 @@ class KDEventParser: KDParseOperation {
                                 athlete.date = self.dateFormatter.dateFromString(text)
                             }
                             if let alias = attributeDict["organization"] {
-                             athlete.country = self.context.findFirst(Country.classForCoder(), predicate: NSPredicate(format: "alias = %@",alias)) as? Country
+                                athlete.country = self.context.findFirst(Country.classForCoder(), predicate: NSPredicate(format: "alias = %@",alias)) as? Country
                             }
                             competitor.athlete = athlete
                         }
@@ -87,52 +87,38 @@ class KDEventParser: KDParseOperation {
                     competitor.outcome = attributeDict["outcome"]
                     competitor.resultValue = attributeDict["result"]
                     competitor.resultType = attributeDict["result_type"]
-                    if let text = attributeDict["sort_order"] {
-                        competitor.sort = text
-                    }
-                    if let text = attributeDict["start_order"] {
-                        competitor.start = text
-                    }
+                    competitor.sort = attributeDict["sort_order"]
+                    competitor.start = attributeDict["start_order"]
+                    competitor.rank = attributeDict["rank"]
                     competitor.unit = unit
                     self.competitor = competitor
                 }
             }
         }
             
-        else if elementName == "score" {
-            if let score = self.context.createObject(Score.classForCoder()) as? Score {
-                score.name = attributeDict["id"]
-                score.code = attributeDict["type"]
-                if let text = attributeDict["sort_order"] {
-                    score.number = text
-                }
-                if let text = attributeDict["start_order"] {
-                    score.value = text
-                }
-                score.competitor = self.competitor
-            }
-        }
-            
-        else if elementName == "extended-result" {
-            if let result = self.context.createObject(Result.classForCoder()) as? Result {
-                result.code = attributeDict["code"]
-                result.difference = attributeDict["diff"]
-                result.type = attributeDict["type"]
-                result.value = attributeDict["value"]
-                result.valueType = attributeDict["value_type"]
-                
-                if let text = attributeDict["rank"] {
-                    result.rank = text
-                }
-                if let text = attributeDict["sequence"] {
-                    result.sequence = text
-                }
-                if let text = attributeDict["sort_order"] {
-                    result.order = text
-                }
-                result.competitor = self.competitor
-            }
-        }
+//        else if elementName == "score" {
+//            if let score = self.context.createObject(Score.classForCoder()) as? Score {
+//                score.name = attributeDict["description"]
+//                score.code = attributeDict["code"]
+//                score.number = attributeDict["number"]
+//                score.value = attributeDict["score"]
+//                score.competitor = self.competitor
+//            }
+//        }
+//            
+//        else if elementName == "extended-result" {
+//            if let result = self.context.createObject(Result.classForCoder()) as? Result {
+//                result.code = attributeDict["code"]
+//                result.difference = attributeDict["diff"]
+//                result.type = attributeDict["type"]
+//                result.value = attributeDict["value"]
+//                result.valueType = attributeDict["value_type"]
+//                result.rank = attributeDict["rank"]
+//                result.sequence = attributeDict["sequence"]
+//                result.order = attributeDict["sort_order"]
+//                result.competitor = self.competitor
+//            }
+//        }
     }
     
     // sent when an end tag is encountered. The various parameters are supplied as above.

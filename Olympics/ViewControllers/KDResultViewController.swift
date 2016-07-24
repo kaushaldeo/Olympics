@@ -22,6 +22,11 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         return refreshControl
     }()
     
+    lazy var country : Country = {
+        var country = Country.country(NSManagedObjectContext.mainContext())!
+        return country
+    }()
+    
     
     //MARK: - Private Data
     func process(error:NSError) {
@@ -43,17 +48,29 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     func refreshData() {
         KDAPIManager.sharedInstance.update(self.event, { [weak self] (error) in
             if let strongSelf = self {
+                
+                var message = "No Competitor for selected event."
                 if let nserror = error {
                     strongSelf.process(nserror)
+                    message = ""
                 }
                 else {
                     //TODO: Stamp the time on refresh control
                 }
+                if let progressView = strongSelf.tableView.backgroundView as? KDErrorView {
+                    progressView.stopAnimation()
+                    progressView.update(message)
+                }
                 strongSelf.fetchedResultsController.update()
                 strongSelf.tableView.reloadData()
                 strongSelf.refreshControl.endRefreshing()
+                
             }
             })
+        
+        if let progressView = self.tableView.backgroundView as? KDErrorView {
+            progressView.startAnimation()
+        }
     }
     
     
@@ -83,9 +100,12 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         super.viewDidAppear(animated)
         
         self.tableView.reloadData()
+        if self.fetchedResultsController.count == 0 {
+            self.tableView.backgroundView = KDErrorView.view("Loading...")
+        }
         self.refreshData()
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -100,6 +120,9 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultsController.sections![section]
+        if sectionInfo.numberOfObjects > 0 {
+            self.tableView.backgroundView = nil
+        }
         return sectionInfo.numberOfObjects
     }
     
@@ -110,7 +133,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
         if let unit = competitor.unit, let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDHeadsViewCell
-            cell.setUnit(unit)
+            cell.set(unit, country: self.country)
             return cell
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("Rank", forIndexPath: indexPath) as! KDResultViewCell
@@ -141,7 +164,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-       //print(event.competitors)
+        //print(event.competitors)
         
     }
     
@@ -168,12 +191,9 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.startDate", ascending: false),NSSortDescriptor(key: "unit.phase", ascending: true),NSSortDescriptor(key: "unit.name", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.startDate", ascending: false),NSSortDescriptor(key: "unit.phase", ascending: true), NSSortDescriptor(key: "unit.name", ascending: true),NSSortDescriptor(key: "rank", ascending: true)]
         
-        
-        if let country = Country.country(context) {
-            fetchRequest.predicate = NSPredicate(format: "unit.event = %@ AND (team.country = %@ OR athlete.country = %@)", self.event,country,country)
-        }
+        fetchRequest.predicate = NSPredicate(format: "unit.event = %@ AND (team.country = %@ OR athlete.country = %@)", self.event,self.country,self.country)
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
