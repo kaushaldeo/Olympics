@@ -194,7 +194,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.startDate", ascending: false),NSSortDescriptor(key: "unit.phase", ascending: true), NSSortDescriptor(key: "unit.name", ascending: true),NSSortDescriptor(key: "rank", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.phase", ascending: true), NSSortDescriptor(key: "unit.name", ascending: true),NSSortDescriptor(key: "unit.startDate", ascending: false),NSSortDescriptor(key: "rank", ascending: true)]
         
         fetchRequest.predicate = NSPredicate(format: "unit.event = %@ AND (team.country = %@ OR athlete.country = %@)", self.event,self.country,self.country)
         
