@@ -19,8 +19,10 @@ class KDUpdate: NSObject {
         if let text = info["message"] {
             self.message = text
         }
-        if let text = info["cacheConfigDate"], let miliseconds = Double(text) {
-           self.cacheConfigDate = NSDate(timeIntervalSince1970: miliseconds/1000)
+        if let text = info["cacheCountryChecksum"] {
+            self.shouldSave = self.cacheCountryChecksum.compare(text, options: .NumericSearch) != .OrderedSame
+            self.cacheCountryChecksum = text
+            NSUserDefaults.checkSum(text)
         }
     }
     
@@ -29,13 +31,10 @@ class KDUpdate: NSObject {
             //Update available
             if latestVersion.compare(self.applicationVersion, options: .NumericSearch) == .OrderedDescending {
                 if self.noThanksEnabled() {
-                    print("noThanksEnabled")
                     //Check for remind me
                     if self.remindMeLaterEnabled() {
-                        print("remindMeLaterEnabled")
                         //Check for number of launch
                         if self.numberOfTimesLaunched() {
-                            print("numberOfTimesLaunched")
                             self.showMessage()
                         }
                     }
@@ -89,7 +88,9 @@ class KDUpdate: NSObject {
     private var applicationStoreVersion: String?
     private var message : String
     
-    var cacheConfigDate : NSDate?
+    private var cacheCountryChecksum : String
+    
+    var shouldSave = false
     
     override init() {
         let bundle = NSBundle.mainBundle()
@@ -106,6 +107,9 @@ class KDUpdate: NSObject {
         applicationBundleID = bundle.bundleIdentifier
         
         message = "Would you like to update it now?"
+        
+        cacheCountryChecksum = NSUserDefaults.checkSum()
+        
         super.init()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KDUpdate.update), name: UIApplicationWillEnterForegroundNotification, object: nil)
@@ -162,18 +166,10 @@ class KDUpdate: NSObject {
     }
     
     private func processApp() {
-     let url = NSURL(string:"itms-apps://itunes.apple.com/app/id1135313762")!
+        let url = NSURL(string:"itms-apps://itunes.apple.com/app/id1135313762")!
         if UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
         }
-    }
-    
-    
-    func shouldSave() -> Bool {
-        if let date = self.cacheConfigDate {
-           return NSDate().compare(date) != .OrderedAscending
-        }
-        return false
     }
     
 }

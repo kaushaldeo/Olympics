@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CC2D1DF1D45F70900316CD1 /* KDRankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */; };
 		721B96331D3B72650064E485 /* KDTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B96321D3B72650064E485 /* KDTabBarViewController.swift */; };
 		724CB2DC1D3A0164003C4D28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */; };
 		724FA9091D319FF600ADCB8D /* KDEventParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA9081D319FF600ADCB8D /* KDEventParser.swift */; };
@@ -83,6 +84,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDRankingCell.swift; sourceTree = "<group>"; };
 		721B96321D3B72650064E485 /* KDTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDTabBarViewController.swift; sourceTree = "<group>"; };
 		724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		724FA9081D319FF600ADCB8D /* KDEventParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDEventParser.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				729A033A1D43406700E300F1 /* KDResultViewCell.swift */,
 				725FBEB31D44A805003D81ED /* KDHeadsViewCell.swift */,
 				725FBEC81D45601E003D81ED /* KDInfoViewCell.swift */,
+				3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */,
 				729A032D1D42DB8800E300F1 /* KDDisciplineView.swift */,
 				729A03381D432B5D00E300F1 /* KDPhaseView.swift */,
 				72D8B6E01D43711F008E86C0 /* KDErrorView.swift */,
@@ -467,6 +470,7 @@
 			files = (
 				72DA120C1D1251DB00AA8EE3 /* Event+CoreDataProperties.swift in Sources */,
 				72D6ABD41D2F68CA0010ECE7 /* KDUnitViewCell.swift in Sources */,
+				3CC2D1DF1D45F70900316CD1 /* KDRankingCell.swift in Sources */,
 				72DA12111D1251DB00AA8EE3 /* Venue.swift in Sources */,
 				72DC6C941D224697001E5AF9 /* KDMedalsViewController.swift in Sources */,
 				724FA90E1D31A74600ADCB8D /* Result+CoreDataProperties.swift in Sources */,

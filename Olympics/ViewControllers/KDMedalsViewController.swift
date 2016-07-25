@@ -186,7 +186,7 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: "Modals")
         fetchedResultsController.delegate = self
         
         fetchedResultsController.update()
