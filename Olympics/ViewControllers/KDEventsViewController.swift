@@ -157,7 +157,7 @@ class KDEventsViewController: UIViewController {
         self.imageView.layer.removeAllAnimations()
         let context = NSManagedObjectContext.mainContext()
         let sets = NSMutableSet()
-        if let units = context.find(Unit.classForCoder(), predicate: NSPredicate(format:"event.country = %@",country), sortDescriptors: [NSSortDescriptor(key: "startDate", ascending: true)]) as? [Unit] {
+        if let units = context.find(Unit.classForCoder(), predicate: NSPredicate(format:"SUBQUERY(event.countries, $country, $country = %@).@count != 0",country), sortDescriptors: [NSSortDescriptor(key: "startDate", ascending: true)]) as? [Unit] {
             for unit in units {
                 if let date = unit.startDate?.today() {
                     sets.addObject(date)

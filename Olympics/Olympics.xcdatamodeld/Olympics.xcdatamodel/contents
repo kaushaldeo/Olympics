@@ -39,7 +39,7 @@
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="silver" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="country" inverseEntity="Event" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="countries" inverseEntity="Event" syncable="YES"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athlete" inverseName="country" inverseEntity="Athlete" syncable="YES"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="country" inverseEntity="Team" syncable="YES"/>
         <userInfo/>
@@ -57,7 +57,7 @@
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="events" inverseEntity="Country" syncable="YES"/>
+        <relationship name="countries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Country" inverseName="events" inverseEntity="Country" syncable="YES"/>
         <relationship name="discipline" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Discipline" inverseName="events" inverseEntity="Discipline" syncable="YES"/>
         <relationship name="participants" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Athlete" inverseName="events" inverseEntity="Athlete" syncable="YES"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Team" inverseName="events" inverseEntity="Team" syncable="YES"/>
