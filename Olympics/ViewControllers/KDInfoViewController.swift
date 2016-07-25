@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class KDInfoViewController: UITableViewController {
+class KDInfoViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     lazy var items : [[String:String]] = {
         var items = [[String:String]]()
@@ -91,8 +92,34 @@ class KDInfoViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        //print(event.competitors)
+        let item = self.items[indexPath.row]
+        switch item["image"]!.lowercaseString {
+        case "rateus":
+            let url = NSURL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1135313762")!
+            if UIApplication.sharedApplication().canOpenURL(url) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+            
+            case "contactus":
+            let controller = MFMailComposeViewController()
+            controller.setToRecipients(["jksolympics@gmail.com"])
+            controller.setSubject("Feedback from Olympics")
+            controller.mailComposeDelegate = self
+            self.navigationController?.presentViewController(controller, animated: true, completion: nil)
+        default:
+            let textToShare = "Olympics is around a corner! Check out this App for live updates!"
+            if let url = NSURL(string:"https://itunes.apple.com/us/app/my-olympics-rio-2016/id1135313762?ls=1&mt=8") {
+                let objectsToShare = [textToShare, url]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                
+                //New Excluded Activities Code
+                activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList]
+                //
+                
+                self.navigationController?.presentViewController(activityVC, animated: true, completion: nil)
+            }
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
     }
     
@@ -105,5 +132,10 @@ class KDInfoViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }

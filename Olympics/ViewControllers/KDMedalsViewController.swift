@@ -30,6 +30,14 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    func showMedal() {
+        if let country = Country.country(NSManagedObjectContext.mainContext()) {
+            if let indexPath = self.fetchedResultsController.indexPathForObject(country) {
+                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+            }
+        }
+    }
+    
     func refreshData() {
         
         KDAPIManager.sharedInstance.updateMedals({ [weak self] (error) in
@@ -41,6 +49,8 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
                     //TODO: Stamp the time on refresh control
                 }
                 strongSelf.refreshControl?.endRefreshing()
+                strongSelf.tableView.reloadData()
+                strongSelf.showMedal()
             }
             })
         
@@ -75,6 +85,7 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         super.viewDidAppear(animated)
         
         self.fetchedResultsController.update()
+        self.showMedal()
         
     }
     
@@ -172,7 +183,7 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         fetchRequest.fetchBatchSize = 20
         
         
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false),NSSortDescriptor(key: "alias", ascending: false)]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

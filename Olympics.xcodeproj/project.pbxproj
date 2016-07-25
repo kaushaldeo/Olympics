@@ -642,7 +642,7 @@
 				INFOPLIST_FILE = Olympics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yp.Olympics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.olympics.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -657,7 +657,7 @@
 				INFOPLIST_FILE = Olympics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yp.Olympics;
+				PRODUCT_BUNDLE_IDENTIFIER = com.olympics.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

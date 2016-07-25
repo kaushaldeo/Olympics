@@ -46,7 +46,7 @@ class KDEventsViewController: UIViewController {
     
     lazy var dateFormatter : NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy"
+        dateFormatter.dateFormat = "MMM d"
         return dateFormatter
     }()
     

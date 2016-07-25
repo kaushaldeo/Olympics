@@ -6,7 +6,6 @@ target 'Olympics' do
   use_frameworks!
   # Pods for Olympics
 pod 'AFNetworking', '~> 3.0'
-pod 'iLink', '~> 1.0.6'
 pod 'Firebase/Analytics'
 
 end
