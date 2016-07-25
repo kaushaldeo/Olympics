@@ -42,7 +42,7 @@ class KDSplashViewController: UIViewController {
         
         self.imageView.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
         
-        self.progressLabel.text = "Loading Configuration Please wait...!"
+        self.progressLabel.text = "Please wait while loading schedules!"
     }
     
     
@@ -74,7 +74,6 @@ class KDSplashViewController: UIViewController {
             }
         }))
         self.presentViewController(alertController, animated: true, completion: nil)
-        print(message)
     }
     
     //MARK: - View Life Cycle

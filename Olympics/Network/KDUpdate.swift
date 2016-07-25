@@ -81,7 +81,7 @@ class KDUpdate: NSObject {
     }
     
     private var numberOfLaunch = 3
-    private var remindDaysGap : NSTimeInterval = 1*60
+    private var remindDaysGap : NSTimeInterval = 24*60*60
     private var applicationVersion : String
     private var applicationName : String
     private var applicationBundleID : String?

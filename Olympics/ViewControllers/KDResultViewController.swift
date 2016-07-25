@@ -210,8 +210,6 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        //print(event.competitors)
         
     }
     

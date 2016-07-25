@@ -77,10 +77,6 @@ class KDEventsViewController: UIViewController {
             selectedView.alpha = 1.0
         }
         
-        pagerController.didChangeHeaderViewHeightHandler = { height in
-            print("call didShowViewControllerHandler : \(height)")
-        }
-        
         return pagerController
     }()
     
@@ -183,7 +179,7 @@ class KDEventsViewController: UIViewController {
         
         let context = NSManagedObjectContext.mainContext()
         if let country = Country.country(context) {
-            if KDUpdate.sharedInstance.shouldSave {
+            if KDUpdate.sharedInstance.shouldSave == false {
                 if let events = country.events where events.count > 0 {
                     self.populateDate(country)
                     return

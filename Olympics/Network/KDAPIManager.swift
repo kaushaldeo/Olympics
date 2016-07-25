@@ -107,9 +107,7 @@ class KDAPIManager : NSObject {
     
     func loadConfiguration(block:((NSError?) -> Void)?) {
         let manager = AFHTTPSessionManager()
-        manager.GET("http://olympics.mybluemix.net/config/getAppVersion", parameters: nil, progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        manager.GET("http://olympics.mybluemix.net/config/getAppVersion", parameters: nil, progress:nil, success: { (task, response) in
                 if let responseObject = response as? [String:String] {
                     self.url = responseObject["baseURL"]!
                     self.key = responseObject["apiKey"]!
@@ -117,8 +115,8 @@ class KDAPIManager : NSObject {
                     KDUpdate.sharedInstance.configuration(responseObject)
                 }
             }, failure: { (task, error) in
-                self.dispatchOnMain(block, error)
-                
+                //Load the data regardless of error while getting config data
+               self.loadData(block)
         })
         KDAPIManager.sharedInstance.managedObjectContext.saveContext()
     }
@@ -128,11 +126,11 @@ class KDAPIManager : NSObject {
         let serviceGroup = dispatch_group_create()
         
         var nserror : NSError? = nil
-        if NSUserDefaults.loadSchedule() == false {
+        if NSUserDefaults.loadSchedule() == false || KDUpdate.sharedInstance.shouldSave {
             dispatch_group_enter(serviceGroup)
             self.updateSchedule({[weak self] in
                 if let strongSelf = self {
-                    if NSUserDefaults.loadCountry() == false {
+                    if NSUserDefaults.loadCountry() == false || KDUpdate.sharedInstance.shouldSave {
                         dispatch_group_enter(serviceGroup)
                         strongSelf.updateCountry({ (error) in
                             if let err = error {
@@ -168,7 +166,7 @@ class KDAPIManager : NSObject {
             })
         }
         else {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 if let completionBlock = block {
                     completionBlock(nserror)
@@ -185,9 +183,7 @@ class KDAPIManager : NSObject {
     }
     
     func updateCountry(block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDCountryParser(parser: parser)
                     operation.completionBlock = {
@@ -202,9 +198,7 @@ class KDAPIManager : NSObject {
     }
     
     func updateSchedule(process:(() -> Void)?, block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
                 if let block = process {
                     block()
                 }
@@ -233,9 +227,7 @@ class KDAPIManager : NSObject {
         guard let identifier = country.identifier else {
             return
         }
-        self.sessionManager.GET("organization/2016/\(identifier)/profile.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("organization/2016/\(identifier)/profile.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDProfileParser(parser: parser)
                     operation.completionBlock = {
@@ -250,9 +242,7 @@ class KDAPIManager : NSObject {
     }
     
     func updateMedals(block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("2016/medals.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("2016/medals.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDMedalParser(parser: parser)
                     operation.completionBlock = {
@@ -270,9 +260,7 @@ class KDAPIManager : NSObject {
         guard let identifier = event.identifier else {
             return
         }
-        self.sessionManager.GET("event/\(identifier)/results.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("event/\(identifier)/results.xml", parameters: ["api_key":key], progress: nil, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDEventParser(parser: parser)
                     operation.completionBlock = {

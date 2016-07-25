@@ -49,7 +49,6 @@ class KDTabBarViewController: UITabBarController {
                     if let text = layer.name {
                         let index : CGFloat = CGFloat(Int(text)! - 100)
                         layer.frame = CGRect(x: (size.width*index)/count, y: 0, width: size.width/count, height: size.height)
-                        print(layer.frame)
                     }
                 }
             }

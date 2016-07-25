@@ -182,7 +182,7 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         fetchRequest.fetchBatchSize = 20
         
         
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false),NSSortDescriptor(key: "alias", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false),NSSortDescriptor(key: "alias", ascending: true)]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

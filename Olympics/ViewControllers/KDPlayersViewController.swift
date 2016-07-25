@@ -102,8 +102,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
      */
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
-        print(athlete)
+    
     }
     
     

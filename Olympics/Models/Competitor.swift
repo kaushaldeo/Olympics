@@ -82,7 +82,6 @@ class Competitor: NSManagedObject {
     
     
     func textColor() -> UIColor {
-        print(self.medal)
         if let text = self.medal {
             switch text.lowercaseString {
             case "gold":
@@ -101,7 +100,6 @@ class Competitor: NSManagedObject {
     func textFont() -> UIFont {
         //UIFontWeightRegular: CGFloat
         //UIFontWeightMedium
-        print(self.outcome)
         if #available(iOS 8.2, *) {
             if let text = self.outcome {
                 switch text.lowercaseString {

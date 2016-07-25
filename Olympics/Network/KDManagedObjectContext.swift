@@ -95,6 +95,11 @@ extension NSManagedObjectContext {
 extension NSFetchedResultsController {
     
     func update() {
+        
+        if let cache = self.cacheName {
+            NSFetchedResultsController .deleteCacheWithName(cache)
+        }
+        
         do {
             try self.performFetch()
         } catch {
@@ -133,10 +138,8 @@ extension NSUserDefaults {
     }
     
     class func country(loaded:Bool) {
-        if KDUpdate.sharedInstance.shouldSave {
-            let setting = NSUserDefaults.standardUserDefaults()
-            setting.setBool(loaded, forKey: "kLoadCountry")
-        }
+        let setting = NSUserDefaults.standardUserDefaults()
+        setting.setBool(loaded, forKey: "kLoadCountry")
     }
     
     class func loadSchedule() -> Bool {
@@ -145,10 +148,8 @@ extension NSUserDefaults {
     }
     
     class func schedule(loaded:Bool) {
-        if KDUpdate.sharedInstance.shouldSave {
-            let setting = NSUserDefaults.standardUserDefaults()
-            setting.setBool(loaded, forKey: "kLoadSchedule")
-        }
+        let setting = NSUserDefaults.standardUserDefaults()
+        setting.setBool(loaded, forKey: "kLoadSchedule")
     }
     
     class func checkSum() -> String {
@@ -156,7 +157,7 @@ extension NSUserDefaults {
         if let text = setting.valueForKey("kChecksum") as? String {
             return text
         }
-        return "1000"
+        return "0"
     }
     
     class func checkSum(sum:String) {
