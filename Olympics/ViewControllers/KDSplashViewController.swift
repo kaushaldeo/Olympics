@@ -14,6 +14,7 @@ class KDSplashViewController: UIViewController {
     
     @IBOutlet weak var backgroundView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var progressLabel: UILabel!
     
     
     //MARK: - Private Methods
@@ -40,6 +41,8 @@ class KDSplashViewController: UIViewController {
         rotationAnimation.repeatCount = Float.infinity
         
         self.imageView.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
+        
+        self.progressLabel.text = "Loading Configuration Please wait...!"
     }
     
     
@@ -87,12 +90,13 @@ class KDSplashViewController: UIViewController {
         self.imageView.image = UIImage(named: "logo")
         let image = UIImage(named: "splash")
         self.backgroundView.image = image?.resizableImageWithCapInsets(UIEdgeInsets(top: 148.0, left: 148.0, bottom: 148.0, right: 148.0))
-        
+        self.progressLabel.hidden = true
         self.startAnimation()
         self.imageView.transform = CGAffineTransformMakeScale(0.0, 0.0)
         UIView.animateWithDuration(3.0, delay: 0.0, options: [.CurveLinear], animations: { () -> Void in
             self.imageView.transform = CGAffineTransformIdentity
         }) { (animationCompleted: Bool) -> Void in
+            self.progressLabel.hidden = false
             self.loadData()
         }
     }

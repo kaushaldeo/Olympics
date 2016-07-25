@@ -32,7 +32,10 @@ class KDProfileParser: KDParseOperation {
         }
         else if elementName == "event" {
             let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
-            if let event = self.context.findFirst(Event.classForCoder(), predicate: predicate) as? Event {
+            if let event = self.context.findOrCreate(Event.classForCoder(), predicate: predicate) as? Event {
+                event.identifier = attributeDict["id"]
+                event.name = attributeDict["description"]
+                event.gender = attributeDict["gender"]
                 self.events.append(event)
             }
         }

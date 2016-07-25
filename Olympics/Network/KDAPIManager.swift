@@ -133,7 +133,7 @@ class KDAPIManager : NSObject {
             self.updateSchedule({[weak self] in
                 if let strongSelf = self {
                     if NSUserDefaults.loadCountry() == false {
-                        dispatch_group_enter(serviceGroup);
+                        dispatch_group_enter(serviceGroup)
                         strongSelf.updateCountry({ (error) in
                             if let err = error {
                                 nserror = err
@@ -143,6 +143,7 @@ class KDAPIManager : NSObject {
                             }
                             dispatch_group_leave(serviceGroup)
                         })
+                        dispatch_group_leave(serviceGroup)
                     }
                 }
                 }, block: { (error) in
@@ -152,7 +153,6 @@ class KDAPIManager : NSObject {
                     else {
                         NSUserDefaults.schedule(true)
                     }
-                    dispatch_group_leave(serviceGroup)
             })
         }
         else if NSUserDefaults.loadCountry() == false {
@@ -168,7 +168,7 @@ class KDAPIManager : NSObject {
             })
         }
         else {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 if let completionBlock = block {
                     completionBlock(nserror)
