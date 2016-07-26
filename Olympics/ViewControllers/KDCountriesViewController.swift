@@ -29,8 +29,8 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 64.0
         
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 103, blue: 173)
@@ -40,6 +40,8 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(KDCountriesViewController.cancelTapped(_:)))
         }
         
+        self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
+
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style: .Plain, target: nil, action: nil)
     }

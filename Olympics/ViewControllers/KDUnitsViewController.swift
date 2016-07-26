@@ -13,7 +13,12 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
     
     weak var parentController : UIViewController?
     
-    var date : NSDate!
+    var date : NSDate! {
+        didSet {
+            self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
+            
+        }
+    }
     
     lazy var dateFormatter : NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
@@ -40,10 +45,13 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         self.tableView.backgroundColor = UIColor.backgroundColor()
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
+        
+  
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         
         self.fetchedResultsController.update()
         

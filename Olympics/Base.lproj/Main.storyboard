@@ -906,6 +906,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DSx-e6-2cO" id="qAC-Uf-kfv">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h7o-kk-TPo">
@@ -916,7 +917,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D6A-xh-Ibx" id="kKE-mL-Fsq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="130"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ME2-Sx-sfj">
@@ -1012,17 +1013,17 @@
                                                                         <exclude reference="Iwa-Lm-bPn"/>
                                                                     </mask>
                                                                     <mask key="constraints">
-                                                                        <exclude reference="HZP-Wt-Emu"/>
-                                                                        <exclude reference="zLB-bv-SSe"/>
-                                                                        <exclude reference="k1W-qm-yHt"/>
-                                                                        <exclude reference="NDS-8C-sao"/>
-                                                                        <exclude reference="gde-qJ-J40"/>
-                                                                        <exclude reference="aUl-eq-Lqc"/>
-                                                                        <exclude reference="pUg-bG-RDl"/>
-                                                                        <exclude reference="y6g-gF-DCf"/>
                                                                         <exclude reference="Pok-Kd-OLN"/>
-                                                                        <exclude reference="qWn-5q-Mvh"/>
+                                                                        <exclude reference="y6g-gF-DCf"/>
+                                                                        <exclude reference="HZP-Wt-Emu"/>
+                                                                        <exclude reference="k1W-qm-yHt"/>
+                                                                        <exclude reference="zLB-bv-SSe"/>
+                                                                        <exclude reference="NDS-8C-sao"/>
+                                                                        <exclude reference="aUl-eq-Lqc"/>
+                                                                        <exclude reference="gde-qJ-J40"/>
+                                                                        <exclude reference="pUg-bG-RDl"/>
                                                                         <exclude reference="Uv7-T4-XNq"/>
+                                                                        <exclude reference="qWn-5q-Mvh"/>
                                                                     </mask>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=compact">
@@ -1033,17 +1034,17 @@
                                                                         <include reference="Iwa-Lm-bPn"/>
                                                                     </mask>
                                                                     <mask key="constraints">
-                                                                        <include reference="HZP-Wt-Emu"/>
-                                                                        <include reference="zLB-bv-SSe"/>
-                                                                        <include reference="k1W-qm-yHt"/>
-                                                                        <include reference="NDS-8C-sao"/>
-                                                                        <include reference="gde-qJ-J40"/>
-                                                                        <include reference="aUl-eq-Lqc"/>
-                                                                        <include reference="pUg-bG-RDl"/>
-                                                                        <include reference="y6g-gF-DCf"/>
                                                                         <include reference="Pok-Kd-OLN"/>
-                                                                        <include reference="qWn-5q-Mvh"/>
+                                                                        <include reference="y6g-gF-DCf"/>
+                                                                        <include reference="HZP-Wt-Emu"/>
+                                                                        <include reference="k1W-qm-yHt"/>
+                                                                        <include reference="zLB-bv-SSe"/>
+                                                                        <include reference="NDS-8C-sao"/>
+                                                                        <include reference="aUl-eq-Lqc"/>
+                                                                        <include reference="gde-qJ-J40"/>
+                                                                        <include reference="pUg-bG-RDl"/>
                                                                         <include reference="Uv7-T4-XNq"/>
+                                                                        <include reference="qWn-5q-Mvh"/>
                                                                     </mask>
                                                                 </variation>
                                                             </tableViewCellContentView>

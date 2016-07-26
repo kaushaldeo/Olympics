@@ -154,19 +154,22 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
             var string = ""
             if let competitor = competitors.first {
                 if let text = competitor.name() {
-                    height = max(height,text.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 160.0)/2).height)
+                    height = max(height,text.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 158.0)/2).height)
                 }
                 string += competitor.resultValue ?? ""
             }
             string += " - "
             if let competitor = competitors.last {
                 if let text = competitor.name() {
-                    height = max(height,text.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 160.0)/2).height)
+                    height = max(height,text.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 158.0)/2).height)
                 }
                 string += competitor.resultValue ?? ""
             }
             if let status = unit.status?.lowercaseString {
-                if status != "closed" && status != "inprogress" {
+                if status == "closed" || status == "inprogress" {
+                    
+                }
+                else {
                     if let date = unit.startDate {
                         string = date.time()
                     }
@@ -177,8 +180,13 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
                     string = date.time()
                 }
             }
-            height = max(height,text.size(UIFont.systemFontOfSize(14), width: 80.0).height)
-            return height + 10.0
+            if #available(iOS 8.2, *) {
+                height = max(height,text.size(UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold), width: 80.0).height)
+            } else {
+                height = max(height,text.size(UIFont.boldSystemFontOfSize(14), width: 80.0).height)
+            }
+           
+            return height + 24.0
         }
         var competitors = unit.competitors!.allObjects as! [Competitor]
         competitors = competitors.filter({ (competitor) -> Bool in

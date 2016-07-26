@@ -163,7 +163,7 @@ public final class ViewPagerController: UIViewController {
     }
     
     public func reloadData() {
-        self.containerView.scrollToCenter(0, animated: false, animation: nil, completion: nil)
+        self.containerView.reload()
         self.view.layoutIfNeeded()
     }
     

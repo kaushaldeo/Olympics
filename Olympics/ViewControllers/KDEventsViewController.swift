@@ -197,6 +197,4 @@ class KDEventsViewController: UIViewController {
             self.startAnimation()
         }
     }
-    
-    
 }

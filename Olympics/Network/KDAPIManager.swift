@@ -19,6 +19,17 @@ class KDAPIManager : NSObject {
     
     private var key = "5hkjft4mvnbzc26875u6c2zv"
     
+    
+    
+   override init() {
+        super.init()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KDAPIManager.updateBackground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     static let sharedInstance: KDAPIManager = {
         return KDAPIManager()
     }()
@@ -32,16 +43,25 @@ class KDAPIManager : NSObject {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         var sessionManager = AFHTTPSessionManager(baseURL: NSURL(string:self.url), sessionConfiguration: configuration)
         sessionManager.responseSerializer = AFXMLParserResponseSerializer()
+        sessionManager.completionQueue = dispatch_queue_create("com.kaushal.process", DISPATCH_QUEUE_CONCURRENT)
         return sessionManager
     }()
     
+    func newSession() -> AFHTTPSessionManager {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let sessionManager = AFHTTPSessionManager(baseURL: NSURL(string:self.url), sessionConfiguration: configuration)
+        sessionManager.responseSerializer = AFXMLParserResponseSerializer()
+        sessionManager.completionQueue = dispatch_queue_create("com.kaushal.process", DISPATCH_QUEUE_CONCURRENT)
+        return sessionManager
+    }
+    
     
     // MARK: - Core Data stack
-    private lazy var applicationDocumentsDirectory: NSURL = {
+    static func applicationDocumentsDirectory() -> NSURL {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.kaushal.Olympics" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
-    }()
+    }
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
@@ -53,7 +73,7 @@ class KDAPIManager : NSObject {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
+        let url = KDAPIManager.applicationDocumentsDirectory().URLByAppendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
             let option = [NSMigratePersistentStoresAutomaticallyOption:true,
@@ -104,6 +124,9 @@ class KDAPIManager : NSObject {
     
     
     //MARK: - Web-Service Methods
+    func updateBackground(notification: NSNotification) {
+        self.loadConfiguration(nil)
+    }
     
     func loadConfiguration(block:((NSError?) -> Void)?) {
         let manager = AFHTTPSessionManager()
@@ -111,8 +134,10 @@ class KDAPIManager : NSObject {
                 if let responseObject = response as? [String:String] {
                     self.url = responseObject["baseURL"]!
                     self.key = responseObject["apiKey"]!
-                    self.loadData(block)
+                    self.sessionManager = self.newSession()
                     KDUpdate.sharedInstance.configuration(responseObject)
+                    self.loadData(block)
+                    
                 }
             }, failure: { (task, error) in
                 //Load the data regardless of error while getting config data
