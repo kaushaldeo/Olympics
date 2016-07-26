@@ -31,12 +31,12 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     //MARK: - Private Data
     func process(error:NSError) {
-        var message = "We had a problem retrieving information.  Do you want to try again?";
+        var message = "ConnectionError".localized("")
         if (error.code == NSURLErrorNotConnectedToInternet) {
-            message = "No Network Connection. Please try again.";
+            message = "InternetError".localized("")
         }
         
-        let alertController = UIAlertController(title: "Oops!!", message: message, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "ErrorTitle".localized(""), message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Retry", style: .Destructive, handler: { [weak self] (action) in
             if let strongSelf = self {
@@ -50,7 +50,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         KDAPIManager.sharedInstance.update(self.event, { [weak self] (error) in
             if let strongSelf = self {
                 
-                var message = "No Competitor for selected event."
+                var message = "ResultError".localized("")
                 if let nserror = error {
                     strongSelf.process(nserror)
                     message = ""

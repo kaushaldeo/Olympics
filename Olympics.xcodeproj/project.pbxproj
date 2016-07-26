@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3CC2D1DF1D45F70900316CD1 /* KDRankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */; };
+		3CC2D1E11D46E33F00316CD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2D1E01D46E33F00316CD1 /* Localizable.strings */; };
 		721B96331D3B72650064E485 /* KDTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721B96321D3B72650064E485 /* KDTabBarViewController.swift */; };
 		724CB2DC1D3A0164003C4D28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */; };
 		724FA9091D319FF600ADCB8D /* KDEventParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FA9081D319FF600ADCB8D /* KDEventParser.swift */; };
@@ -85,6 +86,7 @@
 
 /* Begin PBXFileReference section */
 		3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDRankingCell.swift; sourceTree = "<group>"; };
+		3CC2D1E01D46E33F00316CD1 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		721B96321D3B72650064E485 /* KDTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDTabBarViewController.swift; sourceTree = "<group>"; };
 		724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		724FA9081D319FF600ADCB8D /* KDEventParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDEventParser.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				72DA10871D0BA22F00AA8EE3 /* Views */,
 				729A03311D42DC5600E300F1 /* Resources */,
 				72DA106E1D0BA16B00AA8EE3 /* AppDelegate.swift */,
+				3CC2D1E01D46E33F00316CD1 /* Localizable.strings */,
 				72DA10771D0BA16B00AA8EE3 /* Main.storyboard */,
 				72DA107A1D0BA16B00AA8EE3 /* Assets.xcassets */,
 				72DA107F1D0BA16B00AA8EE3 /* Info.plist */,
@@ -406,6 +409,7 @@
 				729A03331D42DC9D00E300F1 /* KDDisciplineView.xib in Resources */,
 				724CB2DC1D3A0164003C4D28 /* GoogleService-Info.plist in Resources */,
 				729A03371D432B3C00E300F1 /* KDPhaseView.xib in Resources */,
+				3CC2D1E11D46E33F00316CD1 /* Localizable.strings in Resources */,
 				729A03351D42F64200E300F1 /* KDFooterView.xib in Resources */,
 				72DA107B1D0BA16B00AA8EE3 /* Assets.xcassets in Resources */,
 				72DA10791D0BA16B00AA8EE3 /* Main.storyboard in Resources */,

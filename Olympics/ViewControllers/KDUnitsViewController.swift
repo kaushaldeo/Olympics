@@ -57,11 +57,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         self.tableView.backgroundView = nil
         if self.fetchedResultsController.count == 0 {
-            var message = "No Events"
-            if let text = self.title {
-                message = message + " for \(text)"
-            }
-            self.tableView.backgroundView = KDErrorView.view(message)
+            self.tableView.backgroundView = KDErrorView.view("NoEvent".localized(""))
         }
         
         self.tableView.reloadData()

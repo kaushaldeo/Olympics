@@ -118,7 +118,9 @@ extension String {
         return frame.size
     }
     
-    
+    func localized(comment:String = "") -> String {
+        return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: comment)
+    }
 }
 
 

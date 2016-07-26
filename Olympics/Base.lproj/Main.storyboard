@@ -126,7 +126,7 @@
                                     <outlet property="aliasLabel" destination="bNJ-CV-dzt" id="ysL-zZ-TKq"/>
                                     <outlet property="iconView" destination="EpB-AI-7rM" id="ysj-cj-41a"/>
                                     <outlet property="nameLabel" destination="IXF-VD-5zi" id="S6N-rU-MzH"/>
-                                    <segue destination="LdC-bc-T7b" kind="custom" identifier="replace" customClass="KDStoryboardSegue" customModule="Olympics" customModuleProvider="target" id="B5H-27-A3s"/>
+                                    <segue destination="LdC-bc-T7b" kind="custom" identifier="replace" customClass="KDReplaceSegue" customModule="Olympics" customModuleProvider="target" id="B5H-27-A3s"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1651,6 +1651,6 @@
         <image name="schedule" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kDN-ap-Svd"/>
+        <segue reference="B5H-27-A3s"/>
     </inferredMetricsTieBreakers>
 </document>
