@@ -15,12 +15,12 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
     
     //MARK: - Private Data
     func process(error:NSError) {
-        var message = "We had a problem retrieving information.  Do you want to try again?";
+        var message = "ConnectionError".localized("")
         if (error.code == NSURLErrorNotConnectedToInternet) {
-            message = "No Network Connection. Please try again.";
+            message = "InternetError".localized("")
         }
         
-        let alertController = UIAlertController(title: "Oops!!", message: message, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "ErrorTitle".localized(""), message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Retry", style: .Destructive, handler: { [weak self] (action) in
             if let strongSelf = self {
@@ -182,11 +182,11 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         fetchRequest.fetchBatchSize = 20
         
         
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false),NSSortDescriptor(key: "alias", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false),NSSortDescriptor(key: "alias", ascending: true)]
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: "Modals")
         fetchedResultsController.delegate = self
         
         fetchedResultsController.update()

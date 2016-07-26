@@ -31,12 +31,12 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     //MARK: - Private Data
     func process(error:NSError) {
-        var message = "We had a problem retrieving information.  Do you want to try again?";
+        var message = "ConnectionError".localized("")
         if (error.code == NSURLErrorNotConnectedToInternet) {
-            message = "No Network Connection. Please try again.";
+            message = "InternetError".localized("")
         }
         
-        let alertController = UIAlertController(title: "Oops!!", message: message, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "ErrorTitle".localized(""), message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Retry", style: .Destructive, handler: { [weak self] (action) in
             if let strongSelf = self {
@@ -50,7 +50,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         KDAPIManager.sharedInstance.update(self.event, { [weak self] (error) in
             if let strongSelf = self {
                 
-                var message = "No Competitor for selected event."
+                var message = "ResultError".localized("")
                 if let nserror = error {
                     strongSelf.process(nserror)
                     message = ""
@@ -82,9 +82,6 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         // Do any additional setup after loading the view.
         self.tableView.registerNib(UINib(nibName: "KDPhaseView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kHeaderView")
         self.tableView.registerNib(UINib(nibName: "KDFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kFooterView")
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 44
         
         self.title = self.event.discipline?.name
         self.eventLabel.text = self.event.name
@@ -133,24 +130,79 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // Configure the cell...
-        let competitor = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Competitor
-        if let unit = competitor.unit, let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
+        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        if let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDHeadsViewCell
             cell.set(unit, country: self.country)
             return cell
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("Rank", forIndexPath: indexPath) as! KDResultViewCell
-        cell.nameLabel.text = competitor.name()
-        if let text = competitor.iconName() {
-            cell.iconView.image = UIImage(named: "Images/\(text).png")
-        }
-        cell.rankLabel.text = competitor.rank ?? "-"
-        cell.resultLabel.text = competitor.resultValue
+        let cell = tableView.dequeueReusableCellWithIdentifier("Ranking", forIndexPath: indexPath) as! KDRankingCell
+        let competitors = unit.competitors!.allObjects as! [Competitor]
+        cell.competitors = competitors.filter({ (competitor) -> Bool in
+            return competitor.athlete?.country == self.country || competitor.team?.country == self.country
+        })
         return cell
     }
     
     
     //MARK: Table View Delegate Method
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        var height : CGFloat = 0.0
+        if let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
+            let competitors = unit.competitors!.allObjects as! [Competitor]
+            var string = ""
+            if let competitor = competitors.first {
+                if let text = competitor.name() {
+                    height = max(height,text.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 158.0)/2).height)
+                }
+                string += competitor.resultValue ?? ""
+            }
+            string += " - "
+            if let competitor = competitors.last {
+                if let text = competitor.name() {
+                    height = max(height,text.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 158.0)/2).height)
+                }
+                string += competitor.resultValue ?? ""
+            }
+            if let status = unit.status?.lowercaseString {
+                if status == "closed" || status == "inprogress" {
+                    
+                }
+                else {
+                    if let date = unit.startDate {
+                        string = date.time()
+                    }
+                }
+            }
+            else {
+                if let date = unit.startDate {
+                    string = date.time()
+                }
+            }
+            if #available(iOS 8.2, *) {
+                height = max(height,text.size(UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold), width: 80.0).height)
+            } else {
+                height = max(height,text.size(UIFont.boldSystemFontOfSize(14), width: 80.0).height)
+            }
+           
+            return height + 24.0
+        }
+        var competitors = unit.competitors!.allObjects as! [Competitor]
+        competitors = competitors.filter({ (competitor) -> Bool in
+            return competitor.athlete?.country == self.country || competitor.team?.country == self.country
+        })
+        
+        for competitor in competitors {
+            let string = competitor.resultValue ?? ""
+            let width = string.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 80)).width + 80.0
+            if let text = competitor.name() {
+                height += text.size(UIFont.systemFontOfSize(14), width:CGRectGetWidth(tableView.frame) - width).height + 20
+            }
+        }
+        
+        return height
+    }
     
     func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView") as! KDPhaseView
@@ -166,8 +218,6 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        //print(event.competitors)
         
     }
     
@@ -187,20 +237,20 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Competitor", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Unit", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "unit.startDate", ascending: false),NSSortDescriptor(key: "unit.phase", ascending: true), NSSortDescriptor(key: "unit.name", ascending: true),NSSortDescriptor(key: "rank", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "phase", ascending: true), NSSortDescriptor(key: "name", ascending: true),NSSortDescriptor(key: "startDate", ascending: false)]
         
-        fetchRequest.predicate = NSPredicate(format: "unit.event = %@ AND (team.country = %@ OR athlete.country = %@)", self.event,self.country,self.country)
+        fetchRequest.predicate = NSPredicate(format: "event = %@ AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,self.country,self.country)
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"unit.phase", cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"phase", cacheName: nil)
         fetchedResultsController.delegate = self
         
         fetchedResultsController.update()

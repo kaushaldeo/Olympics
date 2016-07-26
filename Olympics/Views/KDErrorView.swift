@@ -29,6 +29,7 @@ class KDErrorView: UIView {
         textLabel.font = UIFont.systemFontOfSize(15.0)
         textLabel.textColor = UIColor.lightGrayColor()
         textLabel.numberOfLines = 0
+        textLabel.textAlignment = .Center
         return textLabel
     }()
     

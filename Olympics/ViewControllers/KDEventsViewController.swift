@@ -77,10 +77,6 @@ class KDEventsViewController: UIViewController {
             selectedView.alpha = 1.0
         }
         
-        pagerController.didChangeHeaderViewHeightHandler = { height in
-            print("call didShowViewControllerHandler : \(height)")
-        }
-        
         return pagerController
     }()
     
@@ -138,12 +134,12 @@ class KDEventsViewController: UIViewController {
     func process(error:NSError) {
         
         self.imageView.layer.removeAllAnimations()
-        var message = "We had a problem retrieving information.  Do you want to try again?";
+        var message = "ConnectionError".localized("")
         if (error.code == NSURLErrorNotConnectedToInternet) {
-            message = "No Network Connection. Please try again.";
+            message = "InternetError".localized("")
         }
         
-        let alertController = UIAlertController(title: "Oops!!", message: message, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "ErrorTitle".localized(""), message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Retry", style: .Destructive, handler: { [weak self] (action) in
             if let strongSelf = self {
@@ -183,7 +179,7 @@ class KDEventsViewController: UIViewController {
         
         let context = NSManagedObjectContext.mainContext()
         if let country = Country.country(context) {
-            if KDUpdate.sharedInstance.shouldSave() {
+            if KDUpdate.sharedInstance.shouldSave == false {
                 if let events = country.events where events.count > 0 {
                     self.populateDate(country)
                     return
@@ -201,6 +197,4 @@ class KDEventsViewController: UIViewController {
             self.startAnimation()
         }
     }
-    
-    
 }

@@ -42,7 +42,7 @@ class KDSplashViewController: UIViewController {
         
         self.imageView.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
         
-        self.progressLabel.text = "Loading Configuration Please wait...!"
+        self.progressLabel.text = "InitialLoading".localized("Show the message while loading..")
     }
     
     
@@ -60,12 +60,12 @@ class KDSplashViewController: UIViewController {
     func process(error:NSError) {
         
         self.imageView.layer.removeAllAnimations()
-        var message = "We had a problem retrieving information.  Do you want to try again?";
+        var message = "ConnectionError".localized("")
         if (error.code == NSURLErrorNotConnectedToInternet) {
-            message = "No Network Connection. Please try again.";
+            message = "InternetError".localized("")
         }
         
-        let alertController = UIAlertController(title: "Oops!!", message: message, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "ErrorTitle".localized(""), message: message, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Retry", style: .Destructive, handler: { [weak self] (action) in
             if let strongSelf = self {
@@ -74,7 +74,6 @@ class KDSplashViewController: UIViewController {
             }
         }))
         self.presentViewController(alertController, animated: true, completion: nil)
-        print(message)
     }
     
     //MARK: - View Life Cycle

@@ -114,11 +114,13 @@ extension String {
         if numberOfLines > 0 {
             size.height = CGFloat(numberOfLines)*font.lineHeight
         }
-        let frame = self.boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let frame = self.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
         return frame.size
     }
     
-    
+    func localized(comment:String = "") -> String {
+        return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: comment)
+    }
 }
 
 

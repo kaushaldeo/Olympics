@@ -15,10 +15,15 @@ class KDParseOperation: NSOperation, NSXMLParserDelegate {
     
     let context: NSManagedObjectContext
     
-    init(parser: NSXMLParser, persistentStoreCoordinator: NSPersistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator) {
+    init(parser: NSXMLParser, persistentStoreCoordinator: NSPersistentStoreCoordinator? = nil) {
         self.parser = parser
         self.context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
-        self.context.persistentStoreCoordinator = persistentStoreCoordinator
+        if let coordinator = persistentStoreCoordinator  {
+        self.context.persistentStoreCoordinator = coordinator
+        }
+        else {
+            self.context.persistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator
+        }
         super.init()
     }
     

@@ -66,9 +66,9 @@ public final class ViewPagerController: UIViewController {
     internal var targetNavigationBar : UINavigationBar?
     
     internal var headerViewHeightConstraint : NSLayoutConstraint!
-
+    
     internal var tabMenuViewHeightConstraint : NSLayoutConstraint!
-
+    
     internal var viewTopConstraint : NSLayoutConstraint!
     
     internal var observingScrollView : UIScrollView? {
@@ -170,7 +170,7 @@ public final class ViewPagerController: UIViewController {
     public func currentContent() -> UIViewController? {
         return self.containerView.currentContent()
     }
-  
+    
     // MARK: - Private Functions
     
     private func setupConstraint() {

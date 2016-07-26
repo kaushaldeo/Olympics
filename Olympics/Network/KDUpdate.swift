@@ -19,8 +19,18 @@ class KDUpdate: NSObject {
         if let text = info["message"] {
             self.message = text
         }
-        if let text = info["cacheConfigDate"], let miliseconds = Double(text) {
-           self.cacheConfigDate = NSDate(timeIntervalSince1970: miliseconds/1000)
+        if let text = info["cacheCountryChecksum"] {
+            self.shouldSave = self.cacheCountryChecksum.compare(text, options: .NumericSearch) != .OrderedSame
+            if self.shouldSave {
+                let persistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator
+                if let persistentStore = persistentStoreCoordinator.persistentStores.last {
+                    try! persistentStoreCoordinator.removePersistentStore(persistentStore)
+                }
+                persistentStoreCoordinator.addStore()
+                self.updateUI()
+            }
+            self.cacheCountryChecksum = text
+            NSUserDefaults.checkSum(text)
         }
     }
     
@@ -29,13 +39,10 @@ class KDUpdate: NSObject {
             //Update available
             if latestVersion.compare(self.applicationVersion, options: .NumericSearch) == .OrderedDescending {
                 if self.noThanksEnabled() {
-                    print("noThanksEnabled")
                     //Check for remind me
                     if self.remindMeLaterEnabled() {
-                        print("remindMeLaterEnabled")
                         //Check for number of launch
                         if self.numberOfTimesLaunched() {
-                            print("numberOfTimesLaunched")
                             self.showMessage()
                         }
                     }
@@ -44,52 +51,74 @@ class KDUpdate: NSObject {
         }
     }
     
-    
-    func showMessage() {
-        if let appDelegate  = UIApplication.sharedApplication().delegate as? AppDelegate {
-            guard let window = appDelegate.window else {
-                return
+    func updateUI() {
+        dispatch_async(dispatch_get_main_queue()) {
+            if let appDelegate  = UIApplication.sharedApplication().delegate as? AppDelegate {
+                guard let window = appDelegate.window else {
+                    return
+                }
+                if let _ = window.rootViewController as? KDSplashViewController {
+                    return
+                }
+                else {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateInitialViewController()
+                    window.rootViewController = viewController
+                }
+                
             }
-            guard let viewController = window.rootViewController else {
-                return
-            }
-            
-            let title = "Update \(self.applicationName)"
-            
-            let alertController = UIAlertController(title: title, message: self.displayMessage(), preferredStyle: .Alert)
-            
-            alertController.addAction(UIAlertAction(title: "No, Thanks", style: .Cancel, handler: { [weak self](action) in
-                if let strongSelf = self {
-                    strongSelf.noThanksPressed()
-                }
-                }))
-            alertController.addAction(UIAlertAction(title: "Remind Me Later", style: .Default, handler: { [weak self] (action) in
-                if let strongSelf = self {
-                    strongSelf.remindMeLater()
-                }
-                }))
-            
-            alertController.addAction(UIAlertAction(title: "Update Now", style: .Default, handler: { [weak self] (action) in
-                if let strongSelf = self {
-                    strongSelf.processApp()
-                }
-                }))
-            
-            viewController.presentViewController(alertController, animated: true, completion: nil)
-            
         }
-        
+    }
+    func showMessage() {
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            if let appDelegate  = UIApplication.sharedApplication().delegate as? AppDelegate {
+                guard let window = appDelegate.window else {
+                    return
+                }
+                guard let viewController = window.rootViewController else {
+                    return
+                }
+                
+                let title = "Update \(self.applicationName)"
+                
+                let alertController = UIAlertController(title: title, message: self.displayMessage(), preferredStyle: .Alert)
+                
+                alertController.addAction(UIAlertAction(title: "No, Thanks", style: .Cancel, handler: { [weak self](action) in
+                    if let strongSelf = self {
+                        strongSelf.noThanksPressed()
+                    }
+                    }))
+                alertController.addAction(UIAlertAction(title: "Remind Me Later", style: .Default, handler: { [weak self] (action) in
+                    if let strongSelf = self {
+                        strongSelf.remindMeLater()
+                    }
+                    }))
+                
+                alertController.addAction(UIAlertAction(title: "Update Now", style: .Default, handler: { [weak self] (action) in
+                    if let strongSelf = self {
+                        strongSelf.processApp()
+                    }
+                    }))
+                
+                viewController.presentViewController(alertController, animated: true, completion: nil)
+                
+            }
+        }
     }
     
+    //MARK: - Private Methods
     private var numberOfLaunch = 3
-    private var remindDaysGap : NSTimeInterval = 1*60
+    private var remindDaysGap : NSTimeInterval = 24*60*60
     private var applicationVersion : String
     private var applicationName : String
     private var applicationBundleID : String?
     private var applicationStoreVersion: String?
     private var message : String
     
-    var cacheConfigDate : NSDate?
+    var cacheCountryChecksum : String
+    
+    var shouldSave = false
     
     override init() {
         let bundle = NSBundle.mainBundle()
@@ -106,6 +135,9 @@ class KDUpdate: NSObject {
         applicationBundleID = bundle.bundleIdentifier
         
         message = "Would you like to update it now?"
+        
+        cacheCountryChecksum = NSUserDefaults.checkSum()
+        
         super.init()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KDUpdate.update), name: UIApplicationWillEnterForegroundNotification, object: nil)
@@ -162,18 +194,10 @@ class KDUpdate: NSObject {
     }
     
     private func processApp() {
-     let url = NSURL(string:"itms-apps://itunes.apple.com/app/id1135313762")!
+        let url = NSURL(string:"itms-apps://itunes.apple.com/app/id1135313762")!
         if UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
         }
-    }
-    
-    
-    func shouldSave() -> Bool {
-        if let date = self.cacheConfigDate {
-           return NSDate().compare(date) != .OrderedAscending
-        }
-        return false
     }
     
 }

@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Olympics
+
+  Created by Kaushal Deo on 7/25/16.
+  Copyright © 2016 Scorpion Inc. All rights reserved.
+*/
+
+"NoEvent" = "No event is scheduled for this day";
+"ConnectionError" = "We had a problem retrieving information. Do you want to try again?";
+"InternetError" =  "No Network Connection. Please try again.";
+"DateResultError" = "Events have not been scheduled yet. Please visit once Olympics have started.";
+"ResultError" = "No Competitors from the selected country";
+"InitialLoading" = "Please wait while loading schedules!";
+"ErrorTitle" = "Oops!!";
+"Cancel" = "Cancel";
+"Retry" = "Retry";

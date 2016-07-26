@@ -19,6 +19,17 @@ class KDAPIManager : NSObject {
     
     private var key = "5hkjft4mvnbzc26875u6c2zv"
     
+    
+    
+   override init() {
+        super.init()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(KDAPIManager.updateBackground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     static let sharedInstance: KDAPIManager = {
         return KDAPIManager()
     }()
@@ -32,16 +43,25 @@ class KDAPIManager : NSObject {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         var sessionManager = AFHTTPSessionManager(baseURL: NSURL(string:self.url), sessionConfiguration: configuration)
         sessionManager.responseSerializer = AFXMLParserResponseSerializer()
+        sessionManager.completionQueue = dispatch_queue_create("com.kaushal.process", DISPATCH_QUEUE_CONCURRENT)
         return sessionManager
     }()
     
+    func newSession() -> AFHTTPSessionManager {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let sessionManager = AFHTTPSessionManager(baseURL: NSURL(string:self.url), sessionConfiguration: configuration)
+        sessionManager.responseSerializer = AFXMLParserResponseSerializer()
+        sessionManager.completionQueue = dispatch_queue_create("com.kaushal.process", DISPATCH_QUEUE_CONCURRENT)
+        return sessionManager
+    }
+    
     
     // MARK: - Core Data stack
-    private lazy var applicationDocumentsDirectory: NSURL = {
+    static func applicationDocumentsDirectory() -> NSURL {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.kaushal.Olympics" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
-    }()
+    }
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
@@ -53,7 +73,7 @@ class KDAPIManager : NSObject {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
+        let url = KDAPIManager.applicationDocumentsDirectory().URLByAppendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
             let option = [NSMigratePersistentStoresAutomaticallyOption:true,
@@ -104,21 +124,24 @@ class KDAPIManager : NSObject {
     
     
     //MARK: - Web-Service Methods
+    func updateBackground(notification: NSNotification) {
+        self.loadConfiguration(nil)
+    }
     
     func loadConfiguration(block:((NSError?) -> Void)?) {
         let manager = AFHTTPSessionManager()
-        manager.GET("http://olympics.mybluemix.net/config/getAppVersion", parameters: nil, progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        manager.GET("http://olympics.mybluemix.net/config/getAppVersion", parameters: nil, progress:nil, success: { (task, response) in
                 if let responseObject = response as? [String:String] {
                     self.url = responseObject["baseURL"]!
                     self.key = responseObject["apiKey"]!
-                    self.loadData(block)
+                    self.sessionManager = self.newSession()
                     KDUpdate.sharedInstance.configuration(responseObject)
+                    self.loadData(block)
+                    
                 }
             }, failure: { (task, error) in
-                self.dispatchOnMain(block, error)
-                
+                //Load the data regardless of error while getting config data
+               self.loadData(block)
         })
         KDAPIManager.sharedInstance.managedObjectContext.saveContext()
     }
@@ -128,11 +151,11 @@ class KDAPIManager : NSObject {
         let serviceGroup = dispatch_group_create()
         
         var nserror : NSError? = nil
-        if NSUserDefaults.loadSchedule() == false {
+        if NSUserDefaults.loadSchedule() == false || KDUpdate.sharedInstance.shouldSave {
             dispatch_group_enter(serviceGroup)
             self.updateSchedule({[weak self] in
                 if let strongSelf = self {
-                    if NSUserDefaults.loadCountry() == false {
+                    if NSUserDefaults.loadCountry() == false || KDUpdate.sharedInstance.shouldSave {
                         dispatch_group_enter(serviceGroup)
                         strongSelf.updateCountry({ (error) in
                             if let err = error {
@@ -168,7 +191,7 @@ class KDAPIManager : NSObject {
             })
         }
         else {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 if let completionBlock = block {
                     completionBlock(nserror)
@@ -185,9 +208,7 @@ class KDAPIManager : NSObject {
     }
     
     func updateCountry(block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDCountryParser(parser: parser)
                     operation.completionBlock = {
@@ -202,9 +223,7 @@ class KDAPIManager : NSObject {
     }
     
     func updateSchedule(process:(() -> Void)?, block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
                 if let block = process {
                     block()
                 }
@@ -233,9 +252,7 @@ class KDAPIManager : NSObject {
         guard let identifier = country.identifier else {
             return
         }
-        self.sessionManager.GET("organization/2016/\(identifier)/profile.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("organization/2016/\(identifier)/profile.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDProfileParser(parser: parser)
                     operation.completionBlock = {
@@ -250,9 +267,7 @@ class KDAPIManager : NSObject {
     }
     
     func updateMedals(block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("2016/medals.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("2016/medals.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDMedalParser(parser: parser)
                     operation.completionBlock = {
@@ -270,9 +285,7 @@ class KDAPIManager : NSObject {
         guard let identifier = event.identifier else {
             return
         }
-        self.sessionManager.GET("event/\(identifier)/results.xml", parameters: ["api_key":key], progress: { (progress) in
-            print(progress)
-            }, success: { (task, response) in
+        self.sessionManager.GET("event/\(identifier)/results.xml", parameters: ["api_key":key], progress: nil, success: { (task, response) in
                 if let parser = response as? NSXMLParser {
                     let operation = KDEventParser(parser: parser)
                     operation.completionBlock = {
