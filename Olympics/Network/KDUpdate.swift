@@ -22,14 +22,12 @@ class KDUpdate: NSObject {
         if let text = info["cacheCountryChecksum"] {
             self.shouldSave = self.cacheCountryChecksum.compare(text, options: .NumericSearch) != .OrderedSame
             if self.shouldSave {
-                //TODO: Manage Re-store of complete data based on 
                 let persistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator
                 if let persistentStore = persistentStoreCoordinator.persistentStores.last {
                     try! persistentStoreCoordinator.removePersistentStore(persistentStore)
                 }
                 persistentStoreCoordinator.addStore()
-                
-                
+                self.updateUI()
             }
             self.cacheCountryChecksum = text
             NSUserDefaults.checkSum(text)
@@ -53,43 +51,63 @@ class KDUpdate: NSObject {
         }
     }
     
-    
-    func showMessage() {
-        if let appDelegate  = UIApplication.sharedApplication().delegate as? AppDelegate {
-            guard let window = appDelegate.window else {
-                return
+    func updateUI() {
+        dispatch_async(dispatch_get_main_queue()) {
+            if let appDelegate  = UIApplication.sharedApplication().delegate as? AppDelegate {
+                guard let window = appDelegate.window else {
+                    return
+                }
+                if let _ = window.rootViewController as? KDSplashViewController {
+                    return
+                }
+                else {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateInitialViewController()
+                    window.rootViewController = viewController
+                }
+                
             }
-            guard let viewController = window.rootViewController else {
-                return
-            }
-            
-            let title = "Update \(self.applicationName)"
-            
-            let alertController = UIAlertController(title: title, message: self.displayMessage(), preferredStyle: .Alert)
-            
-            alertController.addAction(UIAlertAction(title: "No, Thanks", style: .Cancel, handler: { [weak self](action) in
-                if let strongSelf = self {
-                    strongSelf.noThanksPressed()
-                }
-                }))
-            alertController.addAction(UIAlertAction(title: "Remind Me Later", style: .Default, handler: { [weak self] (action) in
-                if let strongSelf = self {
-                    strongSelf.remindMeLater()
-                }
-                }))
-            
-            alertController.addAction(UIAlertAction(title: "Update Now", style: .Default, handler: { [weak self] (action) in
-                if let strongSelf = self {
-                    strongSelf.processApp()
-                }
-                }))
-            
-            viewController.presentViewController(alertController, animated: true, completion: nil)
-            
         }
-        
+    }
+    func showMessage() {
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            if let appDelegate  = UIApplication.sharedApplication().delegate as? AppDelegate {
+                guard let window = appDelegate.window else {
+                    return
+                }
+                guard let viewController = window.rootViewController else {
+                    return
+                }
+                
+                let title = "Update \(self.applicationName)"
+                
+                let alertController = UIAlertController(title: title, message: self.displayMessage(), preferredStyle: .Alert)
+                
+                alertController.addAction(UIAlertAction(title: "No, Thanks", style: .Cancel, handler: { [weak self](action) in
+                    if let strongSelf = self {
+                        strongSelf.noThanksPressed()
+                    }
+                    }))
+                alertController.addAction(UIAlertAction(title: "Remind Me Later", style: .Default, handler: { [weak self] (action) in
+                    if let strongSelf = self {
+                        strongSelf.remindMeLater()
+                    }
+                    }))
+                
+                alertController.addAction(UIAlertAction(title: "Update Now", style: .Default, handler: { [weak self] (action) in
+                    if let strongSelf = self {
+                        strongSelf.processApp()
+                    }
+                    }))
+                
+                viewController.presentViewController(alertController, animated: true, completion: nil)
+                
+            }
+        }
     }
     
+    //MARK: - Private Methods
     private var numberOfLaunch = 3
     private var remindDaysGap : NSTimeInterval = 24*60*60
     private var applicationVersion : String
@@ -98,7 +116,7 @@ class KDUpdate: NSObject {
     private var applicationStoreVersion: String?
     private var message : String
     
-    private var cacheCountryChecksum : String
+    var cacheCountryChecksum : String
     
     var shouldSave = false
     
