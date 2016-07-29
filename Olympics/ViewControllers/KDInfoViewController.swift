@@ -14,8 +14,8 @@ class KDInfoViewController: UITableViewController, MFMailComposeViewControllerDe
     lazy var items : [[String:String]] = {
         var items = [[String:String]]()
         items.append(["name":"Contact us", "image":"contactus"])
-        items.append(["name":"Rate Olympics 2016", "image":"rateus"])
-        items.append(["name":"Share Olympics 2016", "image":"share"])
+        items.append(["name":"Rate Summer Games 2016", "image":"rateus"])
+        items.append(["name":"Share Summer Games 2016", "image":"share"])
         return items
     }()
     override func viewDidLoad() {
@@ -103,11 +103,11 @@ class KDInfoViewController: UITableViewController, MFMailComposeViewControllerDe
             case "contactus":
             let controller = MFMailComposeViewController()
             controller.setToRecipients(["jksolympics@gmail.com"])
-            controller.setSubject("Feedback from Olympics")
+            controller.setSubject("Feedback from Summer Games")
             controller.mailComposeDelegate = self
             self.navigationController?.presentViewController(controller, animated: true, completion: nil)
         default:
-            let textToShare = "Olympics is around a corner! Check out this App for live updates!"
+            let textToShare = "Summer Games is around a corner! Check out this App for live updates!"
             if let url = NSURL(string:"https://itunes.apple.com/us/app/my-olympics-rio-2016/id1135313762?ls=1&mt=8") {
                 let objectsToShare = [textToShare, url]
                 let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)

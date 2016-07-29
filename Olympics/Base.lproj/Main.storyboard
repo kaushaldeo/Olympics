@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FZ7-c7-7Fd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FZ7-c7-7Fd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -393,7 +393,7 @@
             </objects>
             <point key="canvasLocation" x="516" y="-87"/>
         </scene>
-        <!--Olympics-->
+        <!--Medals-->
         <scene sceneID="5oa-N2-JZe">
             <objects>
                 <tableViewController storyboardIdentifier="kMedalsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ddX-ZJ-gbO" customClass="KDMedalsViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
@@ -664,7 +664,7 @@
                             <outlet property="delegate" destination="ddX-ZJ-gbO" id="gkf-mV-aIw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Olympics" id="HVr-s4-1hu"/>
+                    <navigationItem key="navigationItem" title="Medals" id="HVr-s4-1hu"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rt8-eG-nKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1256,7 +1256,8 @@
                                                             <exclude reference="zIN-37-4dm"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="51" y="53" width="24" height="24"/>
                                                         <mask key="constraints">
                                                             <include reference="ce9-vg-Uqi"/>
                                                             <include reference="zIN-37-4dm"/>
@@ -1275,7 +1276,8 @@
                                                             <exclude reference="fiv-Gk-krV"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="165" y="53" width="24" height="24"/>
                                                         <mask key="constraints">
                                                             <include reference="9rU-Sh-Pre"/>
                                                             <include reference="fiv-Gk-krV"/>
@@ -1287,12 +1289,18 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="10" y="12" width="36" height="106"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="21" text="Away" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnF-58-LRY">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="194" y="12" width="36" height="106"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42F-mH-Xxo">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -1309,7 +1317,8 @@
                                                             <exclude reference="5yZ-KB-i5y"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="80" y="12" width="80" height="106"/>
                                                         <mask key="constraints">
                                                             <include reference="5yZ-KB-i5y"/>
                                                         </mask>
@@ -1475,7 +1484,7 @@
             </objects>
             <point key="canvasLocation" x="3628.5" y="-87"/>
         </scene>
-        <!--Olympics-->
+        <!--Schedule-->
         <scene sceneID="JKG-g4-glZ">
             <objects>
                 <viewController storyboardIdentifier="kEventsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mkv-9L-LT6" customClass="KDEventsViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
@@ -1549,7 +1558,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Olympics" id="UvY-SX-33D"/>
+                    <navigationItem key="navigationItem" title="Schedule" id="UvY-SX-33D"/>
                     <connections>
                         <outlet property="imageView" destination="Rg6-JK-O2y" id="fch-9W-2rE"/>
                         <outlet property="overlay" destination="tQM-Jb-Vf9" id="GaZ-ki-9zV"/>
@@ -1575,7 +1584,7 @@
             </objects>
             <point key="canvasLocation" x="-1197" y="-87"/>
         </scene>
-        <!--Olympics-->
+        <!--Athlete-->
         <scene sceneID="Sjw-O6-dyP">
             <objects>
                 <tableViewController storyboardIdentifier="kPlayersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zhm-w5-xHt" customClass="KDPlayersViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
@@ -1620,17 +1629,17 @@
                             <outlet property="delegate" destination="zhm-w5-xHt" id="dTv-Pa-Omr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Olympics" id="ISG-Ns-Oej"/>
+                    <navigationItem key="navigationItem" title="Athlete" id="ISG-Ns-Oej"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wB5-Cl-svh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1249.5" y="1371.75"/>
         </scene>
-        <!--Players-->
+        <!--Athlete-->
         <scene sceneID="lhN-wa-kdx">
             <objects>
                 <navigationController id="J6o-HM-lFI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Players" image="players" id="dBs-Yi-YVx"/>
+                    <tabBarItem key="tabBarItem" title="Athlete" image="players" id="dBs-Yi-YVx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SC4-cW-Fdu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -15,9 +15,9 @@ import AFNetworking
 
 class KDAPIManager : NSObject {
     
-    private var url = "https://api.sportradar.us/oly-testing2"
+    private var url = "https://api.sportradar.us/oly-p2"
     
-    private var key = "5hkjft4mvnbzc26875u6c2zv"
+    private var key = "fkapg97hrh2qtx7hb2uvwpka"
     
     
     
