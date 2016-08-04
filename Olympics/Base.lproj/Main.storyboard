@@ -1594,10 +1594,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="Leh-PX-6A2" customClass="KDAthleteViewCell" customModule="Olympics" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Leh-PX-6A2" id="CcM-sy-x0O">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="phL-D6-j5g">
@@ -1658,8 +1658,6 @@
                                             <exclude reference="lWL-QQ-tcT"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="Huu-yX-D5p"/>
-                                            <exclude reference="Oyn-Ic-NN4"/>
                                             <exclude reference="8L5-Ab-BKc"/>
                                             <exclude reference="NGX-uH-PUN"/>
                                             <exclude reference="yed-8U-sEj"/>
@@ -1667,6 +1665,8 @@
                                             <exclude reference="Bct-8M-Jus"/>
                                             <exclude reference="Ja2-I3-bvh"/>
                                             <exclude reference="Mee-B7-gA7"/>
+                                            <exclude reference="Huu-yX-D5p"/>
+                                            <exclude reference="Oyn-Ic-NN4"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -1676,8 +1676,6 @@
                                             <include reference="lWL-QQ-tcT"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="Huu-yX-D5p"/>
-                                            <include reference="Oyn-Ic-NN4"/>
                                             <include reference="8L5-Ab-BKc"/>
                                             <include reference="NGX-uH-PUN"/>
                                             <include reference="yed-8U-sEj"/>
@@ -1685,6 +1683,8 @@
                                             <include reference="Bct-8M-Jus"/>
                                             <include reference="Ja2-I3-bvh"/>
                                             <include reference="Mee-B7-gA7"/>
+                                            <include reference="Huu-yX-D5p"/>
+                                            <include reference="Oyn-Ic-NN4"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

@@ -28,6 +28,23 @@ class Athlete: NSManagedObject {
         }
     }
     
+    func printName () -> String {
+        if let text = self.name {
+            return text
+        }
+        var string = ""
+        if let text = self.firstName {
+            string += text
+        }
+        if let text = self.lastName {
+            if string.isEmpty == false {
+                string += " "
+            }
+            string += text
+        }
+        return string
+    }
+    
     var imageName: String? {
         get {
             if let  event = self.events?.anyObject() as? Event {

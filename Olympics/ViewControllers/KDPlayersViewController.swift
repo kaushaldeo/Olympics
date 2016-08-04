@@ -26,6 +26,10 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
          self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 64.0
+       
+        
         self.tabBarController?.tabBar.itemPositioning = .Fill
     }
     
@@ -58,8 +62,8 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         // Configure the cell...
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
-        cell.nameLabel.text = athlete.name?.capitalizedString
-        cell.sportsLabel.text = athlete.discipline?.name
+        cell.nameLabel.text = athlete.printName().capitalizedString
+        cell.sportsLabel.text = athlete.discipline!.name!
         if let text = athlete.imageName {
             cell.iconView.image = UIImage(named: "Icon/\(text).png")
         }
