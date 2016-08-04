@@ -56,7 +56,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         // Configure the cell...
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
-        cell.textLabel?.text = athlete.name
+        cell.textLabel?.text = athlete.name?.capitalizedString
         cell.detailTextLabel?.text = athlete.association
         if let text = athlete.imageName {
             cell.imageView?.image = UIImage(named: "Icon/\(text).png")
@@ -130,9 +130,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "discipline.name", ascending: true),NSSortDescriptor(key: "lastName", ascending: true),NSSortDescriptor(key: "firstName", ascending: true)]
         
         if  let country = Country.country(context) {
             fetchRequest.predicate = NSPredicate(format: "country = %@", country)
@@ -141,7 +139,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"discipline.name", cacheName: nil)
         fetchedResultsController.delegate = self
         
         fetchedResultsController.update()

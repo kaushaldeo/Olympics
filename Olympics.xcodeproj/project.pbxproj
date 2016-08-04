@@ -709,7 +709,7 @@
 				3CD1458B1D5305C2005A8751 /* Olympics1.1.xcdatamodel */,
 				72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */,
 			);
-			currentVersion = 72DA10711D0BA16B00AA8EE3 /* Olympics.xcdatamodel */;
+			currentVersion = 3CD1458B1D5305C2005A8751 /* Olympics1.1.xcdatamodel */;
 			path = Olympics.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

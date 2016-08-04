@@ -17,6 +17,9 @@ class KDProfileParser: KDParseOperation {
     
     var teams = [Team]()
     
+    var discipline : Discipline? = nil
+    
+    
     lazy var dateFormatter : NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -39,6 +42,10 @@ class KDProfileParser: KDParseOperation {
                 self.events.append(event)
             }
         }
+        else if elementName == "discipline" {
+            let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
+            self.discipline = self.context.findFirst(Discipline.classForCoder(), predicate: predicate) as? Discipline
+        }
         else if elementName == "participants" {
             self.participants = [Athlete]()
         }
@@ -54,6 +61,7 @@ class KDProfileParser: KDParseOperation {
                 if let text = attributeDict["birth_date"] {
                     athlete.date = self.dateFormatter.dateFromString(text)
                 }
+                athlete.discipline = self.discipline
                 self.participants.append(athlete)
             }
             
