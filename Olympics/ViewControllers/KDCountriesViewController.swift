@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class KDCountriesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
@@ -134,6 +135,9 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         let setting = NSUserDefaults.standardUserDefaults()
         let url = country.objectID.URIRepresentation().absoluteString
         setting.setValue(url, forKey: "kCountry");
+        if let string = country.alias {
+            FIRMessaging.messaging().subscribeToTopic(string)
+        }
     }
     
     /*

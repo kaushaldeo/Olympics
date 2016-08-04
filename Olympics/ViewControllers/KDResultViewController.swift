@@ -93,6 +93,9 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         self.tableView.backgroundColor = UIColor.backgroundColor()
         
         self.tableView.addSubview(self.refreshControl)
+        
+        let unit = self.event.playingUnit(NSDate(), withCountry: self.country)
+        print(unit?.statusValue())
     }
     
     
@@ -174,90 +177,91 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
                 string = date.time()
             }
             
-        if #available(iOS 8.2, *) {
-            height = max(height,text.size(UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold), width: 80.0).height)
-        } else {
-            height = max(height,text.size(UIFont.boldSystemFontOfSize(14), width: 80.0).height)
+            if #available(iOS 8.2, *) {
+                height = max(height,text.size(UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold), width: 80.0).height)
+            } else {
+                height = max(height,text.size(UIFont.boldSystemFontOfSize(14), width: 80.0).height)
+            }
+            
+            return height + 24.0
         }
         
-        return height + 24.0
+        var competitors = unit.competitors!.allObjects as! [Competitor]
+        competitors = competitors.filter({ (competitor) -> Bool in
+            return competitor.athlete?.country == self.country || competitor.team?.country == self.country
+        })
+        
+        for competitor in competitors {
+            let string = competitor.resultValue ?? ""
+            let width = string.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 80)).width + 80.0
+            if let text = competitor.name() {
+                height += text.size(UIFont.systemFontOfSize(14), width:CGRectGetWidth(tableView.frame) - width).height + 20
+            }
+        }
+        
+        return height
     }
-    var competitors = unit.competitors!.allObjects as! [Competitor]
-    competitors = competitors.filter({ (competitor) -> Bool in
-    return competitor.athlete?.country == self.country || competitor.team?.country == self.country
-    })
     
-    for competitor in competitors {
-    let string = competitor.resultValue ?? ""
-    let width = string.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 80)).width + 80.0
-    if let text = competitor.name() {
-    height += text.size(UIFont.systemFontOfSize(14), width:CGRectGetWidth(tableView.frame) - width).height + 20
-    }
+    func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView") as! KDPhaseView
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        headerView.titleLabel.text = sectionInfo.name
+        
+        return headerView
     }
     
-    return height
-}
-
-func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView") as! KDPhaseView
-    let sectionInfo = self.fetchedResultsController.sections![section]
-    headerView.titleLabel.text = sectionInfo.name
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kFooterView") as! KDFooterView
+        return headerView
+    }
     
-    return headerView
-}
-
-func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kFooterView") as! KDFooterView
-    return headerView
-}
-
-func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
     
-}
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
- // Get the new view controller using segue.destinationViewController.
- // Pass the selected object to the new view controller.
- }
- */
-
-// MARK: - Fetched results controller
-lazy var fetchedResultsController: NSFetchedResultsController = {
-    let context = NSManagedObjectContext.mainContext()
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
-    let fetchRequest = NSFetchRequest()
-    // Edit the entity name as appropriate.
-    let entity = NSEntityDescription.entityForName("Unit", inManagedObjectContext: context)
-    fetchRequest.entity = entity
+    // MARK: - Fetched results controller
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        let context = NSManagedObjectContext.mainContext()
+        
+        let fetchRequest = NSFetchRequest()
+        // Edit the entity name as appropriate.
+        let entity = NSEntityDescription.entityForName("Unit", inManagedObjectContext: context)
+        fetchRequest.entity = entity
+        
+        // Set the batch size to a suitable number.
+        fetchRequest.fetchBatchSize = 20
+        
+        // Edit the sort key as appropriate.
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "phase", ascending: true), NSSortDescriptor(key: "name", ascending: true),NSSortDescriptor(key: "startDate", ascending: false)]
+        
+        fetchRequest.predicate = NSPredicate(format: "event = %@ AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,self.country,self.country)
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"phase", cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        fetchedResultsController.update()
+        
+        return fetchedResultsController
+    }()
     
-    // Set the batch size to a suitable number.
-    fetchRequest.fetchBatchSize = 20
     
-    // Edit the sort key as appropriate.
-    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "phase", ascending: true), NSSortDescriptor(key: "name", ascending: true),NSSortDescriptor(key: "startDate", ascending: false)]
+    // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
     
-    fetchRequest.predicate = NSPredicate(format: "event = %@ AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,self.country,self.country)
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        // In the simplest, most efficient, case, reload the table view.
+        self.tableView.reloadData()
+    }
     
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"phase", cacheName: nil)
-    fetchedResultsController.delegate = self
-    
-    fetchedResultsController.update()
-    
-    return fetchedResultsController
-}()
-
-
-// Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-
-func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    // In the simplest, most efficient, case, reload the table view.
-    self.tableView.reloadData()
-}
-
 }

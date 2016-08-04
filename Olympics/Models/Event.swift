@@ -40,8 +40,22 @@ class Event: NSManagedObject {
         if let items = self.units?.allObjects as? [Unit] {
             if let nextDate = date.nextDate() {
                 let predicate = NSPredicate(format: "startDate > %@ AND startDate < %@",date, nextDate)
-             return (items as NSArray).filteredArrayUsingPredicate(predicate).first as? Unit
+                return (items as NSArray).filteredArrayUsingPredicate(predicate).first as? Unit
             }
+        }
+        return nil
+    }
+    
+    func playingUnit(date: NSDate, withCountry country:Country) -> Unit? {
+        if let items = self.units?.allObjects as? [Unit] {
+           return items.filter({ (unit) -> Bool in
+                if unit.startDate?.compare(date) == .OrderedAscending {
+                    
+                    let status = unit.statusValue()
+                    return status != "progress" && status == "closed"
+                }
+                return false
+            }).first
         }
         return nil
     }
