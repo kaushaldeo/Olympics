@@ -24,6 +24,8 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.showCountry()
         
+         self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
+        
         self.tabBarController?.tabBar.itemPositioning = .Fill
     }
     
@@ -52,16 +54,15 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDAthleteViewCell
         
         // Configure the cell...
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
-        cell.textLabel?.text = athlete.name?.capitalizedString
-        cell.detailTextLabel?.text = athlete.association
+        cell.nameLabel.text = athlete.name?.capitalizedString
+        cell.sportsLabel.text = athlete.discipline?.name
         if let text = athlete.imageName {
-            cell.imageView?.image = UIImage(named: "Icon/\(text).png")
+            cell.iconView.image = UIImage(named: "Icon/\(text).png")
         }
-        cell.imageView?.tintColor = UIColor.blackColor()
         return cell
     }
     

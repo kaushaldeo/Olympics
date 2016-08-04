@@ -49,7 +49,10 @@ class Competitor: NSManagedObject {
     
     func name () -> String? {
         if let type = self.type where type == "team" {
-            return self.team?.name
+            if let string = self.team?.name where string.characters.count > 0 {
+                return string
+            }
+            return self.team?.country?.name
         }
         if let player = self.athlete {
             if let _ = player.name {
