@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C8AA1A61D53A486004F43C2 /* KDEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AA1A51D53A486004F43C2 /* KDEventViewController.swift */; };
 		3CC2D1DF1D45F70900316CD1 /* KDRankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */; };
 		3CC2D1E11D46E33F00316CD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2D1E01D46E33F00316CD1 /* Localizable.strings */; };
 		3CD1458D1D5332FE005A8751 /* KDAthleteViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1458C1D5332FE005A8751 /* KDAthleteViewCell.swift */; };
@@ -86,6 +87,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C8AA1A51D53A486004F43C2 /* KDEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDEventViewController.swift; sourceTree = "<group>"; };
 		3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDRankingCell.swift; sourceTree = "<group>"; };
 		3CC2D1E01D46E33F00316CD1 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		3CD1458B1D5305C2005A8751 /* Olympics1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics1.1.xcdatamodel; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				72DC6C911D224685001E5AF9 /* KDPlayersViewController.swift */,
 				72DC6C931D224697001E5AF9 /* KDMedalsViewController.swift */,
 				725FBEB11D44A520003D81ED /* KDResultViewController.swift */,
+				3C8AA1A51D53A486004F43C2 /* KDEventViewController.swift */,
 				725FBEB51D44DD18003D81ED /* KDInfoViewController.swift */,
 			);
 			path = ViewControllers;
@@ -531,6 +534,7 @@
 				72DA12061D1251DB00AA8EE3 /* Location+CoreDataProperties.swift in Sources */,
 				72DA10901D0BECB500AA8EE3 /* KDScrollerBar.swift in Sources */,
 				725FBEC01D45540E003D81ED /* InfiniteScrollView.swift in Sources */,
+				3C8AA1A61D53A486004F43C2 /* KDEventViewController.swift in Sources */,
 				72D0F5C91D2C248600400F03 /* KDSplashViewController.swift in Sources */,
 				72DA121A1D1256C900AA8EE3 /* KDAPIManager.swift in Sources */,
 				724FA90F1D31A74600ADCB8D /* Result.swift in Sources */,

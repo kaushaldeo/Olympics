@@ -13,6 +13,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     var event : Event!
     
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var eventLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -88,6 +89,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
         self.addBackButton()
         
+        self.headerView.backgroundColor = self.navigationController?.navigationBar.barTintColor
         self.view.backgroundColor = UIColor.backgroundColor()
         self.tableView.backgroundView = nil
         self.tableView.backgroundColor = UIColor.backgroundColor()

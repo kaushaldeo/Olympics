@@ -19,6 +19,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 240, green: 91, blue: 34)
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -108,6 +109,32 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
+        let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
+        var events = [Event]()
+        if let event = athlete.events?.allObjects as? [Event] {
+            events = event
+        }
+        if let teams = athlete.teams?.allObjects as? [Team] {
+            for team in teams {
+                if let event = team.events?.allObjects as? [Event] {
+                    events += event
+                }
+            }
+        }
+        if events.count == 1 {
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kResultViewController") as? KDResultViewController {
+                viewController.event = events[0]
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+            
+        }
+        else if events.count > 1 {
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kEventViewController") as? KDEventViewController {
+                viewController.events = events
+                viewController.navigationItem.title = athlete.discipline?.name
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
     }
     
     

@@ -668,7 +668,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rt8-eG-nKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="175.5" y="1371.75"/>
+            <point key="canvasLocation" x="-714" y="1386.75"/>
         </scene>
         <!--Medals-->
         <scene sceneID="TQR-5K-RlR">
@@ -1477,6 +1477,7 @@
                     </view>
                     <connections>
                         <outlet property="eventLabel" destination="3XY-oM-QQ2" id="MIO-RD-1Hm"/>
+                        <outlet property="headerView" destination="G2M-eR-O61" id="PMx-HI-xwH"/>
                         <outlet property="tableView" destination="b4Q-ib-knh" id="xfF-cQ-8un"/>
                     </connections>
                 </viewController>
@@ -1588,7 +1589,7 @@
         <scene sceneID="Sjw-O6-dyP">
             <objects>
                 <tableViewController storyboardIdentifier="kPlayersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zhm-w5-xHt" customClass="KDPlayersViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" id="jYR-6Q-mQ3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" id="jYR-6Q-mQ3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1701,10 +1702,49 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Athlete" id="ISG-Ns-Oej"/>
+                    <connections>
+                        <segue destination="800-Oo-6Cm" kind="show" identifier="eventList" id="ve3-j8-0vk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wB5-Cl-svh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1249.5" y="1371.75"/>
+        </scene>
+        <!--Event View Controller-->
+        <scene sceneID="jO6-Ok-ZMn">
+            <objects>
+                <tableViewController storyboardIdentifier="kEventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="800-Oo-6Cm" customClass="KDEventViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="yc7-Ym-HBS">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="Qb4-80-2Ek" style="IBUITableViewCellStyleDefault" id="99o-gO-Vyf">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="99o-gO-Vyf" id="YgZ-w3-a5r">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qb4-80-2Ek">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="800-Oo-6Cm" id="7ZN-g4-pag"/>
+                            <outlet property="delegate" destination="800-Oo-6Cm" id="p5N-UY-uJs"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GHI-hS-nOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2089.5" y="1371.75"/>
         </scene>
         <!--Athlete-->
         <scene sceneID="lhN-wa-kdx">
