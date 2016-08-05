@@ -64,7 +64,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // Configure the cell...
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
         cell.nameLabel.text = athlete.printName().capitalizedString
-        cell.sportsLabel.text = athlete.discipline!.name!
+        cell.sportsLabel.text = athlete.discipline?.name
         if let text = athlete.imageName {
             cell.iconView.image = UIImage(named: "Icon/\(text).png")
         }
