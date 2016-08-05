@@ -19,10 +19,17 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 240, green: 91, blue: 34)
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.showCountry()
+        
+         self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 64.0
+       
         
         self.tabBarController?.tabBar.itemPositioning = .Fill
     }
@@ -52,16 +59,15 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDAthleteViewCell
         
         // Configure the cell...
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
-        cell.textLabel?.text = athlete.name
-        cell.detailTextLabel?.text = athlete.association
+        cell.nameLabel.text = athlete.printName().capitalizedString
+        cell.sportsLabel.text = athlete.discipline?.name
         if let text = athlete.imageName {
-            cell.imageView?.image = UIImage(named: "Icon/\(text).png")
+            cell.iconView.image = UIImage(named: "Icon/\(text).png")
         }
-        cell.imageView?.tintColor = UIColor.blackColor()
         return cell
     }
     
@@ -103,6 +109,32 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
+        let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
+        var events = [Event]()
+        if let event = athlete.events?.allObjects as? [Event] {
+            events = event
+        }
+        if let teams = athlete.teams?.allObjects as? [Team] {
+            for team in teams {
+                if let event = team.events?.allObjects as? [Event] {
+                    events += event
+                }
+            }
+        }
+        if events.count == 1 {
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kResultViewController") as? KDResultViewController {
+                viewController.event = events[0]
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+            
+        }
+        else if events.count > 1 {
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kEventViewController") as? KDEventViewController {
+                viewController.events = events
+                viewController.navigationItem.title = athlete.discipline?.name
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
     }
     
     
@@ -130,9 +162,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
-        
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "discipline.name", ascending: true),NSSortDescriptor(key: "lastName", ascending: true),NSSortDescriptor(key: "firstName", ascending: true)]
         
         if  let country = Country.country(context) {
             fetchRequest.predicate = NSPredicate(format: "country = %@", country)
@@ -141,7 +171,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"discipline.name", cacheName: nil)
         fetchedResultsController.delegate = self
         
         fetchedResultsController.update()

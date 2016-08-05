@@ -110,12 +110,12 @@ extension String {
     }
     
     func size(font:UIFont, width:CGFloat, numberOfLines:Int) -> CGSize {
-        var size = CGSizeMake(width, CGFloat.max)
-        if numberOfLines > 0 {
-            size.height = CGFloat(numberOfLines)*font.lineHeight
-        }
-        let frame = self.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        return frame.size
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.max))
+        label.text = self
+        label.font = font
+        label.numberOfLines = numberOfLines
+        label.sizeToFit()
+        return label.bounds.size
     }
     
     func localized(comment:String = "") -> String {

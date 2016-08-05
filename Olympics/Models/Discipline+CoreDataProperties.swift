@@ -2,7 +2,7 @@
 //  Discipline+CoreDataProperties.swift
 //  Olympics
 //
-//  Created by Kaushal Deo on 6/15/16.
+//  Created by Kaushal Deo on 8/4/16.
 //  Copyright © 2016 Scorpion Inc. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,5 +21,6 @@ extension Discipline {
     @NSManaged var status: Bool
     @NSManaged var events: NSSet?
     @NSManaged var sport: Sport?
+    @NSManaged var athletes: NSSet?
 
 }

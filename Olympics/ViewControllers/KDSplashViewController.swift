@@ -47,8 +47,12 @@ class KDSplashViewController: UIViewController {
     
     
     func showView() {
-        if let _ = Country.country(NSManagedObjectContext.mainContext()) {
+        if let country = Country.country(NSManagedObjectContext.mainContext()) {
+            if let string = country.alias {
+                FIRMessaging.messaging().subscribeToTopic(string)
+            }
             self.performSegueWithIdentifier("showEvent", sender: nil)
+            
         }
         else {
             self.performSegueWithIdentifier("showCountry", sender: nil)
@@ -72,7 +76,7 @@ class KDSplashViewController: UIViewController {
                 strongSelf.loadData()
                 strongSelf.startAnimation()
             }
-        }))
+            }))
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     

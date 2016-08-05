@@ -668,7 +668,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rt8-eG-nKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="175.5" y="1371.75"/>
+            <point key="canvasLocation" x="-714" y="1386.75"/>
         </scene>
         <!--Medals-->
         <scene sceneID="TQR-5K-RlR">
@@ -1477,6 +1477,7 @@
                     </view>
                     <connections>
                         <outlet property="eventLabel" destination="3XY-oM-QQ2" id="MIO-RD-1Hm"/>
+                        <outlet property="headerView" destination="G2M-eR-O61" id="PMx-HI-xwH"/>
                         <outlet property="tableView" destination="b4Q-ib-knh" id="xfF-cQ-8un"/>
                     </connections>
                 </viewController>
@@ -1588,40 +1589,111 @@
         <scene sceneID="Sjw-O6-dyP">
             <objects>
                 <tableViewController storyboardIdentifier="kPlayersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zhm-w5-xHt" customClass="KDPlayersViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jYR-6Q-mQ3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" id="jYR-6Q-mQ3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="UKb-Ww-291" detailTextLabel="96i-Qs-M4v" style="IBUITableViewCellStyleSubtitle" id="Leh-PX-6A2">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="Leh-PX-6A2" customClass="KDAthleteViewCell" customModule="Olympics" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Leh-PX-6A2" id="CcM-sy-x0O">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UKb-Ww-291">
-                                            <rect key="frame" x="15" y="2" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact">
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="phL-D6-j5g">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="idS-Zg-tv1"/>
+                                                <constraint firstAttribute="width" constant="30" id="s3H-4L-Ujx"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="idS-Zg-tv1"/>
+                                                    <exclude reference="s3H-4L-Ujx"/>
+                                                </mask>
                                             </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="idS-Zg-tv1"/>
+                                                    <include reference="s3H-4L-Ujx"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="20" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6x-XJ-XIs">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="96i-Qs-M4v">
-                                            <rect key="frame" x="15" y="22.5" width="59" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="301" placeholderIntrinsicHeight="17" text="Sports" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWL-QQ-tcT">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact">
-                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            </variation>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="lWL-QQ-tcT" firstAttribute="top" secondItem="L6x-XJ-XIs" secondAttribute="bottom" id="0ak-Hj-Y04"/>
+                                        <constraint firstItem="L6x-XJ-XIs" firstAttribute="top" secondItem="CcM-sy-x0O" secondAttribute="top" constant="10" id="8L5-Ab-BKc">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                                        </constraint>
+                                        <constraint firstAttribute="bottom" secondItem="lWL-QQ-tcT" secondAttribute="bottom" constant="0.5" id="Bct-8M-Jus">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                                        </constraint>
+                                        <constraint firstItem="phL-D6-j5g" firstAttribute="leading" secondItem="CcM-sy-x0O" secondAttribute="leading" constant="16" id="Huu-yX-D5p"/>
+                                        <constraint firstItem="lWL-QQ-tcT" firstAttribute="leading" secondItem="phL-D6-j5g" secondAttribute="trailing" constant="10" id="Ja2-I3-bvh"/>
+                                        <constraint firstAttribute="trailing" secondItem="lWL-QQ-tcT" secondAttribute="trailing" constant="269" id="Mee-B7-gA7">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                        </constraint>
+                                        <constraint firstAttribute="trailing" secondItem="L6x-XJ-XIs" secondAttribute="trailing" constant="269" id="NGX-uH-PUN">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                        </constraint>
+                                        <constraint firstItem="phL-D6-j5g" firstAttribute="centerY" secondItem="CcM-sy-x0O" secondAttribute="centerY" id="Oyn-Ic-NN4"/>
+                                        <constraint firstItem="L6x-XJ-XIs" firstAttribute="leading" secondItem="phL-D6-j5g" secondAttribute="trailing" constant="10" id="yed-8U-sEj"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="phL-D6-j5g"/>
+                                            <exclude reference="L6x-XJ-XIs"/>
+                                            <exclude reference="lWL-QQ-tcT"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="8L5-Ab-BKc"/>
+                                            <exclude reference="NGX-uH-PUN"/>
+                                            <exclude reference="yed-8U-sEj"/>
+                                            <exclude reference="0ak-Hj-Y04"/>
+                                            <exclude reference="Bct-8M-Jus"/>
+                                            <exclude reference="Ja2-I3-bvh"/>
+                                            <exclude reference="Mee-B7-gA7"/>
+                                            <exclude reference="Huu-yX-D5p"/>
+                                            <exclude reference="Oyn-Ic-NN4"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="phL-D6-j5g"/>
+                                            <include reference="L6x-XJ-XIs"/>
+                                            <include reference="lWL-QQ-tcT"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="8L5-Ab-BKc"/>
+                                            <include reference="NGX-uH-PUN"/>
+                                            <include reference="yed-8U-sEj"/>
+                                            <include reference="0ak-Hj-Y04"/>
+                                            <include reference="Bct-8M-Jus"/>
+                                            <include reference="Ja2-I3-bvh"/>
+                                            <include reference="Mee-B7-gA7"/>
+                                            <include reference="Huu-yX-D5p"/>
+                                            <include reference="Oyn-Ic-NN4"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="iconView" destination="phL-D6-j5g" id="xBM-gE-zXQ"/>
+                                    <outlet property="nameLabel" destination="L6x-XJ-XIs" id="Tyw-fL-YeN"/>
+                                    <outlet property="sportsLabel" destination="lWL-QQ-tcT" id="cVY-fr-EFF"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1630,10 +1702,49 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Athlete" id="ISG-Ns-Oej"/>
+                    <connections>
+                        <segue destination="800-Oo-6Cm" kind="show" identifier="eventList" id="ve3-j8-0vk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wB5-Cl-svh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1249.5" y="1371.75"/>
+        </scene>
+        <!--Event View Controller-->
+        <scene sceneID="jO6-Ok-ZMn">
+            <objects>
+                <tableViewController storyboardIdentifier="kEventViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="800-Oo-6Cm" customClass="KDEventViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="yc7-Ym-HBS">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" textLabel="Qb4-80-2Ek" style="IBUITableViewCellStyleDefault" id="99o-gO-Vyf">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="99o-gO-Vyf" id="YgZ-w3-a5r">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qb4-80-2Ek">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="800-Oo-6Cm" id="7ZN-g4-pag"/>
+                            <outlet property="delegate" destination="800-Oo-6Cm" id="p5N-UY-uJs"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GHI-hS-nOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2089.5" y="1371.75"/>
         </scene>
         <!--Athlete-->
         <scene sceneID="lhN-wa-kdx">

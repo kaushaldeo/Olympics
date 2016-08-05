@@ -16,6 +16,7 @@ class KDEventParser: KDParseOperation {
     
     var competitor : Competitor? = nil
     
+    
     lazy var dateFormatter : NSDateFormatter = {
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
@@ -28,6 +29,7 @@ class KDEventParser: KDParseOperation {
             let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
             self.event = self.context.findFirst(Event.classForCoder(), predicate: predicate) as? Event
         }
+        
         else if elementName == "unit" {
             let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
             if let unit = self.context.findOrCreate(Unit.classForCoder(), predicate: predicate) as? Unit {

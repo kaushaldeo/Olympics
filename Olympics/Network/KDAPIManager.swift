@@ -124,6 +124,7 @@ class KDAPIManager : NSObject {
     
     
     //MARK: - Web-Service Methods
+  
     func updateBackground(notification: NSNotification) {
         self.loadConfiguration(nil)
     }
@@ -141,7 +142,7 @@ class KDAPIManager : NSObject {
                 }
             }, failure: { (task, error) in
                 //Load the data regardless of error while getting config data
-               self.loadData(block)
+                self.loadData(block)
         })
         KDAPIManager.sharedInstance.managedObjectContext.saveContext()
     }

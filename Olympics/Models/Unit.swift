@@ -94,6 +94,25 @@ class Unit: NSManagedObject {
     }
     
     
+    func statusValue() -> String {
+        if let string = self.status?.lowercaseString {
+            if string.containsString("schedu") {
+                return "schedule"
+            }
+            else if string.containsString("progress") {
+                return "progress"
+            }
+            else if string.containsString("close") ||  string.containsString("complete"){
+                return "closed"
+            }
+            return "notscheduled"
+            
+        }
+        
+        return "notscheduled"
+    }
+    
+    
     class func minDay(context: NSManagedObjectContext) -> NSDate {
         let sortDescriptor = NSSortDescriptor(key: "startDate", ascending: true)
         let predicate = NSPredicate(format: "startDate != nil")

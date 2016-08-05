@@ -13,6 +13,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     var event : Event!
     
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var eventLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -88,11 +89,15 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
         self.addBackButton()
         
+        self.headerView.backgroundColor = self.navigationController?.navigationBar.barTintColor
         self.view.backgroundColor = UIColor.backgroundColor()
         self.tableView.backgroundView = nil
         self.tableView.backgroundColor = UIColor.backgroundColor()
         
         self.tableView.addSubview(self.refreshControl)
+        
+        let unit = self.event.playingUnit(NSDate(), withCountry: self.country)
+        print(unit?.statusValue())
     }
     
     
@@ -146,64 +151,6 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     
     //MARK: Table View Delegate Method
-     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
-        var height : CGFloat = 0.0
-        if let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
-            let competitors = unit.competitors!.allObjects as! [Competitor]
-            var string = ""
-            if let competitor = competitors.first {
-                if let text = competitor.name() {
-                    height = max(height,text.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 158.0)/2).height)
-                }
-                string += competitor.resultValue ?? ""
-            }
-            string += " - "
-            if let competitor = competitors.last {
-                if let text = competitor.name() {
-                    height = max(height,text.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 158.0)/2).height)
-                }
-                string += competitor.resultValue ?? ""
-            }
-            if let status = unit.status?.lowercaseString {
-                if status == "closed" || status == "inprogress" {
-                    
-                }
-                else {
-                    if let date = unit.startDate {
-                        string = date.time()
-                    }
-                }
-            }
-            else {
-                if let date = unit.startDate {
-                    string = date.time()
-                }
-            }
-            if #available(iOS 8.2, *) {
-                height = max(height,text.size(UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold), width: 80.0).height)
-            } else {
-                height = max(height,text.size(UIFont.boldSystemFontOfSize(14), width: 80.0).height)
-            }
-            
-            return height + 24.0
-        }
-        var competitors = unit.competitors!.allObjects as! [Competitor]
-        competitors = competitors.filter({ (competitor) -> Bool in
-            return competitor.athlete?.country == self.country || competitor.team?.country == self.country
-        })
-        
-        for competitor in competitors {
-            let string = competitor.resultValue ?? ""
-            let width = string.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 80)).width + 80.0
-            if let text = competitor.name() {
-                height += text.size(UIFont.systemFontOfSize(14), width:CGRectGetWidth(tableView.frame) - width).height + 20
-            }
-        }
-        
-        return height
-    }
-
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
         var height : CGFloat = 0.0
@@ -223,29 +170,24 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
                 }
                 string += competitor.resultValue ?? ""
             }
-            if let status = unit.status?.lowercaseString {
-                if status == "closed" || status == "inprogress" {
-                    
-                }
-                else {
-                    if let date = unit.startDate {
-                        string = date.time()
-                    }
-                }
+            let status = unit.statusValue()
+            
+            if status == "closed" || status == "progress" {
+                
             }
-            else {
-                if let date = unit.startDate {
-                    string = date.time()
-                }
+            else if let date = unit.startDate {
+                string = date.time()
             }
+            
             if #available(iOS 8.2, *) {
                 height = max(height,text.size(UIFont.systemFontOfSize(14, weight: UIFontWeightSemibold), width: 80.0).height)
             } else {
                 height = max(height,text.size(UIFont.boldSystemFontOfSize(14), width: 80.0).height)
             }
-           
+            
             return height + 24.0
         }
+        
         var competitors = unit.competitors!.allObjects as! [Competitor]
         competitors = competitors.filter({ (competitor) -> Bool in
             return competitor.athlete?.country == self.country || competitor.team?.country == self.country

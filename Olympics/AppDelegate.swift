@@ -35,8 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
+        // application.registerUserNotificationSettings(<#T##notificationSettings: UIUserNotificationSettings##UIUserNotificationSettings#>)
+        let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
         FIRApp.configure()
+        
         return true
     }
     
@@ -64,6 +69,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
     }
+    
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        debugPrint(deviceToken)
+        if let country = Country.country(NSManagedObjectContext.mainContext()) {
+            if let string = country.alias {
+                FIRMessaging.messaging().subscribeToTopic(string)
+            }
+        }
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        debugPrint(error)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("Kaushal %@", userInfo)
+    }
+    
+    
+    // [START receive_message]
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+                     fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        
+        // Print message ID.
+        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        
+        // TODO: Handle data of notification
+        if let identifier = userInfo["competitor_id"] as? String {
+            //TODO: Process the identifier for team page
+            print(identifier)
+            
+        }
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            completionHandler(.NewData)
+            application.applicationIconBadgeNumber = 0
+        }
+    }
+    // [END receive_message]
+    
     
     
 }
