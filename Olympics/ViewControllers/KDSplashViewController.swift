@@ -50,6 +50,8 @@ class KDSplashViewController: UIViewController {
         else {
             self.performSegueWithIdentifier("showCountry", sender: nil)
         }
+        
+        KDUpdate.sharedInstance.update()
     }
     
     func process(error:NSError) {

@@ -183,9 +183,11 @@ class KDEventsViewController: UIViewController {
         
         let context = NSManagedObjectContext.mainContext()
         if let country = Country.country(context) {
-            if let events = country.events where events.count > 0 {
-                self.populateDate(country)
-                return
+            if KDUpdate.sharedInstance.shouldSave() {
+                if let events = country.events where events.count > 0 {
+                    self.populateDate(country)
+                    return
+                }
             }
             KDAPIManager.sharedInstance.updateProfile(country, { [weak self] (error) in
                 if let strongSelf = self {

@@ -19,8 +19,9 @@ class KDUpdate: NSObject {
         if let text = info["message"] {
             self.message = text
         }
-        
-        self.update()
+        if let text = info["cacheConfigDate"], let miliseconds = Double(text) {
+           self.cacheConfigDate = NSDate(timeIntervalSince1970: miliseconds/1000)
+        }
     }
     
     func update() {
@@ -86,8 +87,9 @@ class KDUpdate: NSObject {
     private var applicationName : String
     private var applicationBundleID : String?
     private var applicationStoreVersion: String?
-    
     private var message : String
+    
+    var cacheConfigDate : NSDate?
     
     override init() {
         let bundle = NSBundle.mainBundle()
@@ -164,6 +166,14 @@ class KDUpdate: NSObject {
         if UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
         }
+    }
+    
+    
+    func shouldSave() -> Bool {
+        if let date = self.cacheConfigDate {
+           return NSDate().compare(date) != .OrderedAscending
+        }
+        return false
     }
     
 }

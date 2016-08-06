@@ -133,8 +133,10 @@ extension NSUserDefaults {
     }
     
     class func country(loaded:Bool) {
-        let setting = NSUserDefaults.standardUserDefaults()
-        setting.setBool(loaded, forKey: "kLoadCountry")
+        if KDUpdate.sharedInstance.shouldSave() {
+            let setting = NSUserDefaults.standardUserDefaults()
+            setting.setBool(loaded, forKey: "kLoadCountry")
+        }
     }
     
     class func loadSchedule() -> Bool {
@@ -143,7 +145,9 @@ extension NSUserDefaults {
     }
     
     class func schedule(loaded:Bool) {
-        let setting = NSUserDefaults.standardUserDefaults()
-        setting.setBool(loaded, forKey: "kLoadSchedule")
+        if KDUpdate.sharedInstance.shouldSave() {
+            let setting = NSUserDefaults.standardUserDefaults()
+            setting.setBool(loaded, forKey: "kLoadSchedule")
+        }
     }
 }
