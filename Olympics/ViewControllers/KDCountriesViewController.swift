@@ -10,13 +10,46 @@ import UIKit
 import CoreData
 import Firebase
 
-class KDCountriesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class KDCountriesViewController: UITableViewController, NSFetchedResultsControllerDelegate,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+    
+    
+    /// Search controller to help us with filtering.
+    lazy var searchController: UISearchController = {
+        var searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.tintColor = UIColor.whiteColor()
+        //searchController.na
+        searchController.searchBar.delegate = self    // so we can monitor text changes + others
+        
+        /*
+         Search is now just presenting a view controller. As such, normal view controller
+         presentation semantics apply. Namely that presentation will walk up the view controller
+         hierarchy until it finds the root view controller or one that defines a presentation context.
+         */
+        return searchController
+    }()
+    
+    /// Secondary search results table view.
+    lazy var resultsTableController: KDCountryResultController = {
+        var resultsTableController = self.storyboard!.instantiateViewControllerWithIdentifier("kCountryResultController") as! KDCountryResultController
+        return resultsTableController
+    }()
+    
+    
+    lazy var searchBar : UISearchBar = {
+        var searchBar = UISearchBar()
+        searchBar.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        searchBar.delegate = self
+        return searchBar
+    }()
     
     
     //MARK: - Private Methods
-    
     func cancelTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("replace", sender: nil)
+        //self.performSegueWithIdentifier("replace", sender: nil)
     }
     
     
@@ -33,8 +66,13 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 103, blue: 173)
+        let color =  UIColor(red: 0, green: 103, blue: 173)
+        self.navigationController?.navigationBar.barTintColor = color
+        self.searchController.searchBar.barTintColor = color
+        self.searchController.searchBar.backgroundColor = color
+       // self.tableView.tableHeaderView = self.searchController.searchBar
+        self.definesPresentationContext = true
+        self.navigationItem.titleView = self.searchController.searchBar
         
         let setting = NSUserDefaults.standardUserDefaults()
         if let _ = setting.valueForKey("kCountry") {
@@ -42,7 +80,8 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         }
         
         self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
-
+        
+        
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style: .Plain, target: nil, action: nil)
     }
@@ -86,15 +125,15 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
     }
     
     
-    
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-        return self.fetchedResultsController.sectionIndexTitles
-    }
-    
-    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return self.fetchedResultsController.sectionForSectionIndexTitle(title, atIndex: index)
-    }
-    
+    /*
+     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+     return self.fetchedResultsController.sectionIndexTitles
+     }
+     
+     override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+     return self.fetchedResultsController.sectionForSectionIndexTitle(title, atIndex: index)
+     }
+     */
     /*
      // Override to support conditional editing of the table view.
      override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -131,13 +170,15 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
      */
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let country = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Country
-        let setting = NSUserDefaults.standardUserDefaults()
-        let url = country.objectID.URIRepresentation().absoluteString
-        setting.setValue(url, forKey: "kCountry");
-        if let string = country.alias {
-            FIRMessaging.messaging().subscribeToTopic(string)
-        }
+        /*
+         let country = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Country
+         let setting = NSUserDefaults.standardUserDefaults()
+         let url = country.objectID.URIRepresentation().absoluteString
+         setting.setValue(url, forKey: "kCountry");
+         if let string = country.alias {
+         FIRMessaging.messaging().subscribeToTopic(string)
+         }
+         */
     }
     
     /*
@@ -219,5 +260,23 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         // In the simplest, most efficient, case, reload the table view.
         self.tableView.reloadData()
     }
+    
+    
+    // MARK: UISearchBarDelegate
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    // MARK: UISearchResultsUpdating
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        // Strip out all the leading and trailing spaces.
+        let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
+        let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
+        let searchItems = strippedString.componentsSeparatedByString(" ") as [String]
+        
+        
+    }
+    
     
 }
