@@ -192,4 +192,14 @@ extension NSUserDefaults {
         let setting = NSUserDefaults.standardUserDefaults()
         setting.setObject(sum, forKey: "kChecksum")
     }
+    
+    class func isUpdate(version: String) -> Bool {
+        let setting = NSUserDefaults.standardUserDefaults()
+        if let text = setting.valueForKey("kUpdateVersion") as? String {
+            return text != version
+        }
+        setting.setObject(version, forKey: "kUpdateVersion")
+        return true
+    }
+    
 }

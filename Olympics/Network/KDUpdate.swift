@@ -118,7 +118,7 @@ class KDUpdate: NSObject {
     
     override init() {
         let bundle = NSBundle.mainBundle()
-        applicationVersion = "1.0"
+        applicationVersion = "1.0.1"
         if let text = bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String {
             applicationVersion = text
         }
@@ -133,6 +133,10 @@ class KDUpdate: NSObject {
         message = "Would you like to update it now?"
         
         cacheCountryChecksum = NSUserDefaults.checkSum()
+        
+        if NSUserDefaults.isUpdate(applicationVersion) {
+            cacheCountryChecksum = "1000"
+        }
         
         super.init()
         
