@@ -97,7 +97,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         self.tableView.addSubview(self.refreshControl)
         
         let unit = self.event.playingUnit(NSDate(), withCountry: self.country)
-        print(unit?.statusValue())
+        debugPrint(unit?.statusValue())
     }
     
     

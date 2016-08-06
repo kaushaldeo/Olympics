@@ -60,4 +60,22 @@ class Event: NSManagedObject {
         return nil
     }
     
+    func addTeam(team: Team) {
+        let sets = NSMutableSet()
+        if let items = self.teams where items.count > 0 {
+            sets.addObjectsFromArray(items.allObjects)
+        }
+        sets.addObject(team)
+        self.teams = sets
+    }
+    
+    func addParticipant(participant: Athlete) {
+        let sets = NSMutableSet()
+        if let items = self.participants where items.count > 0 {
+            sets.addObjectsFromArray(items.allObjects)
+        }
+        sets.addObject(participant)
+        self.participants = sets
+    }
+    
 }

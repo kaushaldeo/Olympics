@@ -171,8 +171,13 @@ class KDEventsViewController: UIViewController {
             controller.parentController = self
             self.pagerController.addContent(title, viewController: controller)
         }
-        
-        self.pagerController.reloadData()
+        var index = 0
+        if let date = NSDate().today() {
+            if let indexOfDay = self.days.indexOf(date) {
+               index = indexOfDay
+            }
+        }
+        self.pagerController.reloadData(index)
     }
     
     func loadData() {

@@ -64,7 +64,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // Configure the cell...
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
         cell.nameLabel.text = athlete.printName().capitalizedString
-        cell.sportsLabel.text = athlete.discipline?.name
+        cell.sportsLabel.text = athlete.discipline?.name ?? athlete.association
         if let text = athlete.imageName {
             cell.iconView.image = UIImage(named: "Icon/\(text).png")
         }
@@ -165,7 +165,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "discipline.name", ascending: true),NSSortDescriptor(key: "lastName", ascending: true),NSSortDescriptor(key: "firstName", ascending: true)]
         
         if  let country = Country.country(context) {
-            fetchRequest.predicate = NSPredicate(format: "country = %@", country)
+            fetchRequest.predicate = NSPredicate(format: "country = %@ AND NOT (discipline = nil)", country)
         }
         
         

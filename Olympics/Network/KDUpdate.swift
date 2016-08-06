@@ -22,11 +22,7 @@ class KDUpdate: NSObject {
         if let text = info["cacheCountryChecksum"] {
             self.shouldSave = self.cacheCountryChecksum.compare(text, options: .NumericSearch) != .OrderedSame
             if self.shouldSave {
-                let persistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator
-                if let persistentStore = persistentStoreCoordinator.persistentStores.last {
-                    try! persistentStoreCoordinator.removePersistentStore(persistentStore)
-                }
-                persistentStoreCoordinator.addStore()
+                KDAPIManager.sharedInstance.updateDatabase()
                 self.updateUI()
             }
             self.cacheCountryChecksum = text

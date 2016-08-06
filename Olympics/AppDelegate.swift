@@ -85,7 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        print("Kaushal %@", userInfo)
     }
     
     
@@ -96,12 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // this callback will not be fired till the user taps on the notification launching the application.
         
         // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        debugPrint("Message ID: \(userInfo["gcm.message_id"]!)")
         
         // TODO: Handle data of notification
         if let identifier = userInfo["competitor_id"] as? String {
             //TODO: Process the identifier for team page
-            print(identifier)
+            debugPrint(identifier)
             
         }
         
