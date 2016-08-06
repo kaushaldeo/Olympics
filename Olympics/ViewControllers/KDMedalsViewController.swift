@@ -116,6 +116,9 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         cell.silverLabel.text = "\(country.silver)"
         cell.brozeLabel.text = "\(country.bronze)"
         cell.rankLabel.text = "\(indexPath.row + 1)"
+        if country.total() == 0 {
+            cell.rankLabel.text = "-"
+        }
         if let text = country.alias?.lowercaseString {
             cell.iconView.image = UIImage(named: "Images/\(text).png")
         }

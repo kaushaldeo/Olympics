@@ -28,4 +28,13 @@ class Country: NSManagedObject {
         return nil
     }
     
+    
+    func addEvent(event: Event) {
+        let sets = NSMutableSet()
+        if let items = self.events where items.count > 0 {
+            sets.addObjectsFromArray(items.allObjects)
+        }
+        sets.addObject(event)
+        self.events = sets
+    }
 }

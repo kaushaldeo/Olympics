@@ -134,9 +134,13 @@ class KDUpdate: NSObject {
         
         cacheCountryChecksum = NSUserDefaults.checkSum()
         
-        if NSUserDefaults.isUpdate(applicationVersion) {
-            cacheCountryChecksum = "1000"
+        if let text = bundle.objectForInfoDictionaryKey("CFBundleVersion") as? String {
+            if NSUserDefaults.isUpdate(text) {
+                cacheCountryChecksum = "0"
+            }
         }
+       
+        
         
         super.init()
         

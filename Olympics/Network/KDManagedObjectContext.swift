@@ -196,6 +196,7 @@ extension NSUserDefaults {
     class func isUpdate(version: String) -> Bool {
         let setting = NSUserDefaults.standardUserDefaults()
         if let text = setting.valueForKey("kUpdateVersion") as? String {
+            setting.setObject(version, forKey: "kUpdateVersion")
             return text != version
         }
         setting.setObject(version, forKey: "kUpdateVersion")

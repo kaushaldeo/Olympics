@@ -38,6 +38,7 @@ class KDProfileParser: KDParseOperation {
                 event.name = attributeDict["description"]
                 event.gender = attributeDict["gender"]
                 self.event = event
+                self.country?.addEvent(event)
             }
         }
         else if elementName == "discipline" {

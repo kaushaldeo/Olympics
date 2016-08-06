@@ -201,7 +201,7 @@ class KDUnitsViewController: UITableViewController, NSFetchedResultsControllerDe
         
         if  let country = Country.country(context) {
             if let nextDate = self.date.nextDate() {
-                fetchRequest.predicate = NSPredicate(format: "SUBQUERY(countries, $country, $country = %@).@count != 0 AND SUBQUERY(units, $unit, $unit.startDate > %@ AND $unit.startDate < %@).@count != 0", country,self.date, nextDate)
+                fetchRequest.predicate = NSPredicate(format: "SUBQUERY(countries, $country, $country = %@).@count != 0 AND SUBQUERY(units, $unit, $unit.startDate > %@ AND $unit.startDate < %@ AND NOT ($unit.phase contains[cd] %@)).@count != 0", country,self.date, nextDate,"Training")
             }
             else {
                 fetchRequest.predicate = NSPredicate(format: "event.country = %@", country)

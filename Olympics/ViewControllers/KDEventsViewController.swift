@@ -149,6 +149,16 @@ class KDEventsViewController: UIViewController {
         self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    func showToday() {
+        var index = 0
+        if let date = NSDate().today() {
+            if let indexOfDay = self.days.indexOf(date) {
+                index = indexOfDay
+            }
+        }
+        self.pagerController.reloadData(index)
+    }
+    
     func populateDate(country: Country) {
         self.imageView.layer.removeAllAnimations()
         let context = NSManagedObjectContext.mainContext()
@@ -171,13 +181,7 @@ class KDEventsViewController: UIViewController {
             controller.parentController = self
             self.pagerController.addContent(title, viewController: controller)
         }
-        var index = 0
-        if let date = NSDate().today() {
-            if let indexOfDay = self.days.indexOf(date) {
-               index = indexOfDay
-            }
-        }
-        self.pagerController.reloadData(index)
+        
     }
     
     func loadData() {
@@ -187,6 +191,7 @@ class KDEventsViewController: UIViewController {
             if KDUpdate.sharedInstance.shouldSave == false {
                 if let events = country.events where events.count > 0 {
                     self.populateDate(country)
+                    self.performSelector(#selector(KDEventsViewController.showToday), withObject: nil, afterDelay: 0.3)
                     return
                 }
             }
@@ -197,6 +202,7 @@ class KDEventsViewController: UIViewController {
                         return
                     }
                     strongSelf.populateDate(country)
+                    strongSelf.showToday()
                 }
                 })
             self.startAnimation()
