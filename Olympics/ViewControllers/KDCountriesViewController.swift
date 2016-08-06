@@ -32,12 +32,6 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         return searchController
     }()
     
-    /// Secondary search results table view.
-    lazy var resultsTableController: KDCountryResultController = {
-        var resultsTableController = self.storyboard!.instantiateViewControllerWithIdentifier("kCountryResultController") as! KDCountryResultController
-        return resultsTableController
-    }()
-    
     
     lazy var searchBar : UISearchBar = {
         var searchBar = UISearchBar()
@@ -70,7 +64,7 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         self.navigationController?.navigationBar.barTintColor = color
         self.searchController.searchBar.barTintColor = color
         self.searchController.searchBar.backgroundColor = color
-       // self.tableView.tableHeaderView = self.searchController.searchBar
+        // self.tableView.tableHeaderView = self.searchController.searchBar
         self.definesPresentationContext = true
         self.navigationItem.titleView = self.searchController.searchBar
         
@@ -219,48 +213,48 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         return fetchedResultsController
     }()
     
-    /*
-     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-     self.tableView.beginUpdates()
-     }
-     
-     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-     switch type {
-     case .Insert:
-     self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-     case .Delete:
-     self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-     default:
-     return
-     }
-     }
-     
-     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-     switch type {
-     case .Insert:
-     tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-     case .Delete:
-     tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-     case .Update:
-     tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-     case .Move:
-     tableView.moveRowAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
-     }
-     }
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-     self.tableView.endUpdates()
-     }
-     */
     
-    
-    // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        // In the simplest, most efficient, case, reload the table view.
-        self.tableView.reloadData()
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.beginUpdates()
     }
     
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        switch type {
+        case .Insert:
+            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Delete:
+            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        default:
+            return
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Update:
+            tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Move:
+            tableView.moveRowAtIndexPath(indexPath!, toIndexPath: newIndexPath!)
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
+    }
+    
+    
+    /*
+     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
+     
+     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+     // In the simplest, most efficient, case, reload the table view.
+     self.tableView.reloadData()
+     }
+     */
     
     // MARK: UISearchBarDelegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -273,8 +267,20 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         // Strip out all the leading and trailing spaces.
         let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
         let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
-        let searchItems = strippedString.componentsSeparatedByString(" ") as [String]
-        
+        if strippedString.characters.count > 0 {
+            let predicate = NSPredicate(format: "name contains[cd] %@ OR alias contains[cd] %@", strippedString,strippedString)
+            self.fetchedResultsController.fetchRequest.predicate = predicate
+            self.searchController.dimsBackgroundDuringPresentation = false
+            
+        }
+        else {
+            self.fetchedResultsController.fetchRequest.predicate = nil
+            self.searchController.dimsBackgroundDuringPresentation = true
+            
+            
+        }
+        self.fetchedResultsController.update()
+        self.tableView.reloadData()
         
     }
     
