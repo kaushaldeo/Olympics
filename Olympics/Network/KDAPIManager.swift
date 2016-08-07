@@ -324,4 +324,22 @@ class KDAPIManager : NSObject {
                 self.dispatchOnMain(block, error)
         })
     }
+    
+    
+    func medal(country:Country, _ block:((NSError?) -> Void)?) {
+        guard let identifier = country.identifier else {
+            return
+        }
+        self.sessionManager.GET("organization/\(identifier)/medals.xml", parameters: ["api_key":key], progress: nil, success: { (task, response) in
+            if let parser = response as? NSXMLParser {
+                let operation = KDWinnerParser(parser: parser)
+                operation.completionBlock = {
+                    self.dispatchOnMain(block, nil)
+                }
+                self.operationQueue.addOperation(operation)
+            }
+            }, failure: { (task, error) in
+                self.dispatchOnMain(block, error)
+        })
+    }
 }

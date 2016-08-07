@@ -19,10 +19,18 @@ extension NSManagedObjectContext {
         return KDAPIManager.sharedInstance.managedObjectContext
     }
     
+    
+    class func context() -> NSManagedObjectContext {
+        let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        context.persistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
+    }
+    
     // MARK: - Core Data Saving support
     func saveContext () {
         if self.hasChanges {
-            self.performBlockAndWait({ 
+            self.performBlockAndWait({
                 do {
                     try self.save()
                 } catch {
@@ -144,7 +152,7 @@ extension NSPersistentStoreCoordinator {
             NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
             //abort()
         }
-
+        
     }
 }
 

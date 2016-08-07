@@ -1,5 +1,5 @@
 //
-//  Event+CoreDataProperties.swift
+//  Winner+CoreDataProperties.swift
 //  Olympics
 //
 //  Created by Kaushal Deo on 8/6/16.
@@ -12,16 +12,13 @@
 import Foundation
 import CoreData
 
-extension Event {
+extension Winner {
 
-    @NSManaged var gender: String?
     @NSManaged var identifier: String?
-    @NSManaged var name: String?
-    @NSManaged var countries: NSSet?
-    @NSManaged var discipline: Discipline?
-    @NSManaged var participants: NSSet?
-    @NSManaged var teams: NSSet?
-    @NSManaged var units: NSSet?
-    @NSManaged var winners: NSSet?
+    @NSManaged var medal: String?
+    @NSManaged var type: String?
+    @NSManaged var event: Event?
+    @NSManaged var athlete: Athlete?
+    @NSManaged var team: Team?
 
 }

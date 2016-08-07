@@ -14,8 +14,8 @@ class Country: NSManagedObject {
     
     // Insert code here to add functionality to your managed object subclass
     
-    func total() -> Int16 {
-        return self.bronze + self.silver + self.gold
+    func total() -> Int {
+        return self.bronze.integerValue + self.silver.integerValue + self.gold.integerValue
     }
     
     class func country(context: NSManagedObjectContext) -> Country? {

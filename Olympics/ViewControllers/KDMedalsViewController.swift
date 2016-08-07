@@ -11,7 +11,11 @@ import CoreData
 
 class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    //MARK: - Private Methods
+    
+    lazy var country : Country = {
+        var country = Country.country(NSManagedObjectContext.mainContext())!
+        return country
+    }()
     
     //MARK: - Private Data
     func process(error:NSError) {
@@ -31,11 +35,40 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
     }
     
     func showMedal() {
-        if let country = Country.country(NSManagedObjectContext.mainContext()) {
-            if let indexPath = self.fetchedResultsController.indexPathForObject(country) {
-                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+        
+    }
+    
+    func updateRank() {
+        let serialQueue = dispatch_queue_create("com.kaushal.rank", DISPATCH_QUEUE_SERIAL)
+        dispatch_sync(serialQueue) { () -> Void in
+            var gold : NSNumber = 0
+            var bronze : NSNumber = 0
+            var silver : NSNumber = 0
+            var rank = 0
+            let context = NSManagedObjectContext.context()
+            let sortings = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false),NSSortDescriptor(key: "alias", ascending: true)]
+            if let items = context.find(Country.classForCoder(), sortDescriptors: sortings) as? [Country] {
+                var index = 1
+                for item in items {
+                    if (gold == item.gold && bronze == item.bronze && item.silver == silver) == false {
+                        rank = index
+                        gold = item.gold
+                        bronze = item.bronze
+                        silver = item.silver
+                    }
+                    index += 1
+                    if item.total() > 0 {
+                        item.rank = "\(rank)"
+                    }
+                    else {
+                        item.rank = "-"
+                    }
+                }
             }
+            context.saveContext()
+            
         }
+        
     }
     
     func refreshData() {
@@ -51,6 +84,7 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
                 strongSelf.refreshControl?.endRefreshing()
                 strongSelf.tableView.reloadData()
                 strongSelf.showMedal()
+                strongSelf.updateRank()
             }
             })
         
@@ -68,8 +102,12 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        self.tableView.registerNib(UINib(nibName: "KDMedalView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kHeaderView")
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
+        
+        self.tableView.backgroundColor = UIColor.backgroundColor()
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 145, blue: 202)
         
@@ -111,14 +149,11 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         
         // Configure the cell...
         let country = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Country
-        cell.aliasLabel.text = country.alias
+        cell.aliasLabel.text = country.name
         cell.goldLabel.text = "\(country.gold)"
         cell.silverLabel.text = "\(country.silver)"
         cell.brozeLabel.text = "\(country.bronze)"
-        cell.rankLabel.text = "\(indexPath.row + 1)"
-        if country.total() == 0 {
-            cell.rankLabel.text = "-"
-        }
+        cell.rankLabel.text = country.rank
         if let text = country.alias?.lowercaseString {
             cell.iconView.image = UIImage(named: "Images/\(text).png")
         }
@@ -161,15 +196,50 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
      }
      */
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    //MARK: Table View Delegate Method
+    
+    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView") as! KDMedalView
+        headerView.nameLabel.text = self.country.name
+        headerView.goldLabel.text = "\(self.country.gold)"
+        headerView.silverLabel.text = "\(self.country.silver)"
+        headerView.brozeLabel.text = "\(self.country.bronze)"
+        headerView.rankLabel.text = self.country.rank
+        if let text = self.country.alias?.lowercaseString {
+            headerView.iconView.image = UIImage(named: "Images/\(text).png")
+        }
+        headerView.tapHandler = { [weak self] (view) in
+            if let strongSelf = self {
+                if strongSelf.country.total() > 0 {
+                    strongSelf.performSegueWithIdentifier("medal", sender: strongSelf.country)
+                }
+            }
+        }
+        return headerView
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if let text = self.country.name {
+            return max(50, text.size(UIFont.systemFontOfSize(15), width:CGRectGetWidth(tableView.frame) - 221.0).height + 30)
+        }
+        return 50.0
+    }
+    
+    
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if let country = sender as? Country {
+            if let viewController = segue.destinationViewController as? KDWinnersViewController {
+                viewController.country = country
+            }
+        }
+    }
+    
     
     // MARK: - Fetched results controller
     
@@ -186,6 +256,10 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "gold", ascending: false),NSSortDescriptor(key: "silver", ascending: false),NSSortDescriptor(key: "bronze", ascending: false),NSSortDescriptor(key: "alias", ascending: true)]
+        
+        if let country = Country.country(context) {
+            fetchRequest.predicate = NSPredicate(format: "identifier != %@",country.identifier!)
+        }
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

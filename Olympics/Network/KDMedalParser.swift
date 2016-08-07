@@ -16,14 +16,14 @@ class KDMedalParser: KDParseOperation {
             let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
             if let country = self.context.findFirst(Country.classForCoder(), predicate: predicate) as? Country {
                 //gold="2" silver="3" bronze="2" total="7"/>
-                if let text = attributeDict["bronze"], let index = Int16(text) {
-                    country.bronze = index
+                if let text = attributeDict["bronze"], let index = Int(text) {
+                    country.bronze = NSNumber(integer: index)
                 }
-                if let text = attributeDict["gold"], let index = Int16(text) {
-                    country.gold = index
+                if let text = attributeDict["gold"], let index = Int(text) {
+                    country.gold = NSNumber(integer: index)
                 }
-                if let text = attributeDict["silver"], let index = Int16(text) {
-                    country.silver = index
+                if let text = attributeDict["silver"], let index = Int(text) {
+                    country.silver = NSNumber(integer: index)
                 }
             }
         }
