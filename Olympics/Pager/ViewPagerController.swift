@@ -162,8 +162,9 @@ public final class ViewPagerController: UIViewController {
         }
     }
     
-    public func reloadData() {
-        self.containerView.scrollToCenter(0, animated: false, animation: nil, completion: nil)
+    public func reloadData(index: Int) {
+        self.tabMenuView.scrollToCenter(index, animated: false, animation: nil, completion: nil)
+        self.containerView.scrollToCenter(index, animated: false, animation: nil, completion: nil)
         self.view.layoutIfNeeded()
     }
     

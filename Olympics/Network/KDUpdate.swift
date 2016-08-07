@@ -22,11 +22,7 @@ class KDUpdate: NSObject {
         if let text = info["cacheCountryChecksum"] {
             self.shouldSave = self.cacheCountryChecksum.compare(text, options: .NumericSearch) != .OrderedSame
             if self.shouldSave {
-                let persistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator
-                if let persistentStore = persistentStoreCoordinator.persistentStores.last {
-                    try! persistentStoreCoordinator.removePersistentStore(persistentStore)
-                }
-                persistentStoreCoordinator.addStore()
+                KDAPIManager.sharedInstance.updateDatabase()
                 self.updateUI()
             }
             self.cacheCountryChecksum = text
@@ -122,7 +118,7 @@ class KDUpdate: NSObject {
     
     override init() {
         let bundle = NSBundle.mainBundle()
-        applicationVersion = "1.0"
+        applicationVersion = "1.0.1"
         if let text = bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String {
             applicationVersion = text
         }
@@ -137,6 +133,14 @@ class KDUpdate: NSObject {
         message = "Would you like to update it now?"
         
         cacheCountryChecksum = NSUserDefaults.checkSum()
+        
+        if let text = bundle.objectForInfoDictionaryKey("CFBundleVersion") as? String {
+            if NSUserDefaults.isUpdate(text) {
+                cacheCountryChecksum = "0"
+            }
+        }
+       
+        
         
         super.init()
         

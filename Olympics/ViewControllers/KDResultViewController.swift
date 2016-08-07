@@ -97,7 +97,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         self.tableView.addSubview(self.refreshControl)
         
         let unit = self.event.playingUnit(NSDate(), withCountry: self.country)
-        print(unit?.statusValue())
+        debugPrint(unit?.statusValue())
     }
     
     
@@ -144,7 +144,18 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         let cell = tableView.dequeueReusableCellWithIdentifier("Ranking", forIndexPath: indexPath) as! KDRankingCell
         let competitors = unit.competitors!.allObjects as! [Competitor]
         cell.competitors = competitors.filter({ (competitor) -> Bool in
-            return competitor.athlete?.country == self.country || competitor.team?.country == self.country
+            if let c = competitor.athlete?.country {
+                return c == self.country
+            }
+            else if let c = competitor.team?.country {
+                return c == self.country
+            }
+            return false
+        }).sort({ (c1, c2) -> Bool in
+            if let s1 = c1.sort, let s2 = c2.sort {
+                return s1.localizedStandardCompare(s2) == NSComparisonResult.OrderedAscending
+            }
+            return false
         })
         return cell
     }
@@ -197,7 +208,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
             let string = competitor.resultValue ?? ""
             let width = string.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 80)).width + 80.0
             if let text = competitor.name() {
-                height += text.size(UIFont.systemFontOfSize(14), width:CGRectGetWidth(tableView.frame) - width).height + 20
+                height += text.size(UIFont.systemFontOfSize(14), width:CGRectGetWidth(tableView.frame) - width).height + 24.0
             }
         }
         
@@ -246,7 +257,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         // Edit the sort key as appropriate.
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "phase", ascending: true), NSSortDescriptor(key: "name", ascending: true),NSSortDescriptor(key: "startDate", ascending: false)]
         
-        fetchRequest.predicate = NSPredicate(format: "event = %@ AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,self.country,self.country)
+        fetchRequest.predicate = NSPredicate(format: "event = %@ AND competitors.@count > 1 AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,self.country,self.country)
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

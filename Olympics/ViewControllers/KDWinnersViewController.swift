@@ -1,43 +1,50 @@
 //
-//  KDPlayersViewController.swift
+//  KDWinnersViewController.swift
 //  Olympics
 //
-//  Created by Kaushal Deo on 6/27/16.
+//  Created by Kaushal Deo on 8/6/16.
 //  Copyright © 2016 Scorpion Inc. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class KDPlayersViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class KDWinnersViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    var country : Country!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 240, green: 91, blue: 34)
-        
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:" ", style: .Plain, target: nil, action: nil)
+        self.addBackButton()
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.showCountry()
+        self.tableView.backgroundView = nil
+        self.tableView.backgroundColor = UIColor.backgroundColor()
         
-         self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
+        self.tableView.registerNib(UINib(nibName: "KDWinnerHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "kHeaderView")
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 64.0
-       
+        self.navigationItem.title = "Breakdown"
         
-        self.tabBarController?.tabBar.itemPositioning = .Fill
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
-         self.fetchedResultsController.update()
+        KDAPIManager.sharedInstance.medal(self.country) { [weak self] (error) in
+            if let strongSelf = self {
+                
+                var message = "ResultError".localized("")
+                if let nserror = error {
+                    //strongSelf.process(nserror)
+                    message = ""
+                }
+                else {
+                    //TODO: Stamp the time on refresh control
+                }
+                
+                strongSelf.fetchedResultsController.update()
+                strongSelf.tableView.reloadData()
+            }
+        }
         
     }
     
@@ -59,17 +66,13 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDAthleteViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDWinnerViewCell
         
         // Configure the cell...
-        let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
-        cell.nameLabel.text = athlete.printName().capitalizedString
-        cell.sportsLabel.text = athlete.discipline?.name ?? athlete.association
-        if let text = athlete.imageName {
-            cell.iconView.image = UIImage(named: "Icon/\(text).png")
-        }
+        cell.setWinner(self.fetchedResultsController.objectAtIndexPath(indexPath) as! Winner)
         return cell
     }
+    
     
     
     /*
@@ -107,36 +110,26 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
      }
      */
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    //MARK: Table View Delegate Method
     
-        let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
-        var events = [Event]()
-        if let event = athlete.events?.allObjects as? [Event] {
-            events = event
+    override func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView") as! KDWinnerHeaderView
+        headerView.nameLabel.text = self.country.name
+        headerView.goldLabel.text = "\(self.country.gold)"
+        headerView.silverLabel.text = "\(self.country.silver)"
+        headerView.brozeLabel.text = "\(self.country.bronze)"
+        if let text = self.country.alias?.lowercaseString {
+            headerView.iconView.image = UIImage(named: "Images/\(text).png")
         }
-        if let teams = athlete.teams?.allObjects as? [Team] {
-            for team in teams {
-                if let event = team.events?.allObjects as? [Event] {
-                    events += event
-                }
-            }
-        }
-        if events.count == 1 {
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kResultViewController") as? KDResultViewController {
-                viewController.event = events[0]
-                self.navigationController?.pushViewController(viewController, animated: true)
-            }
-            
-        }
-        else if events.count > 1 {
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("kEventViewController") as? KDEventViewController {
-                viewController.events = events
-                viewController.navigationItem.title = athlete.discipline?.name
-                self.navigationController?.pushViewController(viewController, animated: true)
-            }
-        }
+        return headerView
     }
     
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if let text = self.country.name {
+            return max(50, text.size(UIFont.systemFontOfSize(15), width:CGRectGetWidth(tableView.frame) - 221.0).height + 30)
+        }
+        return 50.0
+    }
     
     /*
      // MARK: - Navigation
@@ -148,6 +141,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
      }
      */
     
+    
     // MARK: - Fetched results controller
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
@@ -155,23 +149,21 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         
         let fetchRequest = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Athlete", inManagedObjectContext: context)
+        let entity = NSEntityDescription.entityForName("Winner", inManagedObjectContext: context)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
         
-        // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "discipline.name", ascending: true),NSSortDescriptor(key: "lastName", ascending: true),NSSortDescriptor(key: "firstName", ascending: true)]
         
-        if  let country = Country.country(context) {
-            fetchRequest.predicate = NSPredicate(format: "country = %@ AND NOT (discipline = nil)", country)
-        }
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "medal", ascending: true)]
         
+        fetchRequest.predicate = NSPredicate(format: "team.country = %@ OR athlete.country = %@",self.country,self.country)
         
+
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"discipline.name", cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
         fetchedResultsController.update()
@@ -211,6 +203,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
+    
     
     /*
      // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.

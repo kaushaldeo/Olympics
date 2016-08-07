@@ -47,6 +47,9 @@ class Athlete: NSManagedObject {
     
     var imageName: String? {
         get {
+            if let discipline = self.discipline {
+                return discipline.alias?.lowercaseString
+            }
             if let  event = self.events?.anyObject() as? Event {
                 return event.discipline?.alias?.lowercaseString
             }
