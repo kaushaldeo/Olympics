@@ -42,10 +42,19 @@ class Winner: NSManagedObject {
     }
     
     func sports() -> String? {
+        var string = ""
         if let item = self.event {
-            return item.name
+            if let name = item.name {
+                string += name
+            }
+            if let discipline = item.discipline, let text = discipline.name {
+                if string.isEmpty == false {
+                    string += " - "
+                }
+                string += text
+            }
         }
-        return nil
+        return string
     }
     
 }

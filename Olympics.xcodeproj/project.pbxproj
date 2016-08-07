@@ -623,7 +623,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Kaushal Deo (8U46JS6CZP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kaushal Deo (G36XCZFH63)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -645,7 +645,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "c2ac2a84-2bce-4f28-a929-874bc870338c";
+				PROVISIONING_PROFILE = "4c6d7aeb-18e3-4f70-9c1a-65194b77aaa9";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -669,7 +669,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Kaushal Deo (8U46JS6CZP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kaushal Deo (G36XCZFH63)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -684,7 +684,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "c2ac2a84-2bce-4f28-a929-874bc870338c";
+				PROVISIONING_PROFILE = "4c6d7aeb-18e3-4f70-9c1a-65194b77aaa9";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -696,14 +696,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Kaushal Deo (8U46JS6CZP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kaushal Deo (8U46JS6CZP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kaushal Deo (G36XCZFH63)";
 				INFOPLIST_FILE = Olympics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.olympics.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c2ac2a84-2bce-4f28-a929-874bc870338c";
+				PROVISIONING_PROFILE = "4c6d7aeb-18e3-4f70-9c1a-65194b77aaa9";
 			};
 			name = Debug;
 		};
@@ -713,14 +712,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Kaushal Deo (8U46JS6CZP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kaushal Deo (8U46JS6CZP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kaushal Deo (G36XCZFH63)";
 				INFOPLIST_FILE = Olympics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.olympics.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c2ac2a84-2bce-4f28-a929-874bc870338c";
+				PROVISIONING_PROFILE = "4c6d7aeb-18e3-4f70-9c1a-65194b77aaa9";
 			};
 			name = Release;
 		};
