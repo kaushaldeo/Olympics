@@ -47,21 +47,18 @@ class KDSplashViewController: UIViewController {
     
     
     func showView() {
-        self.performSegueWithIdentifier("showCountry", sender: nil)
-        /*
         if let country = Country.country(NSManagedObjectContext.mainContext()) {
             if let string = country.alias {
                 FIRMessaging.messaging().subscribeToTopic(string)
             }
-            
-            
+            self.performSegueWithIdentifier("showHome", sender: nil)
         }
         else {
             self.performSegueWithIdentifier("showCountry", sender: nil)
         }
         
-        KDUpdate.sharedInstance.update()
- */
+        // KDUpdate.sharedInstance.update()
+        
     }
     
     func process(error:NSError) {
@@ -103,7 +100,7 @@ class KDSplashViewController: UIViewController {
             self.imageView.transform = CGAffineTransformIdentity
         }) { (animationCompleted: Bool) -> Void in
             self.progressLabel.hidden = false
-           // self.loadData()
+            // self.loadData()
             self.showView()
         }
     }

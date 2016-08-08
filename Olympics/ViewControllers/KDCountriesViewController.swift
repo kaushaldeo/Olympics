@@ -19,6 +19,7 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         searchController.searchBar.tintColor = UIColor.whiteColor()
         //searchController.na
@@ -70,7 +71,7 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         
         let setting = NSUserDefaults.standardUserDefaults()
         if let _ = setting.valueForKey("kCountry") {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(KDCountriesViewController.cancelTapped(_:)))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backButton")?.imageWithRenderingMode(.AlwaysTemplate), style: .Plain, target: self, action: #selector(KDCountriesViewController.cancelTapped(_:)))
         }
         
         self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
@@ -270,14 +271,9 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         if strippedString.characters.count > 0 {
             let predicate = NSPredicate(format: "name contains[cd] %@ OR alias contains[cd] %@", strippedString,strippedString)
             self.fetchedResultsController.fetchRequest.predicate = predicate
-            self.searchController.dimsBackgroundDuringPresentation = false
-            
         }
         else {
             self.fetchedResultsController.fetchRequest.predicate = nil
-            self.searchController.dimsBackgroundDuringPresentation = true
-            
-            
         }
         self.fetchedResultsController.update()
         self.tableView.reloadData()

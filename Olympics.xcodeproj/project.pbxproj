@@ -16,6 +16,10 @@
 		3C6D530A1D56A6C4002603D2 /* KDWinnerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6D53091D56A6C4002603D2 /* KDWinnerParser.swift */; };
 		3C6D530C1D56AF95002603D2 /* KDWinnerHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C6D530B1D56AF95002603D2 /* KDWinnerHeaderView.xib */; };
 		3C6D530E1D56AFF4002603D2 /* KDWinnerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6D530D1D56AFF4002603D2 /* KDWinnerHeaderView.swift */; };
+		3C6D53101D56CB45002603D2 /* KDHamburgerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6D530F1D56CB45002603D2 /* KDHamburgerButton.swift */; };
+		3C6D53121D56D039002603D2 /* KDRevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6D53111D56D039002603D2 /* KDRevealViewController.swift */; };
+		3C6D53141D56D2DF002603D2 /* KDMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6D53131D56D2DF002603D2 /* KDMenuViewController.swift */; };
+		3C6D53161D56D5F1002603D2 /* KDItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6D53151D56D5F1002603D2 /* KDItemsViewController.swift */; };
 		3C8AA1A61D53A486004F43C2 /* KDEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AA1A51D53A486004F43C2 /* KDEventViewController.swift */; };
 		3CC2D1DF1D45F70900316CD1 /* KDRankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */; };
 		3CC2D1E11D46E33F00316CD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2D1E01D46E33F00316CD1 /* Localizable.strings */; };
@@ -106,6 +110,10 @@
 		3C6D53091D56A6C4002603D2 /* KDWinnerParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDWinnerParser.swift; sourceTree = "<group>"; };
 		3C6D530B1D56AF95002603D2 /* KDWinnerHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KDWinnerHeaderView.xib; sourceTree = "<group>"; };
 		3C6D530D1D56AFF4002603D2 /* KDWinnerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDWinnerHeaderView.swift; sourceTree = "<group>"; };
+		3C6D530F1D56CB45002603D2 /* KDHamburgerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDHamburgerButton.swift; sourceTree = "<group>"; };
+		3C6D53111D56D039002603D2 /* KDRevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDRevealViewController.swift; sourceTree = "<group>"; };
+		3C6D53131D56D2DF002603D2 /* KDMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDMenuViewController.swift; sourceTree = "<group>"; };
+		3C6D53151D56D5F1002603D2 /* KDItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDItemsViewController.swift; sourceTree = "<group>"; };
 		3C8AA1A51D53A486004F43C2 /* KDEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDEventViewController.swift; sourceTree = "<group>"; };
 		3CC2D1DE1D45F70900316CD1 /* KDRankingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDRankingCell.swift; sourceTree = "<group>"; };
 		3CC2D1E01D46E33F00316CD1 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -314,6 +322,8 @@
 		72DA10861D0BA22F00AA8EE3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3C6D53111D56D039002603D2 /* KDRevealViewController.swift */,
+				3C6D53131D56D2DF002603D2 /* KDMenuViewController.swift */,
 				721B96321D3B72650064E485 /* KDTabBarViewController.swift */,
 				72D0F5C81D2C248600400F03 /* KDSplashViewController.swift */,
 				72DA10881D0BA25000AA8EE3 /* KDCountriesViewController.swift */,
@@ -325,6 +335,7 @@
 				725FBEB11D44A520003D81ED /* KDResultViewController.swift */,
 				3C8AA1A51D53A486004F43C2 /* KDEventViewController.swift */,
 				725FBEB51D44DD18003D81ED /* KDInfoViewController.swift */,
+				3C6D53151D56D5F1002603D2 /* KDItemsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -349,6 +360,7 @@
 				3C6D530D1D56AFF4002603D2 /* KDWinnerHeaderView.swift */,
 				72D8B6E01D43711F008E86C0 /* KDErrorView.swift */,
 				72D0F5CC1D2C669E00400F03 /* KDExtensions.swift */,
+				3C6D530F1D56CB45002603D2 /* KDHamburgerButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -538,11 +550,14 @@
 				72DA12161D1251DB00AA8EE3 /* Athlete+CoreDataProperties.swift in Sources */,
 				72DA120F1D1251DB00AA8EE3 /* Unit.swift in Sources */,
 				3C6D53081D56A1FD002603D2 /* KDWinnerViewCell.swift in Sources */,
+				3C6D53121D56D039002603D2 /* KDRevealViewController.swift in Sources */,
 				72DA10891D0BA25000AA8EE3 /* KDCountriesViewController.swift in Sources */,
+				3C6D53161D56D5F1002603D2 /* KDItemsViewController.swift in Sources */,
 				725FBEC51D45540E003D81ED /* ViewPagerController+ScrollHeaderSupport.swift in Sources */,
 				72DA120A1D1251DB00AA8EE3 /* Country+CoreDataProperties.swift in Sources */,
 				72DC6C901D223F19001E5AF9 /* KDStoryboardSegue.swift in Sources */,
 				72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */,
+				3C6D53141D56D2DF002603D2 /* KDMenuViewController.swift in Sources */,
 				72DA12131D1251DB00AA8EE3 /* Competitor.swift in Sources */,
 				725FBECD1D45711D003D81ED /* KDUpdate.swift in Sources */,
 				72DA12101D1251DB00AA8EE3 /* Venue+CoreDataProperties.swift in Sources */,
@@ -562,6 +577,7 @@
 				728A9D811D224E690020F1D0 /* KDMedalViewCell.swift in Sources */,
 				72DA12041D1251DB00AA8EE3 /* Sport+CoreDataProperties.swift in Sources */,
 				72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */,
+				3C6D53101D56CB45002603D2 /* KDHamburgerButton.swift in Sources */,
 				724FA9111D31A74600ADCB8D /* Score.swift in Sources */,
 				72D0F5CD1D2C669E00400F03 /* KDExtensions.swift in Sources */,
 				72DA12061D1251DB00AA8EE3 /* Location+CoreDataProperties.swift in Sources */,
