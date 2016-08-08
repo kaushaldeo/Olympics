@@ -61,14 +61,14 @@
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="xT5-3J-Xmd"/>
                             <exclude reference="88c-Fh-UIU"/>
+                            <exclude reference="xT5-3J-Xmd"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
-                            <include reference="xT5-3J-Xmd"/>
                             <include reference="88c-Fh-UIU"/>
+                            <include reference="xT5-3J-Xmd"/>
                         </mask>
                     </variation>
                 </label>

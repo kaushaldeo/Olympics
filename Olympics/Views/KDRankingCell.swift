@@ -47,7 +47,19 @@ class KDRankingCell: UITableViewCell {
             cell.iconView.image = UIImage(named: "Images/\(text).png")
         }
         cell.rankLabel.text = competitor.rank ?? "-"
-        cell.resultLabel.text = competitor.resultValue
+        if let string = competitor.resultValue {
+            cell.resultLabel.text = string
+        }
+        else if let unit = competitor.unit {
+            let status = unit.statusValue()
+            if status != "closed" && status != "progress" {
+               cell.resultLabel.text = competitor.unit?.startDate?.time()
+            }
+            else if let string = competitor.resultType {
+                cell.resultLabel.text = string == "irm" ? "DNF" : ""
+            }
+        }
+        
         return cell
     }
     

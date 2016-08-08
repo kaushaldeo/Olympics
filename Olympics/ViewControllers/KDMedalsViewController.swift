@@ -76,7 +76,10 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
                     strongSelf.process(nserror)
                 }
                 else {
-                    //TODO: Stamp the time on refresh control
+                    let date = NSDate()
+                    NSUserDefaults.refresh(date, atViewController: strongSelf.restorationIdentifier!)
+                    strongSelf.refreshControl?.attributedTitle = NSAttributedString(string: date.time())
+                    
                 }
                 strongSelf.refreshControl?.endRefreshing()
                 strongSelf.fetchedResultsController.update()
@@ -120,6 +123,10 @@ class KDMedalsViewController: UITableViewController, NSFetchedResultsControllerD
         super.viewDidAppear(animated)
         
         self.fetchedResultsController.update()
+        
+        if let date = NSUserDefaults.refreshDate(self.restorationIdentifier!) {
+            self.refreshControl?.attributedTitle = NSAttributedString(string: date.time())
+        }
     }
     
     override func didReceiveMemoryWarning() {

@@ -9,8 +9,33 @@
 import UIKit
 import CoreData
 
-class KDPlayersViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class KDPlayersViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
+    lazy var searchController: UISearchController = {
+        var searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.tintColor = UIColor.whiteColor()
+        searchController.searchBar.delegate = self    // so we can monitor text changes + others
+        
+        /*
+         Search is now just presenting a view controller. As such, normal view controller
+         presentation semantics apply. Namely that presentation will walk up the view controller
+         hierarchy until it finds the root view controller or one that defines a presentation context.
+         */
+        return searchController
+    }()
+    
+    lazy var country : Country = {
+        return Country.country(NSManagedObjectContext.mainContext())!
+    }()
+    
+    var rigthBarItem : UIBarButtonItem? = nil
+    
+    //MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,11 +50,15 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.showCountry()
         
-         self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
+        self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 64.0
-       
+        
+        self.tableView.backgroundColor = UIColor.backgroundColor()
+        self.tableView.backgroundView = nil
+        
+        self.navigationItem.titleView = self.searchController.searchBar
         
         self.tabBarController?.tabBar.itemPositioning = .Fill
     }
@@ -37,7 +66,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-         self.fetchedResultsController.update()
+        self.fetchedResultsController.update()
         
     }
     
@@ -108,7 +137,8 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
      */
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    
+        self.searchController.searchBar.resignFirstResponder()
+        
         let athlete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Athlete
         var events = [Event]()
         if let event = athlete.events?.allObjects as? [Event] {
@@ -164,9 +194,7 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
         // Edit the sort key as appropriate.
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "discipline.name", ascending: true),NSSortDescriptor(key: "lastName", ascending: true),NSSortDescriptor(key: "firstName", ascending: true)]
         
-        if  let country = Country.country(context) {
-            fetchRequest.predicate = NSPredicate(format: "country = %@ AND NOT (discipline = nil)", country)
-        }
+        fetchRequest.predicate = NSPredicate(format: "country = %@ AND NOT (discipline = nil)", self.country)
         
         
         // Edit the section name key path and cache name if appropriate.
@@ -220,5 +248,41 @@ class KDPlayersViewController: UITableViewController, NSFetchedResultsController
      self.tableView.reloadData()
      }
      */
+    
+    
+    // MARK: UISearchBarDelegate
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    // MARK: UISearchResultsUpdating
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        // Strip out all the leading and trailing spaces.
+        let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
+        let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
+        
+        if strippedString.characters.count > 0 {
+            let predicate = NSPredicate(format: "country = %@ AND NOT (discipline = nil) AND (firstName contains[cd] %@ OR lastName contains[cd] %@)", self.country,strippedString,strippedString)
+            self.fetchedResultsController.fetchRequest.predicate = predicate
+        }
+        else {
+            let predicate = NSPredicate(format: "country = %@ AND NOT (discipline = nil)", self.country)
+            self.fetchedResultsController.fetchRequest.predicate = predicate
+        }
+        self.fetchedResultsController.update()
+        self.tableView.reloadData()
+        
+    }
+    
+    func willPresentSearchController(searchController: UISearchController) {
+        self.rigthBarItem = self.navigationItem.rightBarButtonItem
+        self.navigationItem.setLeftBarButtonItem(nil, animated: true)
+        self.navigationItem.setRightBarButtonItem(nil, animated: true)
+    }
+    
+    func willDismissSearchController(searchController: UISearchController) {
+        self.navigationItem.setRightBarButtonItem(self.rigthBarItem, animated: true)
+    }
     
 }

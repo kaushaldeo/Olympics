@@ -72,6 +72,9 @@ class KDProfileParser: KDParseOperation {
                 team.identifier = attributeDict["id"]
                 team.name = attributeDict["description"]
                 team.country = self.country
+                if let item = self.event {
+                    item.addTeam(team)
+                }
                 self.team = team
             }
         }

@@ -113,6 +113,7 @@
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="medal" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="period" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phase" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -148,7 +149,7 @@
         <element name="Score" positionX="502" positionY="594" width="128" height="120"/>
         <element name="Sport" positionX="855" positionY="270" width="128" height="105"/>
         <element name="Team" positionX="-216" positionY="630" width="128" height="150"/>
-        <element name="Unit" positionX="484" positionY="270" width="128" height="255"/>
+        <element name="Unit" positionX="484" positionY="270" width="128" height="270"/>
         <element name="Venue" positionX="286" positionY="270" width="128" height="105"/>
         <element name="Winner" positionX="-180" positionY="423" width="128" height="135"/>
     </elements>

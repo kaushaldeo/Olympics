@@ -163,15 +163,14 @@ class KDEventsViewController: UIViewController {
         self.imageView.layer.removeAllAnimations()
         let context = NSManagedObjectContext.mainContext()
         let sets = NSMutableSet()
-        if let units = context.find(Unit.classForCoder(), predicate: NSPredicate(format:"SUBQUERY(event.countries, $country, $country = %@).@count != 0",country), sortDescriptors: [NSSortDescriptor(key: "startDate", ascending: true)]) as? [Unit] {
+        if let units = context.find(Unit.classForCoder(), predicate: NSPredicate(format:"SUBQUERY(event.countries, $country, $country = %@).@count != 0 AND NOT (phase contains[cd] %@)",country,"Training"), sortDescriptors: [NSSortDescriptor(key: "startDate", ascending: true)]) as? [Unit] {
             for unit in units {
                 if let date = unit.startDate?.today() {
                     sets.addObject(date)
                 }
             }
         }
-        
-        //self.days = (sets.allObjects as! [NSDate]).sort({$0.compare($1) == NSComparisonResult.OrderedAscending})
+        self.days = (sets.allObjects as! [NSDate]).sort({$0.compare($1) == NSComparisonResult.OrderedAscending})
         for date in self.days {
             let controller = self.storyboard?.instantiateViewControllerWithIdentifier("kUnitsViewController") as! KDUnitsViewController
             controller.view.clipsToBounds = true

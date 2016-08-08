@@ -678,12 +678,15 @@
             <objects>
                 <tableViewController storyboardIdentifier="kWinnersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cfq-Ra-2n8" customClass="KDWinnersViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="ouw-Ps-axv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kWinnerViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="NDn-T5-vsQ" customClass="KDWinnerViewCell" customModule="Olympics" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NDn-T5-vsQ" id="ni1-pj-cUj">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbi-qv-nLw">
@@ -708,13 +711,13 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YS-SA-tvl">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" placeholderIntrinsicWidth="328" placeholderIntrinsicHeight="21" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2YS-SA-tvl">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMm-Qh-5kw">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="328" placeholderIntrinsicHeight="19" text="Sports" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMm-Qh-5kw">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -749,11 +752,11 @@
                                             <exclude reference="fMm-Qh-5kw"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="mLg-iP-GQu"/>
-                                            <exclude reference="s0w-Ug-Zp4"/>
                                             <exclude reference="cSp-ld-o7S"/>
                                             <exclude reference="lyX-It-F4T"/>
                                             <exclude reference="qeg-8h-Jyv"/>
+                                            <exclude reference="mLg-iP-GQu"/>
+                                            <exclude reference="s0w-Ug-Zp4"/>
                                             <exclude reference="65E-75-mQo"/>
                                             <exclude reference="Qvl-cr-48G"/>
                                             <exclude reference="sKE-7H-Mm3"/>
@@ -767,11 +770,11 @@
                                             <include reference="fMm-Qh-5kw"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="mLg-iP-GQu"/>
-                                            <include reference="s0w-Ug-Zp4"/>
                                             <include reference="cSp-ld-o7S"/>
                                             <include reference="lyX-It-F4T"/>
                                             <include reference="qeg-8h-Jyv"/>
+                                            <include reference="mLg-iP-GQu"/>
+                                            <include reference="s0w-Ug-Zp4"/>
                                             <include reference="65E-75-mQo"/>
                                             <include reference="Qvl-cr-48G"/>
                                             <include reference="sKE-7H-Mm3"/>

@@ -28,6 +28,8 @@ class KDWinnersViewController: UITableViewController, NSFetchedResultsController
         
         self.navigationItem.title = "Breakdown"
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 64.0
         
         KDAPIManager.sharedInstance.medal(self.country) { [weak self] (error) in
             if let strongSelf = self {

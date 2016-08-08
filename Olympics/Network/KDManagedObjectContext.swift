@@ -211,4 +211,19 @@ extension NSUserDefaults {
         return true
     }
     
+    
+    
+    class func refresh(date:NSDate, atViewController identifier:String) {
+        let setting = NSUserDefaults.standardUserDefaults()
+        setting.setObject(date, forKey: "identifier")
+    }
+    
+    class func refreshDate(identifier: String) -> NSDate? {
+        let setting = NSUserDefaults.standardUserDefaults()
+        if let date = setting.valueForKey("identifier") as? NSDate {
+            return date
+        }
+        return nil
+    }
+    
 }
