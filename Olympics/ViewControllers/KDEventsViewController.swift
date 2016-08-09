@@ -149,19 +149,28 @@ class KDEventsViewController: UIViewController {
         self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    func showToday() {
+        var index = 0
+        if let date = NSDate().today() {
+            if let indexOfDay = self.days.indexOf(date) {
+                index = indexOfDay
+            }
+        }
+        self.pagerController.reloadData(index)
+    }
+    
     func populateDate(country: Country) {
         self.imageView.layer.removeAllAnimations()
         let context = NSManagedObjectContext.mainContext()
         let sets = NSMutableSet()
-        if let units = context.find(Unit.classForCoder(), predicate: NSPredicate(format:"SUBQUERY(event.countries, $country, $country = %@).@count != 0",country), sortDescriptors: [NSSortDescriptor(key: "startDate", ascending: true)]) as? [Unit] {
+        if let units = context.find(Unit.classForCoder(), predicate: NSPredicate(format:"SUBQUERY(event.countries, $country, $country = %@).@count != 0 AND NOT (phase contains[cd] %@)",country,"Training"), sortDescriptors: [NSSortDescriptor(key: "startDate", ascending: true)]) as? [Unit] {
             for unit in units {
                 if let date = unit.startDate?.today() {
                     sets.addObject(date)
                 }
             }
         }
-        
-        //self.days = (sets.allObjects as! [NSDate]).sort({$0.compare($1) == NSComparisonResult.OrderedAscending})
+        self.days = (sets.allObjects as! [NSDate]).sort({$0.compare($1) == NSComparisonResult.OrderedAscending})
         for date in self.days {
             let controller = self.storyboard?.instantiateViewControllerWithIdentifier("kUnitsViewController") as! KDUnitsViewController
             controller.view.clipsToBounds = true
@@ -172,7 +181,6 @@ class KDEventsViewController: UIViewController {
             self.pagerController.addContent(title, viewController: controller)
         }
         
-        self.pagerController.reloadData()
     }
     
     func loadData() {
@@ -182,6 +190,7 @@ class KDEventsViewController: UIViewController {
             if KDUpdate.sharedInstance.shouldSave == false {
                 if let events = country.events where events.count > 0 {
                     self.populateDate(country)
+                    self.performSelector(#selector(KDEventsViewController.showToday), withObject: nil, afterDelay: 0.3)
                     return
                 }
             }
@@ -192,6 +201,7 @@ class KDEventsViewController: UIViewController {
                         return
                     }
                     strongSelf.populateDate(country)
+                    strongSelf.showToday()
                 }
                 })
             self.startAnimation()

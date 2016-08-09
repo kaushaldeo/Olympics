@@ -10,8 +10,29 @@ import UIKit
 import CoreData
 import Firebase
 
-class KDCountriesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+
+class KDCountriesViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
+    lazy var searchController: UISearchController = {
+        var searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.tintColor = UIColor.whiteColor()
+        searchController.searchBar.delegate = self    // so we can monitor text changes + others
+        
+        /*
+         Search is now just presenting a view controller. As such, normal view controller
+         presentation semantics apply. Namely that presentation will walk up the view controller
+         hierarchy until it finds the root view controller or one that defines a presentation context.
+         */
+        return searchController
+    }()
+    
+    var leftBarItem : UIBarButtonItem? = nil
+    var rigthBarItem : UIBarButtonItem? = nil
     
     //MARK: - Private Methods
     
@@ -35,6 +56,7 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         
         
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 103, blue: 173)
+        self.searchController.searchBar.barTintColor = UIColor(red: 0, green: 103, blue: 173)
         
         let setting = NSUserDefaults.standardUserDefaults()
         if let _ = setting.valueForKey("kCountry") {
@@ -42,8 +64,8 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         }
         
         self.tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.tableView.numberOfSections)), withRowAnimation: .None)
-
         
+        self.navigationItem.titleView = self.searchController.searchBar
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style: .Plain, target: nil, action: nil)
     }
     
@@ -219,5 +241,49 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
         // In the simplest, most efficient, case, reload the table view.
         self.tableView.reloadData()
     }
+    
+    
+    
+    
+    // MARK: UISearchBarDelegate
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    // MARK: UISearchResultsUpdating
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        // Strip out all the leading and trailing spaces.
+        let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
+        let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
+        
+        if strippedString.characters.count > 0 {
+            let predicate = NSPredicate(format: "name contains[cd] %@ OR alias contains[cd] %@", strippedString,strippedString)
+            self.fetchedResultsController.fetchRequest.predicate = predicate
+        }
+        else {
+            self.fetchedResultsController.fetchRequest.predicate = nil
+        }
+        self.fetchedResultsController.update()
+        self.tableView.reloadData()
+
+    }
+
+    func willPresentSearchController(searchController: UISearchController) {
+        self.leftBarItem = self.navigationItem.leftBarButtonItem
+        self.rigthBarItem = self.navigationItem.rightBarButtonItem
+        self.navigationItem.setLeftBarButtonItem(nil, animated: true)
+        self.navigationItem.setRightBarButtonItem(nil, animated: true)
+    }
+    
+//    @available(iOS 8.0, *)
+//    optional public func didPresentSearchController(searchController: UISearchController)
+//    @available(iOS 8.0, *)
+    func willDismissSearchController(searchController: UISearchController) {
+        self.navigationItem.setLeftBarButtonItem(self.leftBarItem, animated: true)
+        self.navigationItem.setRightBarButtonItem(self.rigthBarItem, animated: true)
+        
+    }
+    
     
 }

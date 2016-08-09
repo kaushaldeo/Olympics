@@ -31,6 +31,30 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     
     //MARK: - Private Data
+    
+    func updateOrder() {
+        let serialQueue = dispatch_queue_create("com.kaushal.rank", DISPATCH_QUEUE_SERIAL)
+        dispatch_sync(serialQueue) { () -> Void in
+            let context = NSManagedObjectContext.context()
+            let sortings = [NSSortDescriptor(key: "startDate", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
+            let predicate = NSPredicate(format: "event = %@", self.event)
+            if let items = context.find(Unit.classForCoder(), predicate:predicate,  sortDescriptors: sortings) as? [Unit] {
+                let phases = NSMutableSet()
+                for item in items {
+                    if let string = item.phase?.lowercaseString {
+                        phases.addObject(string)
+                        item.order = String(Character(UnicodeScalar(65 + phases.count)))
+                    }
+                    else if let string = item.name?.lowercaseString {
+                        phases.addObject(string)
+                        item.order = String(Character(UnicodeScalar(65 + phases.count)))
+                    }
+                }
+            }
+            context.saveContext()
+        }
+    }
+    
     func process(error:NSError) {
         var message = "ConnectionError".localized("")
         if (error.code == NSURLErrorNotConnectedToInternet) {
@@ -57,12 +81,15 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
                     message = ""
                 }
                 else {
-                    //TODO: Stamp the time on refresh control
+                    let date = NSDate()
+                    NSUserDefaults.refresh(date, atViewController: strongSelf.restorationIdentifier!)
+                    strongSelf.refreshControl.attributedTitle = NSAttributedString(string: date.time())
                 }
                 if let progressView = strongSelf.tableView.backgroundView as? KDErrorView {
                     progressView.stopAnimation()
                     progressView.update(message)
                 }
+                strongSelf.updateOrder()
                 strongSelf.fetchedResultsController.update()
                 strongSelf.tableView.reloadData()
                 strongSelf.refreshControl.endRefreshing()
@@ -97,7 +124,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         self.tableView.addSubview(self.refreshControl)
         
         let unit = self.event.playingUnit(NSDate(), withCountry: self.country)
-        print(unit?.statusValue())
+        debugPrint(unit?.statusValue())
     }
     
     
@@ -107,6 +134,9 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         self.tableView.reloadData()
         if self.fetchedResultsController.count == 0 {
             self.tableView.backgroundView = KDErrorView.view("Loading...")
+        }
+        if let date = NSUserDefaults.refreshDate(self.restorationIdentifier!) {
+            self.refreshControl.attributedTitle = NSAttributedString(string: date.time())
         }
         self.refreshData()
     }
@@ -136,6 +166,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         
         // Configure the cell...
         let unit = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        debugPrint(unit.statusValue())
         if let text = unit.type where text.lowercaseString.rangeOfString("head") != nil {
             let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! KDHeadsViewCell
             cell.set(unit, country: self.country)
@@ -144,7 +175,18 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         let cell = tableView.dequeueReusableCellWithIdentifier("Ranking", forIndexPath: indexPath) as! KDRankingCell
         let competitors = unit.competitors!.allObjects as! [Competitor]
         cell.competitors = competitors.filter({ (competitor) -> Bool in
-            return competitor.athlete?.country == self.country || competitor.team?.country == self.country
+            if let c = competitor.athlete?.country {
+                return c == self.country
+            }
+            else if let c = competitor.team?.country {
+                return c == self.country
+            }
+            return false
+        }).sort({ (c1, c2) -> Bool in
+            if let s1 = c1.sort, let s2 = c2.sort {
+                return s1.localizedStandardCompare(s2) == NSComparisonResult.OrderedAscending
+            }
+            return false
         })
         return cell
     }
@@ -197,7 +239,7 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
             let string = competitor.resultValue ?? ""
             let width = string.size(UIFont.systemFontOfSize(14), width: (CGRectGetWidth(tableView.frame) - 80)).width + 80.0
             if let text = competitor.name() {
-                height += text.size(UIFont.systemFontOfSize(14), width:CGRectGetWidth(tableView.frame) - width).height + 20
+                height += text.size(UIFont.systemFontOfSize(14), width:CGRectGetWidth(tableView.frame) - width).height + 24.0
             }
         }
         
@@ -206,9 +248,10 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
     
     func  tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("kHeaderView") as! KDPhaseView
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        headerView.titleLabel.text = sectionInfo.name
-        
+        let indexPath = NSIndexPath(forRow: 0, inSection: section)
+        let sectionInfo = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Unit
+        headerView.titleLabel.text = sectionInfo.phase ?? sectionInfo.name
+        debugPrint(self.fetchedResultsController.sections![section].name)
         return headerView
     }
     
@@ -244,13 +287,13 @@ class KDResultViewController: UIViewController, NSFetchedResultsControllerDelega
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "phase", ascending: true), NSSortDescriptor(key: "name", ascending: true),NSSortDescriptor(key: "startDate", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: false),NSSortDescriptor(key: "startDate", ascending: false),NSSortDescriptor(key: "phase", ascending: false)]
         
-        fetchRequest.predicate = NSPredicate(format: "event = %@ AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,self.country,self.country)
+        fetchRequest.predicate = NSPredicate(format: "event = %@ AND competitors.@count > 1 AND SUBQUERY(competitors, $competitor, $competitor.team.country = %@ OR $competitor.athlete.country = %@).@count != 0", self.event,self.country,self.country)
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"phase", cacheName: nil)
+        var fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:context, sectionNameKeyPath:"order", cacheName: nil)
         fetchedResultsController.delegate = self
         
         fetchedResultsController.update()

@@ -19,17 +19,27 @@ extension NSManagedObjectContext {
         return KDAPIManager.sharedInstance.managedObjectContext
     }
     
+    
+    class func context() -> NSManagedObjectContext {
+        let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        context.persistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
+    }
+    
     // MARK: - Core Data Saving support
     func saveContext () {
         if self.hasChanges {
-            do {
-                try self.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+            self.performBlockAndWait({
+                do {
+                    try self.save()
+                } catch {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    let nserror = error as NSError
+                    NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
+            })
         }
     }
     
@@ -106,7 +116,7 @@ extension NSFetchedResultsController {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nserror = error as NSError
-            print("Unresolved error \(nserror), \(nserror.userInfo)")
+            debugPrint("Unresolved error \(nserror), \(nserror.userInfo)")
             //abort()
         }
     }
@@ -142,7 +152,7 @@ extension NSPersistentStoreCoordinator {
             NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
             //abort()
         }
-
+        
     }
 }
 
@@ -190,4 +200,30 @@ extension NSUserDefaults {
         let setting = NSUserDefaults.standardUserDefaults()
         setting.setObject(sum, forKey: "kChecksum")
     }
+    
+    class func isUpdate(version: String) -> Bool {
+        let setting = NSUserDefaults.standardUserDefaults()
+        if let text = setting.valueForKey("kUpdateVersion") as? String {
+            setting.setObject(version, forKey: "kUpdateVersion")
+            return text != version
+        }
+        setting.setObject(version, forKey: "kUpdateVersion")
+        return true
+    }
+    
+    
+    
+    class func refresh(date:NSDate, atViewController identifier:String) {
+        let setting = NSUserDefaults.standardUserDefaults()
+        setting.setObject(date, forKey: "identifier")
+    }
+    
+    class func refreshDate(identifier: String) -> NSDate? {
+        let setting = NSUserDefaults.standardUserDefaults()
+        if let date = setting.valueForKey("identifier") as? NSDate {
+            return date
+        }
+        return nil
+    }
+    
 }

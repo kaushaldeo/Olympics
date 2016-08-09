@@ -24,6 +24,7 @@ class KDParseOperation: NSOperation, NSXMLParserDelegate {
         else {
             self.context.persistentStoreCoordinator = KDAPIManager.sharedInstance.persistentStoreCoordinator
         }
+        self.context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         super.init()
     }
     

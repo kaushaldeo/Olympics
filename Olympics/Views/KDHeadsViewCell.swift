@@ -86,7 +86,7 @@ class KDHeadsViewCell: UITableViewCell {
                 self.resultLabel.text = date.time()
             }
             else {
-                self.resultLabel.text = nil
+                self.resultLabel.text = "TBD"
             }
             
         }
