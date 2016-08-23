@@ -99,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Otl-ZV-VB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2944.5" y="-152.25"/>
+            <point key="canvasLocation" x="1966.5" y="-152.25"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="636-lO-bIq">
@@ -110,13 +110,14 @@
                         <viewControllerLayoutGuide type="bottom" id="yeI-2L-iRh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vSL-oQ-nIA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzd-Ga-RYw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2944.5" y="565.5"/>
+            <point key="canvasLocation" x="1966.5" y="561"/>
         </scene>
         <!--Countries View Controller-->
         <scene sceneID="QtD-h0-ajt">
@@ -230,7 +231,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9th-z3-ZEe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4665" y="-152.25"/>
+            <point key="canvasLocation" x="3828" y="-152.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="t47-P4-7Nv">
@@ -246,21 +247,106 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="noP-Dk-e4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3876" y="-152.25"/>
+            <point key="canvasLocation" x="2944.5" y="-152.25"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="66A-w6-weI">
             <objects>
                 <tableViewController storyboardIdentifier="kMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TjL-mB-KRn" customClass="KDMenuViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xFr-LD-WBA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xFr-LD-WBA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MkX-PU-GlI">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="kInfoViewCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" id="MkX-PU-GlI" customClass="KDInfoViewCell" customModule="Olympics" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MkX-PU-GlI" id="BOB-vl-bS4">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ica-tX-um6">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="afe-Hc-ZTw"/>
+                                                <constraint firstAttribute="width" constant="24" id="dQR-bG-yKN"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="afe-Hc-ZTw"/>
+                                                    <exclude reference="dQR-bG-yKN"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="afe-Hc-ZTw"/>
+                                                    <include reference="dQR-bG-yKN"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FbG-Wz-Fw6">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="NuN-VH-VyQ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="NuN-VH-VyQ"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="NuN-VH-VyQ"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ica-tX-um6" firstAttribute="centerY" secondItem="BOB-vl-bS4" secondAttribute="centerY" id="3U7-UB-biK"/>
+                                        <constraint firstAttribute="bottom" secondItem="FbG-Wz-Fw6" secondAttribute="bottom" constant="10" id="62W-cD-Ili"/>
+                                        <constraint firstItem="ica-tX-um6" firstAttribute="leading" secondItem="BOB-vl-bS4" secondAttribute="leading" constant="16" id="Eum-w7-PAY"/>
+                                        <constraint firstItem="FbG-Wz-Fw6" firstAttribute="leading" secondItem="ica-tX-um6" secondAttribute="trailing" constant="10" id="Tpm-Vj-wSx"/>
+                                        <constraint firstItem="FbG-Wz-Fw6" firstAttribute="top" secondItem="BOB-vl-bS4" secondAttribute="top" constant="10" id="XRE-Do-tHy"/>
+                                        <constraint firstAttribute="trailing" secondItem="FbG-Wz-Fw6" secondAttribute="trailing" constant="308" id="fea-dk-2Bu">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                        </constraint>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="ica-tX-um6"/>
+                                            <exclude reference="FbG-Wz-Fw6"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="3U7-UB-biK"/>
+                                            <exclude reference="Eum-w7-PAY"/>
+                                            <exclude reference="62W-cD-Ili"/>
+                                            <exclude reference="Tpm-Vj-wSx"/>
+                                            <exclude reference="XRE-Do-tHy"/>
+                                            <exclude reference="fea-dk-2Bu"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="ica-tX-um6"/>
+                                            <include reference="FbG-Wz-Fw6"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="3U7-UB-biK"/>
+                                            <include reference="Eum-w7-PAY"/>
+                                            <include reference="62W-cD-Ili"/>
+                                            <include reference="Tpm-Vj-wSx"/>
+                                            <include reference="XRE-Do-tHy"/>
+                                            <include reference="fea-dk-2Bu"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="iconView" destination="ica-tX-um6" id="3wz-0v-fiJ"/>
+                                    <outlet property="nameLabel" destination="FbG-Wz-Fw6" id="4TD-dL-oQU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -271,19 +357,22 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bV5-ft-dfa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3876" y="565.5"/>
+            <point key="canvasLocation" x="2944.5" y="561"/>
         </scene>
         <!--Items-->
         <scene sceneID="F2u-zG-JFT">
             <objects>
                 <tableViewController storyboardIdentifier="KDItemsViewController" id="KQ5-HM-f3k" customClass="KDItemsViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ff0-XY-MMf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Jqg-nj-5Hg">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jqg-nj-5Hg" id="oOL-5X-Ln3">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
