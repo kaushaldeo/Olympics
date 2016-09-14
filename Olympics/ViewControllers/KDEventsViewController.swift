@@ -50,36 +50,6 @@ class KDEventsViewController: UIViewController {
         return dateFormatter
     }()
     
-    lazy var pagerController : ViewPagerController = {
-        
-        var pagerController = ViewPagerController()
-        
-        pagerController.setParentController(self, parentView: self.overlay)
-        
-        var appearance = ViewPagerControllerAppearance()
-        
-        appearance.tabMenuHeight = 44.0
-        appearance.scrollViewMinPositionY = 20.0
-        appearance.scrollViewObservingType = .NavigationBar(targetNavigationBar: self.navigationController!.navigationBar)
-        
-        appearance.tabMenuAppearance.backgroundColor = UIColor(red: 0, green: 160, blue: 25)
-        appearance.tabMenuAppearance.selectedViewBackgroundColor = UIColor.whiteColor()
-        appearance.tabMenuAppearance.defaultTitleColor = UIColor.lightTextColor()
-        appearance.tabMenuAppearance.selectedViewInsets = UIEdgeInsets(top: 39, left: 0, bottom: 0, right: 0)
-        
-        pagerController.updateAppearance(appearance)
-        
-        pagerController.willBeginTabMenuUserScrollingHandler = { selectedView in
-            selectedView.alpha = 0.0
-        }
-        
-        pagerController.didEndTabMenuUserScrollingHandler = { selectedView in
-            selectedView.alpha = 1.0
-        }
-        
-        return pagerController
-    }()
-    
     
     //MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -156,7 +126,6 @@ class KDEventsViewController: UIViewController {
                 index = indexOfDay
             }
         }
-        self.pagerController.reloadData(index)
     }
     
     func populateDate(country: Country) {
@@ -169,17 +138,6 @@ class KDEventsViewController: UIViewController {
                     sets.addObject(date)
                 }
             }
-        }
-        
-        //self.days = (sets.allObjects as! [NSDate]).sort({$0.compare($1) == NSComparisonResult.OrderedAscending})
-        for date in self.days {
-            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("kUnitsViewController") as! KDUnitsViewController
-            controller.view.clipsToBounds = true
-            let title = self.dateFormatter.stringFromDate(date)
-            controller.title = title
-            controller.date = date
-            controller.parentController = self
-            self.pagerController.addContent(title, viewController: controller)
         }
         
     }
