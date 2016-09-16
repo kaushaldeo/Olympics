@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NYc-Jo-dxh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NYc-Jo-dxh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -124,7 +124,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="kCountriesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UOo-jC-6ML" customClass="KDCountriesViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="d6L-xD-fF8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -132,7 +132,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="49a-Dp-XKR" id="z8h-A1-pwy">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tYX-Zw-RTN">
@@ -262,7 +262,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MkX-PU-GlI" id="BOB-vl-bS4">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ica-tX-um6">
@@ -320,12 +320,12 @@
                                             <exclude reference="FbG-Wz-Fw6"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="3U7-UB-biK"/>
-                                            <exclude reference="Eum-w7-PAY"/>
                                             <exclude reference="62W-cD-Ili"/>
                                             <exclude reference="Tpm-Vj-wSx"/>
                                             <exclude reference="XRE-Do-tHy"/>
                                             <exclude reference="fea-dk-2Bu"/>
+                                            <exclude reference="3U7-UB-biK"/>
+                                            <exclude reference="Eum-w7-PAY"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -334,12 +334,12 @@
                                             <include reference="FbG-Wz-Fw6"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="3U7-UB-biK"/>
-                                            <include reference="Eum-w7-PAY"/>
                                             <include reference="62W-cD-Ili"/>
                                             <include reference="Tpm-Vj-wSx"/>
                                             <include reference="XRE-Do-tHy"/>
                                             <include reference="fea-dk-2Bu"/>
+                                            <include reference="3U7-UB-biK"/>
+                                            <include reference="Eum-w7-PAY"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -372,7 +372,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jqg-nj-5Hg" id="oOL-5X-Ln3">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -386,7 +386,35 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gND-LB-xp4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3876" y="1243.5"/>
+            <point key="canvasLocation" x="3828" y="1243"/>
+        </scene>
+        <!--Players View Controller-->
+        <scene sceneID="aZK-lq-UeM">
+            <objects>
+                <tableViewController storyboardIdentifier="kPlayersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bai-Re-jUq" customClass="KDPlayersViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XLq-Va-WTx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="INx-mU-1D8">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="INx-mU-1D8" id="trE-ao-re3">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bai-Re-jUq" id="3cA-U3-Mtv"/>
+                            <outlet property="delegate" destination="bai-Re-jUq" id="qmJ-Sh-LRe"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbe-Tc-mAt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3828" y="1954"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hQ3-xV-eJw">
@@ -398,11 +426,40 @@
                     </navigationBar>
                     <connections>
                         <segue destination="KQ5-HM-f3k" kind="relationship" relationship="rootViewController" id="SJY-hn-aCL"/>
+                        <segue destination="zTz-m0-TAa" kind="custom" identifier="medals" customClass="KDRootSeque" customModule="Olympics" customModuleProvider="target" id="Cbr-PM-UVS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aaQ-jK-9CW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2944.5" y="1243.5"/>
+        </scene>
+        <!--Medals View Controller-->
+        <scene sceneID="GUO-wY-0lG">
+            <objects>
+                <tableViewController storyboardIdentifier="kMedalsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zTz-m0-TAa" customClass="KDMedalsViewController" customModule="Olympics" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="lkE-Qp-Qkl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="SwF-6X-lpG">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SwF-6X-lpG" id="a1e-mQ-zUo">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zTz-m0-TAa" id="mB3-uh-cmA"/>
+                            <outlet property="delegate" destination="zTz-m0-TAa" id="enL-Ik-hQy"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eFX-hK-qkL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3828" y="561"/>
         </scene>
     </scenes>
 </document>

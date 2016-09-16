@@ -14,7 +14,10 @@ class KDMedalParser: KDParseOperation {
         
         if elementName == "organization" {
             let predicate = NSPredicate(format: "identifier = %@", attributeDict["id"]!)
-            if let country = self.context.findFirst(Country.classForCoder(), predicate: predicate) as? Country {
+            if let country = self.context.findOrCreate(Country.classForCoder(), predicate: predicate) as? Country {
+                country.identifier = attributeDict["id"]
+                country.name = attributeDict["description"]
+                country.alias = attributeDict["alias"]
                 //gold="2" silver="3" bronze="2" total="7"/>
                 if let text = attributeDict["bronze"], let index = Int(text) {
                     country.bronze = NSNumber(integer: index)

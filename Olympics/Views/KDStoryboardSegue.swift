@@ -12,8 +12,6 @@ class KDStoryboardSegue: UIStoryboardSegue {
     
     override func perform() {
         if let window = self.sourceViewController.view.window {
-            
-            
             let snapShot = window.snapshotViewAfterScreenUpdates(true)
             self.destinationViewController.view.addSubview(snapShot)
             window.rootViewController = self.destinationViewController
@@ -33,11 +31,19 @@ class KDStoryboardSegue: UIStoryboardSegue {
 }
 
 class KDReplaceSegue: UIStoryboardSegue {
-    
     override func perform() {
         if let window = self.sourceViewController.view.window {
             window.rootViewController = self.destinationViewController
         }
     }
     
+}
+
+
+class KDRootSeque: UIStoryboardSegue {
+    override func perform() {
+        if let navigationController = self.sourceViewController as? UINavigationController {
+            navigationController.setViewControllers([self.destinationViewController], animated: true)
+        }
+    }
 }

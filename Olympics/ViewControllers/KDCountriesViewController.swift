@@ -165,7 +165,7 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
      */
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*
+        
          let country = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Country
          let setting = NSUserDefaults.standardUserDefaults()
          let url = country.objectID.URIRepresentation().absoluteString
@@ -173,7 +173,7 @@ class KDCountriesViewController: UITableViewController, NSFetchedResultsControll
          if let string = country.alias {
          FIRMessaging.messaging().subscribeToTopic(string)
          }
-         */
+         
     }
     
     /*

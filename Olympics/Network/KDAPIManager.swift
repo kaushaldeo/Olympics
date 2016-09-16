@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 import AFNetworking
-
+import Firebase
 
 
 
@@ -142,7 +142,7 @@ class KDAPIManager : NSObject {
         if let context = notification.object as? NSManagedObjectContext {
             let insertedObjects = Array(context.insertedObjects)
             if insertedObjects.count > 0 {
-               try! context.obtainPermanentIDsForObjects(insertedObjects)
+                try! context.obtainPermanentIDsForObjects(insertedObjects)
             }
         }
     }
@@ -150,6 +150,14 @@ class KDAPIManager : NSObject {
     
     
     //MARK: - Web-Service Methods
+    
+    func dispatchOnMain(block:((NSError?) -> Void)?, _ error: NSError?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            if let completionBlock = block {
+                completionBlock(error)
+            }
+        }
+    }
     
     func updateBackground(notification: NSNotification) {
         self.loadConfiguration(nil)
@@ -234,95 +242,216 @@ class KDAPIManager : NSObject {
         })
     }
     
-    func updateCountry(block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
-            if let parser = response as? NSXMLParser {
-                let operation = KDCountryParser(parser: parser)
-                operation.completionBlock = {
-                    self.dispatchOnMain(block, nil)
-                }
-                self.operationQueue.addOperation(operation)
+    func login(block:((NSError?) -> Void)?, process:(()->Void)) {
+        FIRAuth.auth()?.signInAnonymouslyWithCompletion() { (user, error) in
+            // ...
+            if let nserror = error {
+                self.dispatchOnMain(block, nserror)
             }
-            }, failure: { (task, error) in
-                self.dispatchOnMain(block, error)
-                
-        })
-    }
-    
-    func updateSchedule(process:(() -> Void)?, block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
-            if let block = process {
-                block()
-            }
-            if let parser = response as? NSXMLParser {
-                let operation = KDScheduleParser(parser: parser)
-                operation.completionBlock = {
-                    self.dispatchOnMain(block, nil)
-                }
-                self.operationQueue.addOperation(operation)
-            }
-            }, failure: { (task, error) in
-                self.dispatchOnMain(block, error)
-                
-        })
-    }
-    
-    func dispatchOnMain(block:((NSError?) -> Void)?, _ error: NSError?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            if let completionBlock = block {
-                completionBlock(error)
+            else {
+                process()
             }
         }
     }
+    
+    func updateCountry(block:((NSError?) -> Void)?) {
+        
+        self.login(block) {
+            // Get a reference to the storage service, using the default Firebase App
+            let storage = FIRStorage.storage()
+            // Create a storage reference from our storage service
+            let storageRef = storage.referenceForURL("gs://my-olympics.appspot.com/medals")
+            
+            storageRef.dataWithMaxSize(INT64_MAX, completion: { (data, error) in
+                if let nsdata = data {
+                    let parser = NSXMLParser(data: nsdata)
+                    let operation = KDMedalParser(parser: parser)
+                    operation.completionBlock = {
+                        self.dispatchOnMain(block, nil)
+                    }
+                    self.operationQueue.addOperation(operation)
+                    return
+                }
+                self.dispatchOnMain(block, error)
+            })
+        }
+        /*
+         self.sessionManager.GET("organization/list.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
+         if let parser = response as? NSXMLParser {
+         let operation = KDCountryParser(parser: parser)
+         operation.completionBlock = {
+         self.dispatchOnMain(block, nil)
+         }
+         self.operationQueue.addOperation(operation)
+         }
+         }, failure: { (task, error) in
+         self.dispatchOnMain(block, error)
+         
+         })
+         */
+    }
+    
+    func updateSchedule(process:(() -> Void)?, block:((NSError?) -> Void)?) {
+        
+        self.login(block) {
+            // Get a reference to the storage service, using the default Firebase App
+            let storage = FIRStorage.storage()
+            // Create a storage reference from our storage service
+            let storageRef = storage.referenceForURL("gs://my-olympics.appspot.com/schedule")
+            
+            storageRef.dataWithMaxSize(INT64_MAX, completion: { (data, error) in
+                if let nsdata = data {
+                    let parser = NSXMLParser(data: nsdata)
+                    let operation = KDScheduleParser(parser: parser)
+                    operation.completionBlock = {
+                        self.dispatchOnMain(block, nil)
+                    }
+                    self.operationQueue.addOperation(operation)
+                    return
+                }
+                self.dispatchOnMain(block, error)
+            })
+        }
+        /*
+         self.sessionManager.GET("2016/schedule.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
+         if let block = process {
+         block()
+         }
+         if let parser = response as? NSXMLParser {
+         let operation = KDScheduleParser(parser: parser)
+         operation.completionBlock = {
+         self.dispatchOnMain(block, nil)
+         }
+         self.operationQueue.addOperation(operation)
+         }
+         }, failure: { (task, error) in
+         self.dispatchOnMain(block, error)
+         
+         })
+         */
+    }
+    
+    
     
     func updateProfile(country:Country, _ block:((NSError?) -> Void)?) {
         guard let identifier = country.identifier else {
             return
         }
-        self.sessionManager.GET("organization/2016/\(identifier)/profile.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
-            if let parser = response as? NSXMLParser {
-                let operation = KDProfileParser(parser: parser)
-                operation.completionBlock = {
-                    self.dispatchOnMain(block, nil)
+        
+        self.login(block) {
+            // Get a reference to the storage service, using the default Firebase App
+            let storage = FIRStorage.storage()
+            // Create a storage reference from our storage service
+            let storageRef = storage.referenceForURL("gs://my-olympics.appspot.com/country_org/\(identifier)_COUNTRY_CONFIG")
+            
+            storageRef.dataWithMaxSize(INT64_MAX, completion: { (data, error) in
+                if let nsdata = data {
+                    let parser = NSXMLParser(data: nsdata)
+                    let operation = KDProfileParser(parser: parser)
+                    operation.completionBlock = {
+                        self.dispatchOnMain(block, nil)
+                    }
+                    self.operationQueue.addOperation(operation)
+                    return
                 }
-                self.operationQueue.addOperation(operation)
-            }
-            }, failure: { (task, error) in
                 self.dispatchOnMain(block, error)
-        })
+            })
+        }
+        
+        /*
+         self.sessionManager.GET("organization/2016/\(identifier)/profile.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
+         if let parser = response as? NSXMLParser {
+         let operation = KDProfileParser(parser: parser)
+         operation.completionBlock = {
+         self.dispatchOnMain(block, nil)
+         }
+         self.operationQueue.addOperation(operation)
+         }
+         }, failure: { (task, error) in
+         self.dispatchOnMain(block, error)
+         })
+         
+         */
         
     }
     
     func updateMedals(block:((NSError?) -> Void)?) {
-        self.sessionManager.GET("2016/medals.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
-            if let parser = response as? NSXMLParser {
-                let operation = KDMedalParser(parser: parser)
-                operation.completionBlock = {
-                    self.dispatchOnMain(block, nil)
+        self.login(block) {
+            // Get a reference to the storage service, using the default Firebase App
+            let storage = FIRStorage.storage()
+            // Create a storage reference from our storage service
+            let storageRef = storage.referenceForURL("gs://my-olympics.appspot.com/medals")
+            
+            storageRef.dataWithMaxSize(INT64_MAX, completion: { (data, error) in
+                if let nsdata = data {
+                    let parser = NSXMLParser(data: nsdata)
+                    let operation = KDMedalParser(parser: parser)
+                    operation.completionBlock = {
+                        self.dispatchOnMain(block, nil)
+                    }
+                    self.operationQueue.addOperation(operation)
+                    return
                 }
-                self.operationQueue.addOperation(operation)
-            }
-            }, failure: { (task, error) in
                 self.dispatchOnMain(block, error)
-                
-        })
+            })
+        }
+        /*
+         self.sessionManager.GET("2016/medals.xml", parameters: ["api_key":key], progress:nil, success: { (task, response) in
+         if let parser = response as? NSXMLParser {
+         let operation = KDMedalParser(parser: parser)
+         operation.completionBlock = {
+         self.dispatchOnMain(block, nil)
+         }
+         self.operationQueue.addOperation(operation)
+         }
+         }, failure: { (task, error) in
+         self.dispatchOnMain(block, error)
+         
+         })
+         
+         */
+        
     }
     
     func update(event:Event, _ block:((NSError?) -> Void)?) {
         guard let identifier = event.identifier else {
             return
         }
-        self.sessionManager.GET("event/\(identifier)/results.xml", parameters: ["api_key":key], progress: nil, success: { (task, response) in
-            if let parser = response as? NSXMLParser {
-                let operation = KDEventParser(parser: parser)
-                operation.completionBlock = {
-                    self.dispatchOnMain(block, nil)
+        
+        self.login(block) {
+            // Get a reference to the storage service, using the default Firebase App
+            let storage = FIRStorage.storage()
+            // Create a storage reference from our storage service
+            let storageRef = storage.referenceForURL("gs://my-olympics.appspot.com/events/\(identifier)_EVENT_RESULTS")
+            
+            storageRef.dataWithMaxSize(INT64_MAX, completion: { (data, error) in
+                if let nsdata = data {
+                    let parser = NSXMLParser(data: nsdata)
+                    let operation = KDEventParser(parser: parser)
+                    operation.completionBlock = {
+                        self.dispatchOnMain(block, nil)
+                    }
+                    self.operationQueue.addOperation(operation)
+                    return
                 }
-                self.operationQueue.addOperation(operation)
-            }
-            }, failure: { (task, error) in
                 self.dispatchOnMain(block, error)
-        })
+            })
+        }
+        
+        /*
+         self.sessionManager.GET("event/\(identifier)/results.xml", parameters: ["api_key":key], progress: nil, success: { (task, response) in
+         if let parser = response as? NSXMLParser {
+         let operation = KDEventParser(parser: parser)
+         operation.completionBlock = {
+         self.dispatchOnMain(block, nil)
+         }
+         self.operationQueue.addOperation(operation)
+         }
+         }, failure: { (task, error) in
+         self.dispatchOnMain(block, error)
+         })
+         
+         */
     }
     
     
@@ -330,16 +459,39 @@ class KDAPIManager : NSObject {
         guard let identifier = country.identifier else {
             return
         }
-        self.sessionManager.GET("organization/\(identifier)/medals.xml", parameters: ["api_key":key], progress: nil, success: { (task, response) in
-            if let parser = response as? NSXMLParser {
-                let operation = KDWinnerParser(parser: parser)
-                operation.completionBlock = {
-                    self.dispatchOnMain(block, nil)
+        
+        self.login(block) {
+            // Get a reference to the storage service, using the default Firebase App
+            let storage = FIRStorage.storage()
+            // Create a storage reference from our storage service
+            let storageRef = storage.referenceForURL("gs://my-olympics.appspot.com/medals/\(identifier)_MEDAL_TALLY_BY_ORGANIZATION")
+            
+            storageRef.dataWithMaxSize(INT64_MAX, completion: { (data, error) in
+                if let nsdata = data {
+                    let parser = NSXMLParser(data: nsdata)
+                    let operation = KDWinnerParser(parser: parser)
+                    operation.completionBlock = {
+                        self.dispatchOnMain(block, nil)
+                    }
+                    self.operationQueue.addOperation(operation)
+                    return
                 }
-                self.operationQueue.addOperation(operation)
-            }
-            }, failure: { (task, error) in
                 self.dispatchOnMain(block, error)
-        })
+            })
+        }
+        
+        /*
+         self.sessionManager.GET("organization/\(identifier)/medals.xml", parameters: ["api_key":key], progress: nil, success: { (task, response) in
+         if let parser = response as? NSXMLParser {
+         let operation = KDWinnerParser(parser: parser)
+         operation.completionBlock = {
+         self.dispatchOnMain(block, nil)
+         }
+         self.operationQueue.addOperation(operation)
+         }
+         }, failure: { (task, error) in
+         self.dispatchOnMain(block, error)
+         })
+         */
     }
 }

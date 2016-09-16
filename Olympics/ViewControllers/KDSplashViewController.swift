@@ -57,7 +57,7 @@ class KDSplashViewController: UIViewController {
             self.performSegueWithIdentifier("showCountry", sender: nil)
         }
         
-        // KDUpdate.sharedInstance.update()
+         KDUpdate.sharedInstance.update()
         
     }
     
@@ -100,7 +100,7 @@ class KDSplashViewController: UIViewController {
             self.imageView.transform = CGAffineTransformIdentity
         }) { (animationCompleted: Bool) -> Void in
             self.progressLabel.hidden = false
-            // self.loadData()
+            self.loadData()
             self.showView()
         }
     }

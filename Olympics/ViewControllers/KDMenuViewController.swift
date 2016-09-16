@@ -110,7 +110,11 @@ class KDMenuViewController: UITableViewController {
      */
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.mm_drawerController.closeDrawerAnimated(true, completion: nil)
+        self.mm_drawerController.closeDrawerAnimated(true) { (flag) in
+            if let controller = self.mm_drawerController.centerViewController as? UINavigationController {
+                controller.performSegueWithIdentifier("medals", sender: nil)
+            }
+        }
     }
     
 }
