@@ -12,9 +12,26 @@ class CountriesViewController: UITableViewController {
     
     lazy var searchController: UISearchController = {
         let controller = UISearchController(searchResultsController: nil)
-        
+        controller.dimsBackgroundDuringPresentation = false
+        controller.searchResultsUpdater = self
+        controller.delegate = self
         return controller
     }()
+    
+    var items = [Country]()
+    var filteredItem = [Country]()
+    
+    // MARK: - Private Methods
+    
+    func update() {
+        NetworkManager.default.get(router: .countries) { [weak self] items in
+            self?.items = items
+            self?.filteredItem = items
+            self?.tableView.reloadData()
+        }
+    }
+    
+    
     
     // MARK: - View life cycles
     override func viewDidLoad() {
@@ -27,6 +44,7 @@ class CountriesViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.navigationItem.searchController = self.searchController
         self.tableView.updateFooter()
+        self.update()
     }
     
     // MARK: - Table view data source
@@ -36,18 +54,23 @@ class CountriesViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.filteredItem.count
     }
     
     
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusable(cell: CountryViewCell.self, for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusable(cell: CountryViewCell.self, for: indexPath)
+        
+        // Configure the cell...
+        let item = self.filteredItem[indexPath.row]
+        cell.nameLabel.text = item.name
+        cell.aliasLabel.text = item.code
+        let text = item.code.lowercased()
+        cell.iconView.image = UIImage(named: "Images/\(text).png")
+        
+        return cell
+    }
+    
     
     /*
      // Override to support conditional editing of the table view.
@@ -94,4 +117,31 @@ class CountriesViewController: UITableViewController {
      }
      */
     
+}
+
+extension CountriesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        defer {
+            self.tableView.reloadData()
+        }
+        guard let text = searchController.searchBar.text else {
+            self.filteredItem = self.items
+            return
+        }
+        self.filteredItem = self.items.filter({ $0.name.lowercased().contains(text.lowercased())})
+    }
+}
+
+
+extension CountriesViewController: UISearchControllerDelegate {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        self.filteredItem = self.items
+        self.tableView.reloadData()
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        self.filteredItem = self.items
+        self.tableView.reloadData()
+        
+    }
 }

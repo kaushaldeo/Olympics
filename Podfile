@@ -6,9 +6,6 @@ target 'Olympics' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   # Pods for Olympics
-pod 'AFNetworking'
-pod 'Firebase/Analytics'
-pod 'Firebase/Messaging'
-pod 'Firebase/Auth'
-pod 'Firebase/Storage'
+pod 'Alamofire'
+
 end
