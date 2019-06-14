@@ -18,7 +18,7 @@ class NetworkManager {
         self.session = SessionManager(configuration: .default)
     }
     
-    func get(router: Router, completionBlock: @escaping ([Country]) -> Void) {
+    func countries(router: Request.Router, completionBlock: @escaping ([Country]) -> Void) {
         let request = self.session.request(router)
         request.responseData { (response) in
             var items = [Country]()
@@ -35,15 +35,49 @@ class NetworkManager {
             completionBlock(items)
         }
     }
-}
-
-
-enum Router: URLRequestConvertible {
-    case countries
     
-    func asURLRequest() throws -> URLRequest {
-        return URLRequest(url: URL(string: "https://restcountries.eu/rest/v2/all")!)
+    func sports(router: Request.Router, completionBlock: @escaping ([Sport]) -> Void) {
+        let request = self.session.request(router)
+        request.responseData { (response) in
+            var items = [Sport]()
+            guard let data = response.value else {
+                completionBlock(items)
+                return
+            }
+            do {
+                items = try JSONDecoder().decode([Sport].self, from: data)
+            }
+            catch {
+                print(error)
+            }
+            completionBlock(items)
+        }
     }
-    
-    
 }
+
+
+struct Request {
+    static let url = URL(string: "https://raw.githubusercontent.com/kaushaldeo/olympic-data/master")!
+    
+    enum Router: URLRequestConvertible {
+        case countries
+        case sports
+        case event(_ sport: String)
+        
+        func asURLRequest() throws -> URLRequest {
+            let path : String = {
+                switch self {
+                case .countries:
+                    return "countries.json"
+                case .sports:
+                    return "sports.json"
+                case .event(let sport):
+                    return "events/\(sport).json"
+                }
+            }()
+            
+            return URLRequest(url: Request.url.appendingPathComponent(path))
+        }
+    }
+}
+

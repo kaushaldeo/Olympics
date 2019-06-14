@@ -17,7 +17,10 @@
 		3C4340E822AC7DBD007CB428 /* DayScheduleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4340E722AC7DBD007CB428 /* DayScheduleViewCell.swift */; };
 		3C4340EA22ACA629007CB428 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4340E922ACA629007CB428 /* NetworkManager.swift */; };
 		3C4340EC22ACAAE1007CB428 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4340EB22ACAAE1007CB428 /* Country.swift */; };
+		3C6EEC0C22B39A23001E665A /* DisciplineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EEC0B22B39A22001E665A /* DisciplineViewCell.swift */; };
+		3C98E1F122B230F5003831AC /* KDCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C98E1F022B230F5003831AC /* KDCollectionViewCell.swift */; };
 		3CC2D1E11D46E33F00316CD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2D1E01D46E33F00316CD1 /* Localizable.strings */; };
+		3CEFD9E822AFB078009B70DC /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEFD9E722AFB078009B70DC /* Sport.swift */; };
 		724CB2DC1D3A0164003C4D28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */; };
 		729A03291D42033100E300F1 /* Icon in Resources */ = {isa = PBXBuildFile; fileRef = 729A03281D42033100E300F1 /* Icon */; };
 		72D0F5CF1D2C6A6300400F03 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 72D0F5CE1D2C6A6300400F03 /* Images */; };
@@ -39,8 +42,11 @@
 		3C4340E922ACA629007CB428 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3C4340EB22ACAAE1007CB428 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		3C6D52FC1D56806E002603D2 /* Olympics1.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics1.2.xcdatamodel; sourceTree = "<group>"; };
+		3C6EEC0B22B39A22001E665A /* DisciplineViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisciplineViewCell.swift; sourceTree = "<group>"; };
+		3C98E1F022B230F5003831AC /* KDCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDCollectionViewCell.swift; sourceTree = "<group>"; };
 		3CC2D1E01D46E33F00316CD1 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		3CD1458B1D5305C2005A8751 /* Olympics1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics1.1.xcdatamodel; sourceTree = "<group>"; };
+		3CEFD9E722AFB078009B70DC /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
 		724CB2DB1D3A0164003C4D28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		729A03281D42033100E300F1 /* Icon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icon; sourceTree = "<group>"; };
 		72D0F5CE1D2C6A6300400F03 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
@@ -126,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				3C4340EB22ACAAE1007CB428 /* Country.swift */,
+				3CEFD9E722AFB078009B70DC /* Sport.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -144,8 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				3C4340E122AC7570007CB428 /* KDViewCell.swift */,
+				3C98E1F022B230F5003831AC /* KDCollectionViewCell.swift */,
 				3C4340E322AC782A007CB428 /* CountryViewCell.swift */,
 				3C4340E722AC7DBD007CB428 /* DayScheduleViewCell.swift */,
+				3C6EEC0B22B39A22001E665A /* DisciplineViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,10 +301,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Olympics/Pods-Olympics-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -310,10 +321,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C4340EA22ACA629007CB428 /* NetworkManager.swift in Sources */,
+				3CEFD9E822AFB078009B70DC /* Sport.swift in Sources */,
 				3C4340DE22AC71B8007CB428 /* SplashViewController.swift in Sources */,
+				3C98E1F122B230F5003831AC /* KDCollectionViewCell.swift in Sources */,
 				72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */,
 				3C4340E822AC7DBD007CB428 /* DayScheduleViewCell.swift in Sources */,
 				72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */,
+				3C6EEC0C22B39A23001E665A /* DisciplineViewCell.swift in Sources */,
 				3C4340E022AC7281007CB428 /* CountriesViewController.swift in Sources */,
 				3C4340E222AC7570007CB428 /* KDViewCell.swift in Sources */,
 				3C4340E622AC7AED007CB428 /* HomeViewController.swift in Sources */,
@@ -446,7 +460,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.olympics.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c2ac2a84-2bce-4f28-a929-874bc870338c";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
@@ -465,7 +479,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.olympics.iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c2ac2a84-2bce-4f28-a929-874bc870338c";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};

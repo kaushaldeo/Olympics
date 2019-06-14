@@ -11,17 +11,12 @@ import Foundation
 class Country: Codable {
     let name: String
     let code: String
-    let region: String
+    let imageURL: String
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
-        case code = "alpha3Code"
-        case region = "region"
+        case code = "code"
+        case imageURL = "img"
     }
 }
 
-
-struct Region {
-    let name: String
-    let items: [Country]
-}

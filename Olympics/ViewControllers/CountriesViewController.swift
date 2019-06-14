@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CountriesViewController: UITableViewController {
     
@@ -24,7 +25,7 @@ class CountriesViewController: UITableViewController {
     // MARK: - Private Methods
     
     func update() {
-        NetworkManager.default.get(router: .countries) { [weak self] items in
+        NetworkManager.default.countries(router: .countries) { [weak self] items in
             self?.items = items
             self?.filteredItem = items
             self?.tableView.reloadData()
@@ -65,8 +66,7 @@ class CountriesViewController: UITableViewController {
         let item = self.filteredItem[indexPath.row]
         cell.nameLabel.text = item.name
         cell.aliasLabel.text = item.code
-        let text = item.code.lowercased()
-        cell.iconView.image = UIImage(named: "Images/\(text).png")
+        cell.iconView.kf.setImage(with: URL(string: item.imageURL))
         
         return cell
     }

@@ -12,27 +12,21 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var items = [Region]()
+    var items = [ViewModel<SportModel>]()
+    
     // MARK: - Private Methods
-    func update(data: [Country]) {
-        var results = [String:[Country]]()
-        for item in data {
-            let key = item.region.lowercased()
-            var items = results[key] ?? []
-            items.append(item)
-            results[key] = items
-        }
-        var regions = [Region]()
-        for (key, items) in results {
-            regions.append(Region(name: key.capitalized, items: items))
-        }
-        self.items = regions.sorted(by: { $0.name < $1.name })
-        self.collectionView.reloadData()
-        
-    }
     func update() {
-        NetworkManager.default.get(router: .countries) { [weak self] items in
-            self?.update(data: items)
+        NetworkManager.default.sports(router: .sports) { [weak self] items in
+            guard let strongSelf = self else { return }
+            print(items)
+            strongSelf.items = items.reduce([], { (array, sport) -> [ViewModel<SportModel>] in
+                if sport.sports.count == 0 {
+                    return array + [ViewModel<SportModel>(type: DayScheduleViewCell.self, value: SportModel(sport: sport))]
+                }
+                return array + [ViewModel<SportModel>(type: DayScheduleViewCell.self, value: SportModel(sport: sport))] + sport.sports.map({ SportModel(sport: $0)}).map({ ViewModel<SportModel>(type: DisciplineViewCell.self, value: $0) })
+            })
+            
+            strongSelf.collectionView.reloadData()
         }
     }
     
@@ -68,10 +62,9 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusable(cell: DayScheduleViewCell.self, for: indexPath)
         let item = self.items[indexPath.row]
-        cell.nameLabel.text = item.name
-        cell.items = item.items
+        let cell = collectionView.dequeueReusable(cell: item.type, for: indexPath)
+        cell.update(data: item.value)
         return cell
     }
 }
