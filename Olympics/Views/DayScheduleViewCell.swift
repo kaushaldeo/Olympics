@@ -20,8 +20,8 @@ class DayScheduleViewCell: KDCollectionViewCell {
         guard let item = data as? SportModel else {
             return
         }
-        self.color = item.sport.sports.count == 0 ? .white : .groupTableViewBackground
-        self.selectedColor = item.sport.sports.count == 0 ? UIColor.lightGray.withAlphaComponent(0.3) : .groupTableViewBackground
+        //self.color = item.sport.sports.count == 0 ? .white : .groupTableViewBackground
+        //self.selectedColor = item.sport.sports.count == 0 ? UIColor.lightGray.withAlphaComponent(0.3) : .groupTableViewBackground
         self.nameLabel.text = item.sport.name
     }
     

@@ -18,6 +18,11 @@
 		3C4340EA22ACA629007CB428 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4340E922ACA629007CB428 /* NetworkManager.swift */; };
 		3C4340EC22ACAAE1007CB428 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4340EB22ACAAE1007CB428 /* Country.swift */; };
 		3C6EEC0C22B39A23001E665A /* DisciplineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6EEC0B22B39A22001E665A /* DisciplineViewCell.swift */; };
+		3C711EBC22CB564D00A014CB /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = 3C711EBA22CB564D00A014CB /* Appfile */; };
+		3C711EBD22CB564D00A014CB /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 3C711EBB22CB564D00A014CB /* Fastfile */; };
+		3C89B98922CDDE3600E1F320 /* MedalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C89B98822CDDE3600E1F320 /* MedalsViewController.swift */; };
+		3C89B98B22CDDF8400E1F320 /* MedalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C89B98A22CDDF8400E1F320 /* MedalViewCell.swift */; };
+		3C89B98D22CDE68F00E1F320 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C89B98C22CDE68F00E1F320 /* Color.swift */; };
 		3C98E1F122B230F5003831AC /* KDCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C98E1F022B230F5003831AC /* KDCollectionViewCell.swift */; };
 		3CC2D1E11D46E33F00316CD1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2D1E01D46E33F00316CD1 /* Localizable.strings */; };
 		3CEFD9E822AFB078009B70DC /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEFD9E722AFB078009B70DC /* Sport.swift */; };
@@ -43,6 +48,11 @@
 		3C4340EB22ACAAE1007CB428 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		3C6D52FC1D56806E002603D2 /* Olympics1.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics1.2.xcdatamodel; sourceTree = "<group>"; };
 		3C6EEC0B22B39A22001E665A /* DisciplineViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisciplineViewCell.swift; sourceTree = "<group>"; };
+		3C711EBA22CB564D00A014CB /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		3C711EBB22CB564D00A014CB /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		3C89B98822CDDE3600E1F320 /* MedalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalsViewController.swift; sourceTree = "<group>"; };
+		3C89B98A22CDDF8400E1F320 /* MedalViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalViewCell.swift; sourceTree = "<group>"; };
+		3C89B98C22CDE68F00E1F320 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3C98E1F022B230F5003831AC /* KDCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDCollectionViewCell.swift; sourceTree = "<group>"; };
 		3CC2D1E01D46E33F00316CD1 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		3CD1458B1D5305C2005A8751 /* Olympics1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Olympics1.1.xcdatamodel; sourceTree = "<group>"; };
@@ -72,6 +82,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C711EB922CB564D00A014CB /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				3C711EBA22CB564D00A014CB /* Appfile */,
+				3C711EBB22CB564D00A014CB /* Fastfile */,
+			);
+			path = fastlane;
+			sourceTree = "<group>";
+		};
 		6FCEB0915A3FE989420A6CCD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +103,7 @@
 		729A03311D42DC5600E300F1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3C89B98C22CDE68F00E1F320 /* Color.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -91,6 +111,7 @@
 		72DA10621D0BA16B00AA8EE3 = {
 			isa = PBXGroup;
 			children = (
+				3C711EB922CB564D00A014CB /* fastlane */,
 				72DA106D1D0BA16B00AA8EE3 /* Olympics */,
 				72DA106C1D0BA16B00AA8EE3 /* Products */,
 				6FCEB0915A3FE989420A6CCD /* Pods */,
@@ -143,6 +164,7 @@
 				3C4340DD22AC71B8007CB428 /* SplashViewController.swift */,
 				3C4340DF22AC7281007CB428 /* CountriesViewController.swift */,
 				3C4340E522AC7AED007CB428 /* HomeViewController.swift */,
+				3C89B98822CDDE3600E1F320 /* MedalsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -155,6 +177,7 @@
 				3C4340E322AC782A007CB428 /* CountryViewCell.swift */,
 				3C4340E722AC7DBD007CB428 /* DayScheduleViewCell.swift */,
 				3C6EEC0B22B39A22001E665A /* DisciplineViewCell.swift */,
+				3C89B98A22CDDF8400E1F320 /* MedalViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +266,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C711EBD22CB564D00A014CB /* Fastfile in Resources */,
+				3C711EBC22CB564D00A014CB /* Appfile in Resources */,
 				72D0F5CF1D2C6A6300400F03 /* Images in Resources */,
 				724CB2DC1D3A0164003C4D28 /* GoogleService-Info.plist in Resources */,
 				3CC2D1E11D46E33F00316CD1 /* Localizable.strings in Resources */,
@@ -324,12 +349,15 @@
 				3CEFD9E822AFB078009B70DC /* Sport.swift in Sources */,
 				3C4340DE22AC71B8007CB428 /* SplashViewController.swift in Sources */,
 				3C98E1F122B230F5003831AC /* KDCollectionViewCell.swift in Sources */,
+				3C89B98B22CDDF8400E1F320 /* MedalViewCell.swift in Sources */,
+				3C89B98D22CDE68F00E1F320 /* Color.swift in Sources */,
 				72DA106F1D0BA16B00AA8EE3 /* AppDelegate.swift in Sources */,
 				3C4340E822AC7DBD007CB428 /* DayScheduleViewCell.swift in Sources */,
 				72DA10721D0BA16B00AA8EE3 /* Olympics.xcdatamodeld in Sources */,
 				3C6EEC0C22B39A23001E665A /* DisciplineViewCell.swift in Sources */,
 				3C4340E022AC7281007CB428 /* CountriesViewController.swift in Sources */,
 				3C4340E222AC7570007CB428 /* KDViewCell.swift in Sources */,
+				3C89B98922CDDE3600E1F320 /* MedalsViewController.swift in Sources */,
 				3C4340E622AC7AED007CB428 /* HomeViewController.swift in Sources */,
 				3C4340EC22ACAAE1007CB428 /* Country.swift in Sources */,
 				3C4340E422AC782A007CB428 /* CountryViewCell.swift in Sources */,
@@ -454,6 +482,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 8U46JS6CZP;
 				INFOPLIST_FILE = Olympics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -462,7 +491,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -473,6 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = 8U46JS6CZP;
 				INFOPLIST_FILE = Olympics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -481,7 +513,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

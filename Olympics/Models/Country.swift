@@ -20,3 +20,6 @@ class Country: Codable {
     }
 }
 
+
+
+extension Country: DataModel {}

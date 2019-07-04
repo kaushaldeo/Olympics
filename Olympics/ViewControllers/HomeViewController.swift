@@ -14,6 +14,10 @@ class HomeViewController: UIViewController {
     
     var items = [ViewModel<SportModel>]()
     
+    var cellIdentifiers = [String:KDCollectionViewCellType]()
+    
+    let webView = UIWebView(frame: .zero)
+    
     // MARK: - Private Methods
     func update() {
         NetworkManager.default.sports(router: .sports) { [weak self] items in
@@ -63,6 +67,8 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = self.items[indexPath.row]
+        let key = String(describing: item.value)
+        print(key)
         let cell = collectionView.dequeueReusable(cell: item.type, for: indexPath)
         cell.update(data: item.value)
         return cell
